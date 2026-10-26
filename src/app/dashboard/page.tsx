@@ -7,7 +7,7 @@
 
 "use client";
 
-import { ArrowUpRight, FileText, ImageIcon, Package, PanelLeft, ShoppingCart } from "lucide-react";
+import { ArrowUpRight, FolderTree, ImageIcon, PanelLeft } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
 
@@ -15,10 +15,9 @@ import { authClient } from "@/app/api/lib/auth-client";
 import { iconMap } from "@/components/all-icons/all-icons";
 import { LoadingState } from "@/components/ui/loading-state";
 import { dashboardCan } from "@/lib/dashboard/permissions";
+import { removeRetiredSidebarDescendants } from "@/lib/dashboard/retired-routes";
 import { useGetCategoriesQuery } from "@/redux/features/dashboard/categories/categoriesSlice";
 import { useGetMediaQuery } from "@/redux/features/dashboard/media/mediaSlice";
-import { useGetOrdersQuery } from "@/redux/features/dashboard/orders/ordersSlice";
-import { useGetProductsQuery } from "@/redux/features/dashboard/products/productsSlice";
 import { useGetSidebarsQuery } from "@/redux/features/dashboard/sidebars/sidebarSlice";
 
 const sidebarCardColors = ["#8b5cf6", "#0ea5e9", "#10b981", "#f59e0b", "#f43f5e", "#14b8a6", "#f97316"];
@@ -26,26 +25,15 @@ const sidebarCardColors = ["#8b5cf6", "#0ea5e9", "#10b981", "#f59e0b", "#f43f5e"
 export default function DashboardHomePage() {
   const { data: session, isPending } = authClient.useSession();
   const { data, isLoading, isError } = useGetSidebarsQuery(undefined, { skip: !session });
-  const items = useMemo(() => data?.items ?? [], [data?.items]);
+  const items = useMemo(() => removeRetiredSidebarDescendants(data?.items ?? []), [data?.items]);
   const sidebarItemById = useMemo(() => new Map(items.map((item) => [item.id, item])), [items]);
   const canReadMedia = dashboardCan(data?.access, "/dashboard/media", "read");
-  const canReadProducts = dashboardCan(data?.access, "/dashboard/products", "read");
   const canReadCategories = dashboardCan(data?.access, "/dashboard/category", "read");
-  const canReadOrders = dashboardCan(data?.access, "/dashboard/orders", "read");
   const { data: mediaData, isLoading: mediaLoading } = useGetMediaQuery(undefined, { skip: !canReadMedia });
-  const { data: productsData, isLoading: productsLoading } = useGetProductsQuery(
-    { limit: 1, page: 1 },
-    { skip: !canReadProducts },
-  );
   const { data: categoriesData, isLoading: categoriesLoading } = useGetCategoriesQuery(
     { page: 1, pageSize: 1 },
     { skip: !canReadCategories },
   );
-  const { data: ordersData, isLoading: ordersLoading } = useGetOrdersQuery(
-    { page: 1, pageSize: 100 },
-    { skip: !canReadOrders },
-  );
-  const completedOrders = ordersData?.items.filter((item) => item.status === "completed").length ?? 0;
   const mediaTypes = mediaData?.items.reduce<Record<string, number>>((counts, item) => {
     counts[item.type] = (counts[item.type] ?? 0) + 1;
     return counts;
@@ -60,29 +48,13 @@ export default function DashboardHomePage() {
       value: mediaLoading ? null : (mediaData?.items.length ?? 0),
       detail: topMediaType ? `${topMediaType[1]} ${topMediaType[0]} files` : "No media files yet",
     },
-    canReadProducts && {
-      name: "Products",
-      href: "/dashboard/products",
-      icon: Package,
-      color: "#10b981",
-      value: productsLoading ? null : (productsData?.total ?? 0),
-      detail: `${productsData?.summary.inStock ?? 0} products in stock`,
-    },
     canReadCategories && {
       name: "Categories",
       href: "/dashboard/category",
-      icon: ShoppingCart,
+      icon: FolderTree,
       color: "#f59e0b",
       value: categoriesLoading ? null : (categoriesData?.total ?? 0),
       detail: `${categoriesData?.items.filter((item) => item.status === "active").length ?? 0} active on this page`,
-    },
-    canReadOrders && {
-      name: "Orders",
-      href: "/dashboard/orders",
-      icon: FileText,
-      color: "#f43f5e",
-      value: ordersLoading ? null : (ordersData?.total ?? 0),
-      detail: `${completedOrders} completed in latest 100`,
     },
   ].filter(Boolean) as {
     name: string;
@@ -134,7 +106,7 @@ export default function DashboardHomePage() {
                 Live data
               </span>
             </div>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
               {liveSections.map((section) => (
                 <LiveSummaryCard key={section.name} section={section} />
               ))}

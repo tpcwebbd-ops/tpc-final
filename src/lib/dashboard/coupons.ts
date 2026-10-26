@@ -45,15 +45,6 @@ export function parseCouponInput(value: unknown): CouponInput | null {
   };
 }
 
-export function couponDiscount(
-  coupon: Pick<Coupon, "discountType" | "discountValue" | "maximumDiscount">,
-  subtotal: number,
-) {
-  const raw = coupon.discountType === "percent" ? (subtotal * coupon.discountValue) / 100 : coupon.discountValue;
-  const capped = coupon.discountType === "percent" ? Math.min(raw, coupon.maximumDiscount ?? 0) : raw;
-  return Math.min(Math.max(0, subtotal), Math.round(capped));
-}
-
 export function serializeCoupon(coupon: Coupon) {
   return { ...coupon, createdAt: coupon.createdAt.toISOString(), updatedAt: coupon.updatedAt.toISOString() };
 }

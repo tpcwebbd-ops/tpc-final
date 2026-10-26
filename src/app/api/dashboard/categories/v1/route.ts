@@ -6,7 +6,7 @@
 |-----------------------------------------
 */
 
-import { authorizeCategoryRequest } from "@/app/api/lib/catalog-authorization";
+import { authorizeCategoryRequest } from "@/app/api/lib/dashboard-resource-authorization";
 import { parseCategoryInput } from "@/lib/dashboard/catalog";
 import { createCategoryForApi, listCategoriesForApi, serializeCategory } from "@/lib/services/categories";
 

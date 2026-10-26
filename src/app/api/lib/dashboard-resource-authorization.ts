@@ -1,14 +1,8 @@
 /*
 |-----------------------------------------
-| setting up catalog-authorization.ts for the App
+| setting up dashboard-resource-authorization.ts for the App
 | @author: Toufiquer Rahman<toufiquer.0@gmail.com>
-| @copyright: Toufiquer, 10 October, 2026
-|-----------------------------------------
-*/
-
-/*
-|-----------------------------------------
-| Shared catalog request authorization
+| @copyright: Toufiquer, 26 October, 2026
 |-----------------------------------------
 */
 
@@ -17,10 +11,10 @@ import { auth } from "@/app/api/lib/auth";
 import { authorizeDashboardRequest } from "@/app/api/lib/dashboard-authorization";
 
 type Method = "GET" | "POST" | "PATCH" | "DELETE";
-async function authorizeCatalogRequest(
+async function authorizeDashboardResourceRequest(
   request: Request,
   method: Method,
-  resource: "categories" | "products" | "coupons",
+  resource: "categories" | "coupons",
 ) {
   const limited = await rateLimitDistributed(request, `dashboard-${resource}-api`, 60, 60_000);
   if (limited) return { error: limited };
@@ -31,9 +25,8 @@ async function authorizeCatalogRequest(
     ? {}
     : { error: Response.json({ error: allowed.state.message ?? "Unauthorized." }, { status: 403 }) };
 }
+
 export const authorizeCategoryRequest = (request: Request, method: Method) =>
-  authorizeCatalogRequest(request, method, "categories");
-export const authorizeProductRequest = (request: Request, method: Method) =>
-  authorizeCatalogRequest(request, method, "products");
+  authorizeDashboardResourceRequest(request, method, "categories");
 export const authorizeCouponRequest = (request: Request, method: Method) =>
-  authorizeCatalogRequest(request, method, "coupons");
+  authorizeDashboardResourceRequest(request, method, "coupons");

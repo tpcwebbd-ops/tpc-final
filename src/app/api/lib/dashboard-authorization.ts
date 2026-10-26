@@ -20,6 +20,7 @@ import {
   type DashboardOperation,
   type DashboardPermission,
 } from "@/lib/dashboard/permissions";
+import { isRetiredDashboardRoute, removeRetiredSidebarDescendants } from "@/lib/dashboard/retired-routes";
 import { accessesCollection, rolesCollection, sidebarsCollection } from "@/lib/models/auth";
 
 export type { DashboardOperation } from "@/lib/dashboard/permissions";
@@ -166,7 +167,7 @@ export async function getDashboardAccessState(session: SessionUser): Promise<Das
       message: "Your assigned role no longer exists.",
     };
 
-  const sidebars = savedSidebars;
+  const sidebars = removeRetiredSidebarDescendants(savedSidebars);
   const role = savedRole ? (bypassed ? savedRole : await enforceStandardUserPermissions(savedRole, sidebars)) : null;
   const leadsRole = leadRole(role?.name);
   const sidebarPermissions = sidebars.map((sidebar) => ({
@@ -254,8 +255,6 @@ function apiResourcePaths(pathname: string, method: string): string[] | null {
     build: ["/dashboard/admin/build"],
     tracking: ["/dashboard/admin/tracking"],
     categories: ["/dashboard/category"],
-    products: ["/dashboard/products"],
-    orders: ["/dashboard/orders"],
     coupons: ["/dashboard/coupon"],
     navigation: ["/dashboard/developer/navigation"],
     leads: [
@@ -288,6 +287,8 @@ export function isPublicDashboardRead(pathname: string, method: string) {
 
 async function authorizeDashboardRequestWithState(state: DashboardAccessState, pathname: string, method: string) {
   if (state.blocked) return { allowed: false, state };
+  if (isRetiredDashboardRoute(pathname))
+    return { allowed: false, state: { ...state, message: "This dashboard area is no longer available." } };
   if (state.bypassed) return { allowed: true, state };
 
   // The dashboard home is not an editable sidebar row. A role that can read at

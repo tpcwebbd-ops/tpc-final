@@ -21,7 +21,6 @@ import { validateCookieApiWrite } from "@/app/api/lib/request-security";
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isDashboardApi = pathname.startsWith("/api/dashboard/");
-  const isOrdersApi = pathname === "/api/orders/v1";
   const isDashboardRequest = pathname.startsWith("/dashboard/") || pathname === "/dashboard" || isDashboardApi;
   if (isDashboardApi && !isKnownDashboardApiResource(pathname))
     return Response.json({ error: "Unknown dashboard API resource." }, { status: 403 });
@@ -32,10 +31,10 @@ export async function proxy(request: NextRequest) {
     if (limited) return limited;
   }
 
-  // Apply the same origin and JSON checks before dashboard and customer-order
-  // API handlers can perform cookie-authenticated writes. Auth callbacks and
-  // provider webhooks remain outside this matcher.
-  if (isDashboardApi || isOrdersApi) {
+  // Apply the same origin and JSON checks before dashboard API handlers can
+  // perform cookie-authenticated writes. Auth callbacks and provider webhooks
+  // remain outside this matcher.
+  if (isDashboardApi) {
     const rejected = validateCookieApiWrite(request);
     if (rejected) return rejected;
   }
@@ -43,7 +42,7 @@ export async function proxy(request: NextRequest) {
   // Every protected dashboard API handler performs its own session and
   // permission check. Keep the proxy's shared rate limit and CSRF gate here,
   // without repeating those database-backed checks for the same operation.
-  if (isDashboardApi || isOrdersApi) return NextResponse.next();
+  if (isDashboardApi) return NextResponse.next();
 
   const session = await auth.api.getSession({ headers: request.headers });
   if (!session) {
@@ -65,4 +64,4 @@ export async function proxy(request: NextRequest) {
   return NextResponse.next({ request: { headers } });
 }
 
-export const config = { matcher: ["/dashboard/:path*", "/api/dashboard/:path*", "/api/orders/v1"] };
+export const config = { matcher: ["/dashboard/:path*", "/api/dashboard/:path*"] };

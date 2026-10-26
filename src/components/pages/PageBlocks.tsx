@@ -8,7 +8,6 @@
 
 "use client";
 
-import { type PublicContainerProduct } from "@/lib/dashboard/catalog";
 import { type PageBlock } from "@/redux/features/dashboard/pages/pagesSlice";
 
 import { ContainerQuery, type ContainerVariant } from "../container/ContainerIndex";
@@ -39,12 +38,10 @@ export function PageBlocks({
   blocks,
   pageId,
   preview = false,
-  products,
 }: {
   blocks: PageBlock[];
   pageId: string;
   preview?: boolean;
-  products?: PublicContainerProduct[];
 }) {
   return (
     <div className="mx-auto grid max-w-7xl">
@@ -70,7 +67,6 @@ export function PageBlocks({
             <ContainerQuery
               data={block.data as never}
               key={block.id}
-              products={products}
               variant={block.variant as ContainerVariant}
             />
           );

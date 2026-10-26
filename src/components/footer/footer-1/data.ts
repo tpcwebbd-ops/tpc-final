@@ -39,7 +39,7 @@ export const defaultData: FooterOneData = {
   accent: "#111827",
   brand: "NexaMart",
   description:
-    "NexaMart একটি আধুনিক অনলাইন শপিং প্ল্যাটফর্ম, যেখানে সহজে পণ্য খোঁজা, অর্ডার করা ও নিরাপদে কেনাকাটার সুবিধা রয়েছে।",
+    "NexaMart is a flexible website for sharing information, updates, and resources.",
   logoUrl: "/Logo.png",
   logoAlt: "NexaMart logo",
   showLogo: true,

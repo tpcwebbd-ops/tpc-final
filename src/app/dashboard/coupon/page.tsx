@@ -81,7 +81,7 @@ export default function CouponPage() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h1 className="text-xl font-semibold text-stone-900">Coupons</h1>
-            <p className="mt-1 text-sm text-stone-600">Create flat or percentage discounts for checkout.</p>
+            <p className="mt-1 text-sm text-stone-600">Create discount codes for future workflows.</p>
           </div>
           <div className="flex gap-2">
             <button className="secondary-button" disabled={isFetching} onClick={() => void refetch()} type="button">
@@ -105,7 +105,7 @@ export default function CouponPage() {
           </div>
         ) : !data?.items.length ? (
           <div className="mt-5 rounded-sm border border-dashed border-[#d9c9aa] bg-[#fffdfa] p-10 text-center text-sm text-stone-600">
-            No coupons yet. Create one to offer a checkout discount.
+            No coupons yet. Create a discount code for a future workflow.
           </div>
         ) : (
           <div className="mt-5 overflow-x-auto rounded-sm border border-[#eadfca]">

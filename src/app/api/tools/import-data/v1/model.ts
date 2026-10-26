@@ -6,8 +6,8 @@
 
 import "server-only";
 
-import type { ImportPageVariant } from "@/lib/defaults/import-data";
 import { database } from "@/lib/db";
+import type { ImportPageVariant } from "@/lib/defaults/import-data";
 
 export type ImportSidebar = {
   id: string;

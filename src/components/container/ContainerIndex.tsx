@@ -1,51 +1,60 @@
 /*
 |-----------------------------------------
-| setting up ContainerIndex for the App
+| setting up ContainerIndex.tsx for the App
 | @author: Toufiquer Rahman<toufiquer.0@gmail.com>
-| @copyright: NexaMart, August, 2026
+| @copyright: Toufiquer, 26 October, 2026
 |-----------------------------------------
 */
 
 import type { ComponentType } from "react";
 
-import type { PublicContainerProduct } from "@/lib/dashboard/catalog";
-
-import { defaultDataContainer1, type IContainerData } from "./container-1/data";
-import MutationContainer1 from "./container-1/Mutation";
-import QueryContainer1 from "./container-1/Query";
-import { defaultDataContainer2, type IContainerData as IContainerTwoData } from "./container-2/data";
-import MutationContainer2 from "./container-2/Mutation";
-import QueryContainer2 from "./container-2/Query";
-
 export type ContainerVariant = "container-1" | "container-2";
-export type ContainerData = IContainerData | IContainerTwoData;
+export type ContainerData = Record<string, unknown>;
+
+type ContainerProps = {
+  data?: ContainerData | string;
+};
+
+type MutationProps = ContainerProps & {
+  onChange?: (values: ContainerData) => void;
+  onSubmit?: (values: ContainerData) => void;
+};
+
+function CommingSoon() {
+  return (
+    <section className="custom-parent-border mx-auto w-full max-w-7xl px-4 py-12 text-center sm:px-6">
+      <h2 className="text-2xl font-semibold text-stone-800">Comming Soon</h2>
+    </section>
+  );
+}
+
+const PlaceholderQuery = () => <CommingSoon />;
+const PlaceholderMutation = () => <CommingSoon />;
 
 type Definition = {
   defaultData: ContainerData;
   description: string;
-  Mutation: ComponentType<{
-    data?: ContainerData;
-    onChange?: (values: ContainerData) => void;
-    onSubmit: (values: ContainerData) => void;
-  }>;
-  Query: ComponentType<{ data?: ContainerData | string; products?: PublicContainerProduct[] }>;
+  Mutation: ComponentType<MutationProps>;
+  Query: ComponentType<ContainerProps>;
   title: string;
 };
 
+const defaultData: ContainerData = {};
+
 export const containerIndex: Record<ContainerVariant, Definition> = {
   "container-1": {
-    defaultData: defaultDataContainer1,
-    description: "A configurable product-template grid with cart actions.",
-    Mutation: MutationContainer1 as unknown as Definition["Mutation"],
-    Query: QueryContainer1 as unknown as Definition["Query"],
-    title: "Template grid",
+    defaultData,
+    description: "A blank content section.",
+    Mutation: PlaceholderMutation,
+    Query: PlaceholderQuery,
+    title: "Container 1",
   },
   "container-2": {
-    defaultData: defaultDataContainer2,
-    description: "A configurable template carousel with optional bottom navigation.",
-    Mutation: MutationContainer2 as unknown as Definition["Mutation"],
-    Query: QueryContainer2 as unknown as Definition["Query"],
-    title: "Template carousel",
+    defaultData,
+    description: "A blank content section.",
+    Mutation: PlaceholderMutation,
+    Query: PlaceholderQuery,
+    title: "Container 2",
   },
 };
 
@@ -59,30 +68,16 @@ export const getContainerDefinition = (variant: string) => containerIndex[varian
 export const getContainerDefaults = (variant: ContainerVariant): ContainerData =>
   structuredClone(containerIndex[variant].defaultData);
 
-export function ContainerQuery({
-  variant,
-  data,
-  products,
-}: {
-  variant: ContainerVariant;
-  data?: ContainerData | string;
-  products?: PublicContainerProduct[];
-}) {
-  const Query = getContainerDefinition(variant)?.Query;
-  return Query ? <Query data={data} products={products} /> : null;
+export function ContainerQuery({ variant }: { variant: ContainerVariant } & ContainerProps) {
+  const Query = getContainerDefinition(variant)?.Query ?? PlaceholderQuery;
+  return <Query />;
 }
 
 export function ContainerMutation({
   variant,
-  data,
-  onChange,
-  onSubmit,
-}: {
-  variant: ContainerVariant;
-  data?: ContainerData;
-  onChange?: (values: ContainerData) => void;
-  onSubmit: (values: ContainerData) => void;
-}) {
-  const Mutation = getContainerDefinition(variant)?.Mutation;
-  return Mutation ? <Mutation data={data} onChange={onChange} onSubmit={onSubmit} /> : null;
+}: { variant: ContainerVariant } & Omit<MutationProps, "onSubmit"> & {
+    onSubmit: (values: ContainerData) => void;
+  }) {
+  const Mutation = getContainerDefinition(variant)?.Mutation ?? PlaceholderMutation;
+  return <Mutation />;
 }

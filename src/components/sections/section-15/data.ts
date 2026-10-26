@@ -58,8 +58,8 @@ export const defaultDataSection15: OfficeLocation[] = [
     },
     image: "https://i.ibb.co/KpGnqS3D/nature.jpg",
     description:
-      "NexaMart একটি আধুনিক অনলাইন শপিং প্ল্যাটফর্ম, যেখানে সহজে পণ্য খোঁজা, অর্ডার করা ও নিরাপদে কেনাকাটার সুবিধা রয়েছে।",
-    features: ["Customer Support", "Secure Shopping", "Order Assistance"],
+      "NexaMart supports teams with practical planning, clear communication, and reliable project delivery.",
+    features: ["Customer Support", "Project Planning", "Service Updates"],
     schedule: "Sat-Thu, 10:00 - 18:00 BST",
   },
 ];

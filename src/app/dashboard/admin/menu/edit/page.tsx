@@ -1966,7 +1966,6 @@ const mobileItemDefaults = [
   ["Home", "/", "House"],
   ["Menu", "/menu", "Menu"],
   ["Search", "/search", "Search"],
-  ["Cart", "/cart", "ShoppingCart"],
   ["Profile", "/dashboard", "User"],
   ["Contact", "/contact", "Phone"],
   ["Favorites", "/favorites", "Heart"],

@@ -65,9 +65,7 @@ export const sidebarDefaults: ImportSidebarDefault[] = [
   },
   { name: "Media", url: "/dashboard/media", icon: "Image" },
   { name: "Profile", url: "/dashboard/profile", icon: "User" },
-  { name: "Products", url: "/dashboard/products", icon: "Package" },
-  { name: "Category", url: "/dashboard/category", icon: "ShoppingCart" },
-  { name: "Orders", url: "/dashboard/orders", icon: "FileText" },
+  { name: "Category", url: "/dashboard/category", icon: "FolderKanban" },
   { name: "Coupons", url: "/dashboard/coupon", icon: "Tag" },
   { name: "Install", url: "/dashboard/install", icon: "Download" },
 ];

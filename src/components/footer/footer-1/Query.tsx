@@ -126,7 +126,7 @@ export default function Query({ data }: { data: FooterOneData }) {
                 Take us with you
               </h2>
               <p className="mt-1 max-w-xl text-sm leading-6 opacity-75">
-                Install our app for faster browsing, easy reorders, and quick access wherever you shop.
+                Install our app for faster browsing and quick access to your site.
               </p>
             </div>
           </div>

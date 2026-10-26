@@ -41,7 +41,7 @@ export const defaultData: FooterThreeData = {
   showLogo: true,
   brand: "NexaMart",
   description:
-    "NexaMart একটি আধুনিক অনলাইন শপিং প্ল্যাটফর্ম, যেখানে সহজে পণ্য খোঁজা, অর্ডার করা ও নিরাপদে কেনাকাটার সুবিধা রয়েছে।",
+    "NexaMart is a flexible website for sharing information, updates, and resources.",
   disabledPaths: ["/dashboard", "/login", "/forgot-password", "/registration"],
   destinations: [
     { id: "uk", label: "UK", url: "/destinations/uk", visible: true },

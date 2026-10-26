@@ -76,7 +76,7 @@ const QueryPage7 = ({ data }: Page7Props) => {
             )}
             <h1 className="mt-7 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">{pageData.title}</h1>
             <p className="mt-6 text-base leading-8 text-slate-600 sm:text-lg">
-              Clear refund expectations for Site services and digital products.
+              Clear refund expectations for agreed services and project work.
             </p>
             <p className="mt-7 text-sm font-medium text-slate-500">{pageData.lastUpdatedLabel}</p>
           </div>

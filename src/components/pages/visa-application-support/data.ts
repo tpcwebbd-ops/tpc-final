@@ -131,7 +131,7 @@ export const defaultDataVisaApplicationSupport: IVisaApplicationSupportData = {
   showHeroEyebrow: true,
   heroTitle: "Visa Processing in Bangladesh.",
   heroDescription:
-    "NexaMart helps customers find products, place orders, and shop securely with a simple online experience.",
+    "NexaMart helps applicants understand common preparation steps and organise the information needed for a visa consultation.",
   primaryButtonText: "Book a Visa Assessment",
   primaryButtonUrl: "/consultation",
   secondaryButtonText: "View Processing Steps",
@@ -402,7 +402,7 @@ export const defaultDataVisaApplicationSupport: IVisaApplicationSupportData = {
       id: "faq-guarantee",
       question: "Does NexaMart guarantee visa approval?",
       answer:
-        "No. Only the relevant immigration authority can approve a visa. NexaMart helps customers find products, place orders, and shop securely.",
+        "No. Only the relevant immigration authority can approve a visa. NexaMart can help applicants prepare questions and organise their application materials.",
     },
     {
       id: "faq-refusal",
@@ -414,7 +414,7 @@ export const defaultDataVisaApplicationSupport: IVisaApplicationSupportData = {
   ctaTitle: "Start your visa preparation from Bangladesh",
   ctaEyebrow: "Ready for your next step?",
   showCtaEyebrow: true,
-  ctaDescription: "Contact NexaMart for help finding products, placing orders, or receiving shopping support.",
+  ctaDescription: "Contact NexaMart to discuss visa preparation and the support available for your application.",
   ctaButtonText: "Talk to a Visa Advisor",
   ctaButtonUrl: "/consultation",
   companyName: "NexaMart",

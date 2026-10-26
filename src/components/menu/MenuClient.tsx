@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 
 import { authClient } from "@/app/api/lib/auth-client";
 import type { MenuData } from "@/app/dashboard/admin/menu/data";
-import { CartDrawer } from "@/components/cart/CartDrawer";
 import MenuOneQuery from "@/components/menu/menu-1/Query";
 import MenuTwoQuery from "@/components/menu/menu-2/Query";
 import MenuThreeQuery from "@/components/menu/menu-3/Query";
@@ -62,10 +61,5 @@ export default function MenuClient({ data }: { data: MenuData }) {
     ) : (
       <MenuOneQuery data={menu} pending={isPending} />
     );
-  return (
-    <>
-      {renderedMenu}
-      <CartDrawer />
-    </>
-  );
+  return renderedMenu;
 }

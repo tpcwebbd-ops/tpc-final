@@ -53,6 +53,8 @@ export async function POST(request: Request) {
   const parentId = body?.parentId || null;
   if (!name || !url) return Response.json({ error: "Name and URL are required." }, { status: 400 });
   const result = await addSidebar({ name, url, icon, parentId, position: body?.position });
+  if (result.kind === "invalid-route")
+    return Response.json({ error: "This dashboard route is no longer available." }, { status: 400 });
   if (result.kind === "invalid-depth")
     return Response.json(
       { error: "Sidebar items support grand parent, parent, and child levels only." },

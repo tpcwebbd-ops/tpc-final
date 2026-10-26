@@ -14,6 +14,7 @@ import { authorizeDashboardRequest } from "@/app/api/lib/dashboard-authorization
 import { getCache, invalidateDashboardCache, redisKeys, setCache } from "@/app/api/lib/redis";
 import { leadRole } from "@/lib/dashboard/leads";
 import { councilorPermission } from "@/lib/dashboard/permissions";
+import { removeRetiredSidebarDescendants } from "@/lib/dashboard/retired-routes";
 import { sanitizeRoleDescription } from "@/lib/security/role-description";
 
 type Permission = { read: boolean; create: boolean; update: boolean; delete: boolean };
@@ -29,8 +30,9 @@ type Role = {
 };
 type Sidebar = { id: string; name: string; url: string; icon: string; parentId: string | null; position: number };
 function visibleRoleSidebars(sidebars: Sidebar[]) {
+  const availableSidebars = removeRetiredSidebarDescendants(sidebars);
   const removedIds = new Set(
-    sidebars
+    availableSidebars
       .filter(
         (sidebar) =>
           /^\/dashboard\/(?:admin\/)?business-growth(?:\/|$)/.test(sidebar.url) ||
@@ -41,14 +43,14 @@ function visibleRoleSidebars(sidebars: Sidebar[]) {
   let changed = true;
   while (changed) {
     changed = false;
-    for (const sidebar of sidebars) {
+    for (const sidebar of availableSidebars) {
       if (sidebar.parentId && removedIds.has(sidebar.parentId) && !removedIds.has(sidebar.id)) {
         removedIds.add(sidebar.id);
         changed = true;
       }
     }
   }
-  return sidebars.filter((sidebar) => !removedIds.has(sidebar.id));
+  return availableSidebars.filter((sidebar) => !removedIds.has(sidebar.id));
 }
 function serialize(role: Role) {
   return {

@@ -206,7 +206,7 @@ const MutationSection36 = ({ data, onChange }: SectionFormProps) => {
                 ...prev,
                 categories: [
                   ...prev.categories,
-                  { id: nextId(prev.categories), name: "New Category", icon: "shopping-basket" },
+                  { id: nextId(prev.categories), name: "New Category", icon: "briefcase" },
                 ],
               }))
             }

@@ -12,7 +12,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
 
 import { Icon, iconMap } from "@/components/all-icons/all-icons";
-import { CartButton } from "@/components/cart/CartButton";
 import CroppedLogo from "@/components/menu/CroppedLogo";
 import type { MenuButton, MenuData, MenuLink } from "@/components/menu/menu-1/data";
 import { normalizeSearchQuery, useSiteSearch } from "@/components/search/use-site-search";
@@ -146,7 +145,6 @@ export default function MenuThreeQuery({ data, pending }: { data: MenuData; pend
           >
             <Icon name="Search" />
           </button>
-          <CartButton className="border-slate-200 hover:bg-slate-100" />
           {pending ? (
             <span className="h-8 w-16 animate-pulse rounded-full bg-slate-100" />
           ) : data.button.visible !== false ? (

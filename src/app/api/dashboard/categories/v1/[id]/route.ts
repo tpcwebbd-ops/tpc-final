@@ -6,7 +6,7 @@
 |-----------------------------------------
 */
 
-import { authorizeCategoryRequest } from "@/app/api/lib/catalog-authorization";
+import { authorizeCategoryRequest } from "@/app/api/lib/dashboard-resource-authorization";
 import { parseCategoryInput } from "@/lib/dashboard/catalog";
 import { removeCategoryForApi, serializeCategory, updateCategoryForApi } from "@/lib/services/categories";
 
@@ -29,11 +29,6 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
   if ("error" in access) return access.error;
   const { id } = await params;
   const result = await removeCategoryForApi(id);
-  if (result.kind === "referenced")
-    return Response.json(
-      { error: "This category is assigned to one or more products. Remove it from those products before deleting it." },
-      { status: 409 },
-    );
   return result.kind === "deleted"
     ? Response.json({ ok: true })
     : Response.json({ error: "Category not found." }, { status: 404 });

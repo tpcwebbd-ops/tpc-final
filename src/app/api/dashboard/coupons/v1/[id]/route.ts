@@ -6,7 +6,7 @@
 |-----------------------------------------
 */
 
-import { authorizeCouponRequest } from "@/app/api/lib/catalog-authorization";
+import { authorizeCouponRequest } from "@/app/api/lib/dashboard-resource-authorization";
 import { parseCouponInput, serializeCoupon } from "@/lib/dashboard/coupons";
 import { removeCoupon, updateCouponForApi } from "@/lib/services/coupons";
 

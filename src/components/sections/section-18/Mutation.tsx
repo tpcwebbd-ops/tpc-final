@@ -356,7 +356,7 @@ const MutationSection18 = ({ data, onChange }: Section18FormProps) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                           updateSlide(activeSlideIndex, "buttonText", e.target.value)
                         }
-                        placeholder="e.g. Shop the collection"
+                        placeholder="e.g. Learn more"
                       />
                       <ModernInput
                         label="Button Link"

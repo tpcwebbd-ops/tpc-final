@@ -39,37 +39,37 @@ export const defaultLayout = {
 
 export const defaultDataDeliveryPolicy: IDeliveryPolicyData = {
   pageUid: "delivery-policy-uid",
-  pageName: "Delivery Policy",
-  title: "Delivery Policy",
+  pageName: "Service Delivery Policy",
+  title: "Service Delivery Policy",
   lastUpdatedLabel: "Last updated: Today",
   sections: [
     {
-      title: "1. Shipping Destinations",
+      title: "1. Service Area",
       description:
-        "NexaMart currently delivers within the service areas shown at checkout. Please provide a complete, accurate address to help us avoid delivery delays.",
+        "NexaMart currently serves the regions listed on this site. Contact the team to confirm that support is available for your project or request.",
     },
     {
-      title: "2. Processing & Delivery Time",
+      title: "2. Planning & Delivery Time",
       items: [
-        "Processing: Orders are typically processed within 1-2 business days.",
-        "Standard Shipping: 5-7 business days.",
-        "Express Shipping: 1-2 business days.",
+        "Initial requests are usually reviewed within 1-2 business days.",
+        "Project timelines are confirmed in the approved proposal.",
+        "Updates are shared at the milestones agreed for the work.",
       ],
     },
     {
-      title: "3. Shipping Rates",
+      title: "3. Delivery Format",
       description:
-        "Delivery costs are calculated at checkout based on your location and order details. NexaMart may offer free delivery when an order reaches the minimum amount shown at checkout.",
+        "Project deliverables are provided in the format agreed with you. Any additional costs are documented in the applicable proposal or agreement.",
     },
     {
-      title: "4. Order Tracking",
+      title: "4. Project Updates",
       description:
-        "Once an order ships, NexaMart will send a confirmation email with available tracking details so you can monitor its delivery status.",
+        "NexaMart shares progress updates through the agreed contact channel so you can follow the work and next steps.",
     },
   ],
   helpTitle: "Need Help?",
   helpDescription:
-    "If you have questions about delivery or an order has not arrived within the expected timeframe, contact NexaMart support.",
+    "If you have questions about a project or its agreed timeline, contact NexaMart support.",
   supportEmail: "example@gmail.com",
 };
 

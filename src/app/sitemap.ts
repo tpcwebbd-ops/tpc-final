@@ -16,7 +16,6 @@ import { pagesCollection } from "@/lib/models/pages";
 import { seoSettingsCollection, type SeoSettingsRecord } from "@/lib/models/site-settings";
 import { normalizePagePath } from "@/lib/pages/server";
 
-const approvedStaticPublicPaths = ["/products"];
 const nonIndexablePathPrefixes = [
   "/api",
   "/dashboard",
@@ -25,9 +24,7 @@ const nonIndexablePathPrefixes = [
   "/login-demo",
   "/registration",
   "/forgot-password",
-  "/order-tracking",
   "/search",
-  "/products",
   "/_next",
 ];
 
@@ -99,29 +96,6 @@ const getCachedCmsEntries = unstable_cache(
         lastModified:
           current?.lastModified && current.lastModified > lastModified ? current.lastModified : lastModified,
       });
-    }
-
-    for (const path of approvedStaticPublicPaths) {
-      const canonical = layoutCanonical;
-      let url = new URL(path, canonicalOrigin);
-      if (canonical) {
-        try {
-          const configuredCanonical = new URL(canonical);
-          if (
-            configuredCanonical.origin !== canonicalOrigin.origin ||
-            configuredCanonical.username ||
-            configuredCanonical.password ||
-            configuredCanonical.search ||
-            configuredCanonical.hash ||
-            !isIndexableCanonicalPath(configuredCanonical.pathname)
-          )
-            continue;
-          url = configuredCanonical;
-        } catch {
-          continue;
-        }
-      }
-      if (!byUrl.has(url.toString())) byUrl.set(url.toString(), { url: url.toString() });
     }
 
     return [...byUrl.values()];

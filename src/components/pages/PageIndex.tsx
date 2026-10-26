@@ -20,15 +20,15 @@ import CompanyStoryQuery from "./company-story/Query";
 import { defaultData as contact } from "./contact-us/data";
 import ContactMutation from "./contact-us/Mutation";
 import ContactQuery from "./contact-us/Query";
+import { defaultDataCookiePolicy as cookiePolicy } from "./cookie-policy/data";
+import CookiePolicyMutation from "./cookie-policy/Mutation";
+import CookiePolicyQuery from "./cookie-policy/Query";
 import { defaultDataCountryDirectory as countryDirectory } from "./country-directory/data";
 import CountryDirectoryMutation from "./country-directory/Mutation";
 import CountryDirectoryQuery from "./country-directory/Query";
 import { defaultDataDeliveryPolicy as deliveryPolicy } from "./delivery-policy/data";
 import DeliveryPolicyMutation from "./delivery-policy/Mutation";
 import DeliveryPolicyQuery from "./delivery-policy/Query";
-import { defaultDataDetailsPage as detailsPage } from "./details-page/data";
-import DetailsPageMutation from "./details-page/Mutation";
-import DetailsPageQuery from "./details-page/Query";
 import { defaultData as frequentlyAskQuestions } from "./frequently-ask-questions/data";
 import FrequentlyAskQuestionsMutation from "./frequently-ask-questions/Mutation";
 import FrequentlyAskQuestionsQuery from "./frequently-ask-questions/Query";
@@ -47,9 +47,6 @@ import RefundQuery from "./refund-policy/Query";
 import { defaultDataSecurity as security } from "./security/data";
 import SecurityMutation from "./security/Mutation";
 import SecurityQuery from "./security/Query";
-import { defaultDataCookiePolicy as cookiePolicy } from "./cookie-policy/data";
-import CookiePolicyMutation from "./cookie-policy/Mutation";
-import CookiePolicyQuery from "./cookie-policy/Query";
 import { defaultDataSiteTermsAndConditions as siteTermsAndConditions } from "./site-terms-and-conditions/data";
 import SiteTermsAndConditionsMutation from "./site-terms-and-conditions/Mutation";
 import SiteTermsAndConditionsQuery from "./site-terms-and-conditions/Query";
@@ -92,7 +89,6 @@ export type AllPageKind =
   | "leadership-team"
   | "country-directory"
   | "about-the-country"
-  | "details-page"
   | "visa-requirements"
   | "visa-services"
   | "visa-application-support"
@@ -179,7 +175,7 @@ export const pageIndex: Record<AllPageKind, Definition> = {
   "delivery-policy": {
     defaultData: deliveryPolicy as unknown as AllPageData,
     title: "Delivery Policy",
-    description: "A delivery-policy page with shipping and support details",
+    description: "A service-delivery policy with project and support details",
     Mutation: ({ data, onChange }) => (
       <DeliveryPolicyMutation
         data={data as unknown as typeof deliveryPolicy}
@@ -235,18 +231,6 @@ export const pageIndex: Record<AllPageKind, Definition> = {
       />
     ),
     Query: ({ data }) => <AboutTheCountryQuery data={data as unknown as typeof aboutTheCountry} />,
-  },
-  "details-page": {
-    defaultData: detailsPage as unknown as AllPageData,
-    title: "Details Page",
-    description: "A product showcase and purchase page",
-    Mutation: ({ data, onChange }) => (
-      <DetailsPageMutation
-        data={data as unknown as typeof detailsPage}
-        onChange={onChange as unknown as (data: typeof detailsPage) => void}
-      />
-    ),
-    Query: ({ data }) => <DetailsPageQuery data={data as unknown as typeof detailsPage} />,
   },
   "visa-requirements": {
     defaultData: visaRequirements as unknown as AllPageData,

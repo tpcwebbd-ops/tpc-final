@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { CategoryIconKey, defaultDataSection36, Section36Data, Section36Payload, Section36Props } from "./data";
 
 const sectionIconMap: Record<CategoryIconKey, React.ElementType> = {
-  "shopping-basket": iconMap.ShoppingCart,
+  briefcase: iconMap.FolderKanban,
   wheat: iconMap.Sparkles,
   sparkles: iconMap.Sparkles,
   laptop: iconMap.Layout,
@@ -145,7 +145,7 @@ const QuerySection36 = ({ data }: Section36Props) => {
           style={{ scrollBehavior: "smooth" }}
         >
           {settings.categories.map((cat, index) => {
-            const Icon = sectionIconMap[cat.icon] ?? sectionIconMap["shopping-basket"];
+            const Icon = sectionIconMap[cat.icon] ?? sectionIconMap.briefcase;
 
             return (
               <div

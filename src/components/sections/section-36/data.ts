@@ -6,7 +6,7 @@
 |-----------------------------------------
 */
 
-export type CategoryIconKey = "shopping-basket" | "wheat" | "sparkles" | "laptop" | "plug" | "heart";
+export type CategoryIconKey = "briefcase" | "wheat" | "sparkles" | "laptop" | "plug" | "heart";
 
 export interface CategorySliderItem {
   id: number;
@@ -47,14 +47,14 @@ export const defaultDataSection36: Section36Data = {
   showNavigationButtons: true,
   loop: true,
   categories: [
-    { id: 1, name: "Grocery", icon: "shopping-basket" },
-    { id: 2, name: "Agriculture", icon: "wheat" },
-    { id: 3, name: "Beauty", icon: "sparkles" },
-    { id: 4, name: "Digital Product", icon: "laptop" },
-    { id: 5, name: "Electronics", icon: "plug" },
-    { id: 6, name: "Health", icon: "heart" },
-    { id: 7, name: "Fashion", icon: "shopping-basket" },
-    { id: 8, name: "Home", icon: "wheat" },
+    { id: 1, name: "Services", icon: "briefcase" },
+    { id: 2, name: "Resources", icon: "wheat" },
+    { id: 3, name: "Updates", icon: "sparkles" },
+    { id: 4, name: "Projects", icon: "laptop" },
+    { id: 5, name: "Guides", icon: "plug" },
+    { id: 6, name: "Team", icon: "heart" },
+    { id: 7, name: "Events", icon: "briefcase" },
+    { id: 8, name: "Contact", icon: "wheat" },
   ],
 };
 

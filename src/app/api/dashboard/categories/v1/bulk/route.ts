@@ -6,7 +6,7 @@
 |-----------------------------------------
 */
 
-import { authorizeCategoryRequest } from "@/app/api/lib/catalog-authorization";
+import { authorizeCategoryRequest } from "@/app/api/lib/dashboard-resource-authorization";
 import { type Category } from "@/lib/dashboard/catalog";
 import { removeCategoriesForApi, updateCategoriesStatusForApi } from "@/lib/services/categories";
 
@@ -28,11 +28,6 @@ export async function DELETE(request: Request) {
   if (!ids.length || ids.length > 100)
     return Response.json({ error: "Select between 1 and 100 categories." }, { status: 400 });
   const result = await removeCategoriesForApi(ids);
-  if (result.kind === "referenced")
-    return Response.json(
-      { error: "One or more selected categories are assigned to products. Remove them from those products first." },
-      { status: 409 },
-    );
   return Response.json({ deletedCount: result.deletedCount });
 }
 

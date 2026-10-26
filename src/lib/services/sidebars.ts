@@ -9,6 +9,7 @@ import "server-only";
 import { randomUUID } from "crypto";
 
 import { getCache, invalidateDashboardCache, redisKeys, setCache } from "@/app/api/lib/redis";
+import { isRetiredDashboardRoute, removeRetiredSidebarDescendants } from "@/lib/dashboard/retired-routes";
 import {
   clearSidebarPermissions,
   createSidebar as createSidebarRecord,
@@ -41,12 +42,13 @@ function serializeSidebar(item: SidebarItem): SerializedSidebar {
 export async function listSidebars(allowedSidebarIds: string[], bypassed: boolean) {
   const cached = await getCache<{ items: SerializedSidebar[] }>(redisKeys.sidebars);
   const items = cached?.items ?? (await findSidebars()).map(serializeSidebar);
+  const availableItems = removeRetiredSidebarDescendants(items);
   const allowedIds = new Set(allowedSidebarIds);
   const visibleIds = new Set(allowedIds);
   let changed = true;
   while (changed) {
     changed = false;
-    for (const item of items) {
+    for (const item of availableItems) {
       if (visibleIds.has(item.id) && item.parentId && !visibleIds.has(item.parentId)) {
         visibleIds.add(item.parentId);
         changed = true;
@@ -54,7 +56,7 @@ export async function listSidebars(allowedSidebarIds: string[], bypassed: boolea
     }
   }
   if (!cached) await setCache(redisKeys.sidebars, { items });
-  const visibleItems = items.filter(
+  const visibleItems = availableItems.filter(
     (item) =>
       !/^\/dashboard\/(?:admin\/)?business-growth(?:\/|$)/.test(item.url) &&
       item.url !== "/dashboard/admin/customer" &&
@@ -66,6 +68,7 @@ export async function listSidebars(allowedSidebarIds: string[], bypassed: boolea
 export async function addSidebar(
   input: Omit<SidebarItem, "id" | "position" | "createdAt" | "updatedAt"> & { position?: number },
 ) {
+  if (isRetiredDashboardRoute(input.url)) return { kind: "invalid-route" as const };
   const depth = await findSidebarDepth(input.parentId);
   if (depth < 0 || depth > 1) return { kind: "invalid-depth" as const };
   const last = await findLastSidebarForParent(input.parentId);
@@ -85,6 +88,7 @@ export async function editSidebar(
   id: string,
   input: Pick<SidebarItem, "name" | "url"> & Partial<Pick<SidebarItem, "icon" | "parentId" | "position">>,
 ) {
+  if (isRetiredDashboardRoute(input.url)) return { kind: "invalid-route" as const };
   const item = await findSidebarById(id);
   if (!item) return { kind: "not-found" as const };
   const parentId = input.parentId === undefined ? item.parentId : input.parentId || null;

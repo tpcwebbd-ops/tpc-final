@@ -31,6 +31,8 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   const icon = body?.icon?.trim();
   if (!name || !url) return Response.json({ error: "Name and URL are required." }, { status: 400 });
   const result = await editSidebar(id, { name, url, icon, parentId: body?.parentId, position: body?.position });
+  if (result.kind === "invalid-route")
+    return Response.json({ error: "This dashboard route is no longer available." }, { status: 400 });
   if (result.kind === "not-found") return Response.json({ error: "Sidebar item not found." }, { status: 404 });
   if (result.kind === "invalid-parent")
     return Response.json({ error: "An item cannot be placed inside itself or one of its children." }, { status: 400 });

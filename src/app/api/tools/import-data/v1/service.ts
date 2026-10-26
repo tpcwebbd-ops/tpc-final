@@ -11,6 +11,7 @@ import { randomUUID } from "crypto";
 import { revalidatePath, revalidateTag } from "next/cache";
 
 import { invalidateDashboardCache, redisKeys } from "@/app/api/lib/redis";
+import { isRetiredDashboardRoute } from "@/lib/dashboard/retired-routes";
 import { pageDefaults, sidebarDefaults } from "@/lib/defaults/import-data";
 
 import {
@@ -28,14 +29,19 @@ import {
 type ImportRequest = { pagePaths?: unknown; sidebarUrls?: unknown; target?: "all" | "sidebar" | "pages" } | null;
 
 const defaultSidebarUrls = new Set(
-  sidebarDefaults.flatMap((item) => [item.url, ...(item.children ?? []).map((child) => child.url)]),
+  sidebarDefaults
+    .flatMap((item) => [item.url, ...(item.children ?? []).map((child) => child.url)])
+    .filter((url) => !isRetiredDashboardRoute(url)),
 );
 const defaultPagePaths = new Set(pageDefaults.map((page) => page.path));
 export async function importDefaultData(body: ImportRequest) {
   const legacyTarget = body?.target ?? "all";
   const selectedSidebarUrls = new Set(
     Array.isArray(body?.sidebarUrls)
-      ? body.sidebarUrls.filter((url): url is string => typeof url === "string" && defaultSidebarUrls.has(url))
+      ? body.sidebarUrls.filter(
+          (url): url is string =>
+            typeof url === "string" && !isRetiredDashboardRoute(url) && defaultSidebarUrls.has(url),
+        )
       : legacyTarget === "pages"
         ? []
         : defaultSidebarUrls,

@@ -84,7 +84,7 @@ export default function CategoryPage() {
   }
 
   async function destroy(item: CategoryItem) {
-    if (!(await confirmDelete(`Delete “${item.name}”? Categories assigned to products cannot be deleted.`))) return;
+    if (!(await confirmDelete(`Delete “${item.name}”?`))) return;
     try {
       await remove(item.id).unwrap();
       toast.success("Category deleted successfully.");
@@ -165,7 +165,7 @@ export default function CategoryPage() {
           <div>
             <h1 className="text-xl font-semibold text-stone-900">Categories</h1>
             <p className="mt-1 text-sm text-stone-600">
-              Create product categories and keep their descriptions organized.
+              Create and organize categories for your workspace.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -261,8 +261,8 @@ export default function CategoryPage() {
             </div>
             <h3 className="mt-3 text-base font-semibold text-stone-900">No categories yet</h3>
             <p className="mx-auto mt-1 max-w-md text-sm text-stone-600">
-              You haven&apos;t added any categories yet. Add your first category manually, or import preset categories
-              from the Gadget catalog.
+              You haven&apos;t added any categories yet. Add your first category manually, or import a set of common
+              category names.
             </p>
             <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
               <button className="primary-button" onClick={() => setImportOpen(true)} type="button">
@@ -476,7 +476,7 @@ function ImportCategoryModal({
         <div className="flex items-start justify-between gap-4 border-b border-[#eadfca] pb-4">
           <div>
             <h2 className="text-lg font-semibold text-stone-900">Import Preset Categories</h2>
-            <p className="mt-1 text-sm text-stone-600">Select gadget categories to populate your catalog.</p>
+            <p className="mt-1 text-sm text-stone-600">Select categories to add to your workspace.</p>
           </div>
           <button aria-label="Close" className="icon-button" disabled={busy} onClick={close} type="button">
             <X className="h-4 w-4" />
@@ -486,7 +486,7 @@ function ImportCategoryModal({
         {/* Filter tabs and bulk action row */}
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#eadfca] py-3">
           <span className="rounded-sm bg-amber-700 px-2.5 py-1 text-xs font-medium text-white">
-            Gadgets ({defaultImportCategories.length})
+            General presets ({defaultImportCategories.length})
           </span>
 
           <div className="flex items-center gap-2">
@@ -531,9 +531,6 @@ function ImportCategoryModal({
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="text-sm font-semibold text-stone-900">{cat.name}</span>
-                    <span className="inline-flex rounded-sm bg-amber-100 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-amber-800">
-                      {cat.type}
-                    </span>
                     <span className="font-mono text-xs text-stone-500">/{cat.slug}</span>
                     {isExisting && (
                       <span className="inline-flex rounded-sm bg-stone-200 px-1.5 py-0.5 text-[10px] font-medium text-stone-600">

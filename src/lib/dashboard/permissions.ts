@@ -6,6 +6,8 @@
 |-----------------------------------------
 */
 
+import { isRetiredDashboardRoute } from "@/lib/dashboard/retired-routes";
+
 export type DashboardOperation = "read" | "create" | "update" | "delete";
 export type DashboardPermission = Record<DashboardOperation, boolean>;
 export type DashboardPermissions = {
@@ -34,13 +36,14 @@ export function dashboardPaths(path: string) {
     "/dashboard/admin/topbanner": ["/dashboard/admin/top-banner"],
     "/dashboard/admin/footer": ["/dashboard/admin/footer-editor"],
   };
-  const parents = ["/dashboard/admin/menu", "/dashboard/admin/pages", "/dashboard/orders", "/dashboard/leads"].filter(
+  const parents = ["/dashboard/admin/menu", "/dashboard/admin/pages", "/dashboard/leads"].filter(
     (parent) => path.startsWith(`${parent}/`),
   );
   return [path, ...(aliases[path] ?? []), ...parents];
 }
 
 export function dashboardCan(state: DashboardPermissions | undefined, path: string, operation: DashboardOperation) {
+  if (isRetiredDashboardRoute(path)) return false;
   if (!state || state.blocked) return false;
   if (state.bypassed) return true;
   const paths = dashboardPaths(path);

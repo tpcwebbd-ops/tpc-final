@@ -103,7 +103,7 @@ export default function Query({ data }: { data: FooterThreeData }) {
             <div>
               <h2 className="text-lg font-bold text-stone-900">Take us with you</h2>
               <p className="mt-1 max-w-xl text-sm leading-6 text-stone-600">
-                Install our app for faster browsing, easy reorders, and quick access wherever you shop.
+                Install our app for faster browsing and quick access to your site.
               </p>
             </div>
           </div>
