@@ -42,7 +42,7 @@ export const footerIndex: Record<FooterVariant, Definition> = {
   },
   "footer-3": {
     defaultData: three,
-    title: "NexaMart",
+    title: "TestPrep Center",
     description: "Study-abroad links and legal footer",
     Mutation: M3 as unknown as Definition["Mutation"],
     Query: Q3 as unknown as Definition["Query"],

@@ -135,4 +135,4 @@ Look at the file
 'src/components/all-pages/page-7/data.ts'
 'src/components/all-pages/page-7/Mutation.tsx'
 'src/components/all-pages/page-7/Query.tsx' 
-Now please update data.ts for the Company 'NexaMart' Email: info@wesassociates.com, and contact: +880 1618-118670
+Now please update data.ts for the Company 'TestPrep Center' Email: info@wesassociates.com, and contact: +880 1618-118670

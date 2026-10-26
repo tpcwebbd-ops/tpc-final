@@ -39,13 +39,13 @@ export interface Section40Props {
 
 export const defaultDataSection40: Section40Data = {
   id: "section-uid-40",
-  eyebrow: "NexaMart Consultation",
+  eyebrow: "TestPrep Center Consultation",
   showEyebrow: true,
   title: "Get Your",
   highlightedTitle: "Free Consultation",
   paragraphs: [
-    "Book a free consultation with NexaMart to discuss your study-abroad goals. Our experienced counselors will help you understand suitable destinations, courses, universities, and the next steps for your application.",
-    "NexaMart supports students across Bangladesh. Whether you live in Dhaka or anywhere else in the country, you can connect with our team through an online consultation and receive personalized guidance without unnecessary travel.",
+    "Book a free consultation with TestPrep Center to discuss your study-abroad goals. Our experienced counselors will help you understand suitable destinations, courses, universities, and the next steps for your application.",
+    "TestPrep Center supports students across Bangladesh. Whether you live in Dhaka or anywhere else in the country, you can connect with our team through an online consultation and receive personalized guidance without unnecessary travel.",
     "Bring your academic information and questions to your consultation so our team can provide clear, relevant guidance for your international education journey.",
   ],
   primaryButtonText: "Book Consultation",

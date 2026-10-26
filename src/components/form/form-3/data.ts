@@ -8,7 +8,7 @@
 
 export const defaultData = {
   title: "Let’s talk",
-  intro: "NexaMart সম্পর্কে আপনার প্রশ্ন বা সহায়তার অনুরোধ পাঠান; আমাদের টিম দ্রুত আপনার সাথে যোগাযোগ করবে।",
+  intro: "TestPrep Center সম্পর্কে আপনার প্রশ্ন বা সহায়তার অনুরোধ পাঠান; আমাদের টিম দ্রুত আপনার সাথে যোগাযোগ করবে।",
   emailLabel: "Email",
   email: "example@gmail.com",
   addressLabel: "Address",

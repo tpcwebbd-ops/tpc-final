@@ -2,7 +2,7 @@
 |-----------------------------------------
 | setting up page.tsx for the App
 | @author: Toufiquer Rahman<toufiquer.0@gmail.com>
-| @copyright: NexaMart, August, 2026
+| @copyright: TestPrep Center, August, 2026
 |-----------------------------------------
 */
 

@@ -46,7 +46,7 @@ export const defaultDataDeliveryPolicy: IDeliveryPolicyData = {
     {
       title: "1. Service Area",
       description:
-        "NexaMart currently serves the regions listed on this site. Contact the team to confirm that support is available for your project or request.",
+        "TestPrep Center currently serves the regions listed on this site. Contact the team to confirm that support is available for your project or request.",
     },
     {
       title: "2. Planning & Delivery Time",
@@ -64,12 +64,11 @@ export const defaultDataDeliveryPolicy: IDeliveryPolicyData = {
     {
       title: "4. Project Updates",
       description:
-        "NexaMart shares progress updates through the agreed contact channel so you can follow the work and next steps.",
+        "TestPrep Center shares progress updates through the agreed contact channel so you can follow the work and next steps.",
     },
   ],
   helpTitle: "Need Help?",
-  helpDescription:
-    "If you have questions about a project or its agreed timeline, contact NexaMart support.",
+  helpDescription: "If you have questions about a project or its agreed timeline, contact TestPrep Center support.",
   supportEmail: "example@gmail.com",
 };
 

@@ -29,7 +29,7 @@ const ceo: TeamMember = {
   id: "ceo",
   name: "Tanvir Ahmed",
   title: "Founder & CEO",
-  bio: "Leads NexaMart with a clear vision: making international education guidance personal, reliable, and accessible.",
+  bio: "Leads TestPrep Center with a clear vision: making international education guidance personal, reliable, and accessible.",
   image: "https://i.pravatar.cc/600?img=13",
 };
 
@@ -231,7 +231,7 @@ export default function TeamPage() {
           transition={{ duration: 0.6 }}
           className="mb-4 inline-block rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-white/50"
         >
-          NexaMart
+          TestPrep Center
         </motion.span>
         <motion.h1
           initial={{ opacity: 0, y: 24 }}

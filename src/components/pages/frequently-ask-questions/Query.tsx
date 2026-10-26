@@ -19,9 +19,9 @@ import { defaultData } from "./data";
 
 const questions = [
   {
-    question: "What does NexaMart do?",
+    question: "What does TestPrep Center do?",
     answer:
-      "NexaMart is a Bangladesh-based technology company that helps businesses with digital products, web solutions, software services, and practical technical support.",
+      "TestPrep Center is a Bangladesh-based technology company that helps businesses with digital products, web solutions, software services, and practical technical support.",
   },
   {
     question: "How can I request a project or quotation?",
@@ -46,7 +46,7 @@ const questions = [
   {
     question: "Where can I get help after delivery?",
     answer:
-      "Your proposal or service agreement will describe the included support period. For further help, contact NexaMart through our official support channel with the relevant project details.",
+      "Your proposal or service agreement will describe the included support period. For further help, contact TestPrep Center through our official support channel with the relevant project details.",
   },
   {
     question: "Do you work with startups and small businesses?",
@@ -54,7 +54,7 @@ const questions = [
       "Yes. We work with businesses at different stages and can recommend a practical approach based on your current goals, budget, and technical needs.",
   },
   {
-    question: "Can NexaMart build a mobile-friendly website?",
+    question: "Can TestPrep Center build a mobile-friendly website?",
     answer:
       "Yes. Our web solutions are planned to work well across modern desktop, tablet, and mobile devices, subject to the agreed project scope.",
   },
@@ -76,7 +76,7 @@ const questions = [
   {
     question: "Who owns the final project deliverables?",
     answer:
-      "Ownership of final deliverables is set out in your agreement and normally transfers after all applicable payments are received. NexaMart retains ownership of its pre-existing tools, methods, and reusable code.",
+      "Ownership of final deliverables is set out in your agreement and normally transfers after all applicable payments are received. TestPrep Center retains ownership of its pre-existing tools, methods, and reusable code.",
   },
   {
     question: "Can you integrate third-party tools or payment gateways?",
@@ -94,7 +94,7 @@ const questions = [
       "You may contact us to discuss cancellation or a refund request. Eligibility depends on the completed work, payments made, and the applicable proposal, invoice, or Refund Policy.",
   },
   {
-    question: "How can I contact NexaMart?",
+    question: "How can I contact TestPrep Center?",
     answer:
       "Please use our official website contact or support channel and include your name, organisation, and a short description of what you need so our team can respond efficiently.",
   },
@@ -250,7 +250,8 @@ export default function Query({ data = defaultData }: { data?: Record<string, st
         <div className="mx-auto max-w-7xl rounded-sm border border-amber-200 bg-[#fff8e8] p-5 text-center sm:p-6">
           <h2 className="text-2xl font-semibold text-slate-950">Still have a question?</h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-slate-600">
-            Send us your question and relevant project details. The NexaMart team will help with the right next step.
+            Send us your question and relevant project details. The TestPrep Center team will help with the right next
+            step.
           </p>
           <Link
             className="mt-5 inline-flex min-h-10 cursor-pointer items-center justify-center rounded-sm bg-amber-700 px-4 text-sm font-medium text-white transition-all duration-700 hover:bg-amber-800 focus:outline-none focus:ring-4 focus:ring-amber-200"

@@ -43,13 +43,13 @@ export interface Section38Props {
 
 export const defaultDataSection38: Section38Data = {
   id: "section-uid-38",
-  missionEyebrow: "NexaMart",
+  missionEyebrow: "TestPrep Center",
   showMissionEyebrow: true,
   missionTitle: "Our",
   missionHighlightedTitle: "Mission",
   missionDescription:
-    "Our mission is to empower students across Bangladesh with trusted, personalized guidance for studying abroad. NexaMart simplifies university selection, applications, documentation, visa guidance, and pre-departure preparation so every student can move forward with confidence.",
-  visionEyebrow: "NexaMart",
+    "Our mission is to empower students across Bangladesh with trusted, personalized guidance for studying abroad. TestPrep Center simplifies university selection, applications, documentation, visa guidance, and pre-departure preparation so every student can move forward with confidence.",
+  visionEyebrow: "TestPrep Center",
   showVisionEyebrow: true,
   visionTitle: "Our",
   visionHighlightedTitle: "Vision",

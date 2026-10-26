@@ -7,7 +7,7 @@ self.addEventListener("push", (event) => {
     data: { url: data.url || "/" },
     vibrate: [100, 50, 100],
   };
-  event.waitUntil(self.registration.showNotification(data.title || "NexaMart", options));
+  event.waitUntil(self.registration.showNotification(data.title || "TestPrep Center", options));
 });
 
 self.addEventListener("notificationclick", (event) => {

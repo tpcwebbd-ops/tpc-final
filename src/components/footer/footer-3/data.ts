@@ -37,11 +37,10 @@ export const defaultData: FooterThreeData = {
   foreground: "#1c1917",
   accent: "#dc2626",
   logoUrl: "/Logo.png",
-  logoAlt: "NexaMart logo",
+  logoAlt: "TestPrep Center logo",
   showLogo: true,
-  brand: "NexaMart",
-  description:
-    "NexaMart is a flexible website for sharing information, updates, and resources.",
+  brand: "TestPrep Center",
+  description: "TestPrep Center is a flexible website for sharing information, updates, and resources.",
   disabledPaths: ["/dashboard", "/login", "/forgot-password", "/registration"],
   destinations: [
     { id: "uk", label: "UK", url: "/destinations/uk", visible: true },
@@ -57,7 +56,7 @@ export const defaultData: FooterThreeData = {
   ],
   email: "example@gmail.com",
   phone: "01711 221122",
-  copyright: `All Rights Reserved © ${new Date().getFullYear()} - NexaMart `,
+  copyright: `All Rights Reserved © ${new Date().getFullYear()} - TestPrep Center `,
   legalLinks: [
     { id: "privacy", label: "Privacy Policy", url: "/privacy-policy", visible: true },
     { id: "terms", label: "Terms & Conditions", url: "/terms-and-condition", visible: true },

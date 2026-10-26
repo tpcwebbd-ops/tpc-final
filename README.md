@@ -1,6 +1,6 @@
-# NexaMart
+# TestPrep Center
 
-NexaMart is a Next.js 16 PWA and dashboard platform using Better Auth, MongoDB, Redis, role-based access control, account blocking, and protected media tools.
+TestPrep Center is a Next.js 16 PWA and dashboard platform using Better Auth, MongoDB, Redis, role-based access control, account blocking, and protected media tools.
 
 ## Security and access control
 

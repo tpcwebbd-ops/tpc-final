@@ -2,7 +2,7 @@
 |-----------------------------------------
 | setting up not-found.tsx for the App
 | @author: Toufiquer Rahman<toufiquer.0@gmail.com>
-| @copyright: NexaMart, 27 August, 2026
+| @copyright: TestPrep Center, 27 August, 2026
 |-----------------------------------------
 */
 

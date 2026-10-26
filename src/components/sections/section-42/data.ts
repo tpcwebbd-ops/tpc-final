@@ -33,7 +33,7 @@ export const defaultDataSection42: Section42Data = {
   title: "Study in the United Kingdom from Bangladesh for Higher Education",
   paragraphs: [
     "Studying in the United Kingdom is a transformative experience that opens doors to respected qualifications, a vibrant international community, and global career opportunities. For Bangladeshi students seeking high-quality education in Europe, the UK is an outstanding destination.",
-    "The UK is known for research-led universities, focused degree programmes, and strong links with global industries. With guidance from NexaMart, every stage—from choosing a university and exploring scholarships to preparing your Student visa application—becomes clear and manageable.",
+    "The UK is known for research-led universities, focused degree programmes, and strong links with global industries. With guidance from TestPrep Center, every stage—from choosing a university and exploring scholarships to preparing your Student visa application—becomes clear and manageable.",
   ],
   imageUrl: "/images/all-pages-placeholder.png",
   imageAlt: "Study destination placeholder image",

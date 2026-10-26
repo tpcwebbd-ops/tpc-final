@@ -45,7 +45,7 @@ export const defaultRefundPolicySection: RefundPolicySection = {
 
 export const defaultDataPage7: IPage7Data = {
   pageUid: "page-uid-refund-policy",
-  pageName: "NexaMart Refund and Cancellation Policy",
+  pageName: "TestPrep Center Refund and Cancellation Policy",
   title: "Refund Policy",
   eyebrow: "Refund and cancellation guidance",
   showEyebrow: true,
@@ -103,6 +103,6 @@ export const defaultDataPage7: IPage7Data = {
   ],
   contactTitle: "Need help with a refund request?",
   contactDescription:
-    "Please contact NexaMart through the official support channel and include your invoice or payment reference so we can review your request.",
+    "Please contact TestPrep Center through the official support channel and include your invoice or payment reference so we can review your request.",
   supportEmail: "example@gmail.com",
 };

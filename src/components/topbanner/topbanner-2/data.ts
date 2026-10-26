@@ -26,7 +26,7 @@ export type TopBannerTwoData = {
 export const defaultData: TopBannerTwoData = {
   variant: "topbanner-2",
   isVisible: true,
-  text: "Welcome to NexaMart — সহজ ও নিরাপদ অনলাইন শপিং",
+  text: "Welcome to TestPrep Center — সহজ ও নিরাপদ অনলাইন শপিং",
   direction: "left",
   speed: 18,
   background: "#78350f",

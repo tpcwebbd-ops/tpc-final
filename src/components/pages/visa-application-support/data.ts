@@ -131,7 +131,7 @@ export const defaultDataVisaApplicationSupport: IVisaApplicationSupportData = {
   showHeroEyebrow: true,
   heroTitle: "Visa Processing in Bangladesh.",
   heroDescription:
-    "NexaMart helps applicants understand common preparation steps and organise the information needed for a visa consultation.",
+    "TestPrep Center helps applicants understand common preparation steps and organise the information needed for a visa consultation.",
   primaryButtonText: "Book a Visa Assessment",
   primaryButtonUrl: "/consultation",
   secondaryButtonText: "View Processing Steps",
@@ -333,7 +333,7 @@ export const defaultDataVisaApplicationSupport: IVisaApplicationSupportData = {
     },
   ],
   featuresTitle: "Careful guidance without unrealistic promises",
-  featuresEyebrow: "Why customers choose NexaMart",
+  featuresEyebrow: "Why customers choose TestPrep Center",
   showFeaturesEyebrow: true,
   featuresDescription:
     "We focus on preparation quality, applicant understanding, and honest next steps. The immigration authority always makes the final decision.",
@@ -400,9 +400,9 @@ export const defaultDataVisaApplicationSupport: IVisaApplicationSupportData = {
     },
     {
       id: "faq-guarantee",
-      question: "Does NexaMart guarantee visa approval?",
+      question: "Does TestPrep Center guarantee visa approval?",
       answer:
-        "No. Only the relevant immigration authority can approve a visa. NexaMart can help applicants prepare questions and organise their application materials.",
+        "No. Only the relevant immigration authority can approve a visa. TestPrep Center can help applicants prepare questions and organise their application materials.",
     },
     {
       id: "faq-refusal",
@@ -414,10 +414,10 @@ export const defaultDataVisaApplicationSupport: IVisaApplicationSupportData = {
   ctaTitle: "Start your visa preparation from Bangladesh",
   ctaEyebrow: "Ready for your next step?",
   showCtaEyebrow: true,
-  ctaDescription: "Contact NexaMart to discuss visa preparation and the support available for your application.",
+  ctaDescription: "Contact TestPrep Center to discuss visa preparation and the support available for your application.",
   ctaButtonText: "Talk to a Visa Advisor",
   ctaButtonUrl: "/consultation",
-  companyName: "NexaMart",
+  companyName: "TestPrep Center",
   companyEmail: "example@gmail.com",
   companyContact: "01711 221122",
   officeAddress: "Bangladesh",

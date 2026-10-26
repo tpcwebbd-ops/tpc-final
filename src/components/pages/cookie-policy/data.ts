@@ -49,8 +49,8 @@ export const defaultDataCookiePolicy: ICookiePolicyData = {
         "Cookies are small text files placed on your device when you visit a website. They help websites remember information about your visit.",
     },
     {
-      title: "2. How NexaMart uses cookies",
-      description: "NexaMart may use cookies to:",
+      title: "2. How TestPrep Center uses cookies",
+      description: "TestPrep Center may use cookies to:",
       items: [
         "Keep essential website features working.",
         "Understand how visitors use the website.",
@@ -65,11 +65,12 @@ export const defaultDataCookiePolicy: ICookiePolicyData = {
     {
       title: "4. Updates to this policy",
       description:
-        "NexaMart may update this Cookie Policy when its cookie practices change. Please revisit this page from time to time for the latest information.",
+        "TestPrep Center may update this Cookie Policy when its cookie practices change. Please revisit this page from time to time for the latest information.",
     },
   ],
   contactTitle: "Cookie questions",
-  contactDescription: "For questions about NexaMart's use of cookies, email example@gmail.com or call 01711 221122.",
+  contactDescription:
+    "For questions about TestPrep Center's use of cookies, email example@gmail.com or call 01711 221122.",
   supportEmail: "example@gmail.com",
 };
 

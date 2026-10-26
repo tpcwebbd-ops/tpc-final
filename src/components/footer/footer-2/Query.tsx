@@ -115,7 +115,7 @@ export default function Query({ data }: { data: FooterTwoData }) {
               <div className="flex size-11 items-center justify-center rounded-sm border border-stone-200 bg-white text-stone-800 shadow-md shadow-stone-900/10">
                 <Icon name="Download" />
               </div>
-              <h2 className="text-xl font-bold text-stone-950">Stay connected with NexaMart</h2>
+              <h2 className="text-xl font-bold text-stone-950">Stay connected with TestPrep Center</h2>
             </div>
             <p className="mt-2 text-sm leading-6 text-stone-600">
               Install the app for faster browsing and quick access to your site.

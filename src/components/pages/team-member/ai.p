@@ -1,1 +1,1 @@
-Look at the file 'src/components/pages/team-member/data.ts' if found other company name, email, and number then change it to 'NexaMart' 'example@gmail.com', and '01711112222'
+Look at the file 'src/components/pages/team-member/data.ts' if found other company name, email, and number then change it to 'TestPrep Center' 'example@gmail.com', and '01711112222'

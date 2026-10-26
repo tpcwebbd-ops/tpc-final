@@ -38,7 +38,7 @@ export const defaultDataSection47: Section47Data = {
   title: "Study in United States from Bangladesh for Higher Education",
   paragraphs: [
     "Studying in United States is a transformative experience that opens doors to new opportunities, cultures, and global networking. For Bangladeshi students seeking premium educational credentials and excellent career development, United States stands out as a top-tier destination.",
-    "The USA hosts the largest number of top-ranked universities globally. It is renowned for its flexible curriculum, cutting-edge research, and extensive OPT (Optional Practical Training) work rights for STEM graduates. Under the guidance of NexaMart, the entire path—from university shortlisting and scholarship search to visa approvals—becomes stress-free and highly efficient.",
+    "The USA hosts the largest number of top-ranked universities globally. It is renowned for its flexible curriculum, cutting-edge research, and extensive OPT (Optional Practical Training) work rights for STEM graduates. Under the guidance of TestPrep Center, the entire path—from university shortlisting and scholarship search to visa approvals—becomes stress-free and highly efficient.",
   ],
   imageUrl: "/images/all-pages-placeholder.png",
   imageAlt: "Statue of Liberty and the United States flag against a blue sky",

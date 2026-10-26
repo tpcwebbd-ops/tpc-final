@@ -8,7 +8,7 @@
 
 /*
 |-----------------------------------------
-| NexaMart creamy global study hero
+| TestPrep Center creamy global study hero
 |-----------------------------------------
 */
 

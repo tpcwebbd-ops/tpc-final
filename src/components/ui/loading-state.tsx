@@ -25,7 +25,14 @@ export function LoadingState({ label = "Loading", overlay = false }: { label?: s
           <span className="absolute inset-2 rounded-full border-2 border-transparent border-t-amber-500 border-r-amber-300 animate-[loading-orbit_1.35s_linear_infinite_reverse]" />
           <span className="absolute h-11 w-11 rounded-full bg-white shadow-[0_0_26px_rgba(245,158,11,.35)] animate-[loading-core_1.5s_ease-in-out_infinite]" />
           <span className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-full">
-            <Image alt="NexaMart" className="h-9 w-9 object-contain" height={36} priority src="/Logo.png" width={36} />
+            <Image
+              alt="TestPrep Center"
+              className="h-9 w-9 object-contain"
+              height={36}
+              priority
+              src="/Logo.png"
+              width={36}
+            />
           </span>
         </div>
         <p className="mt-4 text-sm font-semibold text-stone-800">{label}</p>

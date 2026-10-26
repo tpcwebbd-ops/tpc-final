@@ -35,22 +35,22 @@ const geistMono = Geist_Mono({
 
 export async function generateMetadata(): Promise<Metadata> {
   const setting = await getSeoSettings({ type: "layout" });
-  const title = setting?.title || "NexaMart";
-  const description = setting?.description || "NexaMart progressive web application";
+  const title = setting?.title || "TestPrep Center";
+  const description = setting?.description || "TestPrep Center progressive web application";
   const images = setting?.socialImage ? [setting.socialImage] : undefined;
   return {
     metadataBase: getCanonicalAppUrl(),
     title,
     description,
-    applicationName: "NexaMart",
+    applicationName: "TestPrep Center",
     icons: { icon: "/Logo.png" },
-    appleWebApp: { capable: true, statusBarStyle: "default", title: "NexaMart" },
+    appleWebApp: { capable: true, statusBarStyle: "default", title: "TestPrep Center" },
     formatDetection: { telephone: false },
     openGraph: {
       title,
       description,
       type: "website",
-      siteName: "NexaMart",
+      siteName: "TestPrep Center",
       ...(setting?.canonicalUrl ? { url: setting.canonicalUrl } : {}),
       ...(images ? { images } : {}),
     },

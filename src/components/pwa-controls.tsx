@@ -68,7 +68,7 @@ export function PwaControls() {
     if (!installEvent) return;
     await installEvent.prompt();
     const choice = await installEvent.userChoice;
-    setStatus(choice.outcome === "accepted" ? "NexaMart was installed." : "Installation was dismissed.");
+    setStatus(choice.outcome === "accepted" ? "TestPrep Center was installed." : "Installation was dismissed.");
     setInstallEvent(null);
   }
 
@@ -111,7 +111,7 @@ export function PwaControls() {
     <div className="mt-8 space-y-6">
       {!isStandalone && (
         <div className="rounded-2xl bg-zinc-100 p-5 dark:bg-zinc-800">
-          <h2 className="font-semibold text-zinc-950 dark:text-white">Install NexaMart</h2>
+          <h2 className="font-semibold text-zinc-950 dark:text-white">Install TestPrep Center</h2>
           {installEvent ? (
             <button
               className="mt-3 rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white"

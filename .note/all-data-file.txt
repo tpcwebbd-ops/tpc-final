@@ -1,4 +1,4 @@
-# Files that contain NexaMart brand, logo, bio, or contact defaults
+# Files that contain TestPrep Center brand, logo, bio, or contact defaults
 
 ## Footer (3)
 

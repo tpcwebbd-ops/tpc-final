@@ -1,4 +1,4 @@
-# NexaMart implementation notes
+# TestPrep Center implementation notes
 
 Use this folder as the compact build handbook for this repository. It records the current architecture and reusable implementation patterns; source code remains the final authority.
 

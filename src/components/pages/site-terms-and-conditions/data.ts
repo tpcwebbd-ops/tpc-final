@@ -26,19 +26,19 @@ export const defaultLayout = {
 
 export const defaultDataSiteTermsAndConditions: ISiteTermsAndConditionsData = {
   pageUid: "site-terms-and-conditions-uid",
-  pageName: "NexaMart Terms & Conditions",
+  pageName: "TestPrep Center Terms & Conditions",
   eyebrow: "Terms & Conditions",
-  title: "The rules and responsibilities for using NexaMart's website and services.",
+  title: "The rules and responsibilities for using TestPrep Center's website and services.",
   subtitle:
-    "These Terms & Conditions explain how NexaMart provides services, outline customer responsibilities, and describe payments, intellectual property, and limitations of liability.",
+    "These Terms & Conditions explain how TestPrep Center provides services, outline customer responsibilities, and describe payments, intellectual property, and limitations of liability.",
   primaryAction: "Read Terms",
-  secondaryAction: "Contact NexaMart",
+  secondaryAction: "Contact TestPrep Center",
   sections: [
     {
       eyebrow: "Acceptance",
       title: "Using the website",
       description:
-        "By browsing this website, submitting forms, or requesting services from NexaMart, visitors agree to these terms.",
+        "By browsing this website, submitting forms, or requesting services from TestPrep Center, visitors agree to these terms.",
       items: [
         "Use the website lawfully",
         "Provide accurate information",
@@ -49,7 +49,7 @@ export const defaultDataSiteTermsAndConditions: ISiteTermsAndConditionsData = {
       eyebrow: "Services",
       title: "Project scope and delivery",
       description:
-        "NexaMart confirms service scope, timelines, deliverables, revisions, and handover details in the applicable customer agreement.",
+        "TestPrep Center confirms service scope, timelines, deliverables, revisions, and handover details in the applicable customer agreement.",
       items: [
         "Scope is agreed before work starts",
         "Change requests may affect cost or timeline",
@@ -77,7 +77,8 @@ export const defaultDataSiteTermsAndConditions: ISiteTermsAndConditionsData = {
     {
       eyebrow: "Contact",
       title: "Terms questions and support",
-      description: "Contact NexaMart if you have questions or need clarification about these Terms & Conditions.",
+      description:
+        "Contact TestPrep Center if you have questions or need clarification about these Terms & Conditions.",
       items: ["Email: example@gmail.com", "Contact: 01711 221122"],
     },
   ],

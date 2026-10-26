@@ -45,7 +45,7 @@ export const defaultDataSection15: OfficeLocation[] = [
   {
     sectionUid: "section-uid-15-100",
     id: "section-uid-15",
-    name: "NexaMart Head Office",
+    name: "TestPrep Center Head Office",
     type: "Headquarters",
     address: "21/B Bijoyshoroni, Tecgaon, Dhaka-1200.",
     city: "Dhaka",
@@ -54,11 +54,11 @@ export const defaultDataSection15: OfficeLocation[] = [
     contact: {
       email: "example@gmail.com",
       phone: "01711 221122",
-      manager: "NexaMart Team",
+      manager: "TestPrep Center Team",
     },
     image: "https://i.ibb.co/KpGnqS3D/nature.jpg",
     description:
-      "NexaMart supports teams with practical planning, clear communication, and reliable project delivery.",
+      "TestPrep Center supports teams with practical planning, clear communication, and reliable project delivery.",
     features: ["Customer Support", "Project Planning", "Service Updates"],
     schedule: "Sat-Thu, 10:00 - 18:00 BST",
   },

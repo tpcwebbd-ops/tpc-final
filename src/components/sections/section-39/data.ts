@@ -34,13 +34,13 @@ export interface Section39Props {
 
 export const defaultDataSection39: Section39Data = {
   id: "section-uid-39",
-  titlePrefix: "Why choose NexaMart for your",
+  titlePrefix: "Why choose TestPrep Center for your",
   highlightedTitle: "study-abroad",
   titleSuffix: "needs?",
   paragraphs: [
-    "Choosing the right course, university, and destination can shape your future. NexaMart provides clear, personalized guidance so you can make informed decisions with confidence.",
+    "Choosing the right course, university, and destination can shape your future. TestPrep Center provides clear, personalized guidance so you can make informed decisions with confidence.",
     "Our experienced team supports you throughout the entire process, including university selection, applications, documentation, visa guidance, and pre-departure preparation.",
-    "NexaMart is based in Bangladesh and works with students across the entire country. Wherever you live, you can access reliable, professional support for your international education journey.",
+    "TestPrep Center is based in Bangladesh and works with students across the entire country. Wherever you live, you can access reliable, professional support for your international education journey.",
   ],
   primaryImage: "https://placehold.co/720x520/dbeafe/1d4ed8?text=Study+Abroad+Guidance",
   topImage: "https://placehold.co/480x320/e2e8f0/475569?text=Why+Choose+Us",

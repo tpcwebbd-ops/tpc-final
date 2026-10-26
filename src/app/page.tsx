@@ -32,12 +32,12 @@ export default async function Home() {
   return (
     <main className="flex flex-1 items-center justify-center bg-zinc-50 px-6 py-16 font-sans dark:bg-zinc-950">
       <section className="w-full max-w-xl rounded-3xl bg-white p-8 shadow-sm ring-1 ring-zinc-950/5 dark:bg-zinc-900 dark:ring-white/10 sm:p-10">
-        <p className="text-sm font-semibold tracking-[0.2em] text-blue-600">NexaMart</p>
+        <p className="text-sm font-semibold tracking-[0.2em] text-blue-600">TestPrep Center</p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight text-zinc-950 dark:text-white">
           Your app, ready to install.
         </h1>
         <p className="mt-4 text-lg leading-8 text-zinc-600 dark:text-zinc-300">
-          Install NexaMart for an app-like experience and opt in to receive push notifications.
+          Install TestPrep Center for an app-like experience and opt in to receive push notifications.
         </p>
         <Link className="mt-5 inline-block text-sm font-semibold text-blue-600 hover:underline" href="/login">
           Sign in or create an account

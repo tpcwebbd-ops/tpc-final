@@ -11,9 +11,9 @@ import type { MenuData } from "../menu-1/data";
 export const defaultData: MenuData = {
   variant: "menu-3",
   isVisible: false,
-  brand: "NexaMart",
+  brand: "TestPrep Center",
   logoUrl: "/Logo.png",
-  logoAlt: "NexaMart logo",
+  logoAlt: "TestPrep Center logo",
   showLogo: true,
   showBrand: true,
   brandColor: "#b45309",

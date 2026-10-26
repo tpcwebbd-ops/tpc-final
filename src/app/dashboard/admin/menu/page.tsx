@@ -2,7 +2,7 @@
 |-----------------------------------------
 | setting up page.tsx for the App
 | @author: Toufiquer Rahman<toufiquer.0@gmail.com>
-| @copyright: NexaMart, August, 2026
+| @copyright: TestPrep Center, August, 2026
 |-----------------------------------------
 */
 
@@ -139,14 +139,21 @@ export default function MenuPage() {
                   </span>
                   <span className="text-xs text-stone-400">#{index + 1}</span>
                 </div>
-                <label aria-busy={busy === menuItem} className="flex items-center gap-2 text-xs font-medium text-stone-600">
+                <label
+                  aria-busy={busy === menuItem}
+                  className="flex items-center gap-2 text-xs font-medium text-stone-600"
+                >
                   <span>{data.isVisible ? "Publish" : "Draft"}</span>
                   <span className="relative flex h-5 w-9 items-center justify-center">
                     <Switch
                       checked={data.isVisible}
                       disabled={busy !== null}
                       onCheckedChange={(isVisible) =>
-                        void save(menuItem, { ...data, isVisible }, `Menu ${isVisible ? "published" : "saved as draft"}.`)
+                        void save(
+                          menuItem,
+                          { ...data, isVisible },
+                          `Menu ${isVisible ? "published" : "saved as draft"}.`,
+                        )
                       }
                     />
                     {busy === menuItem ? (

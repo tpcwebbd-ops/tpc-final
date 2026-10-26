@@ -137,7 +137,7 @@ export default function DemoLoginPage() {
       <div className="relative mx-auto grid w-full max-w-5xl overflow-hidden rounded-sm border border-[#eadfca] bg-white shadow-[0_24px_80px_-34px_rgba(120,53,15,0.20)] lg:min-h-[650px] lg:grid-cols-[0.9fr_1.1fr]">
         <section className="relative isolate min-h-[235px] overflow-hidden bg-[#f8f0df] px-7 py-8 sm:min-h-[275px] sm:p-10 lg:min-h-0 lg:p-14">
           <div className="absolute inset-0 opacity-60 [background-image:linear-gradient(90deg,rgba(146,64,14,.06)_1px,transparent_1px),linear-gradient(rgba(146,64,14,.06)_1px,transparent_1px)] [background-size:32px_32px]" />
-          <p className="relative text-xs font-bold tracking-[0.28em] text-amber-900">NexaMart</p>
+          <p className="relative text-xs font-bold tracking-[0.28em] text-amber-900">TestPrep Center</p>
           <div className="relative mx-auto mt-7 h-32 w-52 sm:mt-9 sm:h-40 sm:w-64 lg:mt-28">
             <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 animate-[orbit_14s_linear_infinite] rounded-full border border-amber-700/30 sm:h-36 sm:w-36" />
             <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 animate-[orbit_9s_linear_infinite_reverse] rounded-full border border-amber-700/25 sm:h-28 sm:w-28" />

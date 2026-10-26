@@ -48,7 +48,7 @@ export const defaultDataSection46: Section46Data = {
   showEyebrow: true,
   title: "Our Partner Universities in the United Kingdom",
   description:
-    "Explore trusted, world-class UK institutions with NexaMart for personalised support with admission and scholarship opportunities.",
+    "Explore trusted, world-class UK institutions with TestPrep Center for personalised support with admission and scholarship opportunities.",
   institutions: [
     {
       id: "institution-oxford",
@@ -56,7 +56,7 @@ export const defaultDataSection46: Section46Data = {
       level: "POSTGRADUATE",
       imageUrl: "/images/all-pages-placeholder.png",
       imageAlt: "United Kingdom university campus for the University of Oxford",
-      buttonText: "Apply via NexaMart →",
+      buttonText: "Apply via TestPrep Center →",
       buttonUrl: "/applicaton",
     },
     {
@@ -65,7 +65,7 @@ export const defaultDataSection46: Section46Data = {
       level: "UNDERGRADUATE",
       imageUrl: "/images/all-pages-placeholder.png",
       imageAlt: "United Kingdom university campus for the University of Cambridge",
-      buttonText: "Apply via NexaMart →",
+      buttonText: "Apply via TestPrep Center →",
       buttonUrl: "/applicaton",
     },
     {
@@ -74,7 +74,7 @@ export const defaultDataSection46: Section46Data = {
       level: "POSTGRADUATE",
       imageUrl: "/images/all-pages-placeholder.png",
       imageAlt: "United Kingdom university campus for Imperial College London",
-      buttonText: "Apply via NexaMart →",
+      buttonText: "Apply via TestPrep Center →",
       buttonUrl: "/applicaton",
     },
     {
@@ -83,7 +83,7 @@ export const defaultDataSection46: Section46Data = {
       level: "UNDERGRADUATE",
       imageUrl: "/images/all-pages-placeholder.png",
       imageAlt: "United Kingdom university campus for the University of Manchester",
-      buttonText: "Apply via NexaMart →",
+      buttonText: "Apply via TestPrep Center →",
       buttonUrl: "/applicaton",
     },
     {
@@ -92,7 +92,7 @@ export const defaultDataSection46: Section46Data = {
       level: "POSTGRADUATE",
       imageUrl: "/images/all-pages-placeholder.png",
       imageAlt: "United Kingdom university campus for the University of Edinburgh",
-      buttonText: "Apply via NexaMart →",
+      buttonText: "Apply via TestPrep Center →",
       buttonUrl: "/applicaton",
     },
   ],
