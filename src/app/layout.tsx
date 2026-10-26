@@ -36,7 +36,7 @@ const geistMono = Geist_Mono({
 export async function generateMetadata(): Promise<Metadata> {
   const setting = await getSeoSettings({ type: "layout" });
   const title = setting?.title || "TestPrep Center";
-  const description = setting?.description || "TestPrep Center progressive web application";
+  const description = setting?.description || "TestPrep Center, The best English Learning Platform in Bangladesh";
   const images = setting?.socialImage ? [setting.socialImage] : undefined;
   return {
     metadataBase: getCanonicalAppUrl(),
