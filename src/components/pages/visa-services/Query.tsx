@@ -504,10 +504,10 @@ const QueryVisaServices = ({ data }: VisaServicesProps) => {
               <Headphones className="h-6 w-6 text-[var(--catalogue-accent)]" />
               <p className="mt-4 font-black text-[var(--catalogue-heading)]">Prefer to ask directly?</p>
               <a
-                href={`mailto:${pageData.companyEmail}`}
+                href={`https://wa.me/${pageData.companyEmail.replace(/\D/g, "").replace(/^0/, "880")}`}
                 className="mt-2 inline-flex items-center gap-2 text-sm font-bold text-[var(--catalogue-accent)] hover:underline"
               >
-                <Mail className="h-4 w-4" /> {pageData.companyEmail}
+                <Mail className="h-4 w-4" /> WhatsApp: {pageData.companyEmail}
               </a>
             </div>
           </motion.div>
@@ -561,10 +561,10 @@ const QueryVisaServices = ({ data }: VisaServicesProps) => {
             </motion.a>
             <div className="mt-7 flex flex-col items-center justify-center gap-3 text-sm text-slate-500 sm:flex-row sm:gap-6">
               <a
-                href={`mailto:${pageData.companyEmail}`}
+                href={`https://wa.me/${pageData.companyEmail.replace(/\D/g, "").replace(/^0/, "880")}`}
                 className="inline-flex items-center gap-2 transition hover:text-[var(--catalogue-accent)]"
               >
-                <Mail className="h-4 w-4" /> {pageData.companyEmail}
+                <Mail className="h-4 w-4" /> WhatsApp: {pageData.companyEmail}
               </a>
               <a
                 href={telHref}

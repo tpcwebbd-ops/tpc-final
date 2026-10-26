@@ -34,10 +34,10 @@ export default async function Home() {
       <section className="w-full max-w-xl rounded-3xl bg-white p-8 shadow-sm ring-1 ring-zinc-950/5 dark:bg-zinc-900 dark:ring-white/10 sm:p-10">
         <p className="text-sm font-semibold tracking-[0.2em] text-blue-600">TestPrep Center</p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight text-zinc-950 dark:text-white">
-          Your app, ready to install.
+          Your learning journey, ready to begin.
         </h1>
         <p className="mt-4 text-lg leading-8 text-zinc-600 dark:text-zinc-300">
-          Install TestPrep Center for an app-like experience and opt in to receive push notifications.
+          Prepare for IELTS, plan your study-abroad journey, and support confident young English speakers with TestPrep Center.
         </p>
         <Link className="mt-5 inline-block text-sm font-semibold text-blue-600 hover:underline" href="/login">
           Sign in or create an account

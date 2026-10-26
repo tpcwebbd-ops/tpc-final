@@ -146,7 +146,7 @@ const MutationDeliveryPolicy = ({ data, onChange }: DeliveryPolicyFormProps) => 
                 />
               </div>
               <div className="grid gap-1.5">
-                <Label htmlFor="delivery-policy-email">Support email</Label>
+                <Label htmlFor="delivery-policy-email">Support WhatsApp number</Label>
                 <Input
                   id="delivery-policy-email"
                   value={formData.supportEmail}

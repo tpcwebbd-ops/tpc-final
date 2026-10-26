@@ -46,30 +46,30 @@ export const defaultDataDeliveryPolicy: IDeliveryPolicyData = {
     {
       title: "1. Service Area",
       description:
-        "TestPrep Center currently serves the regions listed on this site. Contact the team to confirm that support is available for your project or request.",
+        "TestPrep Center provides its learning and guidance services online for learners across Bangladesh.",
     },
     {
-      title: "2. Planning & Delivery Time",
+      title: "2. Enrolment and service access",
       items: [
-        "Initial requests are usually reviewed within 1-2 business days.",
-        "Project timelines are confirmed in the approved proposal.",
-        "Updates are shared at the milestones agreed for the work.",
+        "Contact TPC to discuss the program or guidance you need.",
+        "Course schedules, learning access, and consultation steps are shared before you begin.",
+        "Updates are shared through the agreed online contact channel.",
       ],
     },
     {
       title: "3. Delivery Format",
       description:
-        "Project deliverables are provided in the format agreed with you. Any additional costs are documented in the applicable proposal or agreement.",
+        "IELTS preparation, study-abroad guidance, and TPC Kids Spoken English are delivered online through the formats confirmed for your selected service.",
     },
     {
-      title: "4. Project Updates",
+      title: "4. Learning and guidance updates",
       description:
-        "TestPrep Center shares progress updates through the agreed contact channel so you can follow the work and next steps.",
+        "TestPrep Center shares relevant learning, consultation, and next-step updates through the agreed contact channel.",
     },
   ],
   helpTitle: "Need Help?",
-  helpDescription: "If you have questions about a project or its agreed timeline, contact TestPrep Center support.",
-  supportEmail: "example@gmail.com",
+  helpDescription: "If you have questions about an online course, study-abroad guidance, or service access, contact TestPrep Center on WhatsApp.",
+  supportEmail: "01786558855",
 };
 
 export const defaultDeliveryPolicySection: DeliveryPolicySection = {

@@ -75,7 +75,7 @@ const toPdfFileName = (value: string) =>
       .trim()
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "") || "wes-associates-guide"
+      .replace(/^-|-$/g, "") || "testprep-center-guide"
   }.pdf`;
 
 const getPageData = (data?: IVisaRequirementsData | VisaRequirementsPayload | string): VisaRequirementsPayload => {
@@ -165,7 +165,7 @@ const QueryVisaRequirements = ({ data }: VisaRequirementsProps) => {
 
   useEffect(() => {
     try {
-      const saved = window.localStorage.getItem("wes-visa-checklist-v1");
+      const saved = window.localStorage.getItem("testprep-center-visa-checklist-v1");
       // eslint-disable-next-line react-hooks/set-state-in-effect
       if (saved) setCompleted(new Set(JSON.parse(saved) as string[]));
     } catch {
@@ -179,7 +179,7 @@ const QueryVisaRequirements = ({ data }: VisaRequirementsProps) => {
       if (next.has(id)) next.delete(id);
       else next.add(id);
       try {
-        window.localStorage.setItem("wes-visa-checklist-v1", JSON.stringify([...next]));
+        window.localStorage.setItem("testprep-center-visa-checklist-v1", JSON.stringify([...next]));
       } catch {
         // The checklist remains usable when browser storage is unavailable.
       }
@@ -210,7 +210,7 @@ const QueryVisaRequirements = ({ data }: VisaRequirementsProps) => {
         pdf.setFont("helvetica", "normal");
         pdf.setFontSize(9);
         pdf.setTextColor(98, 84, 87);
-        pdf.text(`Email: ${pageData.downloadCompanyEmail}`, margin, 27);
+        pdf.text(`WhatsApp: ${pageData.downloadCompanyEmail}`, margin, 27);
         pdf.text(`Contact: ${pageData.downloadCompanyContact}`, margin, 32);
         pdf.setDrawColor(226, 220, 221);
         pdf.line(margin, 38, pageWidth - margin, 38);
@@ -282,7 +282,7 @@ const QueryVisaRequirements = ({ data }: VisaRequirementsProps) => {
         pdf.setFontSize(8);
         pdf.setTextColor(120, 110, 112);
         pdf.text(
-          `${pageData.downloadCompanyName} | ${pageData.downloadCompanyEmail} | ${pageData.downloadCompanyContact}`,
+          `${pageData.downloadCompanyName} | WhatsApp: ${pageData.downloadCompanyEmail} | Contact: ${pageData.downloadCompanyContact}`,
           margin,
           pageHeight - 9,
         );

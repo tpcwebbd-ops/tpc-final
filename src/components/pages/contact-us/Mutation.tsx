@@ -11,17 +11,6 @@ import { Switch } from "@/components/ui/switch";
 
 import { defaultData } from "./data";
 
-type OpeningDay = { day: string; openTime: string; closeTime: string };
-const defaultDays = JSON.parse(defaultData.openingDays) as OpeningDay[];
-function readDays(value: string | undefined) {
-  try {
-    const days = JSON.parse(value ?? "") as OpeningDay[];
-    return Array.isArray(days) ? days : defaultDays;
-  } catch {
-    return defaultDays;
-  }
-}
-
 export default function Mutation({
   data = defaultData,
   onChange,
@@ -29,23 +18,20 @@ export default function Mutation({
   data?: Record<string, string>;
   onChange: (data: Record<string, string>) => void;
 }) {
-  const days = readDays(data.openingDays);
   const update = (key: string, value: string) => onChange({ ...data, [key]: value });
-  const updateDay = (index: number, key: keyof OpeningDay, value: string) =>
-    update(
-      "openingDays",
-      JSON.stringify(days.map((item, itemIndex) => (itemIndex === index ? { ...item, [key]: value } : item))),
-    );
   const value = (key: keyof typeof defaultData) => data[key] ?? defaultData[key];
   const fields = [
     "title",
-    "emailLabel",
-    "email",
+    "phoneLabel",
+    "phone",
+    "facebookLabel",
+    "facebookUrl",
+    "facebookGroupLabel",
+    "facebookGroupUrl",
     "addressLabel",
     "address",
     "locationLabel",
     "location",
-    "mapUrl",
   ] as const;
   return (
     <div className="custom-parent-border px-4 grid gap-5">
@@ -80,53 +66,11 @@ export default function Mutation({
       <section className="grid gap-4 rounded-md border border-emerald-200 bg-emerald-50/40 p-4">
         <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
           <div>
-            <h3 className="text-sm font-semibold text-stone-800">Opening Days</h3>
+            <h3 className="text-sm font-semibold text-stone-800">Online support message</h3>
             <p className="mt-1 text-xs text-stone-500">
-              Set the day name, opening time, and closing time shown to visitors.
+              The TestPrep Center contact page now focuses on online service access rather than unverified office hours.
             </p>
           </div>
-          <label className="flex items-center justify-between gap-3 rounded-sm border border-emerald-200 bg-white px-3 py-2 text-xs font-medium text-stone-700">
-            <span>Open 24/7</span>
-            <Switch
-              checked={value("open247") === "true"}
-              onCheckedChange={(checked) => update("open247", String(checked))}
-            />
-          </label>
-        </div>
-        <div className="grid gap-3">
-          {days.map((item, index) => (
-            <div
-              className="grid gap-3 rounded-sm border border-emerald-200 bg-white p-3 sm:grid-cols-[1.3fr_1fr_1fr]"
-              key={`${item.day}-${index}`}
-            >
-              <label className="grid gap-1 text-xs font-medium text-stone-600">
-                Day name
-                <input
-                  className="rounded-sm border border-stone-300 p-2 text-sm font-normal text-stone-800"
-                  value={item.day}
-                  onChange={(event) => updateDay(index, "day", event.target.value)}
-                />
-              </label>
-              <label className="grid gap-1 text-xs font-medium text-stone-600">
-                Opening time
-                <input
-                  className="rounded-sm border border-stone-300 p-2 text-sm font-normal text-stone-800"
-                  type="time"
-                  value={item.openTime}
-                  onChange={(event) => updateDay(index, "openTime", event.target.value)}
-                />
-              </label>
-              <label className="grid gap-1 text-xs font-medium text-stone-600">
-                Closing time
-                <input
-                  className="rounded-sm border border-stone-300 p-2 text-sm font-normal text-stone-800"
-                  type="time"
-                  value={item.closeTime}
-                  onChange={(event) => updateDay(index, "closeTime", event.target.value)}
-                />
-              </label>
-            </div>
-          ))}
         </div>
       </section>
     </div>

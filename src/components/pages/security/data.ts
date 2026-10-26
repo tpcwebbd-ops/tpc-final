@@ -68,8 +68,8 @@ export const defaultDataSecurity: ISecurityData = {
       title: "Help us keep TestPrep Center secure",
       description: "If you believe you have found a security issue, contact TestPrep Center using the details below.",
       items: [
-        "Email: example@gmail.com",
-        "Contact: 01711 221122",
+        "Call or WhatsApp: 01786558855",
+        "Facebook: facebook.com/TestPrepCenter.BD",
         "Share clear details so the concern can be investigated",
       ],
     },

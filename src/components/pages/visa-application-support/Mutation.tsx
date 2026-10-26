@@ -327,7 +327,7 @@ const MutationVisaApplicationSupport = ({ data, onChange }: VisaApplicationSuppo
               <ShieldCheck className="h-6 w-6 text-emerald-700" />
             </div>
             <div>
-              <h2 className="text-xl font-bold">Edit Visa Processing in Bangladesh</h2>
+              <h2 className="text-xl font-bold">Edit Student Visa Preparation</h2>
               <p className="text-sm text-slate-500">
                 Manage the live Bangladesh visa page and every structured collection.
               </p>
@@ -397,7 +397,7 @@ const MutationVisaApplicationSupport = ({ data, onChange }: VisaApplicationSuppo
 
             <div className={cardClass}>
               <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-slate-500">
-                <MapPinned className="h-4 w-4" /> Actions and WES contact
+                <MapPinned className="h-4 w-4" /> Actions and TestPrep Center contact
               </h3>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
@@ -459,9 +459,9 @@ const MutationVisaApplicationSupport = ({ data, onChange }: VisaApplicationSuppo
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label>Company email</Label>
+                  <Label>Company WhatsApp number</Label>
                   <Input
-                    type="email"
+                    inputMode="tel"
                     value={formData.companyEmail}
                     onChange={(event) => updateField("companyEmail", event.target.value)}
                     className={inputClass}

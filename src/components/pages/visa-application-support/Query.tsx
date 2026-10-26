@@ -95,7 +95,7 @@ const QueryVisaApplicationSupport = ({ data }: VisaApplicationSupportProps) => {
 
   useEffect(() => {
     try {
-      const saved = window.localStorage.getItem("wes-bangladesh-visa-checklist-v1");
+      const saved = window.localStorage.getItem("testprep-center-bangladesh-visa-checklist-v1");
       // eslint-disable-next-line react-hooks/set-state-in-effect
       if (saved) setCompletedDocuments(new Set(JSON.parse(saved) as string[]));
     } catch {
@@ -109,7 +109,7 @@ const QueryVisaApplicationSupport = ({ data }: VisaApplicationSupportProps) => {
       if (next.has(id)) next.delete(id);
       else next.add(id);
       try {
-        window.localStorage.setItem("wes-bangladesh-visa-checklist-v1", JSON.stringify([...next]));
+        window.localStorage.setItem("testprep-center-bangladesh-visa-checklist-v1", JSON.stringify([...next]));
       } catch {
         // Keep the checklist interactive in restricted browsers.
       }
@@ -559,12 +559,12 @@ const QueryVisaApplicationSupport = ({ data }: VisaApplicationSupportProps) => {
             <p className="mt-6 text-lg leading-8">{pageData.faqDescription}</p>
             <div className="mt-8 rounded-sm border border-emerald-100 bg-emerald-50/50 p-5 dark:border-slate-800 dark:bg-slate-900">
               <Headphones className="h-6 w-6 text-[var(--bd-green)] dark:text-emerald-300" />
-              <p className="mt-4 font-black text-[var(--bd-heading)] dark:text-white">Ask Site</p>
+              <p className="mt-4 font-black text-[var(--bd-heading)] dark:text-white">Ask TestPrep Center</p>
               <a
-                href={`mailto:${pageData.companyEmail}`}
+                href={`https://wa.me/${pageData.companyEmail.replace(/\D/g, "").replace(/^0/, "880")}`}
                 className="mt-2 inline-flex items-center gap-2 text-sm font-bold text-[var(--bd-red)] hover:underline"
               >
-                <Mail className="h-4 w-4" /> {pageData.companyEmail}
+                <Mail className="h-4 w-4" /> WhatsApp: {pageData.companyEmail}
               </a>
             </div>
           </motion.div>

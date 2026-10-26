@@ -34,14 +34,14 @@ export interface Section31Props {
 export const defaultDataSection31: Section31Data = {
   id: "section-uid-31",
   badgeText: "★ We Are Also Providing",
-  headingPrefix: "The Best",
+  headingPrefix: "Online",
   headingHighlight: "Study Abroad",
   headingSuffix: "Services",
   stats: [
-    { number: "5000+", label: "Students Placed" },
-    { number: "50+", label: "Universities" },
-    { number: "15+", label: "Countries" },
-    { number: "98%", label: "Success Rate" },
+    { number: "TPC", label: "TestPrep Center" },
+    { number: "IELTS", label: "Preparation" },
+    { number: "Study", label: "Abroad guidance" },
+    { number: "Kids", label: "Spoken English" },
   ],
 };
 

@@ -55,14 +55,14 @@ export const defaultDataPage7: IPage7Data = {
   lastUpdatedLabel: "Last updated: 24 August 2026",
   highlightTitle: "Fair and clear review",
   highlightDescription:
-    "Every eligible request is reviewed against the relevant proposal, invoice, and service agreement. We aim to communicate the outcome and next steps clearly.",
+    "Every eligible request is reviewed against the selected program, invoice, and applicable service terms. We aim to communicate the outcome and next steps clearly.",
   sections: [
     {
       eyebrow: "Overview",
       showEyebrow: true,
       title: "Refund policy overview",
       description:
-        "Refund eligibility depends on the agreed scope of work, payment terms, and the applicable service agreement.",
+        "Refund eligibility depends on the selected course or guidance service, payment terms, and the applicable service conditions.",
     },
     {
       eyebrow: "Eligibility",
@@ -72,7 +72,7 @@ export const defaultDataPage7: IPage7Data = {
         "You may request a review when a paid service has not started, a duplicate payment was made, or we cannot deliver an agreed service for reasons within our control.",
       items: [
         "Submit the request promptly with your invoice or payment reference",
-        "Explain the issue and include relevant project or account details",
+        "Explain the issue and include relevant course, consultation, or account details",
         "Refunds are reviewed against the scope and payment terms agreed for the service",
       ],
     },
@@ -81,11 +81,11 @@ export const defaultDataPage7: IPage7Data = {
       showEyebrow: true,
       title: "Services that may not be refundable",
       description:
-        "Fees for completed work, approved milestones, consumed subscriptions, third-party charges, and customised digital deliverables are generally non-refundable unless the applicable agreement states otherwise.",
+        "Fees for completed classes, delivered consultations, used learning access, third-party charges, and completed service stages may be non-refundable unless the applicable terms state otherwise.",
       items: [
-        "Work already completed or handed over",
-        "Third-party licences, domain, hosting, gateway, or platform costs",
-        "Delays caused by missing client materials, approvals, or feedback",
+        "Classes, consultations, or guidance already delivered",
+        "Third-party application, testing, payment-gateway, or platform costs",
+        "Delays caused by missing learner information, documents, or responses",
       ],
     },
     {
@@ -104,5 +104,5 @@ export const defaultDataPage7: IPage7Data = {
   contactTitle: "Need help with a refund request?",
   contactDescription:
     "Please contact TestPrep Center through the official support channel and include your invoice or payment reference so we can review your request.",
-  supportEmail: "example@gmail.com",
+  supportEmail: "01786558855",
 };

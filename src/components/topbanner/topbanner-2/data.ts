@@ -23,21 +23,33 @@ export type TopBannerTwoData = {
   position: "fixed" | "sticky" | "hide";
   excludedPaths: string[];
 };
+
 export const defaultData: TopBannerTwoData = {
   variant: "topbanner-2",
   isVisible: true,
-  text: "Welcome to TestPrep Center — সহজ ও নিরাপদ অনলাইন শপিং",
+  text: "Learn IELTS, plan your study abroad journey, and build kids' spoken English skills online with TestPrep Center (TPC).",
   direction: "left",
   speed: 18,
   background: "#78350f",
   foreground: "#fff7ed",
   fontSize: "base",
   icons: [
-    { id: "facebook", title: "Facebook", icon: "CiFacebook", url: "https://facebook.com", visible: true },
-    { id: "youtube", title: "YouTube", icon: "AiOutlineYoutube", url: "https://youtube.com", visible: true },
-    { id: "whatsapp", title: "WhatsApp", icon: "FaWhatsapp", url: "https://wa.me/8801711221122", visible: true },
-    { id: "messenger", title: "Messenger", icon: "FaFacebookMessenger", url: "https://m.me", visible: true },
-    { id: "call", title: "Call", icon: "Phone", url: "tel:+8801711221122", visible: true },
+    {
+      id: "facebook",
+      title: "Facebook",
+      icon: "CiFacebook",
+      url: "https://www.facebook.com/TestPrepCenter.BD/",
+      visible: true,
+    },
+    {
+      id: "facebook-group",
+      title: "TPC Kids Facebook Group",
+      icon: "CiFacebook",
+      url: "https://www.facebook.com/groups/tpckids",
+      visible: true,
+    },
+    { id: "whatsapp", title: "WhatsApp", icon: "FaWhatsapp", url: "https://wa.me/8801786558855", visible: true },
+    { id: "call", title: "Call", icon: "Phone", url: "tel:+8801786558855", visible: true },
   ],
   authLabel: "Login / Dashboard",
   buttonVisible: true,

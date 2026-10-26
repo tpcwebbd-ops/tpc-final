@@ -172,9 +172,11 @@ const QueryPage7 = ({ data }: Page7Props) => {
           {pageData.supportEmail && (
             <a
               className="mt-4 inline-block text-sm font-semibold text-amber-800 underline underline-offset-4"
-              href={`mailto:${pageData.supportEmail}`}
+              href={`https://wa.me/${pageData.supportEmail.replace(/\D/g, "").replace(/^0/, "880")}`}
+              rel="noopener noreferrer"
+              target="_blank"
             >
-              {pageData.supportEmail}
+              WhatsApp: {pageData.supportEmail}
             </a>
           )}
         </div>

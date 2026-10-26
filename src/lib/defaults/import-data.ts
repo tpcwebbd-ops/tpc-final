@@ -7,6 +7,8 @@
 
 export type ImportPageVariant =
   | "all-home"
+  | "ielts-preparation"
+  | "kids-spoken-english"
   | "all-about-us"
   | "all-contact-us"
   | "all-frequently-ask-questions"
@@ -71,8 +73,30 @@ export const sidebarDefaults: ImportSidebarDefault[] = [
   { name: "Install", url: "/dashboard/install", icon: "Download" },
 ];
 export const pageDefaults: ImportPageDefault[] = [
-  { title: "Home", path: "/", description: "A flexible home page.", variant: "all-home" },
-  { title: "About us", path: "/about-us", description: "Learn about our team and purpose.", variant: "all-about-us" },
+  {
+    title: "TestPrep Center Home",
+    path: "/",
+    description: "IELTS preparation, study-abroad guidance, and kids' spoken English online.",
+    variant: "all-home",
+  },
+  {
+    title: "IELTS Preparation",
+    path: "/ielts-preparation",
+    description: "Online IELTS preparation from TestPrep Center.",
+    variant: "ielts-preparation",
+  },
+  {
+    title: "TPC Kids Spoken English",
+    path: "/kids-spoken-english",
+    description: "Online spoken-English learning for young learners in Bangladesh.",
+    variant: "kids-spoken-english",
+  },
+  {
+    title: "About TestPrep Center",
+    path: "/about-us",
+    description: "Learn about our approach and purpose.",
+    variant: "all-about-us",
+  },
   {
     title: "Contact us",
     path: "/contact-us",

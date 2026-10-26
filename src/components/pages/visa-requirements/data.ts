@@ -180,7 +180,7 @@ export const defaultDataVisaRequirements: IVisaRequirementsData = {
   showEyebrow: true,
   heroTitle: "Student Visa Requirements",
   heroDescription:
-    "Compare destinations, understand every document, and build a confident student visa application from one clear, expert-led workspace.",
+    "Compare destinations, understand common documents, and build a clear student-visa preparation plan. Always verify current requirements with official sources.",
   exploreButtonText: "Explore Countries",
   exploreButtonUrl: "#countries",
   checklistButtonText: "Download Checklist",
@@ -1121,8 +1121,8 @@ export const defaultDataVisaRequirements: IVisaRequirementsData = {
   downloadsTitle: "Practical guides for every stage",
   downloadsDescription: "Keep a clear copy of the checklists and preparation guides you need.",
   downloadCompanyName: "TestPrep Center",
-  downloadCompanyEmail: "example@gmail.com",
-  downloadCompanyContact: "01711 221122",
+  downloadCompanyEmail: "01786558855",
+  downloadCompanyContact: "01786558855",
   downloads: [
     {
       id: "download-profile",
@@ -1256,9 +1256,9 @@ export const defaultDataVisaRequirements: IVisaRequirementsData = {
   ctaDescription:
     "Get a personalised document plan, funding review, and application roadmap from an experienced study-abroad advisor.",
   primaryButtonText: "Book Consultation",
-  primaryButtonUrl: "/consultation",
+  primaryButtonUrl: "/contact-us",
   secondaryButtonText: "Contact Advisor",
-  secondaryButtonUrl: "/contact",
+  secondaryButtonUrl: "/contact-us",
   backgroundColor: "#ffffff",
   surfaceColor: "#f7fafc",
   headingColor: "#251214",

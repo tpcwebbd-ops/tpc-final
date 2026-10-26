@@ -39,7 +39,7 @@ const normalizeData = (data?: ICompanyStoryData | CompanyStoryPayload): CompanyS
   ...defaultLayout,
   ...data,
   pageUid: "company-story-uid",
-  pageName: "Company Story",
+  pageName: "About TestPrep Center",
   showEyebrow: data?.showEyebrow !== false,
   sections: Array.isArray(data?.sections)
     ? data.sections.map((section) => ({ ...section, showEyebrow: section.showEyebrow !== false }))
@@ -94,7 +94,13 @@ const MutationCompanyStory = ({ data, onChange }: CompanyStoryFormProps) => {
     setPaddingY((current) => (current === nextData.paddingY ? current : nextData.paddingY));
   }, [data]);
   useEffect(() => {
-    onChangeRef.current?.({ ...formData, paddingX, paddingY, pageUid: "company-story-uid", pageName: "Company Story" });
+    onChangeRef.current?.({
+      ...formData,
+      paddingX,
+      paddingY,
+      pageUid: "company-story-uid",
+      pageName: "About TestPrep Center",
+    });
   }, [formData, paddingX, paddingY]);
   const updateSpacing = (field: "paddingX" | "paddingY", value: number) => {
     const next = Math.min(300, Math.max(-300, value));

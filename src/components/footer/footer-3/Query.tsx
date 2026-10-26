@@ -89,8 +89,12 @@ export default function Query({ data }: { data: FooterThreeData }) {
         <div>
           <h2 className="font-bold">Contact</h2>
           <div className="mt-4 grid gap-3 text-sm">
-            <a href={`mailto:${data.email}`}>{data.email}</a>
+            <a href={`https://wa.me/${data.whatsappNumber.replace(/\D/g, "").replace(/^0/, "880")}`} rel="noopener noreferrer" target="_blank">
+              WhatsApp: {data.whatsappNumber}
+            </a>
             <a href={`tel:${data.phone.replace(/[^+\d]/g, "")}`}>{data.phone}</a>
+            <a href={data.facebookUrl} rel="noopener noreferrer" target="_blank">Facebook Page</a>
+            <a href={data.facebookGroupUrl} rel="noopener noreferrer" target="_blank">TPC Kids Facebook Group</a>
           </div>
         </div>
       </div>
@@ -103,7 +107,7 @@ export default function Query({ data }: { data: FooterThreeData }) {
             <div>
               <h2 className="text-lg font-bold text-stone-900">Take us with you</h2>
               <p className="mt-1 max-w-xl text-sm leading-6 text-stone-600">
-                Install our app for faster browsing and quick access to your site.
+                Install our app for quicker access to TestPrep Center online learning services.
               </p>
             </div>
           </div>

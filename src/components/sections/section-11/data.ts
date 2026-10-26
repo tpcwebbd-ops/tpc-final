@@ -10,7 +10,6 @@ export interface IMilestone {
   label: string;
   value: string;
 }
-
 export interface IExperienceItem {
   id: string;
   year: string;
@@ -21,7 +20,6 @@ export interface IExperienceItem {
   highlightMilestone: IMilestone;
   features: string[];
 }
-
 export interface Section11Data {
   id: string;
   sectionUid: string;
@@ -34,64 +32,59 @@ export interface Section11Data {
   description: string;
   experiences: IExperienceItem[];
 }
-
 export interface Section11Props {
   data?: Section11Data | string;
 }
-
-export const defaultExperience: Omit<IExperienceItem, "id"> = { year: "2024 - Present", companyName: "New Company", role: "Role Title", description: "Describe your role and impact here...", lastAchievement: "Significant achievement", highlightMilestone: { label: "Metric", value: "100%" }, features: ["Skill 1"] };
-
+export const defaultExperience: Omit<IExperienceItem, "id"> = {
+  year: "Learning path",
+  companyName: "TestPrep Center",
+  role: "Program",
+  description: "Describe this learning path.",
+  lastAchievement: "Useful next step",
+  highlightMilestone: { label: "Format", value: "Online" },
+  features: ["Learning support"],
+};
 export const defaultDataSection11: Section11Data = {
   sectionUid: "section-uid-11",
   id: "section-uid-11",
   paddingX: 0,
   paddingY: 0,
-  eyebrow: "Career Path",
+  eyebrow: "TestPrep Center",
   showEyebrow: true,
-  title: "Professional",
-  subTitle: "Journey",
-  description: "A timeline of dedication, innovation, and impactful contributions across the tech industry.",
+  title: "Your Learning",
+  subTitle: "Path",
+  description: "Choose the online TestPrep Center program that fits the goal you want to work toward.",
   experiences: [
     {
-      id: "exp-001",
-      year: "2022 - Present",
-      companyName: "TechFlow Systems",
-      role: "Senior Frontend Engineer",
-      description:
-        "Leading the core UI team in rebuilding the legacy dashboard into a modern, high-performance React application.",
-      lastAchievement: "Reduced initial load time by 45% using server components.",
-      highlightMilestone: {
-        label: "Users Impacted",
-        value: "2M+",
-      },
-      features: ["Next.js 14", "TypeScript", "System Architecture", "Team Leadership"],
+      id: "ielts",
+      year: "Step 1",
+      companyName: "TestPrep Center",
+      role: "IELTS Preparation",
+      description: "Build a practical plan for improving your English test skills and preparing for IELTS.",
+      lastAchievement: "Focused online preparation",
+      highlightMilestone: { label: "Format", value: "Online" },
+      features: ["Listening", "Reading", "Writing", "Speaking"],
     },
     {
-      id: "exp-002",
-      year: "2020 - 2022",
-      companyName: "Creative Pulse",
-      role: "UI/UX Developer",
+      id: "abroad",
+      year: "Step 2",
+      companyName: "TestPrep Center",
+      role: "Study Abroad Guidance",
       description:
-        "Bridged the gap between design and engineering, creating interactive micro-sites and award-winning landing pages.",
-      lastAchievement: "Won the Awwwards Site of the Day for the 2021 Rebrand.",
-      highlightMilestone: {
-        label: "Conversion Rate",
-        value: "+150%",
-      },
-      features: ["Framer Motion", "WebGL", "Interactive Design", "GSAP"],
+        "Clarify destinations, applications, documents, and the preparation needed for your international education goal.",
+      lastAchievement: "Clear next steps",
+      highlightMilestone: { label: "Support", value: "Guidance" },
+      features: ["Destinations", "Applications", "Documents", "Visa preparation"],
     },
     {
-      id: "exp-003",
-      year: "2018 - 2020",
-      companyName: "StartUp Inc.",
-      role: "Junior Web Developer",
-      description: "Collaborated with cross-functional teams to ship features rapidly in an agile environment.",
-      lastAchievement: "Successfully migrated the payment gateway without downtime.",
-      highlightMilestone: {
-        label: "Features Shipped",
-        value: "45+",
-      },
-      features: ["React", "Redux", "Stripe API", "Agile/Scrum"],
+      id: "kids",
+      year: "Step 3",
+      companyName: "TestPrep Center",
+      role: "TPC Kids Spoken English",
+      description: "Help young learners practise everyday English communication in a supportive online setting.",
+      lastAchievement: "Growing confidence",
+      highlightMilestone: { label: "Learners", value: "Kids" },
+      features: ["Speaking", "Vocabulary", "Conversation", "Online learning"],
     },
   ],
 };

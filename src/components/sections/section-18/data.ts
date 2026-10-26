@@ -9,7 +9,6 @@
 export interface Section18Props {
   data?: Section18Data | Section18Payload | string;
 }
-
 export interface ISlideItem {
   id: string;
   image: string;
@@ -18,10 +17,8 @@ export interface ISlideItem {
   buttonText?: string;
   buttonLink?: string;
 }
-
 export type NavPosition = "middle-inside" | "middle-outside" | "bottom-overlay" | "bottom-outside";
 export type ItemsPerSlide = 1 | 2 | 3 | 4;
-
 export interface Section18Data {
   id: string;
   slides: ISlideItem[];
@@ -30,41 +27,38 @@ export interface Section18Data {
   isAutoplay: boolean;
   infiniteLoop: boolean;
   pauseOnHover: boolean;
-
   itemsPerSlide: ItemsPerSlide;
   navPosition: NavPosition;
   showArrowsOnHover: boolean;
-
   height: "auto" | "fixed-sm" | "fixed-md" | "fixed-lg" | "screen";
   overlayOpacity: number;
 }
-
 export const defaultDataSection18: Section18Data = {
   id: "section-uid-18",
   sectionUid: "section-uid-18",
   slides: [
     {
-      id: "1",
+      id: "ielts",
       image: "/images/all-pages-placeholder.png",
-      title: "A clear place to start.",
-      description: "Explore the information, services, and resources available across our site.",
-      buttonText: "About us",
-      buttonLink: "/about-us",
+      title: "Prepare for IELTS online.",
+      description: "Build your English test skills with focused support from TestPrep Center.",
+      buttonText: "Explore IELTS Support",
+      buttonLink: "/contact-us",
     },
     {
-      id: "2",
+      id: "abroad",
       image: "/images/all-pages-placeholder.png",
-      title: "Useful updates and guidance.",
-      description: "Find answers to common questions and learn how our services work.",
-      buttonText: "Frequently asked questions",
-      buttonLink: "/frequently-ask-questions",
+      title: "Plan your study-abroad journey.",
+      description: "Get clear online guidance on destinations, applications, and your next steps.",
+      buttonText: "Talk to a Counselor",
+      buttonLink: "/contact-us",
     },
     {
-      id: "3",
+      id: "kids",
       image: "/images/all-pages-placeholder.png",
-      title: "Let’s work together.",
-      description: "Get in touch to discuss a question, project, or service request.",
-      buttonText: "Contact us",
+      title: "Help your child speak with confidence.",
+      description: "Discover TPC Kids Spoken English for supportive online practice.",
+      buttonText: "Contact TPC",
       buttonLink: "/contact-us",
     },
   ],
@@ -78,14 +72,11 @@ export const defaultDataSection18: Section18Data = {
   height: "fixed-md",
   overlayOpacity: 52,
 };
-
 export interface Section18Payload extends Section18Data {
   paddingX: number;
   paddingY: number;
 }
-
 export const defaultLayout = { paddingX: 0, paddingY: 0 };
-
 export interface Section18FormProps {
   data?: Section18Data | Section18Payload;
   onChange?: (values: Section18Data | Section18Payload) => void;

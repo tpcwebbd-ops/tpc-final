@@ -13,29 +13,20 @@ export interface ISection48Data {
   stampValue: string;
   stampText: string;
 }
-
 export type Section48Data = ISection48Data;
-
 export interface Section48Payload extends Section48Data {
   paddingX: number;
   paddingY: number;
 }
-
 export interface Section48Props {
   data?: Section48Data | Section48Payload | string;
 }
-
-export const defaultLayout = {
-  paddingX: 0,
-  paddingY: 0,
-};
-
+export const defaultLayout = { paddingX: 0, paddingY: 0 };
 export const defaultDataSection48: Section48Data = {
   id: "section-uid-48",
-  banglaFirstLine: "স্বপ্ন আপনার,",
-  banglaSecondLine: "সঠিক পথ দেখানোর দায়িত্ব আমাদের।",
-  stampValue: "16",
-  stampText: "YEARS OF TRUST • YEARS OF TRUST •",
+  banglaFirstLine: "Your learning goal,",
+  banglaSecondLine: "our clear online guidance.",
+  stampValue: "TPC",
+  stampText: "IELTS • STUDY ABROAD • KIDS SPOKEN ENGLISH •",
 };
-
 export const defaultData = defaultDataSection48;

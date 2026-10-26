@@ -17,7 +17,7 @@ export const defaultDataSection1: RichTextData & { id: string } = {
       children: [
         {
           children: [
-            { detail: 0, format: 0, mode: "normal", style: "", text: "Rich Text Editor", type: "text", version: 1 },
+            { detail: 0, format: 0, mode: "normal", style: "", text: "TestPrep Center: Online IELTS, study-abroad, and kids' spoken English support for learners across Bangladesh.", type: "text", version: 1 },
           ],
           direction: null,
           format: "",

@@ -8,88 +8,48 @@
 
 export const defaultQuestions = [
   {
-    question: "What does Site do?",
-    answer: "Site helps businesses plan and deliver practical digital products, web solutions, and software services.",
+    question: "What does TestPrep Center offer?",
+    answer:
+      "TestPrep Center offers online IELTS preparation, study-abroad guidance, and TPC Kids spoken English courses for learners in Bangladesh.",
   },
   {
-    question: "How can I request a project or quotation?",
+    question: "Are TPC services available online?",
     answer:
-      "Share your requirements through the contact channel. The team will review the scope, priorities, timeline, and next steps.",
+      "Yes. TestPrep Center provides its learning and guidance services online, so you can connect from anywhere in Bangladesh.",
   },
   {
-    question: "How are project costs and payments handled?",
+    question: "Who can join an IELTS preparation program?",
     answer:
-      "Pricing, payment milestones, and any deposit are confirmed in the applicable proposal or invoice before work begins.",
+      "Anyone preparing for IELTS can contact TPC to discuss their current level, target score, and the best next step.",
   },
   {
-    question: "Can you support an existing website or software product?",
+    question: "Can TPC help me plan to study abroad?",
     answer:
-      "Yes. An initial review can identify whether maintenance, improvements, or a separate development engagement is the best fit.",
+      "Yes. TPC can help you understand study destinations, applications, documents, and the preparation needed for your study-abroad goal.",
   },
   {
-    question: "How do you protect project information?",
+    question: "Does TPC guarantee admission or a visa?",
     answer:
-      "Access is limited to people who need information for authorised work. Avoid sending sensitive credentials through unsecured channels.",
+      "No. Universities and immigration authorities make their own decisions. TPC provides preparation and guidance, not guaranteed outcomes.",
   },
   {
-    question: "Where can I get help after delivery?",
+    question: "What is TPC Kids Spoken English?",
     answer:
-      "Your proposal or service agreement describes the included support period. Contact Site with the relevant project details for further help.",
+      "TPC Kids Spoken English is an online course designed to help young learners practise everyday English communication with confidence.",
   },
   {
-    question: "Do you work with startups and small businesses?",
-    answer:
-      "Yes. Site works with businesses at different stages and recommends an approach based on goals, budget, and technical needs.",
+    question: "How can I speak with TestPrep Center?",
+    answer: "Call or WhatsApp TestPrep Center at 01786558855, or connect through the official Facebook page.",
   },
   {
-    question: "Can Site build a mobile-friendly website?",
-    answer:
-      "Yes. Web solutions are planned to work across modern desktop, tablet, and mobile devices within the agreed project scope.",
-  },
-  {
-    question: "Will I receive updates during the project?",
-    answer:
-      "Yes. Progress updates are shared at the milestones agreed for your project, with feedback requested where needed.",
-  },
-  {
-    question: "Can I request changes after a project starts?",
-    answer:
-      "Yes. Each request is reviewed, and changes outside the approved scope may affect the price, timeline, or both.",
-  },
-  {
-    question: "Do you provide domain and hosting services?",
-    answer:
-      "Site can help choose, set up, or manage suitable domain and hosting services when included in your agreement.",
-  },
-  {
-    question: "Who owns the final project deliverables?",
-    answer:
-      "Ownership of final deliverables follows your agreement and normally transfers after applicable payments are received.",
-  },
-  {
-    question: "Can you integrate third-party tools or payment gateways?",
-    answer:
-      "Yes, where technically suitable and included in scope. Third-party platforms remain subject to their own terms and approvals.",
-  },
-  {
-    question: "What should I prepare before starting a project?",
-    answer:
-      "Prepare your goals, key requirements, brand assets, content, preferred timeline, and the main contact person for decisions.",
-  },
-  {
-    question: "Can I cancel a project or request a refund?",
-    answer:
-      "Contact Site to discuss cancellation or a refund request. Eligibility depends on completed work, payments, and the applicable agreement.",
-  },
-  {
-    question: "How can I contact Site?",
-    answer:
-      "Use the official contact channel and include your name, organisation, and a short description so the team can respond efficiently.",
+    question: "Where can I join the TPC Kids community?",
+    answer: "You can join the TPC Kids Facebook Group at facebook.com/groups/tpckids for community updates.",
   },
 ];
 
 export const defaultData = {
   title: "Frequently Asked Questions",
-  intro: "Find clear answers about our services, process, support, and what to prepare before getting started.",
+  intro:
+    "Find clear answers about TPC's online IELTS preparation, study-abroad guidance, and kids' spoken English courses.",
   questionsJson: JSON.stringify(defaultQuestions),
 };

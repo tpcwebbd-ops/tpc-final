@@ -8,8 +8,8 @@
 
 export const defaultDataSection2 = {
   id: "section-uid-2",
-  heading: "A better experience",
-  description: "Simple content that is easy to edit.",
+  heading: "Learn with confidence, from anywhere.",
+  description: "TestPrep Center brings IELTS preparation, study-abroad guidance, and kids' spoken English online to learners across Bangladesh.",
   paddingX: "0",
   paddingY: "0",
 };

@@ -61,7 +61,7 @@ export const getFlagImageFromEmoji = (flag: string) => {
 };
 
 export const getDefaultCountryDescription = (name: string, region: Region) =>
-  `${name} is located in ${region}. Open this destination profile to review its location and useful local information. Replace this demo text with the detailed guidance, services, or destination information your visitors need.`;
+  `${name} is in ${region}. Use this profile as a starting point for your study-abroad research, then confirm university, admission, and visa requirements from the relevant official sources.`;
 
 const COUNTRY_SEED: Array<[string, string, Region]> = [
   ["Hong Kong", "🇭🇰", "Asia"],

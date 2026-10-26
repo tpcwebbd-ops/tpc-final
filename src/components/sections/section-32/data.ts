@@ -35,53 +35,53 @@ export interface Section32Props {
 
 export const defaultDataSection32: Section32Data = {
   id: "section-uid-32",
-  title: "Journeys of Excellence",
-  subtitle: "Following the path of success, one story at a time.",
+  title: "Your Learning Journey",
+  subtitle: "Take clear online steps toward your IELTS, study-abroad, or spoken-English goal.",
   stories: [
     {
       id: "1",
-      name: "Sarah Jenkins",
-      university: "Stanford University",
-      subject: "Computer Science",
+      name: "Your IELTS Goal",
+      university: "Online preparation",
+      subject: "English language skills",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop",
       description:
-        "Overcoming initial struggles with algorithms, Sarah dedicated her weekends to coding bootcamps. Her perseverance led to a breakthrough internship at Google.",
+        "Build a focused plan for listening, reading, writing, and speaking with guidance from TestPrep Center.",
     },
     {
       id: "2",
-      name: "Michael Chen",
-      university: "MIT",
-      subject: "Robotics Engineering",
+      name: "Your Study-Abroad Plan",
+      university: "Destination research",
+      subject: "University applications",
       image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000&auto=format&fit=crop",
       description:
-        "Michael balanced a full-time job while pursuing his masters. His innovative thesis on autonomous drone navigation caught the attention of Tesla.",
+        "Understand your possible destinations, admission preparation, required documents, and practical next steps online.",
     },
     {
       id: "3",
-      name: "Priya Patel",
-      university: "Cambridge University",
-      subject: "Biotechnology",
+      name: "Your Document Checklist",
+      university: "Application preparation",
+      subject: "Study-abroad documents",
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1000&auto=format&fit=crop",
       description:
-        "Starting with limited funding, Priya secured multiple grants. Her work on sustainable bio-plastics is now being adopted by major packaging firms.",
+        "Organise the information and documents needed for the next stage of your study-abroad journey.",
     },
     {
       id: "4",
-      name: "David Okonjo",
-      university: "Oxford University",
-      subject: "Economics",
+      name: "TPC Kids",
+      university: "Online learning",
+      subject: "Spoken English",
       image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1000&auto=format&fit=crop",
       description:
-        "David moved countries to pursue his education. He graduated top of his class and founded a fintech startup helping underbanked communities.",
+        "Give young learners a supportive space to practise everyday English communication with growing confidence.",
     },
     {
       id: "5",
-      name: "Emma Wilson",
-      university: "Harvard Medical School",
-      subject: "Neurology",
+      name: "Stay Connected",
+      university: "TestPrep Center",
+      subject: "Online support",
       image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1000&auto=format&fit=crop",
       description:
-        "Emma spent years volunteering in remote clinics. Her empathy-driven approach earned her a fellowship at Johns Hopkins.",
+        "Call or WhatsApp TestPrep Center to discuss the learning or guidance option that fits your goal.",
     },
   ],
 };

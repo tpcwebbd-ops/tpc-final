@@ -32,56 +32,45 @@ export const defaultLayout = {
 
 export const defaultDataCompanyStory: ICompanyStoryData = {
   pageUid: "company-story-uid",
-  pageName: "Company Story",
-  eyebrow: "About The Company",
+  pageName: "About TestPrep Center",
+  eyebrow: "About TestPrep Center",
   showEyebrow: true,
-  title: "A practical team focused on clear strategy, clean design, and dependable delivery.",
+  title: "A learning partner for IELTS, global education goals, and confident young speakers.",
   subtitle:
-    "This About page explains who the business is, what it believes, how it works, and why customers can trust the team with important digital projects.",
-  primaryAction: "Meet The Team",
-  secondaryAction: "View Our Work",
+    "TestPrep Center (TPC) is an online education platform helping learners across Bangladesh prepare for IELTS, study abroad, and spoken English growth.",
+  primaryAction: "Explore Our Programs",
+  secondaryAction: "Talk to TPC",
   sections: [
     {
       eyebrow: "Story",
       showEyebrow: true,
       title: "Who we are",
       description:
-        "Present the company background with a confident but human tone that helps visitors understand the team behind the work.",
-      items: ["Focused digital delivery", "Business-first design decisions", "Long-term client relationships"],
+        "TPC brings online education and guidance together so learners can take meaningful next steps from wherever they are in Bangladesh.",
+      items: ["Online-first learning support", "Clear, practical communication", "A welcoming learning community"],
     },
     {
       eyebrow: "Mission",
       showEyebrow: true,
-      title: "What we are building toward",
-      description:
-        "Explain the company mission in a way that connects services to customer outcomes, not just internal ambition.",
-      items: [
-        "Make digital tools easier to use",
-        "Turn ideas into working products",
-        "Support growth with practical systems",
-      ],
+      title: "Make learning opportunities easier to reach",
+      description: "We help learners build English skills and make informed decisions about their academic futures.",
+      items: ["Support IELTS preparation", "Clarify study-abroad pathways", "Develop kids' spoken English confidence"],
     },
     {
       eyebrow: "Values",
       showEyebrow: true,
-      title: "How we make decisions",
-      description: "Show the principles that guide project planning, communication, quality, and client experience.",
-      items: ["Clarity before complexity", "Reliable timelines", "Design that supports real workflows"],
+      title: "Guidance learners can trust",
+      description:
+        "We value clear information, thoughtful support, and realistic next steps for every learner and family.",
+      items: ["Clarity before complexity", "Respect for every learner", "Practical, honest support"],
     },
     {
       eyebrow: "Experience",
       showEyebrow: true,
-      title: "What clients can expect",
-      description: "Describe the working relationship so prospects know what happens after they start a conversation.",
-      items: ["Structured discovery", "Regular progress updates", "Testing before handover"],
-    },
-    {
-      eyebrow: "Promise",
-      showEyebrow: true,
-      title: "A partner beyond launch",
+      title: "What learners can expect",
       description:
-        "Close the page by positioning the company as a long-term partner for improvements, support, and future growth.",
-      items: ["Post-launch fixes", "Performance improvements", "Feature expansion support"],
+        "A focused online experience with approachable communication, useful resources, and guidance that fits each goal.",
+      items: ["Convenient online access", "Goal-focused learning", "Friendly support"],
     },
   ],
 };

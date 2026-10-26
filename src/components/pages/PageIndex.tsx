@@ -41,6 +41,10 @@ import LeadershipTeamQuery from "./leadership-team/Query";
 import { defaultDataPage4 as privacy } from "./privacy-policy/data";
 import PrivacyMutation from "./privacy-policy/Mutation";
 import PrivacyQuery from "./privacy-policy/Query";
+import {
+  defaultIeltsPreparationData as ieltsPreparation,
+  defaultKidsSpokenEnglishData as kidsSpokenEnglish,
+} from "./program-pages/data";
 import { defaultDataPage7 as refund } from "./refund-policy/data";
 import RefundMutation from "./refund-policy/Mutation";
 import RefundQuery from "./refund-policy/Query";
@@ -80,6 +84,8 @@ import WhatsAppFaqQuery from "./whatsapp-faq/Query";
 
 export type AllPageKind =
   | "all-home"
+  | "ielts-preparation"
+  | "kids-spoken-english"
   | "company-story"
   | "whatsapp-faq"
   | "security"
@@ -114,8 +120,8 @@ type Definition = {
 export const pageIndex: Record<AllPageKind, Definition> = {
   "all-home": {
     defaultData: home as unknown as AllPageData,
-    title: "Home Page",
-    description: "A flexible landing page with services, insights, and a call to action",
+    title: "TestPrep Center Home",
+    description: "The main landing page for IELTS, study-abroad, and kids' spoken-English services",
     Mutation: ({ data, onChange }) => (
       <HomeMutation
         data={data as unknown as typeof home}
@@ -124,10 +130,34 @@ export const pageIndex: Record<AllPageKind, Definition> = {
     ),
     Query: ({ data }) => <HomeQuery data={data as unknown as typeof home} />,
   },
+  "ielts-preparation": {
+    defaultData: ieltsPreparation as unknown as AllPageData,
+    title: "IELTS Preparation",
+    description: "An online IELTS preparation page for TestPrep Center learners",
+    Mutation: ({ data, onChange }) => (
+      <HomeMutation
+        data={data as unknown as typeof ieltsPreparation}
+        onChange={onChange as unknown as (data: typeof ieltsPreparation) => void}
+      />
+    ),
+    Query: ({ data }) => <HomeQuery data={data as unknown as typeof ieltsPreparation} />,
+  },
+  "kids-spoken-english": {
+    defaultData: kidsSpokenEnglish as unknown as AllPageData,
+    title: "TPC Kids Spoken English",
+    description: "An online spoken-English course page for young learners in Bangladesh",
+    Mutation: ({ data, onChange }) => (
+      <HomeMutation
+        data={data as unknown as typeof kidsSpokenEnglish}
+        onChange={onChange as unknown as (data: typeof kidsSpokenEnglish) => void}
+      />
+    ),
+    Query: ({ data }) => <HomeQuery data={data as unknown as typeof kidsSpokenEnglish} />,
+  },
   "company-story": {
     defaultData: companyStory as unknown as AllPageData,
-    title: "Company Story",
-    description: "An animated company about-page layout",
+    title: "About TestPrep Center",
+    description: "A page for TestPrep Center's purpose, approach, and learner support",
     Mutation: ({ data, onChange }) => (
       <CompanyStoryMutation
         data={data as unknown as typeof companyStory}
@@ -222,8 +252,8 @@ export const pageIndex: Record<AllPageKind, Definition> = {
   },
   "about-the-country": {
     defaultData: aboutTheCountry as unknown as AllPageData,
-    title: "About the Country",
-    description: "A complete business website landing-page layout",
+    title: "TestPrep Center Programs",
+    description: "A flexible landing page for TestPrep Center programs and services",
     Mutation: ({ data, onChange }) => (
       <AboutTheCountryMutation
         data={data as unknown as typeof aboutTheCountry}
@@ -234,8 +264,8 @@ export const pageIndex: Record<AllPageKind, Definition> = {
   },
   "visa-requirements": {
     defaultData: visaRequirements as unknown as AllPageData,
-    title: "Visa Requirements",
-    description: "A student-visa guide with country filters and planning resources",
+    title: "Student Visa Requirements",
+    description: "A study-abroad planning guide with visa requirements and checklists",
     Mutation: ({ data, onChange }) => (
       <VisaRequirementsMutation
         data={data as unknown as typeof visaRequirements}
@@ -246,8 +276,8 @@ export const pageIndex: Record<AllPageKind, Definition> = {
   },
   "visa-services": {
     defaultData: visaServices as unknown as AllPageData,
-    title: "Visa Services",
-    description: "A complete service catalogue and conversion page",
+    title: "Study Abroad Services",
+    description: "A TestPrep Center service catalogue for university and student-visa preparation",
     Mutation: ({ data, onChange }) => (
       <VisaServicesMutation
         data={data as unknown as typeof visaServices}
@@ -258,8 +288,8 @@ export const pageIndex: Record<AllPageKind, Definition> = {
   },
   "visa-application-support": {
     defaultData: visaApplicationSupport as unknown as AllPageData,
-    title: "Visa Application Support",
-    description: "A Bangladesh student-visa guide and checklist page",
+    title: "Student Visa Preparation",
+    description: "A Bangladesh-focused student-visa preparation guide and checklist",
     Mutation: ({ data, onChange }) => (
       <VisaApplicationSupportMutation
         data={data as unknown as typeof visaApplicationSupport}
@@ -270,8 +300,8 @@ export const pageIndex: Record<AllPageKind, Definition> = {
   },
   "visa-consultancy": {
     defaultData: visaConsultancy as unknown as AllPageData,
-    title: "Visa Consultancy",
-    description: "An education-consultancy service and readiness page",
+    title: "Study Abroad Guidance",
+    description: "A TestPrep Center page for university and study-abroad planning guidance",
     Mutation: ({ data, onChange }) => (
       <VisaConsultancyMutation
         data={data as unknown as typeof visaConsultancy}
@@ -282,8 +312,8 @@ export const pageIndex: Record<AllPageKind, Definition> = {
   },
   "visa-service-catalogue": {
     defaultData: visaServiceCatalogue as unknown as AllPageData,
-    title: "Visa Service Catalogue",
-    description: "An alternating service-catalogue page",
+    title: "Study Abroad Support Catalogue",
+    description: "An overview of TestPrep Center's study-abroad preparation support",
     Mutation: ({ data, onChange }) => (
       <VisaServiceCatalogueMutation
         data={data as unknown as typeof visaServiceCatalogue}
@@ -294,8 +324,8 @@ export const pageIndex: Record<AllPageKind, Definition> = {
   },
   "visa-insights": {
     defaultData: visaInsights as unknown as AllPageData,
-    title: "Visa Insights",
-    description: "A searchable study-abroad blog page",
+    title: "TestPrep Center Guides",
+    description: "A searchable collection of IELTS and study-abroad guidance",
     Mutation: ({ data, onChange }) => (
       <VisaInsightsMutation
         data={data as unknown as typeof visaInsights}

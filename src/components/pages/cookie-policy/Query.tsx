@@ -51,9 +51,11 @@ const CookiePolicyQuery = ({ data }: CookiePolicyProps) => {
             <div className="mt-6 flex flex-wrap gap-2">
               <a
                 className="inline-flex items-center gap-1 rounded-sm bg-lime-200 px-2.5 py-1.5 text-[0.8rem] font-medium text-lime-950 transition duration-700 hover:bg-lime-300"
-                href={`mailto:${pageData.supportEmail}`}
+                href={`https://wa.me/${pageData.supportEmail.replace(/\D/g, "").replace(/^0/, "880")}`}
+                rel="noopener noreferrer"
+                target="_blank"
               >
-                {iconMap.Mail} Contact us
+                {iconMap.MessageCircle} Chat on WhatsApp
               </a>
               <Button
                 className="cursor-pointer bg-amber-100 text-amber-950 transition duration-700 hover:bg-amber-200"
@@ -116,9 +118,11 @@ const CookiePolicyQuery = ({ data }: CookiePolicyProps) => {
           <p className="mt-2 max-w-3xl text-sm leading-6 text-stone-600">{pageData.contactDescription}</p>
           <a
             className="mt-3 inline-block break-all text-sm font-medium text-amber-800 underline"
-            href={`mailto:${pageData.supportEmail}`}
+            href={`https://wa.me/${pageData.supportEmail.replace(/\D/g, "").replace(/^0/, "880")}`}
+            rel="noopener noreferrer"
+            target="_blank"
           >
-            {pageData.supportEmail}
+            WhatsApp: {pageData.supportEmail}
           </a>
         </div>
       </section>

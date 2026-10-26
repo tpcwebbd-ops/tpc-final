@@ -77,7 +77,7 @@ const normalizeData = (data?: IVisaInsightsData | VisaInsightsPayload): VisaInsi
     ...defaultLayout,
     ...cloneData(data),
     pageUid: "visa-insights-uid",
-    pageName: "Blog Page",
+    pageName: "TestPrep Center Guides",
     topics: Array.isArray(data.topics) ? data.topics : defaultDataVisaInsights.topics,
     blogs: Array.isArray(data.blogs) ? data.blogs : defaultDataVisaInsights.blogs,
   };
@@ -141,7 +141,13 @@ const MutationVisaInsights = ({ data, onChange }: VisaInsightsFormProps) => {
   }, [data]);
 
   useEffect(() => {
-    onChangeRef.current?.({ ...formData, paddingX, paddingY, pageUid: "visa-insights-uid", pageName: "Blog Page" });
+    onChangeRef.current?.({
+      ...formData,
+      paddingX,
+      paddingY,
+      pageUid: "visa-insights-uid",
+      pageName: "TestPrep Center Guides",
+    });
   }, [formData, paddingX, paddingY]);
 
   const updateSpacing = (field: "paddingX" | "paddingY", value: number) => {
@@ -239,7 +245,7 @@ const MutationVisaInsights = ({ data, onChange }: VisaInsightsFormProps) => {
       <div className="mx-auto max-w-7xl overflow-hidden rounded-sm border-x border-[#eadfca] bg-white shadow-sm">
         <header className="flex flex-col gap-3 border-b border-[#eadfca] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
           <div>
-            <h2 className="text-xl font-bold">Edit Blog Page</h2>
+            <h2 className="text-xl font-bold">Edit TestPrep Center Guides</h2>
             <p className="mt-1 text-sm text-slate-500">Import a public URL or add a blog manually.</p>
           </div>
           <span className="w-fit rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-500">

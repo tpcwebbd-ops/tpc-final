@@ -89,7 +89,7 @@ const QueryVisaConsultancy = ({ data }: VisaConsultancyProps) => {
 
   useEffect(() => {
     try {
-      const saved = window.localStorage.getItem("wes-consultancy-readiness-v1");
+      const saved = window.localStorage.getItem("testprep-center-consultancy-readiness-v1");
       // eslint-disable-next-line react-hooks/set-state-in-effect
       if (saved) setReadyItems(new Set(JSON.parse(saved) as string[]));
     } catch {
@@ -103,7 +103,7 @@ const QueryVisaConsultancy = ({ data }: VisaConsultancyProps) => {
       if (next.has(id)) next.delete(id);
       else next.add(id);
       try {
-        window.localStorage.setItem("wes-consultancy-readiness-v1", JSON.stringify([...next]));
+        window.localStorage.setItem("testprep-center-consultancy-readiness-v1", JSON.stringify([...next]));
       } catch {
         // Keep the planner usable when storage is unavailable.
       }
@@ -553,10 +553,10 @@ const QueryVisaConsultancy = ({ data }: VisaConsultancyProps) => {
               <Headphones className="h-6 w-6 text-[var(--consult-accent)]" />
               <p className="mt-4 font-black text-[var(--consult-heading)]">Ask a consultant</p>
               <a
-                href={`mailto:${pageData.companyEmail}`}
+                href={`https://wa.me/${pageData.companyEmail.replace(/\D/g, "").replace(/^0/, "880")}`}
                 className="mt-2 inline-flex items-center gap-2 text-sm font-bold text-[var(--consult-accent)] hover:underline"
               >
-                <Mail className="h-4 w-4" /> {pageData.companyEmail}
+                <Mail className="h-4 w-4" /> WhatsApp: {pageData.companyEmail}
               </a>
             </div>
           </motion.div>

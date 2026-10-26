@@ -64,6 +64,8 @@ export type PageBlockVariant =
   | "section-47"
   | "section-48"
   | "all-home"
+  | "ielts-preparation"
+  | "kids-spoken-english"
   | "company-story"
   | "whatsapp-faq"
   | "security"

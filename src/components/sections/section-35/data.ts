@@ -15,31 +15,22 @@ export interface ISection35Data {
   gradientFrom: string;
   gradientTo: string;
 }
-
 export type Section35Data = ISection35Data;
-
 export interface Section35Payload extends Section35Data {
   paddingX: number;
   paddingY: number;
 }
-
 export interface Section35Props {
   data?: Section35Data | Section35Payload | string;
 }
-
 export const defaultDataSection35: Section35Data = {
   id: "section-uid-35",
   pageUid: "section-uid-35",
-  pageName: "Section 35",
-  text: "🚀 We Recommend Hostinger",
-  link: "#",
+  pageName: "TestPrep Center",
+  text: "Talk to TestPrep Center about IELTS, study abroad, or TPC Kids Spoken English.",
+  link: "/contact-us",
   gradientFrom: "#2563eb",
   gradientTo: "#7c3aed",
 };
-
 export const defaultData = defaultDataSection35;
-
-export const defaultLayout = {
-  paddingX: 0,
-  paddingY: 0,
-};
+export const defaultLayout = { paddingX: 0, paddingY: 0 };

@@ -20,7 +20,7 @@ export type Section4Props = PageTemplateProps<ISection4Data>;
 
 export const defaultDataPage4: ISection4Data = {
   pageUid: "page-uid-privacy-policy",
-  pageName: "Site Privacy Policy",
+  pageName: "TestPrep Center Privacy Policy",
   eyebrow: "",
   showEyebrow: false,
   image: "/images/all-pages-placeholder.png",
@@ -28,22 +28,22 @@ export const defaultDataPage4: ISection4Data = {
   paddingY: 0,
   title: "Privacy Policy",
   subtitle:
-    "This demo Privacy Policy explains how Site may collect, use, store, and protect personal information when providing services. Customize it for your company, products, and local legal requirements before publishing.",
+    "This Privacy Policy explains how TestPrep Center may collect, use, store, and protect personal information when providing online learning and guidance services.",
   primaryAction: "",
   secondaryAction: "",
   highlightTitle: "Our privacy commitment",
   highlightDescription:
-    "We collect only what we need to provide, protect, and improve Site services. We do not sell personal information.",
+    "We collect only what we need to provide, protect, and improve TestPrep Center services. We do not sell personal information.",
   sections: [
     {
       eyebrow: "Collection",
       showEyebrow: true,
       title: "Information we collect",
       description:
-        "We may collect information you provide directly and limited technical information generated when you use our website, products, or support channels.",
+        "We may collect information you provide directly and limited technical information generated when you use our website, online learning, or support channels.",
       items: [
-        "Name, email address, phone number, and business details you submit",
-        "Project requirements, messages, and support requests",
+        "Name, phone number, learning goal, and other details you submit",
+        "Course enquiries, study-abroad details, messages, and support requests",
         "Basic device, browser, and website-usage information",
       ],
     },
@@ -52,9 +52,9 @@ export const defaultDataPage4: ISection4Data = {
       showEyebrow: true,
       title: "How we use information",
       description:
-        "We use information to respond to requests, deliver services, manage accounts and payments, improve our products, and protect Site from misuse or security incidents.",
+        "We use information to respond to requests, provide online learning and guidance, manage accounts and payments, improve services, and protect TestPrep Center from misuse or security incidents.",
       items: [
-        "Provide agreed products, projects, and customer support",
+        "Provide selected courses, guidance, and learner support",
         "Send essential service and account communications",
         "Improve reliability, security, and user experience",
       ],
@@ -80,7 +80,7 @@ export const defaultDataPage4: ISection4Data = {
       items: [
         "Third parties must handle information for authorised purposes",
         "Some records may need to be retained for legal or accounting reasons",
-        "Contact Site through the official support channel for privacy requests",
+        "Contact TestPrep Center through the official support channel for privacy requests",
       ],
     },
   ],

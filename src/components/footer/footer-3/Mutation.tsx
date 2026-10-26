@@ -81,11 +81,11 @@ export default function Mutation({
             />
           </label>
           <label>
-            Email
+            WhatsApp number
             <input
               className={input}
-              onChange={(event) => setData({ ...data, email: event.target.value })}
-              value={data.email}
+              onChange={(event) => setData({ ...data, whatsappNumber: event.target.value })}
+              value={data.whatsappNumber}
             />
           </label>
           <label>
@@ -94,6 +94,22 @@ export default function Mutation({
               className={input}
               onChange={(event) => setData({ ...data, phone: event.target.value })}
               value={data.phone}
+            />
+          </label>
+          <label>
+            Facebook Page URL
+            <input
+              className={input}
+              onChange={(event) => setData({ ...data, facebookUrl: event.target.value })}
+              value={data.facebookUrl}
+            />
+          </label>
+          <label>
+            TPC Kids Group URL
+            <input
+              className={input}
+              onChange={(event) => setData({ ...data, facebookGroupUrl: event.target.value })}
+              value={data.facebookGroupUrl}
             />
           </label>
           <label>

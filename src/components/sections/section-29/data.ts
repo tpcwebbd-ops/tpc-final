@@ -28,11 +28,11 @@ export interface Section29Props {
 export const defaultDataSection29: Section29Data = {
   id: "section-uid-29",
   title: "Ready to Start Your IELTS Journey?",
-  subtitle: "Join thousands of successful students who achieved their target band scores",
+  subtitle: "Get focused online support for your target score from anywhere in Bangladesh.",
   buttonPrimaryText: "Book Free Consultation",
-  buttonSecondaryText: "Watch Class Demo",
-  contactLabel: "Call us now for immediate enrollment",
-  contactNumber: "📞 +880 1XXX-XXXXXX",
+  buttonSecondaryText: "Chat on WhatsApp",
+  contactLabel: "Call or WhatsApp TestPrep Center to get started",
+  contactNumber: "01786558855",
 };
 
 export const defaultLayout = {

@@ -622,7 +622,7 @@ const MutationVisaServices = ({ data, onChange }: VisaServicesFormProps) => {
               {(
                 [
                   ["companyName", "Site name"],
-                  ["companyEmail", "Email"],
+                  ["companyEmail", "WhatsApp number"],
                   ["companyContact", "Contact"],
                 ] as Array<[keyof IVisaServicesData, string]>
               ).map(([field, label]) => (

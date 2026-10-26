@@ -138,14 +138,14 @@ export const defaultLayout = { paddingX: 0, paddingY: 0 };
 
 export const defaultDataVisaConsultancy: IVisaConsultancyData = {
   pageUid: "visa-consultancy-uid",
-  pageName: "Visa Consultancy",
-  eyebrow: "Personal study visa consultancy",
+  pageName: "Study Abroad Guidance",
+  eyebrow: "Personal study-abroad guidance",
   showHeroEyebrow: true,
-  heroTitle: "Expert guidance for the decisions behind your visa.",
+  heroTitle: "Clear guidance for your study-abroad decisions.",
   heroDescription:
     "A strong student visa journey starts before the application form. TestPrep Center helps you connect destination choice, admission, funding, documents, and personal goals into one credible plan.",
   primaryButtonText: "Book a Consultation",
-  primaryButtonUrl: "/consultation",
+  primaryButtonUrl: "/contact-us",
   secondaryButtonText: "Explore Our Support",
   secondaryButtonUrl: "#consultancy-services",
   heroNote: "Personal roadmap · Ethical guidance · Destination-specific preparation",
@@ -336,7 +336,7 @@ export const defaultDataVisaConsultancy: IVisaConsultancyData = {
       ],
     },
   ],
-  benefitsEyebrow: "The WES consultancy difference",
+  benefitsEyebrow: "The TestPrep Center approach",
   showBenefitsEyebrow: true,
   benefitsTitle: "Advice built on evidence, not pressure",
   benefitsDescription:
@@ -450,10 +450,10 @@ export const defaultDataVisaConsultancy: IVisaConsultancyData = {
   ctaDescription:
     "Book a personal consultation with TestPrep Center and leave with a practical roadmap shaped around your study goals, finances, and application profile.",
   ctaButtonText: "Schedule Your Consultation",
-  ctaButtonUrl: "/consultation",
+  ctaButtonUrl: "/contact-us",
   companyName: "TestPrep Center",
-  companyEmail: "info@wesassociates.com",
-  companyContact: "+880 1618-118670",
+  companyEmail: "01786558855",
+  companyContact: "01786558855",
   backgroundColor: "#ffffff",
   surfaceColor: "#f5f8fc",
   headingColor: "#123047",

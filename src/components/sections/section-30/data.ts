@@ -37,24 +37,24 @@ export interface Section30Props {
 export const defaultDataSection30: Section30Data = {
   id: "section-uid-30",
   badgeText: "★ We Are Also Providing",
-  headingPrefix: "The Best",
+  headingPrefix: "Online",
   headingHighlight: "Study Abroad",
   headingSuffix: "Services",
   features: [
     {
       title: "Expert Guidance",
       description:
-        "Get personalized support from experienced counselors who understand your goals and help you achieve them.",
+        "Get clear online guidance to understand your goals, documents, and practical next steps.",
       iconName: "Users",
     },
     {
-      title: "High Success Rate",
-      description: "From applications to visas, our proven process ensures a smooth and successful journey.",
+      title: "Clear Process",
+      description: "Understand applications, documents, and preparation steps without promises of admission or visa outcomes.",
       iconName: "Award",
     },
     {
       title: "Tailored Solutions",
-      description: "We provide customized advice based on your needs, budget, and career aspirations.",
+      description: "Receive guidance shaped around your destination interests, preparation stage, and academic goals.",
       iconName: "BookOpen",
     },
   ],

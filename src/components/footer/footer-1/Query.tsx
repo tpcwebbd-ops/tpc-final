@@ -103,14 +103,25 @@ export default function Query({ data }: { data: FooterOneData }) {
             <h2 className="font-semibold" style={{ color: data.accent }}>
               Contact
             </h2>
-            <a className="w-fit transition duration-700 hover:opacity-100" href={`mailto:${data.email}`}>
-              {data.email}
+            <a
+              className="w-fit transition duration-700 hover:opacity-100"
+              href={`https://wa.me/${data.whatsappNumber.replace(/\D/g, "").replace(/^0/, "880")}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              WhatsApp: {data.whatsappNumber}
             </a>
             <a
               className="w-fit transition duration-700 hover:opacity-100"
               href={`tel:${data.phone.replace(/[^+\d]/g, "")}`}
             >
               {data.phone}
+            </a>
+            <a className="w-fit transition duration-700 hover:opacity-100" href={data.facebookUrl} rel="noopener noreferrer" target="_blank">
+              Facebook Page
+            </a>
+            <a className="w-fit transition duration-700 hover:opacity-100" href={data.facebookGroupUrl} rel="noopener noreferrer" target="_blank">
+              TPC Kids Facebook Group
             </a>
           </div>
         )}

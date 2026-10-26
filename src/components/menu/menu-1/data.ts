@@ -127,8 +127,20 @@ export const defaultData: MenuData = {
   logoAspect: "full",
   links: [
     { id: "home", label: "Home", url: "/", visible: true, position: 0, icon: "Home", showIcon: true },
-    { id: "about", label: "About us", url: "/about-us", visible: true, position: 1 },
-    { id: "contact", label: "Contact", url: "/contact-us", visible: true, position: 2 },
+    {
+      id: "programs",
+      label: "Programs",
+      url: "/contact-us",
+      visible: true,
+      position: 1,
+      children: [
+        { id: "ielts", label: "IELTS Preparation", url: "/contact-us", visible: true, position: 0 },
+        { id: "study-abroad", label: "Study Abroad", url: "/contact-us", visible: true, position: 1 },
+        { id: "kids-spoken", label: "Kids Spoken English", url: "/contact-us", visible: true, position: 2 },
+      ],
+    },
+    { id: "about", label: "About TPC", url: "/about-us", visible: true, position: 2 },
+    { id: "contact", label: "Contact", url: "/contact-us", visible: true, position: 3 },
   ],
   background: "#ffffff",
   foreground: "#292524",
@@ -139,10 +151,10 @@ export const defaultData: MenuData = {
   fontFamily: "inherit",
   button: {
     visible: true,
-    type: "dashboard",
-    label: "Account",
-    url: "/login",
-    icon: "LogIn",
+    type: "contact",
+    label: "Free Consultation",
+    url: "/contact-us",
+    icon: "MessageCircle",
     showIcon: true,
     background: "#1c1917",
     foreground: "#ffffff",
@@ -170,7 +182,9 @@ export const defaultData: MenuData = {
     flexTextAlign: "center",
     links: [
       { id: "home", label: "Home", url: "/", visible: true, position: 0, icon: "Home", showIcon: true },
-      { id: "contact", label: "Contact", url: "/contact-us", visible: true, position: 1 },
+      { id: "ielts", label: "IELTS", url: "/contact-us", visible: true, position: 1 },
+      { id: "study-abroad", label: "Study Abroad", url: "/contact-us", visible: true, position: 2 },
+      { id: "contact", label: "Contact", url: "/contact-us", visible: true, position: 3 },
     ],
   },
 };

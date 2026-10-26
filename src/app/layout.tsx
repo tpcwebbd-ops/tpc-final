@@ -36,7 +36,9 @@ const geistMono = Geist_Mono({
 export async function generateMetadata(): Promise<Metadata> {
   const setting = await getSeoSettings({ type: "layout" });
   const title = setting?.title || "TestPrep Center";
-  const description = setting?.description || "TestPrep Center, The best English Learning Platform in Bangladesh";
+  const description =
+    setting?.description ||
+    "TestPrep Center (TPC) is Bangladesh's online learning platform for IELTS preparation, study-abroad guidance, and kids' spoken English courses.";
   const images = setting?.socialImage ? [setting.socialImage] : undefined;
   return {
     metadataBase: getCanonicalAppUrl(),

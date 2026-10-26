@@ -39,7 +39,7 @@ const parseData = (data?: IVisaInsightsData | VisaInsightsPayload | string): Vis
       ...defaultLayout,
       ...parsed,
       pageUid: "visa-insights-uid",
-      pageName: "Blog Page",
+      pageName: "TestPrep Center Guides",
       topics: Array.isArray(parsed.topics) ? parsed.topics : defaultDataVisaInsights.topics,
       blogs: Array.isArray(parsed.blogs) ? parsed.blogs : defaultDataVisaInsights.blogs,
     };

@@ -148,7 +148,7 @@ const CookiePolicyMutation = ({ data, onChange }: CookiePolicyFormProps) => {
                 />
               </div>
               <div className="grid gap-1.5">
-                <Label htmlFor="cookie-policy-email">Support email</Label>
+                <Label htmlFor="cookie-policy-email">Support WhatsApp number</Label>
                 <Input
                   id="cookie-policy-email"
                   value={formData.supportEmail}

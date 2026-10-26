@@ -22,13 +22,16 @@ export type FooterThreeData = {
   disabledPaths: string[];
   destinations: FooterThreeLink[];
   services: FooterThreeLink[];
-  email: string;
   phone: string;
+  whatsappNumber: string;
+  facebookUrl: string;
+  facebookGroupUrl: string;
   copyright: string;
   legalLinks: FooterThreeLink[];
   showLegalBar: boolean;
   legalBackground: string;
 };
+
 export const defaultData: FooterThreeData = {
   variant: "footer-3",
   isVisible: true,
@@ -40,28 +43,31 @@ export const defaultData: FooterThreeData = {
   logoAlt: "TestPrep Center logo",
   showLogo: true,
   brand: "TestPrep Center",
-  description: "TestPrep Center is a flexible website for sharing information, updates, and resources.",
+  description:
+    "Your online partner for IELTS preparation, study-abroad guidance, and kids' spoken English in Bangladesh.",
   disabledPaths: ["/dashboard", "/login", "/forgot-password", "/registration"],
   destinations: [
-    { id: "uk", label: "UK", url: "/destinations/uk", visible: true },
-    { id: "usa", label: "USA", url: "/destinations/usa", visible: true },
-    { id: "canada", label: "Canada", url: "/destinations/canada", visible: true },
-    { id: "australia", label: "Australia", url: "/destinations/australia", visible: true },
+    { id: "uk", label: "United Kingdom", url: "/contact-us", visible: true },
+    { id: "usa", label: "United States", url: "/contact-us", visible: true },
+    { id: "canada", label: "Canada", url: "/contact-us", visible: true },
+    { id: "australia", label: "Australia", url: "/contact-us", visible: true },
   ],
   services: [
-    { id: "consultation", label: "Consultation", url: "/consultation", visible: true },
-    { id: "admission", label: "Admission", url: "/admission", visible: true },
-    { id: "scholarship", label: "Scholarship", url: "/scholarship", visible: true },
-    { id: "visa", label: "Visa guidance", url: "/visa-guidance", visible: true },
+    { id: "ielts", label: "IELTS Preparation", url: "/contact-us", visible: true },
+    { id: "study-abroad", label: "Study Abroad Guidance", url: "/contact-us", visible: true },
+    { id: "kids-spoken", label: "Kids Spoken English", url: "/contact-us", visible: true },
+    { id: "consultation", label: "Online Consultation", url: "/contact-us", visible: true },
   ],
-  email: "example@gmail.com",
-  phone: "01711 221122",
-  copyright: `All Rights Reserved © ${new Date().getFullYear()} - TestPrep Center `,
+  phone: "01786558855",
+  whatsappNumber: "01786558855",
+  facebookUrl: "https://www.facebook.com/TestPrepCenter.BD/",
+  facebookGroupUrl: "https://www.facebook.com/groups/tpckids",
+  copyright: `All Rights Reserved © ${new Date().getFullYear()} - TestPrep Center`,
   legalLinks: [
     { id: "privacy", label: "Privacy Policy", url: "/privacy-policy", visible: true },
     { id: "terms", label: "Terms & Conditions", url: "/terms-and-condition", visible: true },
     { id: "refund", label: "Refund Policy", url: "/refund-policy", visible: true },
-    { id: "faq", label: "Frequently Ask Questions", url: "/frequently-ask-questions", visible: true },
+    { id: "faq", label: "Frequently Asked Questions", url: "/frequently-ask-questions", visible: true },
   ],
   showLegalBar: true,
   legalBackground: "#000000",

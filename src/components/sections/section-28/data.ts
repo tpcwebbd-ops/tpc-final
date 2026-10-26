@@ -31,24 +31,24 @@ export interface Section28Props {
 
 export const defaultDataSection28: Section28Data = {
   id: "section-uid-28",
-  title: "Why Choose Our Classes?",
-  subtitle: "Experience the difference with our proven teaching methodology",
+  title: "Why Learn with TestPrep Center?",
+  subtitle: "Focused online learning and practical support for your IELTS goal",
   features: [
     {
-      title: "Small Batches",
-      description: "Maximum 12 students per batch for personalized attention",
+      title: "Online Access",
+      description: "Learn from anywhere in Bangladesh without needing to travel.",
       iconName: "Users",
       gradient: "from-blue-500 to-blue-600",
     },
     {
-      title: "Expert Teachers",
-      description: "IELTS certified instructors with 8+ band scores",
+      title: "Focused Guidance",
+      description: "Build IELTS skills with clear explanations, practice, and helpful direction.",
       iconName: "Award",
       gradient: "from-green-500 to-green-600",
     },
     {
-      title: "Free Materials",
-      description: "All course materials and books included at no extra cost",
+      title: "Useful Learning Resources",
+      description: "Use practical resources to support your study and improve each IELTS skill.",
       iconName: "BookOpen",
       gradient: "from-purple-500 to-purple-600",
     },

@@ -23,9 +23,9 @@ export type TopBannerThreeData = {
 export const defaultData: TopBannerThreeData = {
   variant: "topbanner-3",
   isVisible: true,
-  text: "Buy All - Lifetime Access - ৳9950 Only",
-  ctaLabel: "Get Offer",
-  ctaUrl: "/pricing",
+  text: "Start learning online with IELTS preparation, study-abroad guidance, and TPC Kids Spoken English.",
+  ctaLabel: "Chat on WhatsApp",
+  ctaUrl: "https://wa.me/8801786558855",
   buttonVisible: true,
   background: "#2563eb",
   foreground: "#fde047",

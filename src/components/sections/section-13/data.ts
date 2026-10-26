@@ -16,7 +16,6 @@ export interface IEvent {
   description: string;
   actionText: string;
 }
-
 export interface Section13Data {
   id: string;
   sectionUid: string;
@@ -30,55 +29,58 @@ export interface Section13Data {
   categories: string[];
   events: IEvent[];
 }
-
 export interface Section13Props {
   data?: Section13Data | string;
 }
-
-export const defaultEvent: Omit<IEvent, "id" | "category"> = { title: "New Event", date: "TBD", location: "TBD", image: "", description: "Event details goes here...", actionText: "Register" };
-
+export const defaultEvent: Omit<IEvent, "id" | "category"> = {
+  title: "New session",
+  date: "Check with TPC",
+  location: "Online",
+  image: "",
+  description: "Session details go here.",
+  actionText: "Contact TPC",
+};
 export const defaultDataSection13: Section13Data = {
   sectionUid: "section-uid-13",
   id: "section-uid-13",
   paddingX: 0,
   paddingY: 0,
-  title: "Community",
-  badge: "Get Together",
+  title: "Online",
+  badge: "Learn with TPC",
   showEyebrow: true,
-  subTitle: "Gatherings",
-  description:
-    "Join our vibrant community events. Connect, learn, and grow together in spaces designed for collaboration.",
-  categories: ["Workshop", "Conference", "Hackathon"],
+  subTitle: "Sessions",
+  description: "Connect with TestPrep Center for useful online learning and guidance opportunities.",
+  categories: ["IELTS", "Study Abroad", "TPC Kids"],
   events: [
     {
-      id: "evt-1",
-      title: "Annual Tech Summit",
-      date: "Oct 15, 2024",
-      location: "San Francisco, CA",
+      id: "ielts-session",
+      title: "IELTS Preparation Session",
+      date: "Contact TPC for schedule",
+      location: "Online",
       image: "https://i.ibb.co/KpGnqS3D/nature.jpg",
-      category: "Conference",
-      description: "A full day of keynotes, workshops, and networking with industry leaders.",
-      actionText: "Register Now",
+      category: "IELTS",
+      description: "Discuss the online IELTS support that fits your target score and preparation stage.",
+      actionText: "Ask TPC",
     },
     {
-      id: "evt-2",
-      title: "Design Systems Workshop",
-      date: "Nov 02, 2024",
-      location: "Online / Zoom",
+      id: "abroad-session",
+      title: "Study Abroad Guidance Session",
+      date: "Contact TPC for schedule",
+      location: "Online",
       image: "https://i.ibb.co/KpGnqS3D/nature.jpg",
-      category: "Workshop",
-      description: "Deep dive into building scalable UI libraries with Figma and React.",
-      actionText: "Join Waitlist",
+      category: "Study Abroad",
+      description: "Understand practical next steps for destinations, applications, and document preparation.",
+      actionText: "Ask TPC",
     },
     {
-      id: "evt-3",
-      title: "Winter Hackathon",
-      date: "Dec 10, 2024",
-      location: "London, UK",
+      id: "kids-session",
+      title: "TPC Kids Spoken English",
+      date: "Contact TPC for schedule",
+      location: "Online",
       image: "https://i.ibb.co/KpGnqS3D/nature.jpg",
-      category: "Hackathon",
-      description: "48 hours of coding, pizza, and innovation. Open to all skill levels.",
-      actionText: "Apply to Hack",
+      category: "TPC Kids",
+      description: "Discover supportive online English-speaking practice for young learners.",
+      actionText: "Ask TPC",
     },
   ],
 };

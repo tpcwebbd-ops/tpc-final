@@ -9,10 +9,10 @@
 export const defaultData = {
   title: "Let’s talk",
   intro: "TestPrep Center সম্পর্কে আপনার প্রশ্ন বা সহায়তার অনুরোধ পাঠান; আমাদের টিম দ্রুত আপনার সাথে যোগাযোগ করবে।",
-  emailLabel: "Email",
-  email: "example@gmail.com",
+  emailLabel: "Phone & WhatsApp",
+  email: "01786558855",
   addressLabel: "Address",
-  address: "21/B Bijoyshoroni, Tecgaon, Dhaka-1200.",
+  address: "Online service across Bangladesh",
   locationLabel: "Location",
   location: "Dhaka, Bangladesh",
   mapUrl: "https://www.google.com/maps?q=Dhaka,Bangladesh&output=embed",

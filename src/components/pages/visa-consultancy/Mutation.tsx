@@ -85,7 +85,7 @@ const collections: Array<{ key: CollectionKey; label: string; help: string; fiel
   {
     key: "benefits",
     label: "Consultancy benefits",
-    help: "Reasons students and families choose WES.",
+    help: "Reasons students and families choose TestPrep Center.",
     fields: [
       { key: "title", label: "Title" },
       { key: "description", label: "Description", multiline: true },
@@ -247,7 +247,7 @@ const MutationVisaConsultancy = ({ data, onChange }: VisaConsultancyFormProps) =
                   ["ctaButtonText", "CTA button"],
                   ["ctaButtonUrl", "CTA URL"],
                   ["companyName", "Company name"],
-                  ["companyEmail", "Company email"],
+                  ["companyEmail", "Company WhatsApp number"],
                   ["companyContact", "Company contact"],
                 ] as const
               ).map(([field, label]) => (

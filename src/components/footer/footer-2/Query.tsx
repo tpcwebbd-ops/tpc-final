@@ -108,6 +108,17 @@ export default function Query({ data }: { data: FooterTwoData }) {
                 </span>
                 {data.phone}
               </a>
+              <a
+                className="inline-flex items-center gap-2 transition-colors duration-200 hover:text-orange-800"
+                href={`https://wa.me/${data.whatsappNumber.replace(/\D/g, "").replace(/^0/, "880")}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <span className="text-orange-700">
+                  <Icon name="MessageCircle" />
+                </span>
+                WhatsApp
+              </a>
             </div>
           </div>
           <aside className="w-full max-w-sm rounded-sm border border-[#eadfce] bg-[#fffaf0] p-5 shadow-[0_20px_60px_-35px_rgba(87,83,78,.18)] sm:p-6">
@@ -118,7 +129,7 @@ export default function Query({ data }: { data: FooterTwoData }) {
               <h2 className="text-xl font-bold text-stone-950">Stay connected with TestPrep Center</h2>
             </div>
             <p className="mt-2 text-sm leading-6 text-stone-600">
-              Install the app for faster browsing and quick access to your site.
+              Install the app for quicker access to TestPrep Center online learning services.
             </p>
             <InstallButton />
           </aside>
@@ -164,16 +175,23 @@ export default function Query({ data }: { data: FooterTwoData }) {
             <div className="mt-4 grid gap-3 text-sm">
               <a
                 className="w-fit truncate text-stone-600 transition duration-200 hover:text-orange-800"
-                href={`mailto:${data.email}`}
-                title={data.email}
+                href={`https://wa.me/${data.whatsappNumber.replace(/\D/g, "").replace(/^0/, "880")}`}
+                rel="noopener noreferrer"
+                target="_blank"
               >
-                {data.email}
+                WhatsApp: {data.whatsappNumber}
               </a>
               <a
                 className="w-fit text-stone-600 transition duration-200 hover:text-orange-800"
                 href={`tel:${data.phone.replace(/[^+\d]/g, "")}`}
               >
                 {data.phone}
+              </a>
+              <a className="w-fit truncate text-stone-600 transition duration-200 hover:text-orange-800" href={data.facebookUrl} rel="noopener noreferrer" target="_blank">
+                Facebook Page
+              </a>
+              <a className="w-fit truncate text-stone-600 transition duration-200 hover:text-orange-800" href={data.facebookGroupUrl} rel="noopener noreferrer" target="_blank">
+                TPC Kids Facebook Group
               </a>
             </div>
           </div>

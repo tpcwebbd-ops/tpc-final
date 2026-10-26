@@ -401,9 +401,9 @@ const MutationVisaRequirements = ({ data, onChange }: VisaRequirementsFormProps)
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label>PDF site email</Label>
+                      <Label>PDF site WhatsApp number</Label>
                       <Input
-                        type="email"
+                        inputMode="tel"
                         value={formData.downloadCompanyEmail}
                         onChange={(event) => updateField("downloadCompanyEmail", event.target.value)}
                         className={fieldClassName}

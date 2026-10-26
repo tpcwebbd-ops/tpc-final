@@ -70,8 +70,8 @@ export const defaultDataCookiePolicy: ICookiePolicyData = {
   ],
   contactTitle: "Cookie questions",
   contactDescription:
-    "For questions about TestPrep Center's use of cookies, email example@gmail.com or call 01711 221122.",
-  supportEmail: "example@gmail.com",
+    "For questions about TestPrep Center's use of cookies, call or WhatsApp 01786558855.",
+  supportEmail: "01786558855",
 };
 
 export const defaultCookiePolicySection: CookiePolicySection = {

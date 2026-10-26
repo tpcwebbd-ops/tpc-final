@@ -8,8 +8,8 @@
 
 export const defaultDataSection3 = {
   id: "section-uid-3",
-  heading: "Build something fast",
-  description: "A clear, focused section for your page.",
+  heading: "Your next learning step starts here.",
+  description: "Choose focused online support for IELTS, study-abroad planning, or kids' spoken English with TestPrep Center.",
   paddingX: "0",
   paddingY: "0",
 };

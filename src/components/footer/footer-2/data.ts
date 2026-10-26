@@ -19,8 +19,10 @@ export type FooterTwoData = {
   logoUrl: string;
   logoAlt: string;
   showLogo: boolean;
-  email: string;
   phone: string;
+  whatsappNumber: string;
+  facebookUrl: string;
+  facebookGroupUrl: string;
   disabledPaths: string[];
   columns: { title: string; links: { id: string; label: string; url: string; visible: boolean }[] }[];
   links: { id: string; label: string; url: string; visible: boolean }[];
@@ -38,34 +40,38 @@ export const defaultData: FooterTwoData = {
   foreground: "#292524",
   accent: "#b45309",
   brand: "TestPrep Center",
-  tagline: "A clear, welcoming place to learn about our work.",
-  description: "TestPrep Center is a flexible website for sharing information, updates, and resources.",
+  tagline: "Learn, prepare, and move forward from anywhere in Bangladesh.",
+  description:
+    "TPC provides online IELTS preparation, personalized study-abroad guidance, and kids' spoken English courses.",
   logoUrl: "/Logo.png",
   logoAlt: "TestPrep Center logo",
   showLogo: true,
-  email: "example@gmail.com",
-  phone: "01711 221122",
+  phone: "01786558855",
+  whatsappNumber: "01786558855",
+  facebookUrl: "https://www.facebook.com/TestPrepCenter.BD/",
+  facebookGroupUrl: "https://www.facebook.com/groups/tpckids",
   disabledPaths: ["/dashboard", "/login", "/forgot-password", "/registration"],
   columns: [
+    {
+      title: "Programs",
+      links: [
+        { id: "ielts", label: "IELTS Preparation", url: "/contact-us", visible: true },
+        { id: "study-abroad", label: "Study Abroad Guidance", url: "/contact-us", visible: true },
+        { id: "kids-spoken", label: "Kids Spoken English", url: "/contact-us", visible: true },
+      ],
+    },
     {
       title: "Explore",
       links: [
         { id: "home", label: "Home", url: "/", visible: true },
-        { id: "about", label: "About us", url: "/about-us", visible: true },
-        { id: "contact", label: "Contact", url: "/contact-us", visible: true },
-      ],
-    },
-    {
-      title: "Resources",
-      links: [
-        { id: "team", label: "Team", url: "/team-member", visible: true },
-        { id: "faq", label: "Frequently asked questions", url: "/frequently-ask-questions", visible: true },
+        { id: "about", label: "About TPC", url: "/about-us", visible: true },
+        { id: "faq", label: "Frequently Asked Questions", url: "/frequently-ask-questions", visible: true },
       ],
     },
   ],
   links: [
     { id: "contact", label: "Contact", url: "/contact-us", visible: true },
-    { id: "privacy", label: "Privacy", url: "/privacy-policy", visible: true },
+    { id: "facebook", label: "Facebook", url: "https://www.facebook.com/TestPrepCenter.BD/", visible: true },
   ],
   copyright: `© ${new Date().getFullYear()} TestPrep Center. All rights reserved.`,
   showLegalBar: true,
@@ -74,7 +80,7 @@ export const defaultData: FooterTwoData = {
     { id: "refund", label: "Refund Policy", url: "/refund-policy", visible: true },
     { id: "privacy", label: "Privacy Policy", url: "/privacy-policy", visible: true },
     { id: "terms", label: "Terms & Conditions", url: "/terms-and-condition", visible: true },
-    { id: "security", label: "Security", url: "/", visible: true },
-    { id: "cookies", label: "Cookie Policy", url: "/", visible: true },
+    { id: "security", label: "Security", url: "/security", visible: true },
+    { id: "cookies", label: "Cookie Policy", url: "/cookie-policy", visible: true },
   ],
 };

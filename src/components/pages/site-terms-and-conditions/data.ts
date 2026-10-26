@@ -47,31 +47,31 @@ export const defaultDataSiteTermsAndConditions: ISiteTermsAndConditionsData = {
     },
     {
       eyebrow: "Services",
-      title: "Project scope and delivery",
+      title: "Programs and guidance",
       description:
-        "TestPrep Center confirms service scope, timelines, deliverables, revisions, and handover details in the applicable customer agreement.",
+        "TestPrep Center confirms the selected program or guidance scope, online access, schedule, and next steps through the applicable service communication.",
       items: [
-        "Scope is agreed before work starts",
-        "Change requests may affect cost or timeline",
-        "Client feedback is required for progress",
+        "Program and guidance details are shared before enrolment or service begins",
+        "Schedule or service changes may affect availability or fees",
+        "Learners should provide accurate, timely information where needed",
       ],
     },
     {
       eyebrow: "Payments",
       title: "Fees and billing",
       description:
-        "Set basic expectations around invoices, payment schedules, deposits, and work pauses caused by overdue payments.",
-      items: ["Payment terms are shared in proposals", "Deposits may be required", "Late payments can delay delivery"],
+        "Fees, payment schedules, and any deposit requirements are shared for the selected online program or guidance service.",
+      items: ["Payment terms are shared before service begins", "Deposits may be required", "Late payments can delay access or service"],
     },
     {
       eyebrow: "Ownership",
-      title: "Content and intellectual property",
+      title: "Learning materials and content",
       description:
-        "Explain ownership of client-provided content, delivered assets, third-party tools, and reusable development patterns.",
+        "Learning materials, website content, and third-party resources remain subject to the permissions and terms shared with learners.",
       items: [
-        "Client owns provided brand assets",
-        "Final ownership follows payment and agreement",
-        "Third-party tools follow their own licenses",
+        "Do not copy or redistribute learning materials without permission",
+        "Learners remain responsible for documents and information they provide",
+        "Third-party tools and institutions follow their own terms",
       ],
     },
     {
@@ -79,7 +79,7 @@ export const defaultDataSiteTermsAndConditions: ISiteTermsAndConditionsData = {
       title: "Terms questions and support",
       description:
         "Contact TestPrep Center if you have questions or need clarification about these Terms & Conditions.",
-      items: ["Email: example@gmail.com", "Contact: 01711 221122"],
+      items: ["Call or WhatsApp: 01786558855", "Facebook: facebook.com/TestPrepCenter.BD"],
     },
   ],
 };

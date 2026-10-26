@@ -189,7 +189,7 @@ const MutationPage7 = ({ data, onChange }: Page7FormProps) => {
                 />
               </div>
               <div className="space-y-2">
-                <Label>Support Email</Label>
+                <Label>Support WhatsApp number</Label>
                 <Input
                   value={formData.supportEmail}
                   onChange={(e) => updateField("supportEmail", e.target.value)}

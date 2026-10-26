@@ -48,7 +48,7 @@ export const defaultDataSection38: Section38Data = {
   missionTitle: "Our",
   missionHighlightedTitle: "Mission",
   missionDescription:
-    "Our mission is to empower students across Bangladesh with trusted, personalized guidance for studying abroad. TestPrep Center simplifies university selection, applications, documentation, visa guidance, and pre-departure preparation so every student can move forward with confidence.",
+    "Our mission is to help learners across Bangladesh access practical online education support. TestPrep Center provides IELTS preparation, study-abroad guidance, and kids' spoken English learning so each learner can move forward with confidence.",
   visionEyebrow: "TestPrep Center",
   showVisionEyebrow: true,
   visionTitle: "Our",
