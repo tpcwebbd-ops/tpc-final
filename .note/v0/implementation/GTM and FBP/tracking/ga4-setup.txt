@@ -1,0 +1,27 @@
+1. go to https://tagmanager.google.com/#/home and create account
+2. to right side there is a button name preview click it
+    - write the url and connect 
+    - check the connection.
+3. event fire
+```
+    import { sendGTMEvent } from '@next/third-parties/google';
+
+    sendGTMEvent({
+      event: 'page_view',
+      page_path: pathname,
+      page_query: query,
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+```
+4.  Go to Tag Manager and create Tags.
+    - go to google analytics and create a web-screen with the url.
+5. Create Tag inside Tag Manager
+    -   page_view, 
+    -   view_item, 
+    -   add_to_cart, 
+    -   view_cart, 
+    -   being_checkout, 
+    -   purchase,
+
+5. 

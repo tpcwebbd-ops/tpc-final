@@ -1,0 +1,60 @@
+
+I have a company name TecBuzz, 'http://tecbuzz.bd/', I need to update my website and service. 
+
+I have those service and here is charge for service. 
+Servie Name        | Discount Cost | Real Cost 
+1. Website:        | 8000          | 15000
+2. Hosting:        | 500           | 500
+3. Domain:         | 2000          | 2000
+4. Content:        | 2500          | 3500
+5. Marketing:      | 1000          | 1000
+6. Service:        | 1000          | 1000
+7. SEO:            | 2000          | 3000
+8. Ad Bosting:     | 1000          | 4000
+
+Content Monthly Package (3 Reels + 7 Post): 
+Reels: 3/week (Sun, Tue, Thu)
+Static Post: 7/week (everyday)
+Reels: 12*150=1800
+Static Post: 30*20=600
+Ad Post (21 Static Post): 21*50=1050
+
+
+Content Monthly Package (7 Reels + 7 Post): 
+Reels: 7/week (everyday)
+Static Post: 7/week (everyday)
+Reels: 30*150=4500
+Static Post: 30*20=600
+Ad Post (21 Static Post): 21*50=1050
+
+
+Content Monthly Package (14 Reels + 14 Post): 
+Reels: 14/week (everyday 2 Reels)
+Static Post: 14/week (everyday 2 Static post)
+Reels: 60*150=9000
+Static Post: 60*20=1200
+Ad Post 1 (21 Static Post): 21*50=1050
+Ad Post 2 (21 Static Post): 21*50=1050
+
+My Website features : 
+1. Authentication, Role based access, Employee management. 
+2. Full customize able webiste.
+3. Blocking user.
+4. Fast Loading. 
+5. Tracking like Google GTA4, FB pixel, ticktop pixel 
+6. WhatsApp
+7. Business growth [manage lead user, tracking them, following up, councillor management]
+8. Media [ImageBB, Youtube, Uploadthings]
+9. Install as PWA. 
+10. Sequrite rate-limit, Authentication, and authrorization.
+
+* Please have a Look on the website for more info. 
+
+Based on bangladesh SMC give me Full Business plan. pricing, and service. I can delevery in 24-48 Hours. I want from You 
+1. Website : Waht I need to update?
+2. Business pricing: Update pricing 
+3. How to Busting and Do funneling. 
+4. How to get customer form facebook AD or Google 
+5. Any Idea to grow my business?
+
+* Expalin all details in bangla. 

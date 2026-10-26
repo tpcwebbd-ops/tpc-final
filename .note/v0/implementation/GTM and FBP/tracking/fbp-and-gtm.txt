@@ -1,0 +1,309 @@
+Next.js-এ Google Tag Manager ও Facebook Pixel ইন্টিগ্রেশন গাইড
+এক্সিকিউটিভ সারসংক্ষেপ
+Next.js অ্যাপে Google Tag Manager ইন্টিগ্রেশনের জন্য সবচেয়ে পরিষ্কার পদ্ধতি হচ্ছে App Router ব্যবহার করলে Next.js-এর অফিসিয়াল @next/third-parties/google প্যাকেজের GoogleTagManager কম্পোনেন্ট ব্যবহার করা, আর Meta Pixel-এর জন্য next/script দিয়ে একটি ছোট client-side loader component বানানো। GTM ইনস্টল হয়ে গেলে sendGTMEvent() বা dataLayer.push() দিয়ে কাস্টম ইভেন্ট পাঠানো যায়, আর Meta Pixel-এ PageView, AddToCart, Purchase ধরনের ইভেন্ট সরাসরি fire করা যায়। Next.js ডকস দেখায় যে ট্যাগ ম্যানেজার ও analytics script সাধারণত afterInteractive লোডিং-এর ভালো প্রার্থী, আর GTM-এর History Change trigger single-page app-এ virtual pageview track করার জন্য বানানো হয়েছে। Meta-র অফিসিয়াল help content-ও বলে Meta Pixel সরাসরি কোডে বা Google Tag Manager দিয়েও সেটআপ করা যায়। [1]
+সবচেয়ে practical setup হলো এইটি: GTM একবার globally load করুন, তারপর সিদ্ধান্ত নিন আপনি Meta Pixel সরাসরি কোডে চালাবেন, নাকি GTM-এর ভিতর থেকে manage করবেন। যদি marketing team বারবার tags বদলায়, GTM-driven setup ভালো; যদি আপনি কম moving parts চান, তবে GTM + direct Meta Pixel setup তুলনামূলক সহজ। Google-এর ডকস অনুযায়ী GTM third-party tags-ও manage করতে পারে, ফলে একবার container বসানোর পরে অনেক tracking পরিবর্তন app code না ছুঁয়েও করা সম্ভব। [2]
+কোন setup বেছে নেবেন
+আমি সাধারণত Next.js প্রজেক্টে এই দুইটা architecture-এর একটাকে recommend করি:
+পদ্ধতি	কখন ভালো	কী code-এ থাকবে
+GTM + Direct Meta Pixel	ডেভেলপার-কন্ট্রোলড setup, দ্রুত implementation	GTM loader + Meta Pixel component
+GTM + Meta Pixel via GTM	marketing team GTM থেকেই সব manage করবে	শুধু GTM loader; Meta Pixel GTM UI-এ
+Google Tag Manager একটি container-ভিত্তিক tag management system; Google-এর ভাষায় এটি site/app-এর manually-coded tags-এর জায়গায় Google ও third-party tags manage করতে পারে। Meta-ও অফিসিয়াল help page-এ বলে যে আপনি Meta Pixel-কে Google Tag Manager account-এ add করতে পারেন। তাই যদি আপনার goal হয় “এক জায়গা থেকে সব tracking manage করা”, তাহলে GTM-only management logical; আর যদি Meta Pixel debugging developer-controlled রাখতে চান, তাহলে direct Meta Pixel clearer। [3]
+একটা গুরুত্বপূর্ণ rule: একই Meta Pixel base code দুইবার install করবেন না—একবার direct code-এ, আবার GTM-এ—না হলে duplicate fires হতে পারে। Google Tag Assistant duplicated tags detect করতে পারে, আর Meta-র help content-ও duplicate pixel fires reporting discrepancy তৈরি করতে পারে বলে সতর্ক করে। [4]
+App Router-এ recommended implementation
+কী কী লাগবে
+App Router setup-এর আগে আপনার লাগবে:
+1.	একটি Google Tag Manager account এবং container ID—এটি GTM-XXXXXXX ফরম্যাটে থাকে। GTM container create ও install করার আগে Google account ও website code access দরকার। [5]
+2.	একটি Meta Pixel ID—Meta Pixel website events measure করার জন্য ব্যবহার হয়। Meta Events Manager-এ pixel/dataset view আছে, এবং Meta তাদের help content-এ বলে website events এখন dataset view-এ merged হতে পারে। [6]
+3.	Next.js App Router project—Next.js docs অনুযায়ী @next/third-parties প্যাকেজ install করে GoogleTagManager ব্যবহার করা যায়; একই docs-এ বলা আছে এটি active development-এ আছে। [7]
+প্রথমে dependencies এবং environment variables যোগ করুন:
+pnpm add @next/third-parties@latest
+# .env.local
+NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+NEXT_PUBLIC_FB_PIXEL_ID=123456789012345
+এই উদাহরণে আমি NEXT_PUBLIC_* ব্যবহার করছি কারণ GTM ID এবং Pixel ID client-side script-এ লাগবে।
+Root layout-এ GTM load করুন
+// app/layout.tsx
+import { GoogleTagManager } from '@next/third-parties/google'
+import FacebookPixel from '@/components/facebook-pixel'
+import FacebookPixelPageView from '@/components/facebook-pixel-pageview'
+import GtmRouteChange from '@/components/gtm-route-change'
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID
+  const pixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID
+
+  return (
+    <html lang="bn">
+      {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
+      <body>
+        {children}
+        <FacebookPixel pixelId={pixelId} />
+        <FacebookPixelPageView />
+        <GtmRouteChange />
+      </body>
+    </html>
+  )
+}
+Next.js-এর official docs দেখায় যে GoogleTagManager root layout-এ বসিয়ে all routes-এ GTM load করা যায়। একই docs-এ আরও বলা আছে sendGTMEvent() কাজ করার জন্য parent tree-তে <GoogleTagManager /> থাকতে হবে। [7]
+Meta Pixel base loader component
+// components/facebook-pixel.tsx
+'use client'
+
+import Script from 'next/script'
+
+export default function FacebookPixel({
+  pixelId,
+}: {
+  pixelId?: string
+}) {
+  if (!pixelId) return null
+
+  return (
+    <Script id="meta-pixel-base" strategy="afterInteractive">
+      {`
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', '${pixelId}');
+        fbq('track', 'PageView');
+      `}
+    </Script>
+  )
+}
+Next.js next/script docs অনুযায়ী tag manager এবং analytics script-গুলোর জন্য afterInteractive ভালো strategy, এবং inline script-এ একটি id দিতে হয় যাতে Next.js এটি track ও optimize করতে পারে। [8]
+Client-side route change-এ PageView fire করুন
+Single-page app-এ hard refresh ছাড়া route বদলালে browser full page reload করে না। Next.js App Router-এ page change reactively ধরতে usePathname() ও useSearchParams() compose করতে বলা হয়েছে। আর GTM-এর official History Change trigger single-page apps-এ virtual pageview track করার জন্যই বানানো। [9]
+// components/facebook-pixel-pageview.tsx
+'use client'
+
+import { useEffect, useRef } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
+
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void
+  }
+}
+
+export default function FacebookPixelPageView() {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const firstRender = useRef(true)
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false
+      return
+    }
+
+    window.fbq?.('track', 'PageView')
+  }, [pathname, searchParams])
+
+  return null
+}
+// components/gtm-route-change.tsx
+'use client'
+
+import { useEffect, useRef } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { sendGTMEvent } from '@next/third-parties/google'
+
+export default function GtmRouteChange() {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const firstRender = useRef(true)
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false
+      return
+    }
+
+    const query = searchParams.toString()
+    const page = query ? `${pathname}?${query}` : pathname
+
+    sendGTMEvent({
+      event: 'virtual_page_view',
+      page_path: pathname,
+      page_query: query,
+      page_location: window.location.href,
+      page_title: document.title,
+      page,
+    })
+  }, [pathname, searchParams])
+
+  return null
+}
+এখানে আমি initial render skip করেছি যাতে base script-এর initial PageView-এর সঙ্গে duplicate না হয়। মনে রাখবেন: GTM-এ History Change trigger ব্যবহার করলে আবার virtual_page_view custom event strategy একসঙ্গে enable করবেন না—একটা strategy বেছে নিন। Duplicate tags বা duplicate fires debugging tool-এ ধরা পড়ে এবং reporting mismatch তৈরি করতে পারে। [10]
+Business event helper
+// lib/tracking.ts
+'use client'
+
+import { sendGTMEvent } from '@next/third-parties/google'
+
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void
+  }
+}
+
+export function trackAddToCart(value: number, currency = 'BDT') {
+  sendGTMEvent({
+    event: 'add_to_cart',
+    value,
+    currency,
+  })
+
+  window.fbq?.('track', 'AddToCart', {
+    value,
+    currency,
+  })
+}
+
+export function trackPurchase(orderId: string, value: number, currency = 'BDT') {
+  sendGTMEvent({
+    event: 'purchase',
+    transaction_id: orderId,
+    value,
+    currency,
+  })
+
+  window.fbq?.('track', 'Purchase', {
+    value,
+    currency,
+  })
+}
+Meta help content অনুযায়ী value এবং currency standard event-এর সঙ্গে পাঠানো গেলে ROAS measure ও value-based optimization-এ সাহায্য করে। Catalog-based scenarios-এ Meta ViewContent, AddToCart, Purchase ধরনের standard events-ও ব্যবহার করে। অন্যদিকে GTM custom event trigger dataLayer.push()-এর event name ধরতে পারে এবং অতিরিক্ত variables-ও নিতে পারে। [11]
+Pages Router-এ equivalent implementation
+যদি আপনার project এখনো pages/ router-এ থাকে, তাহলে route change ধরার recommended hook হলো router.events; Next.js docs routeChangeComplete-সহ supported router events list করে এবং _app.js-এ subscribe করার উদাহরণও দেয়। [12]
+// pages/_app.tsx
+import type { AppProps } from 'next/app'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import FacebookPixel from '@/components/facebook-pixel'
+
+declare global {
+  interface Window {
+    dataLayer?: Record<string, any>[]
+    fbq?: (...args: any[]) => void
+  }
+}
+
+export default function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({
+        event: 'virtual_page_view',
+        page_path: url,
+      })
+
+      window.fbq?.('track', 'PageView')
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
+
+  return (
+    <>
+      <FacebookPixel pixelId={process.env.NEXT_PUBLIC_FB_PIXEL_ID} />
+      <Component {...pageProps} />
+    </>
+  )
+}
+আর যদি আপনি Pages Router-এ raw GTM snippets ব্যবহার করতে চান, Google-এর official install guide অনুযায়ী প্রথম GTM snippet <head>-এর যত ওপরে সম্ভব এবং দ্বিতীয় noscript iframe opening <body>-এর পরপর বসাতে হয়। তবে performance perspective থেকে Next.js docs tag manager/analytics-এর জন্য afterInteractive approach-ও ভালো প্রার্থী হিসেবে উল্লেখ করে। [13]
+GTM UI-এ যা কনফিগার করবেন
+Code বসানোই শেষ কাজ না; GTM UI-এ অন্তত এই configuration-গুলো করুন।
+প্রথমে GTM workspace-এ যান এবং container verify করুন। Google-এর docs বলে Preview mode চালু করলে আপনার site Tag Assistant-এর সঙ্গে connect হয়, যাতে কোন tag fire হলো, কোন order-এ হলো, সেটা inspect করা যায়। Preview ঠিক থাকলে Workspace থেকে Submit করে Publish and Create Version দিন। [14]
+এরপর SPA pageview-এর জন্য দুটি valid পথ আছে:
+1.	History Change trigger: GTM-এর official docs অনুযায়ী এটি URL fragment change বা HTML5 pushState detect করে, এবং single-page web apps-এ virtual pageview track করার জন্য useful। [15]
+2.	Custom Event trigger: যদি আপনি code থেকে sendGTMEvent() বা dataLayer.push() করেন, GTM-এ virtual_page_view, add_to_cart, purchase ইত্যাদি event names-এর উপর Custom Event trigger তৈরি করুন। Google-এর docs dataLayer.push({'event':'button1-click','conversionValue':25}) pattern দেখায়। [16]
+sendGTMEvent() ব্যবহার করলে GTM-এর data layer-এ event যায়, আর data layer variables GTM tags-এ map করা যায়। উদাহরণ হিসেবে value, currency, transaction_id, page_path ইত্যাদি carry করলে GTM থেকে GA4, Google Ads, বা অন্য tag feed করা সহজ হয়। GTM install হওয়ার পর app code প্রতিবার edit না করেও অনেক tag UI থেকে manage করা যায়। [17]
+আপনি যদি Meta Pixel-ও GTM থেকে manage করতে চান, Meta-র official help বলে Google Tag Manager account-এ Meta Pixel add করা যায়। এখানে full UI article browsing-এর সময় login-gated ছিল, তাই practical pattern হলো: GTM-এ Meta Pixel base tag All Pages-এ fire করুন, আর AddToCart/Purchase-এর জন্য custom events-এর উপর আলাদা tags বানান। তবে direct code setup চালু থাকলে GTM-এ আবার একই pixel বসাবেন না। [18]
+Meta Pixel events map করার বাস্তব নিয়ম
+Meta Pixel website actions measure করতে ব্যবহার হয়, আর Meta-র help content অনুযায়ী ViewContent, AddToCart, Purchase ধরনের standard events catalog/commerce use cases-এ গুরুত্বপূর্ণ। value ও currency parameters conversion value measurement উন্নত করে। [19]
+ব্যবহারে আমি এই mapping recommend করি:
+•	সব page-এ: PageView
+•	product details page-এ: ViewContent
+•	cart button click-এ: AddToCart
+•	successful order / thank-you state-এ: Purchase
+যদি আপনি event setup code ছাড়া করতে চান, Meta Events Manager-এর Event Setup Tool web events ও parameters no-code ভাবে set up করতে সাহায্য করতে পারে। তবে production-grade Next.js app-এ code-based বা GTM-based setup debugging-এর জন্য সাধারণত বেশি predictable। [20]
+উদাহরণ হিসেবে আপনি helper-এ ViewContent-ও যোগ করতে পারেন:
+export function trackViewContent(value?: number, currency = 'BDT') {
+  window.fbq?.('track', 'ViewContent', {
+    value,
+    currency,
+  })
+}
+আর custom marketing interaction-এর জন্য GTM custom event strategy রাখতে পারেন:
+sendGTMEvent({
+  event: 'cta_click',
+  cta_name: 'hero_signup',
+})
+তারপর GTM-এ cta_click নামে Custom Event trigger বানিয়ে প্রয়োজনমতো GA4, Ads, বা অন্য tag fire করুন। Google custom event trigger docs এই pattern-টাই support করে। [21]
+টেস্টিং, ডিবাগিং ও ট্রাবলশুটিং
+Implementation শেষ হলে এই checklist follow করুন।
+প্রথমে GTM side test করুন। Google-এর docs অনুযায়ী GTM Preview ব্যবহার করুন, site URL connect করুন, তারপর Tag Assistant debug interface-এ দেখুন virtual_page_view, add_to_cart, purchase events দেখা যাচ্ছে কি না। Tag Assistant extension tags firing, missing tags, duplicated tags, incorrect configuration—এসব ধরতে সাহায্য করে। [22]
+তারপর Meta side test করুন। Meta-এর help content অনুযায়ী Meta Pixel Helper Chrome extension দিয়ে page-এ pixel detect, errors, এবং received events দেখা যায়; আর Test Events tool দিয়ে website/app events সঠিকভাবে set up হয়েছে কি না যাচাই করা যায়। Meta আরও বলে, যদি আপনি standard events যোগ করেন, প্রতিটি event validate করতে corresponding test conversion actually complete করা উচিত। [23]
+সাধারণ সমস্যা ও সমাধান সাধারণত এইগুলো হয়:
+•	client-side navigation-এ pageview আসছে না: App Router হলে usePathname()/useSearchParams()-ভিত্তিক tracker লাগান, অথবা GTM-এ History Change trigger দিন। Pages Router হলে router.events.on('routeChangeComplete', ...) ব্যবহার করুন। [24]
+•	duplicate pageview / duplicate purchase: একসঙ্গে multiple strategy enable করা হয়েছে কি না দেখুন—যেমন direct Meta Pixel + GTM Meta Pixel, বা GTM All Pages pageview + custom virtual_page_view—এগুলো duplicate fires তৈরি করতে পারে। GTM Tag Assistant ও Meta Pixel Helper/Diagnostics দিয়ে পরীক্ষা করুন। [25]
+•	purchase value mismatch: Meta-র help অনুযায়ী currency, decimal points, এবং purchase event variables ঠিক আছে কি না দেখুন। [26]
+•	অচেনা domain থেকে events আসছে: Meta Pixel traffic permissions ব্যবহার করে কোন domains থেকে pixel events গ্রহণ করবেন তা control করতে পারেন। [27]
+•	App Router-এ rewrites/proxy থাকলে hydration mismatch warning: Next.js docs usePathname()-এর ক্ষেত্রে rewrites থাকলে mismatch হতে পারে বলে সতর্ক করে; tracking component-কে আলাদা small client-only component হিসেবে রাখুন, যেমন উপরের FacebookPixelPageView ও GtmRouteChange। [28]
+সবশেষে, GTM container-এ changes করে থাকলে Preview pass করার পরে অবশ্যই publish করুন; Google docs স্পষ্টভাবে বলে edited tags, triggers, variables operational করতে publish করতে হবে। [29]
+________________________________________
+[1] [7] [17] https://nextjs.org/docs/app/guides/third-party-libraries
+https://nextjs.org/docs/app/guides/third-party-libraries
+[2] https://support.google.com/tagmanager/answer/14842872?hl=en
+https://support.google.com/tagmanager/answer/14842872?hl=en
+[3] https://support.google.com/tagmanager/answer/6102821?hl=en
+https://support.google.com/tagmanager/answer/6102821?hl=en
+[4] [25] https://support.google.com/tagmanager/answer/13355721?hl=en-419
+https://support.google.com/tagmanager/answer/13355721?hl=en-419
+[5] [13] https://support.google.com/tagmanager/answer/14847097?hl=en
+https://support.google.com/tagmanager/answer/14847097?hl=en
+[6] https://www.facebook.com/business/help/742478679120153/?query=About+ad+targeting
+https://www.facebook.com/business/help/742478679120153/?query=About+ad+targeting
+[8] https://nextjs.org/docs/pages/api-reference/components/script
+https://nextjs.org/docs/pages/api-reference/components/script
+[9] [24] [28] https://nextjs.org/docs/app/api-reference/functions/use-pathname
+https://nextjs.org/docs/app/api-reference/functions/use-pathname
+[10] [15] https://support.google.com/tagmanager/answer/7679322?hl=en
+https://support.google.com/tagmanager/answer/7679322?hl=en
+[11] [26] https://www.facebook.com/business/help/308258403676519/?query=events
+https://www.facebook.com/business/help/308258403676519/?query=events
+[12] https://nextjs.org/docs/pages/api-reference/functions/use-router
+https://nextjs.org/docs/pages/api-reference/functions/use-router
+[14] [22] https://support.google.com/tagmanager/answer/6107056?hl=en
+https://support.google.com/tagmanager/answer/6107056?hl=en
+[16] [21] https://support.google.com/tagmanager/answer/7679219?hl=en
+https://support.google.com/tagmanager/answer/7679219?hl=en
+[18] https://www.facebook.com/business/help/1021909254506499/?query=Select+Settings
+https://www.facebook.com/business/help/1021909254506499/?query=Select+Settings
+[19] https://www.facebook.com/business/help/1044262445604547/?query=How+do+I+make+sure+I+don%27t+run+ads+for+products+that+are+out+of+stock%3F
+https://www.facebook.com/business/help/1044262445604547/?query=How+do+I+make+sure+I+don%27t+run+ads+for+products+that+are+out+of+stock%3F
+[20] https://www.facebook.com/business/help/1208535569271747/?query=Video+Views+to+100%25
+https://www.facebook.com/business/help/1208535569271747/?query=Video+Views+to+100%25
+[23] https://www.facebook.com/business/help/198406697184603/?query=no
+https://www.facebook.com/business/help/198406697184603/?query=no
+[27] https://www.facebook.com/business/help/572690630080597/?id=713045022172985
+https://www.facebook.com/business/help/572690630080597/?id=713045022172985
+[29] https://support.google.com/tagmanager/answer/6107163?hl=en
+https://support.google.com/tagmanager/answer/6107163?hl=en
+

@@ -1,0 +1,9 @@
+User-agent:*
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /cart/
+Allow: /
+
+Sitemap:
+https:www.tecbuzz.bd/sitemap.xml

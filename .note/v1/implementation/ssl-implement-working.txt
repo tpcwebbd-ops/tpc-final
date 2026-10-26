@@ -1,0 +1,359 @@
+SSLCommerz Implementation Guide
+
+Project: C:\Users\Toufiquer\Downloads\rajib\WebApp
+
+Current implementation path:
+- Shared SSLCommerz service: src/app/api/payment/sslcommerz/service.ts
+- Payment session route: src/app/api/payment/sslcommerz/initiate/route.ts
+- Callback routes:
+  - src/app/api/payment/sslcommerz/success/route.ts
+  - src/app/api/payment/sslcommerz/fail/route.ts
+  - src/app/api/payment/sslcommerz/cancel/route.ts
+  - src/app/api/payment/sslcommerz/ipn/route.ts
+- Payment status API: src/app/api/payment/status/route.ts
+- Main checkout return UI: src/app/cart/page.tsx
+
+1. Environment variables
+
+Add these to .env.local or the active deployment environment:
+
+SSLCOMMERZ_STORE_ID=your_store_id
+SSLCOMMERZ_STORE_PASSWORD=your_store_password
+SSLCOMMERZ_SANDBOX=true
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+For production:
+
+SSLCOMMERZ_SANDBOX=false
+NEXT_PUBLIC_BASE_URL=https://your-domain.com
+
+NEXT_PUBLIC_SITE_URL can also be used as a fallback base URL. SSLCommerz callback URLs must point to a public reachable domain in live or sandbox callback testing.
+
+2. SSLCommerz shared service
+
+File: src/app/api/payment/sslcommerz/service.ts
+
+Main responsibilities:
+- Select sandbox or live SSLCommerz URLs from SSLCOMMERZ_SANDBOX.
+- Read SSLCOMMERZ_STORE_ID and SSLCOMMERZ_STORE_PASSWORD.
+- Build the base callback URL from NEXT_PUBLIC_BASE_URL, NEXT_PUBLIC_SITE_URL, or the request origin.
+- Parse callback payloads from JSON, form-data, or x-www-form-urlencoded bodies.
+- Validate val_id through the SSLCommerz Transaction Validation API.
+- Treat only VALID and VALIDATED as successful validation statuses.
+- Compare the validated SSLCommerz amount with the stored order total before marking an order paid or held.
+- Store SSLCommerz values such as valId, bankTranId, cardType, currency, riskLevel, riskTitle, and paymentGatewayData.
+- Redirect the customer back to the original checkout page using ssl_payment and tran_id query parameters.
+
+3. Payment session creation
+
+File: src/app/api/payment/sslcommerz/initiate/route.ts
+
+Frontend route used by cart:
+
+POST /api/payment/sslcommerz/initiate
+
+Expected payload:
+
+{
+  "customerName": "Customer Name",
+  "customerEmail": "customer@example.com",
+  "customerPhone": "01700000000",
+  "shippingAddress": "",
+  "items": [
+    {
+      "productId": "product-id",
+      "title": "Product title",
+      "quantity": 1,
+      "price": 4000
+    }
+  ],
+  "subtotal": 4000,
+  "shippingCharge": 50,
+  "discount": 0,
+  "totalAmount": 4050,
+  "redirectPath": "/cart",
+  "note": "Created from asset cart checkout."
+}
+
+Flow:
+- Validate customer name, email, phone, items, and totalAmount.
+- Generate tranId in SSL-... format.
+- Generate orderNo in ORD-... format.
+- Create a pending Orders document:
+  - paymentMethod = sslcommerz
+  - paymentStatus = pending
+  - deliveryStatus = pending
+  - orderStatus = pending
+  - currency = BDT
+  - paymentGatewayData.redirectPath = redirectPath
+  - paymentGatewayData.gateway = sslcommerz
+- Send an x-www-form-urlencoded request to the SSLCommerz init API.
+- Return GatewayPageURL and redirectUrl to the frontend.
+- If SSLCommerz init fails, mark the pending order failed and store initResponse.
+
+Frontend example:
+
+const response = await fetch('/api/payment/sslcommerz/initiate', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    customerName: customerInfo.name,
+    customerEmail: customerInfo.email,
+    customerPhone: customerInfo.phone,
+    shippingAddress: '',
+    items: orderItems,
+    subtotal,
+    shippingCharge: processingFee,
+    discount: 0,
+    totalAmount: total,
+    redirectPath: '/cart',
+    note: 'Created from asset cart checkout.',
+  }),
+});
+
+const result = await response.json();
+const redirectUrl = result?.data?.redirectUrl || result?.data?.GatewayPageURL;
+if (redirectUrl) window.location.href = redirectUrl;
+
+4. SSLCommerz init payload
+
+The init route sends these values to SSLCommerz:
+
+store_id
+store_passwd
+total_amount
+currency=BDT
+tran_id
+success_url
+fail_url
+cancel_url
+ipn_url
+cus_name
+cus_email
+cus_phone
+cus_add1
+cus_city
+cus_country
+shipping_method=NO
+product_name
+product_category=Digital Products
+product_profile=digital-goods
+num_of_item
+value_a
+
+Callback URLs used by this project:
+
+success_url = /api/payment/sslcommerz/success
+fail_url    = /api/payment/sslcommerz/fail
+cancel_url  = /api/payment/sslcommerz/cancel
+ipn_url     = /api/payment/sslcommerz/ipn
+
+value_a stores the original redirect path, such as /cart.
+
+5. Success callback handling
+
+File: src/app/api/payment/sslcommerz/success/route.ts
+
+Supported methods:
+- POST: normal SSLCommerz callback form post.
+- GET: useful if SSLCommerz or testing tools return query parameters.
+
+Flow:
+- Parse tran_id, val_id, and status from the callback payload.
+- Require status to be VALID or VALIDATED.
+- Call validateSslPayment(val_id).
+- Use the validation response tran_id when present.
+- Find the matching order by tranId.
+- Compare validation.amount with order.totalAmount.
+- Read risk level from validation.risk_level, payload.risk_level, payload.risk, or payload.riskLevel.
+
+If risk is safe:
+- riskLevel is not 1.
+- paymentStatus = paid
+- deliveryStatus = delivered
+- orderStatus = completed
+- Customer account/session cookies are created.
+- Customer is redirected to:
+  /cart?ssl_payment=success&tran_id=TRAN_ID
+
+If risk is risky:
+- riskLevel = 1.
+- paymentStatus = risk_hold
+- deliveryStatus = pending
+- orderStatus = processing
+- Customer account/session cookies are not created.
+- Downloads are not released.
+- Customer is redirected to:
+  /cart?ssl_payment=risk_hold&tran_id=TRAN_ID
+
+If validation fails or payload is invalid:
+- Order is marked failed when tran_id is available.
+- Customer is redirected to:
+  /cart?ssl_payment=failed&tran_id=TRAN_ID
+
+6. Risky transaction behavior
+
+SSLCommerz risk meaning:
+- risk = 0 or risk_level = 0: safe transaction.
+- risk = 1 or risk_level = 1: risky transaction.
+
+Project behavior for risky successful payments:
+- Do not automatically fulfill the order.
+- Do not create the customer-account session from the payment.
+- Do not show download buttons.
+- Keep delivery pending.
+- Keep order processing.
+- Store riskLevel and riskTitle on the order.
+- Store the full validation response in paymentGatewayData.
+- Show a visible manual-review banner on the cart return page.
+- Show a WhatsApp button so the customer can contact the admin.
+
+Manual review process:
+- Review billing details, email address, phone number, order items, and any delivery information.
+- Contact the customer directly by verified phone or email.
+- For high-value orders, contact SSLCommerz support or the issuing bank before fulfilling.
+- After approval, an admin can update the order from risk_hold to paid and release the product manually.
+
+7. WhatsApp button on manual review
+
+File: src/app/cart/page.tsx
+
+When the return URL contains:
+
+/cart?ssl_payment=risk_hold&tran_id=TRAN_ID
+
+The cart page shows:
+- Payment under manual review
+- Transaction ID
+- Contact admin on WhatsApp button
+
+The WhatsApp number is not hardcoded. It is fetched from the existing WhatsApp settings API:
+
+RTK query:
+- src/redux/features/whatsapp/whatsAppSlice.ts
+- baseUrl = /api/whatsapp
+- query = () => ''
+
+API route:
+- src/app/api/whatsapp/route.ts
+
+Field used:
+- whatsAppButtonNumber
+
+Message used:
+- whatsAppButtonMessage when configured.
+- Fallback message includes the manual-review context and tran_id.
+
+8. Fail and cancel callbacks
+
+Files:
+- src/app/api/payment/sslcommerz/fail/route.ts
+- src/app/api/payment/sslcommerz/cancel/route.ts
+
+Flow:
+- Parse tran_id from the callback payload.
+- On fail:
+  - paymentStatus = failed
+  - orderStatus = pending
+  - redirect to /cart?ssl_payment=failed&tran_id=TRAN_ID
+- On cancel:
+  - paymentStatus = cancelled
+  - orderStatus = cancelled
+  - redirect to /cart?ssl_payment=cancelled&tran_id=TRAN_ID
+
+9. IPN route
+
+File: src/app/api/payment/sslcommerz/ipn/route.ts
+
+IPN means Instant Payment Notification. It is a server-to-server callback from SSLCommerz and should be enabled in the SSLCommerz Developer Dashboard.
+
+Flow:
+- Parse the callback payload.
+- Call the same finalizeSslPayment(payload) logic used by the success route.
+- Validate val_id through SSLCommerz.
+- Compare validation amount with the stored order total.
+- Apply the same paid or risk_hold status rules.
+- Return JSON instead of redirecting.
+
+Why IPN matters:
+- The customer may close the browser before returning to the site.
+- The browser redirect may fail due to network issues.
+- IPN gives the server a background confirmation path.
+
+10. Payment status API
+
+File: src/app/api/payment/status/route.ts
+
+Request:
+
+GET /api/payment/status?tran_id=TRAN_ID
+
+Response data includes:
+
+{
+  "paymentStatus": "paid",
+  "totalAmount": 4050,
+  "customerName": "Customer Name",
+  "customerEmail": "customer@example.com",
+  "tranId": "SSL-...",
+  "orderNo": "ORD-...",
+  "items": []
+}
+
+The cart success UI uses this API to load purchased items only when ssl_payment=success.
+
+11. Cart return UI
+
+File: src/app/cart/page.tsx
+
+Return states:
+
+ssl_payment=success
+- Clears the local asset cart.
+- Loads order details from /api/payment/status.
+- Shows purchased products and download buttons.
+- Shows account link.
+
+ssl_payment=risk_hold
+- Clears the local asset cart.
+- Does not load purchased products.
+- Shows the manual-review banner.
+- Shows the configured WhatsApp admin button when a WhatsApp number exists.
+
+ssl_payment=failed
+- Shows payment failed banner.
+- Allows retry from the cart.
+
+ssl_payment=cancelled
+- Shows payment cancelled banner.
+- Allows retry from the cart.
+
+12. Order model fields
+
+File: src/app/api/orders/v1/model.ts
+
+Relevant fields:
+- paymentStatus: pending, paid, failed, cancelled, refunded, risk_hold
+- deliveryStatus: pending, packed, shipped, delivered, returned
+- orderStatus: pending, processing, completed, cancelled
+- tranId
+- valId
+- bankTranId
+- cardType
+- currency
+- riskLevel
+- riskTitle
+- paymentGatewayData
+
+13. Security checklist
+
+- Always call validateSslPayment(val_id) before marking an order paid or held.
+- Never mark payment paid from callback status alone.
+- Always compare SSLCommerz validation amount with the stored order total.
+- Keep IPN enabled in the SSLCommerz Developer Dashboard.
+- Keep NEXT_PUBLIC_BASE_URL or NEXT_PUBLIC_SITE_URL pointed at the public callback domain.
+- Use SSLCOMMERZ_SANDBOX=true for sandbox testing.
+- Use SSLCOMMERZ_SANDBOX=false only with live credentials.
+- Do not auto-fulfill risk_level=1 transactions.
+- Review risk_hold orders manually before releasing downloads or services.
+- Confirm that /api/payment/sslcommerz/success, /fail, /cancel, and /ipn are reachable from SSLCommerz.

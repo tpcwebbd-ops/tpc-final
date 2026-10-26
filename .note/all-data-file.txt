@@ -1,0 +1,41 @@
+# Files that contain NexaMart brand, logo, bio, or contact defaults
+
+## Footer (3)
+
+src/components/footer/footer-1/data.ts
+src/components/footer/footer-2/data.ts
+src/components/footer/footer-3/data.ts
+
+## Form (1)
+
+src/components/form/form-3/data.ts
+
+## Menu (3)
+
+src/components/menu/menu-1/data.ts
+src/components/menu/menu-2/data.ts
+src/components/menu/menu-3/data.ts
+
+## Pages (10)
+
+src/components/pages/contact-us/data.ts
+src/components/pages/cookie-policy/data.ts
+src/components/pages/delivery-policy/data.ts
+src/components/pages/refund-policy/data.ts
+src/components/pages/security/data.ts
+src/components/pages/site-terms-and-conditions/data.ts
+src/components/pages/visa-application-support/data.ts
+src/components/pages/visa-requirements/data.ts
+src/components/pages/visa-services/data.ts
+src/components/pages/whatsapp-faq/data.ts
+
+## Sections (1)
+
+src/components/sections/section-15/data.ts
+
+## TopBanner (2)
+
+src/components/topbanner/topbanner-1/data.ts
+src/components/topbanner/topbanner-2/data.ts
+
+Total: 20 data.ts files found.

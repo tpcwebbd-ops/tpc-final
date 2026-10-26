@@ -1,0 +1,173 @@
+# Facebook Pixel / Meta Pixel Tracking Summary
+
+## মূল ধারণা
+
+Meta/Facebook Pixel website visitor action measure করার জন্য ব্যবহার হয়। Next.js app-এ Pixel setup করার সময় সবচেয়ে গুরুত্বপূর্ণ বিষয় হলো: base Pixel code একবার load করতে হবে, SPA route change-এ manual `PageView` পাঠাতে হবে, এবং ecommerce event যেমন `AddToCart` বা `Purchase` সঠিক জায়গায় fire করতে হবে।
+
+Meta Pixel সরাসরি code দিয়ে setup করা যায়, আবার Google Tag Manager দিয়েও manage করা যায়। কিন্তু একই Pixel ID direct code এবং GTM দুই জায়গায় একসাথে বসালে duplicate event fire হতে পারে। তাই একটি strategy বেছে নিতে হবে।
+
+## Recommended Setup Options
+
+1. GTM + Direct Meta Pixel
+   - Developer-controlled setup দরকার হলে ভালো।
+   - App code-এ GTM loader এবং Meta Pixel component থাকবে।
+   - Debugging predictable হয়।
+
+2. GTM + Meta Pixel via GTM
+   - Marketing team GTM UI থেকে সব tag manage করলে ভালো।
+   - App code-এ শুধু GTM loader থাকবে।
+   - Meta Pixel base tag, PageView, AddToCart, Purchase ইত্যাদি GTM UI থেকে configure হবে।
+
+একই Pixel base code দুইবার install করা যাবে না।
+
+## Environment Variables
+
+Meta Pixel direct setup করলে client-side script-এর জন্য public environment variable লাগবে:
+
+```txt
+NEXT_PUBLIC_FB_PIXEL_ID=123456789012345
+```
+
+Pixel ID secret নয়, তাই `NEXT_PUBLIC_` ব্যবহার করা যায়।
+
+## App Router Implementation
+
+Root layout থেকে Pixel loader component render করা যায়:
+
+```tsx
+import FacebookPixel from '@/components/facebook-pixel'
+import FacebookPixelPageView from '@/components/facebook-pixel-pageview'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const pixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID
+
+  return (
+    <html lang="bn">
+      <body>
+        {children}
+        <FacebookPixel pixelId={pixelId} />
+        <FacebookPixelPageView />
+      </body>
+    </html>
+  )
+}
+```
+
+`next/script` দিয়ে base Pixel script `afterInteractive` strategy-তে load করা উচিত। Initial load-এ `fbq('track', 'PageView')` পাঠানো যায়।
+
+## SPA Route PageView
+
+Next.js App Router full page reload ছাড়া route change করে। তাই শুধু base script থাকলে client-side navigation-এ PageView miss হতে পারে।
+
+App Router-এ route change track করতে:
+
+- `usePathname()`
+- `useSearchParams()`
+- `useEffect()`
+
+ব্যবহার করা যায়। Initial render skip করলে base Pixel script-এর initial PageView duplicate হয় না।
+
+Pages Router হলে `router.events.on('routeChangeComplete')` ব্যবহার করা যায়।
+
+## Recommended Meta Events
+
+Common ecommerce mapping:
+
+- All pages: `PageView`
+- Product details page: `ViewContent`
+- Cart button click: `AddToCart`
+- Validated successful order: `Purchase`
+
+Recommended helper shape:
+
+```ts
+window.fbq?.('track', 'AddToCart', {
+  value,
+  currency: 'BDT',
+})
+
+window.fbq?.('track', 'Purchase', {
+  value,
+  currency: 'BDT',
+})
+```
+
+`value` এবং `currency` consistent রাখা দরকার, কারণ conversion value, ROAS, এবং optimization reporting এগুলোর উপর নির্ভর করে।
+
+## Purchase Event Rule
+
+`Purchase` event checkout button click-এ fire করা উচিত নয়। Payment provider বা backend order validation শেষে order সত্যি successful হলে তবেই `Purchase` fire করতে হবে।
+
+Hosted payment flow থাকলে:
+
+1. Payment success callback/IPN আসে।
+2. Backend validation API দিয়ে payment verify করে।
+3. Local order `PAID` হয়।
+4. Thank-you page বা validated order state থেকে `Purchase` event fire হয়।
+
+এই rule follow না করলে analytics revenue বেশি দেখাতে পারে।
+
+## Direct Pixel বনাম GTM Pixel
+
+Direct Pixel ভালো যখন:
+
+- Developer code-level control চান।
+- Duplicate/debug issue কমাতে চান।
+- Pixel event firing exact route/component থেকে manage করতে চান।
+
+GTM Pixel ভালো যখন:
+
+- Marketing team app code ছাড়াই tag update করতে চায়।
+- Third-party tracking বেশি।
+- GTM workspace থেকে all tags centralize করতে চান।
+
+কিন্তু দুই setup একসাথে active করা যাবে না, যদি না duplicate event control স্পষ্টভাবে করা থাকে।
+
+## Testing Checklist
+
+- Meta Pixel Helper দিয়ে page-এ Pixel detect হচ্ছে কি না দেখুন।
+- Meta Events Manager-এর Test Events দিয়ে `PageView`, `ViewContent`, `AddToCart`, `Purchase` verify করুন।
+- SPA route change করলে new `PageView` যাচ্ছে কি না দেখুন।
+- `Purchase` event শুধু paid order-এর পরে যাচ্ছে কি না verify করুন।
+- `value` এবং `currency` ঠিক আছে কি না দেখুন।
+- Duplicate Pixel fire হচ্ছে কি না Pixel Helper/Diagnostics দিয়ে check করুন।
+- Traffic permissions দিয়ে allowed domains configure করুন।
+
+## Common Problems
+
+Client-side route change-এ PageView যাচ্ছে না:
+
+- App Router হলে `usePathname()` এবং `useSearchParams()` based tracker যোগ করুন।
+- Pages Router হলে `routeChangeComplete` listener যোগ করুন।
+
+Duplicate PageView বা Purchase:
+
+- Direct Pixel এবং GTM Pixel দুইটাই active কি না check করুন।
+- Initial base Pixel PageView এবং route tracker একই initial render-এ fire করছে কি না check করুন।
+
+Purchase value mismatch:
+
+- Decimal value, currency, এবং event parameter mapping check করুন।
+- Payment validated হওয়ার আগে `Purchase` fire হচ্ছে কি না check করুন।
+
+Unknown domain থেকে events:
+
+- Meta Pixel traffic permissions configure করুন।
+
+## Production Checklist
+
+- `NEXT_PUBLIC_FB_PIXEL_ID` configured।
+- Pixel base script one-time load হচ্ছে।
+- SPA route tracker আছে।
+- Initial PageView duplicate নয়।
+- `ViewContent`, `AddToCart`, `Purchase` event mapping defined।
+- `Purchase` only validated paid order-এর পরে fire হয়।
+- Pixel Helper pass।
+- Test Events pass।
+- Duplicate direct/GTM installation নেই।
+
+--------------------------------------------------------
+You found the pixel id from 
+business.facebook.com -> Settings -> Data Sources -> Datasets & pixels
+
+And install Meta Pixel Helper extention from chrome web store.

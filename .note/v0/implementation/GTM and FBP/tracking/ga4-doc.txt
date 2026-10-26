@@ -1,0 +1,99 @@
+OFFICIAL DOCUMENTATIONS
+
+Recommended Events (GA4)
+
+https://support.google.com/analytics/answer/92735?hl=en
+
+Recommended Events (GA4) - Along with recommended schema
+
+https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtm
+
+
+=======================================================================
+## page_view
+Event Parameters            Type
+=======================================================================
+page_id                     string,
+page_name,                  string,
+page_route,                 string,
+page_path,                  string,
+page_query,                 string,
+page_location,              string,
+page_title                  string,
+-----------------------------------------------------------------------
+
+
+
+=======================================================================
+## view_item
+Event Parameters            Type
+=======================================================================
+currency                    string
+value                       number
+items                       Array<Item>
+-----------------------------------------------------------------------
+
+
+
+=======================================================================
+## add_to_cart
+Event Parameters            Type
+=======================================================================
+currency                    string
+value                       number
+items                       Array<Item>
+-----------------------------------------------------------------------
+
+
+=======================================================================
+## view_cart
+Event Parameters            Type
+=======================================================================
+currency                    string
+value                       number
+items                       Array<Item>
+-----------------------------------------------------------------------
+
+
+
+=======================================================================
+## being_checkout
+Event Parameters            Type
+=======================================================================
+currency                    string
+value                       number
+items                       Array<Item>
+-----------------------------------------------------------------------
+
+
+
+
+=======================================================================
+## purchase
+Event Parameters            Type
+=======================================================================
+currency                    string
+value                       number
+items                       Array<Item>
+transaction_id              string
+-----------------------------------------------------------------------
+
+
+
+=======================================================================
+Code to Modify the items array 
+=======================================================================
+function(){
+var items = {{ga4_dlv_items}}; // Items Array
+return items.map(function(item){
+return {
+item_id : item.item_id.toString(),
+item_name : item.item_name,
+price : parseFloat(item.price),
+item_category : item.item_category,
+quantity : item.quantity ? parseFloat(item.quantity) : 1
+}
+}
+
+-----------------------------------------------------------------------
+

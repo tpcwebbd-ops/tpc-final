@@ -1,0 +1,281 @@
+# Google Tag Manager Tracking Summary
+
+## মূল ধারণা
+
+Google Tag Manager বা GTM একটি container-based tag management system. Next.js app-এ GTM একবার globally install করলে GTM UI থেকে GA4, Google Ads, Meta Pixel, এবং অন্যান্য third-party tags manage করা যায়। এতে অনেক tracking change app code edit না করেও করা সম্ভব।
+
+Next.js App Router ব্যবহার করলে সবচেয়ে পরিষ্কার পদ্ধতি হলো `@next/third-parties/google` package-এর `GoogleTagManager` component ব্যবহার করা। Event পাঠাতে `sendGTMEvent()` বা direct `dataLayer.push()` ব্যবহার করা যায়।
+
+## কখন GTM ব্যবহার করবেন
+
+GTM ভালো যখন:
+
+- Marketing team app code ছাড়াই tags update করতে চায়।
+- GA4, Google Ads, Meta Pixel, custom conversion tags এক জায়গা থেকে manage করতে হবে।
+- Preview, debug, publish/version workflow দরকার।
+- SPA route tracking centralize করতে চান।
+
+Direct code tracking ভালো হতে পারে যখন:
+
+- Tracking খুব ছোট।
+- Marketing team GTM UI ব্যবহার করবে না।
+- Developer code-level control রাখতে চান।
+
+## Environment Variable
+
+GTM container ID client-side script-এ লাগে, তাই public env variable ব্যবহার করা যায়:
+
+```txt
+NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+```
+
+## App Router Setup
+
+Dependency:
+
+```bash
+pnpm add @next/third-parties@latest
+```
+
+Root layout:
+
+```tsx
+import { GoogleTagManager } from '@next/third-parties/google'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID
+
+  return (
+    <html lang="bn">
+      {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+`sendGTMEvent()` কাজ করতে হলে parent tree-তে `<GoogleTagManager />` load থাকতে হবে।
+
+## Sending Events From Code
+
+GTM event পাঠানোর জন্য:
+
+```ts
+import { sendGTMEvent } from '@next/third-parties/google'
+
+sendGTMEvent({
+  event: 'add_to_cart',
+  value: 500,
+  currency: 'BDT',
+})
+```
+
+Custom marketing event:
+
+```ts
+sendGTMEvent({
+  event: 'cta_click',
+  cta_name: 'hero_signup',
+})
+```
+
+GTM UI-এ এই event name দিয়ে Custom Event Trigger তৈরি করতে হবে।
+
+## SPA Route Tracking
+
+Next.js App Router client-side navigation করে, তাই normal page load tracking সব route transition ধরতে নাও পারে।
+
+SPA pageview track করার দুইটি valid strategy আছে:
+
+1. GTM History Change Trigger
+   - GTM UI থেকে configure করা যায়।
+   - pushState, fragment change, SPA navigation ধরতে পারে।
+   - Code কম লাগে।
+
+2. Custom `virtual_page_view` Event
+   - App code থেকে `sendGTMEvent()` দিয়ে পাঠানো হয়।
+   - Payload developer-controlled।
+   - `page_path`, `page_query`, `page_location`, `page_title` ইত্যাদি পাঠানো যায়।
+
+দুই strategy একসাথে active করলে duplicate pageview হতে পারে। একটি strategy বেছে নেওয়া উচিত।
+
+Example App Router route event:
+
+```tsx
+'use client'
+
+import { useEffect, useRef } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { sendGTMEvent } from '@next/third-parties/google'
+
+export default function GtmRouteChange() {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const firstRender = useRef(true)
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false
+      return
+    }
+
+    const query = searchParams.toString()
+
+    sendGTMEvent({
+      event: 'virtual_page_view',
+      page_path: pathname,
+      page_query: query,
+      page_location: window.location.href,
+      page_title: document.title,
+    })
+  }, [pathname, searchParams])
+
+  return null
+}
+```
+
+Initial render skip করলে initial pageview duplicate হওয়ার ঝুঁকি কমে।
+
+## Pages Router Setup
+
+Pages Router হলে route change detect করতে `router.events` ব্যবহার করা যায়:
+
+```tsx
+router.events.on('routeChangeComplete', (url) => {
+  window.dataLayer = window.dataLayer || []
+  window.dataLayer.push({
+    event: 'virtual_page_view',
+    page_path: url,
+  })
+})
+```
+
+Raw GTM snippet ব্যবহার করলে Google-এর official install pattern হলো:
+
+- First snippet `<head>`-এর যত ওপরে সম্ভব।
+- `noscript` iframe opening `<body>`-এর পরপর।
+
+তবে Next.js performance pattern অনুযায়ী analytics/tag manager script-এর জন্য `afterInteractive` strategyও practical।
+
+## GTM UI Configuration
+
+Code বসানোর পর GTM UI-এ কাজ করতে হবে:
+
+1. Container Preview mode চালু করুন।
+2. Site URL connect করুন।
+3. Tag Assistant-এ event sequence দেখুন।
+4. Trigger তৈরি করুন।
+5. Variables map করুন।
+6. Tags configure করুন।
+7. Preview pass করলে Submit করে Publish and Create Version করুন।
+
+Custom event trigger examples:
+
+- `virtual_page_view`
+- `add_to_cart`
+- `purchase`
+- `cta_click`
+
+Data layer variables examples:
+
+- `value`
+- `currency`
+- `transaction_id`
+- `page_path`
+- `page_location`
+- `page_title`
+- `cta_name`
+
+## GA4 Ecommerce Events
+
+GA4 ecommerce বা conversion reporting ঠিক রাখতে event payload consistent হওয়া দরকার।
+
+Recommended events:
+
+- `view_item`
+- `add_to_cart`
+- `begin_checkout`
+- `purchase`
+
+For purchase:
+
+```ts
+sendGTMEvent({
+  event: 'purchase',
+  transaction_id: orderId,
+  value,
+  currency: 'BDT',
+  items,
+})
+```
+
+`purchase` event payment validated হওয়ার আগে fire করা উচিত নয়। Checkout click বা redirect success page payment proof নয়। Backend-validated paid order confirmed হলে `purchase` fire করতে হবে।
+
+## Meta Pixel Via GTM
+
+Meta Pixel GTM থেকেও manage করা যায়। তখন app code-এ direct Pixel base code না বসানো ভালো, কারণ direct Pixel + GTM Pixel একসাথে থাকলে duplicate events হতে পারে।
+
+GTM-driven Pixel setup হলে:
+
+- Meta Pixel base tag: All Pages
+- PageView: All Pages বা virtual pageview trigger
+- AddToCart: `add_to_cart` custom event trigger
+- Purchase: validated `purchase` custom event trigger
+
+## Testing Checklist
+
+- GTM container ID সঠিক।
+- GTM Preview site-এর সাথে connect হচ্ছে।
+- Tag Assistant-এ tags fire order দেখা যাচ্ছে।
+- `virtual_page_view` বা History Change tracking কাজ করছে।
+- `add_to_cart`, `purchase`, custom events data layer-এ দেখা যাচ্ছে।
+- Data layer variables correctly mapped।
+- Duplicate pageview নেই।
+- Duplicate purchase নেই।
+- Preview pass করার পরে GTM container published।
+
+## Common Problems
+
+Pageview route change-এ যাচ্ছে না:
+
+- History Change Trigger enable করুন, অথবা code থেকে `virtual_page_view` পাঠান।
+- App Router হলে `usePathname()` / `useSearchParams()` based client component ব্যবহার করুন।
+- Pages Router হলে `routeChangeComplete` listener ব্যবহার করুন।
+
+Duplicate pageview:
+
+- History Change Trigger এবং custom `virtual_page_view` দুইটাই active কি না check করুন।
+- Initial page load event এবং route tracker duplicate হচ্ছে কি না check করুন।
+
+Events GTM UI-এ trigger করছে না:
+
+- Event name exact match করছে কি না দেখুন।
+- Custom Event Trigger configured কি না দেখুন।
+- Data layer event GTM load হওয়ার পরে push হচ্ছে কি না দেখুন।
+
+Purchase revenue mismatch:
+
+- `value`, `currency`, `transaction_id`, এবং `items` mapping check করুন।
+- Payment validation হওয়ার আগেই `purchase` fire হচ্ছে কি না check করুন।
+
+Tag changes live হচ্ছে না:
+
+- GTM Preview pass করলেও publish না করলে production-এ change active হবে না।
+- Submit করে Publish and Create Version করতে হবে।
+
+## Production Checklist
+
+- `NEXT_PUBLIC_GTM_ID` configured।
+- GTM root layout-এ globally loaded।
+- One SPA pageview strategy selected।
+- Required custom event triggers created।
+- Required data layer variables created।
+- GA4 / Ads / other tags mapped।
+- Purchase fires only after validated paid order।
+- GTM Preview pass।
+- Tag Assistant pass।
+- Container published।
+- Duplicate Meta Pixel বা duplicate ecommerce tags নেই।
+
+-------------------------------------------------------------
+https://tagmanager.google.com/#/home
