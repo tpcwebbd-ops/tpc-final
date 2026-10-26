@@ -48,7 +48,12 @@ type Sidebar = {
 };
 type SessionUser = { user: { id?: string | null; email?: string | null } };
 
-const standardUserPaths = new Set(["/dashboard/profile", "/dashboard/media", "/dashboard/install"]);
+const standardUserPaths = new Set([
+  "/dashboard/profile",
+  "/dashboard/media",
+  "/dashboard/install",
+  "/dashboard/tutorial",
+]);
 
 export type DashboardAccessState = {
   bypassed: boolean;

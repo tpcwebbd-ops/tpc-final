@@ -65,6 +65,7 @@ export const sidebarDefaults: ImportSidebarDefault[] = [
   },
   { name: "Media", url: "/dashboard/media", icon: "Image" },
   { name: "Profile", url: "/dashboard/profile", icon: "User" },
+  { name: "Tutorial", url: "/dashboard/tutorial", icon: "Video" },
   { name: "Category", url: "/dashboard/category", icon: "FolderKanban" },
   { name: "Coupons", url: "/dashboard/coupon", icon: "Tag" },
   { name: "Install", url: "/dashboard/install", icon: "Download" },
