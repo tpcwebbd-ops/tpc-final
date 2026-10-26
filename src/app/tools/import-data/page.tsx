@@ -12,8 +12,13 @@ import Link from "next/link";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 
 import { authClient } from "@/app/api/lib/auth-client";
-import { useGetImportStatusQuery, useImportDataMutation } from "@/app/tools/import-data/importData";
+import {
+  useGetImportStatusQuery,
+  useImportDataMutation,
+  useResetImportDataMutation,
+} from "@/app/tools/import-data/importData";
 import { iconMap } from "@/components/all-icons/all-icons";
+import { AlertDialog } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -34,9 +39,11 @@ export default function ImportDataPage() {
   } = useGetImportStatusQuery(undefined, { skip: !session });
   const pagesLoading = sidebarsLoading;
   const [importData, { isLoading: importing }] = useImportDataMutation();
+  const [resetImportData, { isLoading: resetting }] = useResetImportDataMutation();
   const [toast, setToast] = useState<{ error?: boolean; message: string } | null>(null);
   const [refreshRemaining, setRefreshRemaining] = useState(0);
   const [activeTab, setActiveTab] = useState<"sidebar" | "leads">("sidebar");
+  const [confirmingReset, setConfirmingReset] = useState(false);
   const [selectedSidebarUrls, setSelectedSidebarUrls] = useState(() => new Set(defaultPaths));
   const [selectedPagePaths, setSelectedPagePaths] = useState(() => new Set(pageDefaults.map((page) => page.path)));
 
@@ -49,6 +56,7 @@ export default function ImportDataPage() {
     (inventory?.canImportSidebars && selectedSidebarUrls.size > 0) ||
     (inventory?.canImportPages && selectedPagePaths.size > 0),
   );
+  const resettableCount = (inventory?.resettableSidebarCount ?? 0) + (inventory?.resettablePageCount ?? 0);
 
   useEffect(() => {
     if (!refreshRemaining) return;
@@ -106,6 +114,31 @@ export default function ImportDataPage() {
       setToast({ message: "Import status refreshed." });
     } catch {
       setToast({ error: true, message: "Could not refresh import status." });
+    }
+  }
+
+  async function handleReset() {
+    try {
+      const result = await resetImportData().unwrap();
+      setConfirmingReset(false);
+      setToast({
+        message: `Reset complete: ${result.sidebarsDeleted} sidebar records and ${result.pagesDeleted} pages deleted.`,
+      });
+      void refetchInventory();
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : typeof error === "object" &&
+              error &&
+              "data" in error &&
+              typeof error.data === "object" &&
+              error.data &&
+              "error" in error.data &&
+              typeof error.data.error === "string"
+            ? error.data.error
+            : "Could not reset the imported sidebar and pages.";
+      setToast({ error: true, message });
     }
   }
 
@@ -260,6 +293,34 @@ export default function ImportDataPage() {
             <ImportLeads onNotice={setToast} />
           </div>
         )}
+        <div className="relative mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[#eadfca] pt-5">
+          <div>
+            <h2 className="font-semibold text-stone-900">Reset imported data</h2>
+            <p className="mt-1 text-sm text-stone-500">
+              Deletes only the sidebar and pages created by this importer. Leads and other data stay untouched.
+            </p>
+          </div>
+          <Button
+            className="cursor-pointer bg-red-100 text-red-800 transition duration-700 hover:-translate-y-0.5 hover:bg-red-200"
+            disabled={resetting || !inventory?.canReset || resettableCount === 0}
+            onClick={() => setConfirmingReset(true)}
+            size="sm"
+            variant="destructive"
+          >
+            {iconMap.Trash2}
+            Reset All
+          </Button>
+        </div>
+        <AlertDialog
+          busy={resetting}
+          busyLabel="Resetting…"
+          confirmLabel="Reset All"
+          description="This permanently deletes only sidebar and page records created by this importer. It does not delete Leads or other data."
+          onCancel={() => setConfirmingReset(false)}
+          onConfirm={() => void handleReset()}
+          open={confirmingReset}
+          title="Reset imported data?"
+        />
       </section>
     </main>
   );

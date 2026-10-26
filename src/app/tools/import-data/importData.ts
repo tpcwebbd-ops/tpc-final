@@ -13,13 +13,21 @@ export type ImportDataRequest = {
   sidebarUrls: string[];
 };
 export type ImportDataResult = { inserted: number; updated: number; pagesInserted: number };
+export type ResetImportDataResult = { pagesDeleted: number; sidebarsDeleted: number };
+
+export type ImportDataStatus = {
+  sidebarUrls: string[];
+  pagePaths: string[];
+  canImportSidebars: boolean;
+  canImportPages: boolean;
+  canReset: boolean;
+  resettableSidebarCount: number;
+  resettablePageCount: number;
+};
 
 const importDataApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    getImportStatus: build.query<
-      { sidebarUrls: string[]; pagePaths: string[]; canImportSidebars: boolean; canImportPages: boolean },
-      void
-    >({
+    getImportStatus: build.query<ImportDataStatus, void>({
       query: () => "../tools/import-data/v1",
       providesTags: ["Sidebar", "Page", "Role", "Access"],
     }),
@@ -27,7 +35,11 @@ const importDataApi = apiSlice.injectEndpoints({
       query: (body) => ({ url: "../tools/import-data/v1", method: "POST", body }),
       invalidatesTags: ["Sidebar", "Role", "Access", "Leads", "Page"],
     }),
+    resetImportData: build.mutation<ResetImportDataResult, void>({
+      query: () => ({ url: "../tools/import-data/v1", method: "DELETE" }),
+      invalidatesTags: ["Sidebar", "Role", "Access", "Page"],
+    }),
   }),
 });
 
-export const { useGetImportStatusQuery, useImportDataMutation } = importDataApi;
+export const { useGetImportStatusQuery, useImportDataMutation, useResetImportDataMutation } = importDataApi;

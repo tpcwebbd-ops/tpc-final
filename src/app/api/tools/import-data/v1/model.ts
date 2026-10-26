@@ -9,6 +9,8 @@ import "server-only";
 import { database } from "@/lib/db";
 import type { ImportPageVariant } from "@/lib/defaults/import-data";
 
+export const IMPORT_DATA_SOURCE = "tools/import-data" as const;
+
 export type ImportSidebar = {
   id: string;
   name: string;
@@ -16,11 +18,15 @@ export type ImportSidebar = {
   icon: string;
   parentId: string | null;
   position: number;
+  importSource?: typeof IMPORT_DATA_SOURCE;
   createdAt: Date;
   updatedAt: Date;
 };
 
-export type SavedImportSidebar = Pick<ImportSidebar, "id" | "name" | "url" | "icon" | "parentId" | "position">;
+export type SavedImportSidebar = Pick<
+  ImportSidebar,
+  "id" | "name" | "url" | "icon" | "parentId" | "position" | "importSource"
+>;
 
 export type ImportSitePage = {
   id: string;
@@ -28,6 +34,7 @@ export type ImportSitePage = {
   path: string;
   description: string;
   published: boolean;
+  importSource?: typeof IMPORT_DATA_SOURCE;
   blocks: {
     id: string;
     type: "all-page";
@@ -43,13 +50,16 @@ const importPages = () => database().collection<ImportSitePage>("pages");
 
 export const findImportSidebars = () =>
   importSidebars()
-    .find({}, { projection: { id: 1, name: 1, url: 1, icon: 1, parentId: 1, position: 1 } })
+    .find({}, { projection: { id: 1, name: 1, url: 1, icon: 1, parentId: 1, position: 1, importSource: 1 } })
     .toArray();
 
 export const updateImportSidebar = (id: string, changes: Partial<ImportSidebar>) =>
   importSidebars().updateOne({ id }, { $set: changes });
 
 export const createImportSidebar = (item: ImportSidebar) => importSidebars().insertOne(item);
+
+export const deleteImportSidebars = (ids: string[]) =>
+  ids.length ? importSidebars().deleteMany({ id: { $in: ids } }) : Promise.resolve({ deletedCount: 0 });
 
 export const migrateImportPageVariant = (from: "all-faq" | "all-about" | "all-contact", to: ImportPageVariant) =>
   importPages().updateMany(
@@ -66,6 +76,11 @@ export const findImportPagePaths = async () =>
         .toArray()
     ).map((page) => page.path),
   );
+
+export const findImportPages = () => importPages().find({}).toArray();
+
+export const deleteImportPages = (ids: string[]) =>
+  ids.length ? importPages().deleteMany({ id: { $in: ids } }) : Promise.resolve({ deletedCount: 0 });
 
 export const migrateImportHomePage = () =>
   importPages().updateOne({ path: "/home" }, { $set: { path: "/", title: "Home", updatedAt: new Date() } });

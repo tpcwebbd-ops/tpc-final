@@ -13,14 +13,20 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { invalidateDashboardCache, redisKeys } from "@/app/api/lib/redis";
 import { isRetiredDashboardRoute } from "@/lib/dashboard/retired-routes";
 import { pageDefaults, sidebarDefaults } from "@/lib/defaults/import-data";
+import { pageCacheTag } from "@/lib/pages/server";
 
 import {
+  IMPORT_DATA_SOURCE,
   createImportPage,
   createImportSidebar,
+  deleteImportPages,
+  deleteImportSidebars,
+  findImportPages,
   findImportPagePaths,
   findImportSidebars,
   migrateImportHomePage,
   migrateImportPageVariant,
+  type ImportSitePage,
   updateImportSidebar,
   type ImportSidebar,
   type SavedImportSidebar,
@@ -34,6 +40,103 @@ const defaultSidebarUrls = new Set(
     .filter((url) => !isRetiredDashboardRoute(url)),
 );
 const defaultPagePaths = new Set(pageDefaults.map((page) => page.path));
+
+type ResettableImportData = {
+  pages: ImportSitePage[];
+  sidebarIds: string[];
+};
+
+function findLegacySidebarIds(sidebars: SavedImportSidebar[]) {
+  const legacyIds = new Set<string>();
+  const matchingItems = (
+    expected: { icon: string; name: string; position: number; url: string },
+    parentId: string | null,
+  ) =>
+    sidebars.filter(
+      (item) =>
+        !item.importSource &&
+        item.name === expected.name &&
+        item.url === expected.url &&
+        item.icon === expected.icon &&
+        item.parentId === parentId &&
+        item.position === expected.position,
+    );
+
+  for (let parentPosition = 0; parentPosition < sidebarDefaults.length; parentPosition += 1) {
+    const parent = sidebarDefaults[parentPosition];
+    const parents = matchingItems({ ...parent, position: parentPosition }, null);
+    if (parents.length !== 1) continue;
+    const [savedParent] = parents;
+    legacyIds.add(savedParent.id);
+    for (let childPosition = 0; childPosition < (parent.children?.length ?? 0); childPosition += 1) {
+      const child = parent.children![childPosition];
+      const children = matchingItems({ ...child, position: childPosition }, savedParent.id);
+      if (children.length === 1) legacyIds.add(children[0].id);
+    }
+  }
+  return legacyIds;
+}
+
+function isLegacyImportPage(page: ImportSitePage) {
+  const expected = pageDefaults.find((item) => item.path === page.path);
+  if (
+    !expected ||
+    page.importSource ||
+    page.title !== expected.title ||
+    page.description !== expected.description ||
+    !page.published
+  )
+    return false;
+  if (page.blocks.length !== 1) return false;
+  const [block] = page.blocks;
+  return (
+    block.type === "all-page" &&
+    block.variant === expected.variant &&
+    Boolean(block.data) &&
+    typeof block.data === "object" &&
+    !Array.isArray(block.data) &&
+    Object.keys(block.data).length === 0
+  );
+}
+
+async function getResettableImportData(): Promise<ResettableImportData> {
+  const [sidebars, pages] = await Promise.all([findImportSidebars(), findImportPages()]);
+  const sidebarIds = new Set(
+    sidebars.filter((item) => item.importSource === IMPORT_DATA_SOURCE).map((item) => item.id),
+  );
+  for (const id of findLegacySidebarIds(sidebars)) sidebarIds.add(id);
+  return {
+    pages: pages.filter((page) => page.importSource === IMPORT_DATA_SOURCE || isLegacyImportPage(page)),
+    sidebarIds: [...sidebarIds],
+  };
+}
+
+export async function getImportResetStatus() {
+  const { pages, sidebarIds } = await getResettableImportData();
+  return { resettablePageCount: pages.length, resettableSidebarCount: sidebarIds.length };
+}
+
+export async function resetImportDefaultData() {
+  const { pages, sidebarIds } = await getResettableImportData();
+  const [sidebarsResult, pagesResult] = await Promise.all([
+    deleteImportSidebars(sidebarIds),
+    deleteImportPages(pages.map((page) => page.id)),
+  ]);
+
+  if (sidebarsResult.deletedCount) await invalidateDashboardCache(redisKeys.sidebars, redisKeys.roles);
+  if (pagesResult.deletedCount) {
+    for (const path of new Set(pages.map((page) => page.path))) {
+      revalidatePath(path);
+      revalidateTag(pageCacheTag(path), "max");
+    }
+    revalidatePath("/", "layout");
+    revalidatePath("/sitemap.xml");
+    revalidateTag("site-pages", "max");
+    revalidateTag("public-page-search", { expire: 0 });
+  }
+  return { pagesDeleted: pagesResult.deletedCount, sidebarsDeleted: sidebarsResult.deletedCount };
+}
+
 export async function importDefaultData(body: ImportRequest) {
   const legacyTarget = body?.target ?? "all";
   const selectedSidebarUrls = new Set(
@@ -80,6 +183,7 @@ export async function importDefaultData(body: ImportRequest) {
           icon: parent.icon,
           parentId: null,
           position: parentPosition,
+          importSource: IMPORT_DATA_SOURCE,
           createdAt: new Date(),
           updatedAt: new Date(),
         };
@@ -118,6 +222,7 @@ export async function importDefaultData(body: ImportRequest) {
             icon: child.icon,
             parentId: savedParent.id,
             position: childPosition,
+            importSource: IMPORT_DATA_SOURCE,
             createdAt: new Date(),
             updatedAt: new Date(),
           };
@@ -172,6 +277,7 @@ export async function importDefaultData(body: ImportRequest) {
         path: page.path,
         description: page.description,
         published: true,
+        importSource: IMPORT_DATA_SOURCE,
         blocks: [{ id: randomUUID(), type: "all-page", variant: page.variant, data: {} }],
         createdAt: now,
         updatedAt: now,

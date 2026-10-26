@@ -6,6 +6,8 @@
 |-----------------------------------------
 */
 
+import { importPageRoutes } from "@/lib/defaults/import-data";
+
 import type { MenuData } from "../menu-1/data";
 
 export const defaultData: MenuData = {
@@ -38,39 +40,37 @@ export const defaultData: MenuData = {
   fontSize: 14,
   fontFamily: "Arial",
   links: [
-    { id: "home", label: "Home", url: "/", visible: true, position: 0 },
+    { id: "home", label: "Home", url: importPageRoutes.home.path, visible: true, position: 0 },
     {
       id: "programs",
       label: "Programs",
-      url: "/contact-us",
+      url: importPageRoutes.ielts.path,
       visible: true,
       position: 1,
       children: [
         {
           id: "ielts",
           label: "IELTS Preparation",
-          url: "/contact-us",
+          url: importPageRoutes.ielts.path,
           visible: true,
           position: 0,
-          children: [
-            {
-              id: "study-abroad",
-              label: "Study Abroad Guidance",
-              url: "/contact-us",
-              visible: true,
-              position: 0,
-            },
-          ],
+        },
+        {
+          id: "kids-spoken",
+          label: "Kids Spoken English",
+          url: importPageRoutes.kidsSpokenEnglish.path,
+          visible: true,
+          position: 1,
         },
       ],
     },
-    { id: "kids-spoken", label: "Kids Spoken English", url: "/contact-us", visible: true, position: 2 },
-    { id: "contact", label: "Contact", url: "/contact-us", visible: true, position: 3 },
+    { id: "kids-spoken", label: "Kids Spoken English", url: importPageRoutes.kidsSpokenEnglish.path, visible: true, position: 2 },
+    { id: "contact", label: "Contact", url: importPageRoutes.contact.path, visible: true, position: 3 },
   ],
   button: {
     type: "contact",
     label: "Free Consultation",
-    url: "/contact-us",
+    url: importPageRoutes.contact.path,
     icon: "MessageCircle",
     background: "#fef3c7",
     foreground: "#92400e",

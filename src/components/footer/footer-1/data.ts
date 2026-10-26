@@ -6,6 +6,8 @@
 |-----------------------------------------
 */
 
+import { importPageRoutes } from "@/lib/defaults/import-data";
+
 export type FooterLink = { id: string; label: string; url: string; visible: boolean };
 export type FooterOneData = {
   variant: "footer-1";
@@ -55,26 +57,25 @@ export const defaultData: FooterOneData = {
   showLegalBar: true,
   legalBackground: "#fffaf0",
   legalLinks: [
-    { id: "privacy", label: "Privacy Policy", url: "/privacy-policy", visible: true },
-    { id: "terms", label: "Terms & Conditions", url: "/terms-and-condition", visible: true },
-    { id: "refund", label: "Refund Policy", url: "/refund-policy", visible: true },
-    { id: "faq", label: "Frequently Asked Questions", url: "/frequently-ask-questions", visible: true },
+    { id: "privacy", label: "Privacy Policy", url: importPageRoutes.privacy.path, visible: true },
+    { id: "terms", label: "Terms & Conditions", url: importPageRoutes.terms.path, visible: true },
+    { id: "refund", label: "Refund Policy", url: importPageRoutes.refund.path, visible: true },
+    { id: "faq", label: "Frequently Asked Questions", url: importPageRoutes.faq.path, visible: true },
   ],
   columns: [
     {
       title: "Explore",
       links: [
-        { id: "home", label: "Home", url: "/", visible: true },
-        { id: "about", label: "About TPC", url: "/about-us", visible: true },
-        { id: "contact", label: "Contact", url: "/contact-us", visible: true },
+        { id: "home", label: "Home", url: importPageRoutes.home.path, visible: true },
+        { id: "about", label: "About TPC", url: importPageRoutes.about.path, visible: true },
+        { id: "contact", label: "Contact", url: importPageRoutes.contact.path, visible: true },
       ],
     },
     {
       title: "Programs",
       links: [
-        { id: "ielts", label: "IELTS Preparation", url: "/contact-us", visible: true },
-        { id: "study-abroad", label: "Study Abroad Guidance", url: "/contact-us", visible: true },
-        { id: "kids-spoken", label: "Kids Spoken English", url: "/contact-us", visible: true },
+        { id: "ielts", label: "IELTS Preparation", url: importPageRoutes.ielts.path, visible: true },
+        { id: "kids-spoken", label: "Kids Spoken English", url: importPageRoutes.kidsSpokenEnglish.path, visible: true },
       ],
     },
   ],

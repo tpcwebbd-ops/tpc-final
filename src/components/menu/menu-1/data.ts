@@ -6,6 +6,8 @@
 |-----------------------------------------
 */
 
+import { importPageRoutes } from "@/lib/defaults/import-data";
+
 export type MenuLink = {
   id: string;
   label: string;
@@ -126,21 +128,34 @@ export const defaultData: MenuData = {
   logoZoom: 100,
   logoAspect: "full",
   links: [
-    { id: "home", label: "Home", url: "/", visible: true, position: 0, icon: "Home", showIcon: true },
+    {
+      id: "home",
+      label: "Home",
+      url: importPageRoutes.home.path,
+      visible: true,
+      position: 0,
+      icon: "Home",
+      showIcon: true,
+    },
     {
       id: "programs",
       label: "Programs",
-      url: "/contact-us",
+      url: importPageRoutes.ielts.path,
       visible: true,
       position: 1,
       children: [
-        { id: "ielts", label: "IELTS Preparation", url: "/contact-us", visible: true, position: 0 },
-        { id: "study-abroad", label: "Study Abroad", url: "/contact-us", visible: true, position: 1 },
-        { id: "kids-spoken", label: "Kids Spoken English", url: "/contact-us", visible: true, position: 2 },
+        { id: "ielts", label: "IELTS Preparation", url: importPageRoutes.ielts.path, visible: true, position: 0 },
+        {
+          id: "kids-spoken",
+          label: "Kids Spoken English",
+          url: importPageRoutes.kidsSpokenEnglish.path,
+          visible: true,
+          position: 1,
+        },
       ],
     },
-    { id: "about", label: "About TPC", url: "/about-us", visible: true, position: 2 },
-    { id: "contact", label: "Contact", url: "/contact-us", visible: true, position: 3 },
+    { id: "about", label: "About TPC", url: importPageRoutes.about.path, visible: true, position: 2 },
+    { id: "contact", label: "Contact", url: importPageRoutes.contact.path, visible: true, position: 3 },
   ],
   background: "#ffffff",
   foreground: "#292524",
@@ -153,7 +168,7 @@ export const defaultData: MenuData = {
     visible: true,
     type: "contact",
     label: "Free Consultation",
-    url: "/contact-us",
+    url: importPageRoutes.contact.path,
     icon: "MessageCircle",
     showIcon: true,
     background: "#1c1917",
@@ -181,10 +196,10 @@ export const defaultData: MenuData = {
     flexItems: 4,
     flexTextAlign: "center",
     links: [
-      { id: "home", label: "Home", url: "/", visible: true, position: 0, icon: "Home", showIcon: true },
-      { id: "ielts", label: "IELTS", url: "/contact-us", visible: true, position: 1 },
-      { id: "study-abroad", label: "Study Abroad", url: "/contact-us", visible: true, position: 2 },
-      { id: "contact", label: "Contact", url: "/contact-us", visible: true, position: 3 },
+      { id: "home", label: "Home", url: importPageRoutes.home.path, visible: true, position: 0, icon: "Home", showIcon: true },
+      { id: "ielts", label: "IELTS", url: importPageRoutes.ielts.path, visible: true, position: 1 },
+      { id: "kids-spoken", label: "Kids", url: importPageRoutes.kidsSpokenEnglish.path, visible: true, position: 2 },
+      { id: "contact", label: "Contact", url: importPageRoutes.contact.path, visible: true, position: 3 },
     ],
   },
 };

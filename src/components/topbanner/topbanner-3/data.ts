@@ -6,6 +6,8 @@
 |-----------------------------------------
 */
 
+import { importPageRoutes } from "@/lib/defaults/import-data";
+
 export type TopBannerThreeData = {
   variant: "topbanner-3";
   isVisible: boolean;
@@ -24,8 +26,8 @@ export const defaultData: TopBannerThreeData = {
   variant: "topbanner-3",
   isVisible: true,
   text: "Start learning online with IELTS preparation, study-abroad guidance, and TPC Kids Spoken English.",
-  ctaLabel: "Chat on WhatsApp",
-  ctaUrl: "https://wa.me/8801786558855",
+  ctaLabel: "Book a Free Consultation",
+  ctaUrl: importPageRoutes.contact.path,
   buttonVisible: true,
   background: "#2563eb",
   foreground: "#fde047",

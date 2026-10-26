@@ -6,6 +6,8 @@
 |-----------------------------------------
 */
 
+import { importPageRoutes } from "@/lib/defaults/import-data";
+
 export type FooterTwoData = {
   variant: "footer-2";
   isVisible: boolean;
@@ -55,32 +57,31 @@ export const defaultData: FooterTwoData = {
     {
       title: "Programs",
       links: [
-        { id: "ielts", label: "IELTS Preparation", url: "/contact-us", visible: true },
-        { id: "study-abroad", label: "Study Abroad Guidance", url: "/contact-us", visible: true },
-        { id: "kids-spoken", label: "Kids Spoken English", url: "/contact-us", visible: true },
+        { id: "ielts", label: "IELTS Preparation", url: importPageRoutes.ielts.path, visible: true },
+        { id: "kids-spoken", label: "Kids Spoken English", url: importPageRoutes.kidsSpokenEnglish.path, visible: true },
       ],
     },
     {
       title: "Explore",
       links: [
-        { id: "home", label: "Home", url: "/", visible: true },
-        { id: "about", label: "About TPC", url: "/about-us", visible: true },
-        { id: "faq", label: "Frequently Asked Questions", url: "/frequently-ask-questions", visible: true },
+        { id: "home", label: "Home", url: importPageRoutes.home.path, visible: true },
+        { id: "about", label: "About TPC", url: importPageRoutes.about.path, visible: true },
+        { id: "faq", label: "Frequently Asked Questions", url: importPageRoutes.faq.path, visible: true },
       ],
     },
   ],
   links: [
-    { id: "contact", label: "Contact", url: "/contact-us", visible: true },
+    { id: "contact", label: "Contact", url: importPageRoutes.contact.path, visible: true },
     { id: "facebook", label: "Facebook", url: "https://www.facebook.com/TestPrepCenter.BD/", visible: true },
   ],
   copyright: `© ${new Date().getFullYear()} TestPrep Center. All rights reserved.`,
   showLegalBar: true,
   legalBackground: "#f8fafc",
   legalLinks: [
-    { id: "refund", label: "Refund Policy", url: "/refund-policy", visible: true },
-    { id: "privacy", label: "Privacy Policy", url: "/privacy-policy", visible: true },
-    { id: "terms", label: "Terms & Conditions", url: "/terms-and-condition", visible: true },
-    { id: "security", label: "Security", url: "/security", visible: true },
-    { id: "cookies", label: "Cookie Policy", url: "/cookie-policy", visible: true },
+    { id: "refund", label: "Refund Policy", url: importPageRoutes.refund.path, visible: true },
+    { id: "privacy", label: "Privacy Policy", url: importPageRoutes.privacy.path, visible: true },
+    { id: "terms", label: "Terms & Conditions", url: importPageRoutes.terms.path, visible: true },
+    { id: "security", label: "Security", url: importPageRoutes.security.path, visible: true },
+    { id: "cookies", label: "Cookie Policy", url: importPageRoutes.cookiePolicy.path, visible: true },
   ],
 };

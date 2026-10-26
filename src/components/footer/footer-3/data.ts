@@ -6,6 +6,8 @@
 |-----------------------------------------
 */
 
+import { importPageRoutes } from "@/lib/defaults/import-data";
+
 export type FooterThreeLink = { id: string; label: string; url: string; visible: boolean };
 export type FooterThreeData = {
   variant: "footer-3";
@@ -47,16 +49,15 @@ export const defaultData: FooterThreeData = {
     "Your online partner for IELTS preparation, study-abroad guidance, and kids' spoken English in Bangladesh.",
   disabledPaths: ["/dashboard", "/login", "/forgot-password", "/registration"],
   destinations: [
-    { id: "uk", label: "United Kingdom", url: "/contact-us", visible: true },
-    { id: "usa", label: "United States", url: "/contact-us", visible: true },
-    { id: "canada", label: "Canada", url: "/contact-us", visible: true },
-    { id: "australia", label: "Australia", url: "/contact-us", visible: true },
+    { id: "uk", label: "United Kingdom", url: importPageRoutes.contact.path, visible: true },
+    { id: "usa", label: "United States", url: importPageRoutes.contact.path, visible: true },
+    { id: "canada", label: "Canada", url: importPageRoutes.contact.path, visible: true },
+    { id: "australia", label: "Australia", url: importPageRoutes.contact.path, visible: true },
   ],
   services: [
-    { id: "ielts", label: "IELTS Preparation", url: "/contact-us", visible: true },
-    { id: "study-abroad", label: "Study Abroad Guidance", url: "/contact-us", visible: true },
-    { id: "kids-spoken", label: "Kids Spoken English", url: "/contact-us", visible: true },
-    { id: "consultation", label: "Online Consultation", url: "/contact-us", visible: true },
+    { id: "ielts", label: "IELTS Preparation", url: importPageRoutes.ielts.path, visible: true },
+    { id: "kids-spoken", label: "Kids Spoken English", url: importPageRoutes.kidsSpokenEnglish.path, visible: true },
+    { id: "consultation", label: "Online Consultation", url: importPageRoutes.contact.path, visible: true },
   ],
   phone: "01786558855",
   whatsappNumber: "01786558855",
@@ -64,10 +65,10 @@ export const defaultData: FooterThreeData = {
   facebookGroupUrl: "https://www.facebook.com/groups/tpckids",
   copyright: `All Rights Reserved © ${new Date().getFullYear()} - TestPrep Center`,
   legalLinks: [
-    { id: "privacy", label: "Privacy Policy", url: "/privacy-policy", visible: true },
-    { id: "terms", label: "Terms & Conditions", url: "/terms-and-condition", visible: true },
-    { id: "refund", label: "Refund Policy", url: "/refund-policy", visible: true },
-    { id: "faq", label: "Frequently Asked Questions", url: "/frequently-ask-questions", visible: true },
+    { id: "privacy", label: "Privacy Policy", url: importPageRoutes.privacy.path, visible: true },
+    { id: "terms", label: "Terms & Conditions", url: importPageRoutes.terms.path, visible: true },
+    { id: "refund", label: "Refund Policy", url: importPageRoutes.refund.path, visible: true },
+    { id: "faq", label: "Frequently Asked Questions", url: importPageRoutes.faq.path, visible: true },
   ],
   showLegalBar: true,
   legalBackground: "#000000",

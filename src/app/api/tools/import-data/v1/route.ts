@@ -13,7 +13,7 @@ import { validateCookieApiWrite } from "@/app/api/lib/request-security";
 import { dashboardCan } from "@/lib/dashboard/permissions";
 
 import { findImportPagePaths, findImportSidebars } from "./model";
-import { importDefaultData } from "./service";
+import { getImportResetStatus, importDefaultData, resetImportDefaultData } from "./service";
 
 async function permissions(request: Request) {
   const session = await auth.api.getSession({ headers: request.headers });
@@ -26,6 +26,9 @@ async function permissions(request: Request) {
     canImportPages:
       dashboardCan(state, "/dashboard/admin/pages", "create") &&
       dashboardCan(state, "/dashboard/admin/pages", "update"),
+    canReset:
+      dashboardCan(state, "/dashboard/developer/sidebar", "delete") &&
+      dashboardCan(state, "/dashboard/admin/pages", "delete"),
   };
 }
 
@@ -38,8 +41,11 @@ export async function GET(request: Request) {
     grants.canImportSidebars ? findImportSidebars() : [],
     grants.canImportPages ? findImportPagePaths() : new Set<string>(),
   ]);
+  const resetStatus = grants.canReset
+    ? await getImportResetStatus()
+    : { resettablePageCount: 0, resettableSidebarCount: 0 };
   return Response.json(
-    { ...grants, sidebarUrls: sidebars.map((item) => item.url), pagePaths: [...pages] },
+    { ...grants, ...resetStatus, sidebarUrls: sidebars.map((item) => item.url), pagePaths: [...pages] },
     { headers: { "Cache-Control": "private, no-store" } },
   );
 }
@@ -64,4 +70,16 @@ export async function POST(request: Request) {
       { status: 403 },
     );
   return Response.json(await importDefaultData(body));
+}
+
+export async function DELETE(request: Request) {
+  const limited = await rateLimitDistributed(request, "import-reset-api", 10, 60_000);
+  if (limited) return limited;
+  const rejected = validateCookieApiWrite(request);
+  if (rejected) return rejected;
+  const grants = await permissions(request);
+  if (!grants) return Response.json({ error: "Sign in required." }, { status: 401 });
+  if (!grants.canReset)
+    return Response.json({ error: "Reset requires Delete permission for both Sidebar and Pages." }, { status: 403 });
+  return Response.json(await resetImportDefaultData());
 }

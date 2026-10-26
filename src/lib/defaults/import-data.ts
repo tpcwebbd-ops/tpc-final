@@ -21,6 +21,22 @@ export type ImportPageVariant =
 export type ImportSidebarDefault = { name: string; url: string; icon: string; children?: ImportSidebarDefault[] };
 export type ImportPageDefault = { title: string; path: string; description: string; variant: ImportPageVariant };
 
+/** Public page paths created by the data importer and reused by site navigation defaults. */
+export const importPageRoutes = {
+  home: { label: "Home", path: "/" },
+  ielts: { label: "IELTS Preparation", path: "/ielts-preparation" },
+  kidsSpokenEnglish: { label: "TPC Kids Spoken English", path: "/kids-spoken-english" },
+  about: { label: "About TestPrep Center", path: "/about-us" },
+  contact: { label: "Contact us", path: "/contact-us" },
+  faq: { label: "Frequently Asked Questions", path: "/frequently-ask-questions" },
+  privacy: { label: "Privacy Policy", path: "/privacy-policy" },
+  refund: { label: "Refund Policy", path: "/refund-policy" },
+  security: { label: "Security", path: "/security" },
+  cookiePolicy: { label: "Cookie Policy", path: "/cookie-policy" },
+  teamMembers: { label: "Team Members", path: "/team-member" },
+  terms: { label: "Terms and Conditions", path: "/terms-and-condition" },
+} as const;
+
 export const sidebarDefaults: ImportSidebarDefault[] = [
   {
     name: "Developer",
@@ -75,63 +91,63 @@ export const sidebarDefaults: ImportSidebarDefault[] = [
 export const pageDefaults: ImportPageDefault[] = [
   {
     title: "TestPrep Center Home",
-    path: "/",
+    path: importPageRoutes.home.path,
     description: "IELTS preparation, study-abroad guidance, and kids' spoken English online.",
     variant: "all-home",
   },
   {
     title: "IELTS Preparation",
-    path: "/ielts-preparation",
+    path: importPageRoutes.ielts.path,
     description: "Online IELTS preparation from TestPrep Center.",
     variant: "ielts-preparation",
   },
   {
     title: "TPC Kids Spoken English",
-    path: "/kids-spoken-english",
+    path: importPageRoutes.kidsSpokenEnglish.path,
     description: "Online spoken-English learning for young learners in Bangladesh.",
     variant: "kids-spoken-english",
   },
   {
     title: "About TestPrep Center",
-    path: "/about-us",
+    path: importPageRoutes.about.path,
     description: "Learn about our approach and purpose.",
     variant: "all-about-us",
   },
   {
     title: "Contact us",
-    path: "/contact-us",
+    path: importPageRoutes.contact.path,
     description: "Contact details, map, and message form.",
     variant: "all-contact-us",
   },
   {
     title: "Frequently Asked Questions",
-    path: "/frequently-ask-questions",
+    path: importPageRoutes.faq.path,
     description: "Answers to frequently asked questions.",
     variant: "all-frequently-ask-questions",
   },
-  { title: "Privacy Policy", path: "/privacy-policy", description: "Our privacy policy.", variant: "all-privacy" },
-  { title: "Refund Policy", path: "/refund-policy", description: "Our refund policy.", variant: "all-refund" },
+  { title: "Privacy Policy", path: importPageRoutes.privacy.path, description: "Our privacy policy.", variant: "all-privacy" },
+  { title: "Refund Policy", path: importPageRoutes.refund.path, description: "Our refund policy.", variant: "all-refund" },
   {
     title: "Security",
-    path: "/security",
+    path: importPageRoutes.security.path,
     description: "How we protect our website and services.",
     variant: "security",
   },
   {
     title: "Cookie Policy",
-    path: "/cookie-policy",
+    path: importPageRoutes.cookiePolicy.path,
     description: "How we use cookies and your choices.",
     variant: "cookie-policy",
   },
   {
     title: "Team Members",
-    path: "/team-member",
+    path: importPageRoutes.teamMembers.path,
     description: "Meet the people behind TestPrep Center.",
     variant: "all-team-member",
   },
   {
     title: "Terms and Conditions",
-    path: "/terms-and-condition",
+    path: importPageRoutes.terms.path,
     description: "Our terms and conditions.",
     variant: "all-terms",
   },
