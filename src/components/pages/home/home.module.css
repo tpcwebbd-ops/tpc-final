@@ -366,6 +366,12 @@
 .animatedText {
   display: inline;
 }
+.animatedText[data-reveal="right"] {
+  --word-enter-transform: translateX(32px);
+}
+.animatedText[data-reveal="scale"] {
+  --word-enter-transform: scale(0);
+}
 .word {
   display: inline-block;
   transition:
@@ -376,21 +382,26 @@
 /* AOS adds aos-init only after JavaScript loads; SSR and no-JS stay visible. */
 .home :global([data-aos="text-reveal"].aos-init:not(.aos-animate)) .word {
   opacity: 0;
-  transform: translateY(24px) rotate(1.5deg);
+  transform: var(--word-enter-transform, translateX(-32px));
 }
-.home :global([data-aos="fade-up"]),
+.home :global([data-aos="fade-left"]),
+.home :global([data-aos="fade-right"]),
 .home :global([data-aos="zoom-in"]) {
   transition:
     opacity 750ms ease,
     transform 750ms cubic-bezier(0.2, 0.65, 0.3, 1);
 }
-.home :global([data-aos="fade-up"].aos-init:not(.aos-animate)) {
+.home :global([data-aos="fade-left"].aos-init:not(.aos-animate)) {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateX(64px);
+}
+.home :global([data-aos="fade-right"].aos-init:not(.aos-animate)) {
+  opacity: 0;
+  transform: translateX(-64px);
 }
 .home :global([data-aos="zoom-in"].aos-init:not(.aos-animate)) {
   opacity: 0;
-  transform: scale(0.94) translateY(20px);
+  transform: scale(0);
 }
 .home :global([data-aos-delay="100"]) {
   transition-delay: 100ms;

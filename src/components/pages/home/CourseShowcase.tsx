@@ -76,7 +76,11 @@ function CourseCard({ node, index }: { node: ContentNode | string; index: number
   const href = `${whatsapp}?text=${encodeURIComponent(`Hi TestPrep Center! I'd like to learn more about ${course.title}${course.freeClass ? " and join a free class" : ""}.`)}`;
 
   return (
-    <li className={styles.courseItem} data-aos="fade-up" data-aos-delay={index * 100}>
+    <li
+      className={styles.courseItem}
+      data-aos={["fade-right", "zoom-in", "fade-left"][index % 3]}
+      data-aos-delay={(index % 3) * 100}
+    >
       <article className={styles.courseCard} data-theme={look.theme}>
         <div className={styles.cardArt}>
           <Image
@@ -201,7 +205,7 @@ export default function CourseShowcase({ section }: { section: HomeSection }) {
           ))}
         </ul>
 
-        <div className={styles.contactPanel} data-aos="fade-up">
+        <div className={styles.contactPanel} data-aos="zoom-in">
           <div className={styles.contactIntro}>
             <span className={styles.contactIcon} aria-hidden="true">
               <MessageCircle size={24} strokeWidth={1.6} />
@@ -227,7 +231,7 @@ export default function CourseShowcase({ section }: { section: HomeSection }) {
           </a>
         </div>
 
-        <div className={styles.communityRow} data-aos="fade-up">
+        <div className={styles.communityRow} data-aos="fade-left">
           <p>
             <span aria-hidden="true" />
             Keep learning. Stay connected.

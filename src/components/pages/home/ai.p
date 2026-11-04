@@ -1,1 +1,2 @@
-Please Look at the full Home page. 'src/components/page/home/...'  Now I can see all components is animated form below to top when Scroll.  I want some come from right and some  come from left, and some come from scale-0 to scale - 100 I mean from nothing to visible. 
+Look at the menu 
+'src/components/menu/...' and settings from 'src/app/dashboard/admin/menu/...' If I choose menu sticky but it is not working with home page. fix it. 

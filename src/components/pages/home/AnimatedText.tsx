@@ -9,9 +9,9 @@ import type { CSSProperties } from "react";
 
 import styles from "./home.module.css";
 
-export default function AnimatedText({ text }: { text: string }) {
+export default function AnimatedText({ text, from = "left" }: { text: string; from?: "left" | "right" | "scale" }) {
   return (
-    <span className={styles.animatedText} data-aos="text-reveal">
+    <span className={styles.animatedText} data-aos="text-reveal" data-reveal={from}>
       {text.split(/(\s+)/u).map((word, index) =>
         /^\s+$/u.test(word) ? (
           word

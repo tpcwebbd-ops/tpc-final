@@ -18,6 +18,7 @@ import styles from "./home.module.css";
 import ScrollAnimations from "./ScrollAnimations";
 
 const whatsapp = "https://wa.me/8801786558855";
+type EntranceAnimation = "fade-left" | "fade-right" | "zoom-in";
 
 function actionHref(text: string): string {
   if (/facebook/i.test(text))
@@ -43,9 +44,17 @@ function RichContent({ node }: { node: ContentNode | string }): ReactNode {
   return createElement(node.tag === "h1" ? "h2" : node.tag, undefined, children);
 }
 
-function SectionImage({ section, hero = false }: { section: HomeSection; hero?: boolean }) {
+function SectionImage({
+  section,
+  hero = false,
+  animation,
+}: {
+  section: HomeSection;
+  hero?: boolean;
+  animation: EntranceAnimation;
+}) {
   return (
-    <div className={`${styles.visual} ${hero ? styles.heroVisual : ""}`} data-aos="zoom-in" data-aos-delay="150">
+    <div className={`${styles.visual} ${hero ? styles.heroVisual : ""}`} data-aos={animation} data-aos-delay="150">
       <div className={styles.imageBackdrop} aria-hidden="true" />
       <div className={styles.photoFrame}>
         <Image
@@ -104,7 +113,7 @@ function SectionImage({ section, hero = false }: { section: HomeSection; hero?: 
 function Actions({ nodes }: { nodes: ContentNode[] }) {
   if (!nodes.length) return null;
   return (
-    <div className={styles.actions} data-aos="fade-up" data-aos-delay="150">
+    <div className={styles.actions} data-aos="zoom-in" data-aos-delay="150">
       {nodes.map((node, index) => (
         <a
           className={index === 0 ? styles.primaryAction : styles.secondaryAction}
@@ -135,6 +144,11 @@ function LearningSection({ section, index }: { section: HomeSection; index: numb
   const hero = kidsHero || ieltsHero;
   const Heading = kidsHero ? "h1" : "h2";
   const dark = ieltsHero || demo;
+  const reversed = index % 2 === 0 && !hero;
+  // Follow the column positions, with a scale entrance every third section.
+  const copyFrom = index % 3 === 2 ? "scale" : reversed ? "right" : "left";
+  const copyAnimation = copyFrom === "scale" ? "zoom-in" : reversed ? "fade-left" : "fade-right";
+  const imageAnimation = index % 3 === 0 ? "zoom-in" : reversed ? "fade-right" : "fade-left";
   const className = [
     styles.learningSection,
     hero ? styles.hero : "",
@@ -142,7 +156,7 @@ function LearningSection({ section, index }: { section: HomeSection; index: numb
     dark ? styles.darkSection : "",
     results ? styles.resultsSection : "",
     demo ? styles.demoSection : "",
-    index % 2 === 0 && !hero ? styles.reversed : "",
+    reversed ? styles.reversed : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -160,13 +174,13 @@ function LearningSection({ section, index }: { section: HomeSection; index: numb
                     key={index}
                     lang={/[\u0980-\u09ff]/u.test(part) ? "bn" : "en"}
                   >
-                    <AnimatedText text={part} />
+                    <AnimatedText text={part} from={copyFrom} />
                   </span>
                 ))}
           </Heading>
           <div
             className={`${styles.sectionBody} ${hero ? styles.heroBody : ""}`}
-            data-aos="fade-up"
+            data-aos={copyAnimation}
             data-aos-delay="100"
           >
             {body.map((node, index) => (
@@ -175,7 +189,7 @@ function LearningSection({ section, index }: { section: HomeSection; index: numb
           </div>
           <Actions nodes={actions} />
         </div>
-        <SectionImage hero={hero} section={section} />
+        <SectionImage hero={hero} section={section} animation={imageAnimation} />
       </div>
       {results && <Check aria-hidden="true" className={styles.resultsMark} strokeWidth={1} />}
     </section>
