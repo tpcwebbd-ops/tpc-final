@@ -1,0 +1,52 @@
+{
+  "source": "AI-generated imagery created for the TestPrep Center homepage using OpenAI image generation.",
+  "created": "2026-11-04",
+  "note": "Illustrative scenes of contemporary learning in Bangladesh; these are not photographs of enrolled students or actual TestPrep Center facilities.",
+  "assets": {
+    "playground.webp": {
+      "format": "WebP",
+      "width": 1440,
+      "height": 1080
+    },
+    "classroom.webp": {
+      "format": "WebP",
+      "width": 1440,
+      "height": 1080
+    },
+    "reading.webp": {
+      "format": "WebP",
+      "width": 1440,
+      "height": 1080
+    },
+    "ielts.webp": {
+      "format": "WebP",
+      "width": 1440,
+      "height": 1080
+    },
+    "presentation.webp": {
+      "format": "WebP",
+      "width": 1440,
+      "height": 1080
+    },
+    "online.webp": {
+      "format": "WebP",
+      "width": 1440,
+      "height": 1080
+    },
+    "writing.webp": {
+      "format": "WebP",
+      "width": 1440,
+      "height": 1080
+    },
+    "campus.webp": {
+      "format": "WebP",
+      "width": 1440,
+      "height": 1080
+    },
+    "tutoring.webp": {
+      "format": "WebP",
+      "width": 1440,
+      "height": 1080
+    }
+  }
+}

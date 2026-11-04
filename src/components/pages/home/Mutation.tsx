@@ -91,7 +91,7 @@ export default function Mutation({ data, onChange }: { data?: Partial<HomeData>;
         <div>
           <h2 className="text-xl font-semibold">Home page content</h2>
           <p className="mt-1 text-sm text-stone-500">
-            27 sections from design.txt. Edit each section’s text and image.
+            Edit your homepage text and images. Build English Confidence appears first, followed by All courses.
           </p>
         </div>
         <label className="flex items-center gap-3 text-sm">

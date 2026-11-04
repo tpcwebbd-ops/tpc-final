@@ -8,31 +8,35 @@
 "use client";
 
 import {
-  ArrowDown,
   ArrowRight,
   ArrowUpRight,
-  AudioLines,
   BookOpen,
   CalendarDays,
   Check,
   ChevronDown,
   Clock3,
-  GraduationCap,
   MessageCircle,
-  PenLine,
-  Sparkles,
 } from "lucide-react";
-import { type CSSProperties } from "react";
+import Image from "next/image";
 import { FaFacebookF, FaWhatsapp, FaYoutube } from "react-icons/fa";
 
+import AnimatedText from "./AnimatedText";
 import styles from "./course-showcase.module.css";
 import { contentText, type ContentNode, type HomeSection } from "./data";
 
 const whatsapp = "https://wa.me/8801786558855";
 const courseLooks = [
-  { label: "For young learners", icon: GraduationCap, theme: "kids" },
-  { label: "Find your voice", icon: AudioLines, theme: "speaking" },
-  { label: "Write with confidence", icon: PenLine, theme: "writing" },
+  { image: "classroom", alt: "Bangladeshi children learning English through picture-card games", theme: "kids" },
+  {
+    image: "ielts",
+    alt: "Bangladeshi university students practising English conversation together",
+    theme: "speaking",
+  },
+  {
+    image: "writing",
+    alt: "Bangladeshi university students practising English writing with a tutor",
+    theme: "writing",
+  },
 ] as const;
 
 function readCourse(node: ContentNode | string) {
@@ -44,7 +48,8 @@ function readCourse(node: ContentNode | string) {
   const duration = parts.find((part) => /\bmonths?\b/i.test(part));
   const cadence = parts.find((part) => /^\d.*\b(?:lectures|classes)\b/i.test(part));
   const schedule = parts.find((part) => /\b(?:AM|PM)\b/i.test(part));
-  const action = parts.find((part) => /join a free class/i.test(part));
+  const action = parts.find((part) => /join a free class|ফ্রি ক্লাসে যোগ দিন/i.test(part));
+  const actionLabel = action?.split(/\s*•\s*/).find((part) => /[\u0980-\u09ff]/u.test(part)) ?? action;
   const [length, ...extras] = duration?.split(/\s*\+\s*/) ?? [];
   const features = [
     ...extras,
@@ -60,34 +65,27 @@ function readCourse(node: ContentNode | string) {
     cadence,
     schedule,
     features,
-    action: action?.split(/\s*•\s*/)[0] ?? "Enquire on WhatsApp",
-    translation: action
-      ?.split(/\s*•\s*/)
-      .slice(1)
-      .join(" • "),
+    action: actionLabel ?? "Enquire on WhatsApp",
+    freeClass: Boolean(action),
   };
 }
 
 function CourseCard({ node, index }: { node: ContentNode | string; index: number }) {
   const course = readCourse(node);
   const look = courseLooks[index % courseLooks.length];
-  const Icon = look.icon;
-  const href = `${whatsapp}?text=${encodeURIComponent(`Hi TestPrep Center! I'd like to learn more about ${course.title}${course.action === "Join a free class" ? " and join a free class" : ""}.`)}`;
+  const href = `${whatsapp}?text=${encodeURIComponent(`Hi TestPrep Center! I'd like to learn more about ${course.title}${course.freeClass ? " and join a free class" : ""}.`)}`;
 
   return (
-    <li className={styles.courseItem} style={{ "--card-index": index } as CSSProperties}>
+    <li className={styles.courseItem} data-aos="fade-up" data-aos-delay={index * 100}>
       <article className={styles.courseCard} data-theme={look.theme}>
-        <div className={styles.cardArt} aria-hidden="true">
-          <span className={styles.artOrbit} />
-          <span className={styles.artOrbitInner} />
-          <span className={styles.artSpark}>
-            <Sparkles size={21} strokeWidth={1.5} />
-          </span>
-          <span className={styles.artIcon}>
-            <Icon size={34} strokeWidth={1.45} />
-          </span>
-          <span className={styles.artCaption}>{look.label}</span>
-          <span className={styles.artNumber}>{String(index + 1).padStart(2, "0")}</span>
+        <div className={styles.cardArt}>
+          <Image
+            className={styles.coursePhoto}
+            src={`/images/home/bangladesh/${look.image}.webp`}
+            alt={look.alt}
+            fill
+            sizes="(max-width: 760px) 90vw, 380px"
+          />
         </div>
 
         <div className={styles.cardContent}>
@@ -168,10 +166,7 @@ function CourseCard({ node, index }: { node: ContentNode | string; index: number
               rel="noopener noreferrer"
               aria-label={`${course.action} — ${course.title} on WhatsApp (opens in a new tab)`}
             >
-              <span>
-                {course.action}
-                {course.translation && <small lang="bn">{course.translation}</small>}
-              </span>
+              <span lang={/[\u0980-\u09ff]/u.test(course.action) ? "bn" : "en"}>{course.action}</span>
               <ArrowUpRight aria-hidden="true" size={21} />
             </a>
           </div>
@@ -189,47 +184,24 @@ export default function CourseShowcase({ section }: { section: HomeSection }) {
 
   return (
     <section className={styles.showcase} id={section.id} aria-labelledby={`${section.id}-title`}>
+      <span id="AnnouncementBar" className={styles.legacyAnchor} aria-hidden="true" />
       <div className={styles.ambientGlow} aria-hidden="true" />
       <div className={styles.showcaseInner}>
         <header className={styles.showcaseHeader}>
-          <div>
-            <p className={styles.eyebrow}>
-              <span aria-hidden="true">
-                <Sparkles size={13} />
-              </span>
-              Small steps. Big possibilities.
-            </p>
-            <h2 id={`${section.id}-title`}>
-              Your next chapter
-              <br />
-              starts{" "}
-              <span>
-                right here.
-                <svg viewBox="0 0 250 14" preserveAspectRatio="none" aria-hidden="true">
-                  <path d="M3 10Q115-5 247 7" />
-                </svg>
-              </span>
-            </h2>
-          </div>
-          <div className={styles.headerAside}>
-            <p>
-              First words. Confident conversations. IELTS goals.
-              <br />
-              Find a course that brings you closer.
-            </p>
-            <a href={`#${section.id}-courses`}>
-              Explore our courses <ArrowDown aria-hidden="true" size={16} />
-            </a>
-          </div>
+          <h2 id={`${section.id}-title`}>
+            <AnimatedText text={contentText(section.content.find((node) => node.tag === "h2") ?? "All courses")} />
+          </h2>
+          <span className={styles.headerLine} aria-hidden="true" />
         </header>
 
+        <span id="AnnouncementBar-courses" className={styles.legacyAnchor} aria-hidden="true" />
         <ul className={styles.courseGrid} id={`${section.id}-courses`} aria-label="Available courses">
           {offers?.children.map((node, index) => (
             <CourseCard key={index} node={node} index={index} />
           ))}
         </ul>
 
-        <div className={styles.contactPanel}>
+        <div className={styles.contactPanel} data-aos="fade-up">
           <div className={styles.contactIntro}>
             <span className={styles.contactIcon} aria-hidden="true">
               <MessageCircle size={24} strokeWidth={1.6} />
@@ -255,7 +227,7 @@ export default function CourseShowcase({ section }: { section: HomeSection }) {
           </a>
         </div>
 
-        <div className={styles.communityRow}>
+        <div className={styles.communityRow} data-aos="fade-up">
           <p>
             <span aria-hidden="true" />
             Keep learning. Stay connected.

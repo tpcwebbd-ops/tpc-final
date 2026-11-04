@@ -1,12 +1,1 @@
-Look at the first section 
-```
-Kids Spoken Level 1
-IELTS Speaking Course
-IELTS Writing Full Course – 2026
-WhatsApp 01786558855
-Kids English Facebook page
-TestPrep Center Facebook page
-TestPrep Center on YouTube
-``` 
-
-Now please Update the section for our course view and CTA, Make it Good Looking UI with stunning animation. 
+Please Look at the full Home page. 'src/components/page/home/...'  Now I can see all components is animated form below to top when Scroll.  I want some come from right and some  come from left, and some come from scale-0 to scale - 100 I mean from nothing to visible. 

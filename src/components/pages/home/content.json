@@ -1,9 +1,71 @@
 [
   {
-    "id": "AnnouncementBar",
-    "imageUrl": "/images/home/AnnouncementBar.webp",
-    "imageAlt": "",
+    "id": "KidsHero",
+    "imageUrl": "/images/home/bangladesh/playground.webp",
+    "imageAlt": "Bangladeshi children practising English through a playful outdoor activity with their teacher in Dhaka",
     "content": [
+      {
+        "tag": "h1",
+        "children": ["ইংরেজিতে আত্মবিশ্বাস গড়ুন"]
+      },
+      {
+        "tag": "p",
+        "children": ["খেলা, নতুন কিছু শেখা ও কথা বলার মাধ্যমে শিশুরা আনন্দে ইংরেজি শিখবে এবং আত্মবিশ্বাস গড়ে তুলবে।"]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["৩ মাস"]
+              },
+              {
+                "tag": "span",
+                "children": ["কোর্সের সময়কাল"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["৬–১০ বছর"]
+              },
+              {
+                "tag": "span",
+                "children": ["উপযুক্ত বয়স"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": ["৬–১০ বছরের শিশুদের জন্য সহজ, আনন্দময় শেখার পরিবেশ।"]
+      },
+      {
+        "tag": "a",
+        "children": ["ভর্তি হতে যোগাযোগ করুন"]
+      },
+      {
+        "tag": "a",
+        "children": ["কোর্সটি দেখুন"]
+      }
+    ]
+  },
+  {
+    "id": "all-course",
+    "imageUrl": "/images/home/bangladesh/ielts.webp",
+    "imageAlt": "Bangladeshi university students developing English speaking skills together in a modern learning studio",
+    "content": [
+      {
+        "tag": "h2",
+        "children": ["All courses"]
+      },
       {
         "tag": "ul",
         "children": [
@@ -13,7 +75,7 @@
               {
                 "tag": "a",
                 "children": [
-                  "Kids Spoken Level 1 | 2 months | 24 lectures | Age-friendly spoken English | 5,000 BDT | Join a free class • ফ্রি ক্লাসে যোগ দিন"
+                  "Kids Spoken Level 1 | 2 months | 24 lectures | Age-friendly spoken English | 5,000 BDT | ফ্রি ক্লাসে যোগ দিন"
                 ]
               }
             ]
@@ -24,7 +86,7 @@
               {
                 "tag": "a",
                 "children": [
-                  "IELTS Speaking Course | 2 months + 4-month club access | 24 classes · 24 lecture sheets | Part 1: 6 · Part 2: 8 · Part 3: 10 | Sun, Tue & Thu · 9:30–10:30 PM | 4,000 BDT | Join a free class • ফ্রি ক্লাসে যোগ দিন"
+                  "IELTS Speaking Course | 2 months + 4-month club access | 24 classes · 24 lecture sheets | Part 1: 6 · Part 2: 8 · Part 3: 10 | Sun, Tue & Thu · 9:30–10:30 PM | 4,000 BDT | ফ্রি ক্লাসে যোগ দিন"
                 ]
               }
             ]
@@ -35,7 +97,7 @@
               {
                 "tag": "a",
                 "children": [
-                  "IELTS Writing Full Course – 2026 | 2 Months | 3–4 classes per week | Saturday, Monday, Wednesday · 9:30–10:30 PM | Foundation classes · Writing basics | Vocabulary lessons · Words & phrases | Task 1 · Graphs, charts & diagrams | Task 2 · Six major essay types | WhatsApp · +880 1786 558855 | 4,000 TK | Join a free class • ফ্রি ক্লাসে যোগ দিন"
+                  "IELTS Writing Full Course – 2026 | 2 Months | 3–4 classes per week | Saturday, Monday, Wednesday · 9:30–10:30 PM | Foundation classes · Writing basics | Vocabulary lessons · Words & phrases | Task 1 · Graphs, charts & diagrams | Task 2 · Six major essay types | WhatsApp · +880 1786 558855 | 4,000 TK | ফ্রি ক্লাসে যোগ দিন"
                 ]
               }
             ]
@@ -67,28 +129,20 @@
   },
   {
     "id": "CameraSpeakingSection",
-    "imageUrl": "/images/home/CameraSpeakingSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/presentation.webp",
+    "imageAlt": "A Bangladeshi schoolgirl confidently sharing her playground drawing with classmates in English",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Camera confidence"]
-      },
       {
         "tag": "h2",
         "children": ["Feel Comfortable On Camera"]
       },
       {
         "tag": "p",
-        "children": [
-          "প্রেজেন্টেশন ও video homework-এর মাধ্যমে শিশুরা camera confidence তৈরি করবে। Children will build confidence on camera through presentations and video homework."
-        ]
+        "children": ["প্রেজেন্টেশন ও video homework-এর মাধ্যমে শিশুরা camera confidence তৈরি করবে।"]
       },
       {
         "tag": "p",
-        "children": [
-          "সহজ, ছোট ছোট speaking task-এর মাধ্যমে নিজের কণ্ঠ, অভিব্যক্তি এবং উপস্থাপনায় স্বচ্ছন্দ হবে। Simple speaking tasks will help children feel comfortable with their voice, expressions, and presentations."
-        ]
+        "children": ["সহজ, ছোট ছোট speaking task-এর মাধ্যমে নিজের কণ্ঠ, অভিব্যক্তি এবং উপস্থাপনায় স্বচ্ছন্দ হবে।"]
       },
       {
         "tag": "p",
@@ -97,50 +151,32 @@
             "tag": "strong",
             "children": ["Learning outcome:"]
           },
-          " ক্যামেরার সামনে শান্তভাবে, স্পষ্টভাবে এবং আত্মবিশ্বাসের সাথে কথা বলা। Speak calmly, clearly, and confidently in front of the camera."
+          " ক্যামেরার সামনে শান্তভাবে, স্পষ্টভাবে এবং আত্মবিশ্বাসের সাথে কথা বলা।"
         ]
       },
       {
         "tag": "a",
         "children": ["Build confidence"]
-      },
-      {
-        "tag": "span",
-        "children": ["REC"]
-      },
-      {
-        "tag": "span",
-        "children": ["You can do it!"]
-      },
-      {
-        "tag": "span",
-        "children": ["Find your voice"]
       }
     ]
   },
   {
     "id": "CollocationsSection",
-    "imageUrl": "/images/home/CollocationsSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/classroom.webp",
+    "imageAlt": "Young Bangladeshi learners enjoying an English conversation and picture-card activity in a modern classroom",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Word connections"]
-      },
       {
         "tag": "h2",
         "children": ["Choose Words Naturally"]
       },
       {
         "tag": "p",
-        "children": [
-          "শিশুরা শিখবে কোন শব্দগুলো একসাথে স্বাভাবিকভাবে ব্যবহার হয়। Children will learn which words naturally go together."
-        ]
+        "children": ["শিশুরা শিখবে কোন শব্দগুলো একসাথে স্বাভাবিকভাবে ব্যবহার হয়।"]
       },
       {
         "tag": "p",
         "children": [
-          "সঠিক পরিস্থিতিতে সঠিক শব্দ বেছে নিয়ে তারা আরও পরিষ্কার, স্বচ্ছন্দ এবং প্রাকৃতিক ইংরেজিতে কথা বলবে। Choosing the right words for each situation will help them speak English more clearly, comfortably, and naturally."
+          "সঠিক পরিস্থিতিতে সঠিক শব্দ বেছে নিয়ে তারা আরও পরিষ্কার, স্বচ্ছন্দ এবং প্রাকৃতিক ইংরেজিতে কথা বলবে।"
         ]
       },
       {
@@ -189,44 +225,26 @@
       },
       {
         "tag": "p",
-        "children": [
-          "শব্দের সঠিক জুটি বুঝে কথায় তৈরি হবে স্বাভাবিক flow। Understanding natural word pairs will help children speak with a natural flow."
-        ]
-      },
-      {
-        "tag": "span",
-        "children": ["Match!"]
-      },
-      {
-        "tag": "span",
-        "children": ["Right words"]
+        "children": ["শব্দের সঠিক জুটি বুঝে কথায় তৈরি হবে স্বাভাবিক flow।"]
       }
     ]
   },
   {
     "id": "ContractionsSection",
-    "imageUrl": "/images/home/ContractionsSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/classroom.webp",
+    "imageAlt": "Young Bangladeshi learners enjoying an English conversation and picture-card activity in a modern classroom",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Everyday speaking"]
-      },
       {
         "tag": "h2",
         "children": ["Speak Naturally, Faster"]
       },
       {
         "tag": "p",
-        "children": [
-          "কথার গতি ও স্বাভাবিকতা বাড়াতে শিশুরা contractions শিখবে। Children will learn contractions to speak more smoothly and naturally."
-        ]
+        "children": ["কথার গতি ও স্বাভাবিকতা বাড়াতে শিশুরা contractions শিখবে।"]
       },
       {
         "tag": "p",
-        "children": [
-          "দৈনন্দিন কথোপকথনে দীর্ঘ শব্দকে ছোট করে সহজে, দ্রুত এবং আত্মবিশ্বাসের সাথে বলা হবে। Using contractions will help children speak more easily, quickly, and confidently in everyday conversations."
-        ]
+        "children": ["দৈনন্দিন কথোপকথনে দীর্ঘ শব্দকে ছোট করে সহজে, দ্রুত এবং আত্মবিশ্বাসের সাথে বলা হবে।"]
       },
       {
         "tag": "ul",
@@ -287,46 +305,26 @@
       },
       {
         "tag": "p",
-        "children": ["বাস্তব কথোপকথন আরও সহজ ও স্বাভাবিক শোনাবে। Real conversations sound easier and more natural."]
-      },
-      {
-        "tag": "span",
-        "children": ["I’m ready!"]
-      },
-      {
-        "tag": "span",
-        "children": ["I’ll try!"]
+        "children": ["বাস্তব কথোপকথন আরও সহজ ও স্বাভাবিক শোনাবে।"]
       }
     ]
   },
   {
     "id": "ConversationPracticeSection",
-    "imageUrl": "/images/home/ConversationPracticeSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/classroom.webp",
+    "imageAlt": "Young Bangladeshi learners enjoying an English conversation and picture-card activity in a modern classroom",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Let’s talk!"]
-      },
-      {
-        "tag": "span",
-        "children": ["Learn by talking"]
-      },
       {
         "tag": "h2",
         "children": ["Practice Through Conversation"]
       },
       {
         "tag": "p",
-        "children": [
-          "কথোপকথনের মাধ্যমে শিশুরা প্রশ্ন, উত্তর এবং স্বাভাবিকভাবে কথা বলা শিখবে। Through conversation, children will learn to ask questions, answer, and speak naturally."
-        ]
+        "children": ["কথোপকথনের মাধ্যমে শিশুরা প্রশ্ন, উত্তর এবং স্বাভাবিকভাবে কথা বলা শিখবে।"]
       },
       {
         "tag": "p",
-        "children": [
-          "জোড়ায় কথা বলা, পরিস্থিতি অনুযায়ী speaking এবং interactive activity-এর মাধ্যমে শেখা হবে আনন্দময়। Pair conversations, situational speaking, and interactive activities make learning enjoyable."
-        ]
+        "children": ["জোড়ায় কথা বলা, পরিস্থিতি অনুযায়ী speaking এবং interactive activity-এর মাধ্যমে শেখা হবে আনন্দময়।"]
       },
       {
         "tag": "ul",
@@ -393,22 +391,16 @@
   },
   {
     "id": "CourseResultsSection",
-    "imageUrl": "/images/home/CourseResultsSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/playground.webp",
+    "imageAlt": "Bangladeshi children practising English through a playful outdoor activity with their teacher in Dhaka",
     "content": [
       {
-        "tag": "span",
-        "children": ["Learning milestones"]
-      },
-      {
         "tag": "h2",
-        "children": ["কোর্স শেষে অর্জন | Course Outcomes"]
+        "children": ["কোর্স শেষে অর্জন"]
       },
       {
         "tag": "p",
-        "children": [
-          "শিশুর শেখা দক্ষতাগুলো ধীরে ধীরে বাস্তব আত্মবিশ্বাসে পরিণত হবে। The skills children develop will gradually become real confidence."
-        ]
+        "children": ["শিশুর শেখা দক্ষতাগুলো ধীরে ধীরে বাস্তব আত্মবিশ্বাসে পরিণত হবে।"]
       },
       {
         "tag": "ul",
@@ -460,123 +452,29 @@
         "children": [
           {
             "tag": "strong",
-            "children": ["চূড়ান্ত লক্ষ্য | Final goal:"]
+            "children": ["চূড়ান্ত লক্ষ্য:"]
           },
-          " প্রতিটি শিশু যেন ইংরেজিতে নিজের ভাবনা আত্মবিশ্বাসের সাথে প্রকাশ করতে পারে। Every child can express their ideas in English with confidence."
+          " প্রতিটি শিশু যেন ইংরেজিতে নিজের ভাবনা আত্মবিশ্বাসের সাথে প্রকাশ করতে পারে।"
         ]
-      },
-      {
-        "tag": "span",
-        "children": ["Ready"]
-      },
-      {
-        "tag": "span",
-        "children": ["to speak!"]
-      }
-    ]
-  },
-  {
-    "id": "KidsHero",
-    "imageUrl": "/images/home/KidsHero.webp",
-    "imageAlt": "",
-    "content": [
-      {
-        "tag": "span",
-        "children": ["Kids spoken English"]
-      },
-      {
-        "tag": "h1",
-        "children": ["Build English Confidence | ইংরেজিতে আত্মবিশ্বাস গড়ুন"]
-      },
-      {
-        "tag": "p",
-        "children": [
-          "৩ মাসে শিশুরা শিখবে প্রয়োজনীয় ইংরেজি, আনন্দে ও আত্মবিশ্বাসে। In 3 months, children will learn practical English with joy and confidence."
-        ]
-      },
-      {
-        "tag": "ul",
-        "children": [
-          {
-            "tag": "li",
-            "children": [
-              {
-                "tag": "strong",
-                "children": ["৩ মাস | 3 months"]
-              },
-              {
-                "tag": "span",
-                "children": ["কোর্সের সময়কাল | Course duration"]
-              }
-            ]
-          },
-          {
-            "tag": "li",
-            "children": [
-              {
-                "tag": "strong",
-                "children": ["৬–১০ বছর | Ages 6–10"]
-              },
-              {
-                "tag": "span",
-                "children": ["উপযুক্ত বয়স | Suitable age"]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "tag": "p",
-        "children": [
-          "৬–১০ বছরের শিশুদের জন্য সহজ, আনন্দময় শেখার পরিবেশ। A fun, welcoming learning environment for children ages 6–10."
-        ]
-      },
-      {
-        "tag": "a",
-        "children": ["ভর্তি হতে যোগাযোগ করুন | Enroll now"]
-      },
-      {
-        "tag": "a",
-        "children": ["কোর্সটি দেখুন | View course"]
-      },
-      {
-        "tag": "span",
-        "children": ["Learn with joy!"]
       }
     ]
   },
   {
     "id": "PracticalVocabularySection",
-    "imageUrl": "/images/home/PracticalVocabularySection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/classroom.webp",
+    "imageAlt": "Young Bangladeshi learners enjoying an English conversation and picture-card activity in a modern classroom",
     "content": [
-      {
-        "tag": "span",
-        "children": ["600–800"]
-      },
-      {
-        "tag": "span",
-        "children": ["everyday words | দৈনন্দিন শব্দ"]
-      },
-      {
-        "tag": "span",
-        "children": ["Everyday English"]
-      },
       {
         "tag": "h2",
         "children": ["Learn Practical Vocabulary"]
       },
       {
         "tag": "p",
-        "children": [
-          "শিশুরা শব্দ শিখে বাস্তব জীবনে সঠিকভাবে ব্যবহার করবে। Children will learn new words and use them correctly in everyday life."
-        ]
+        "children": ["শিশুরা শব্দ শিখে বাস্তব জীবনে সঠিকভাবে ব্যবহার করবে।"]
       },
       {
         "tag": "p",
-        "children": [
-          "৬০০–৮০০টি দৈনন্দিন শব্দ শেখে পরিবার, স্কুল ও বন্ধুদের কথোপকথনে। They will learn 600–800 everyday words used with family, at school, and with friends."
-        ]
+        "children": ["৬০০–৮০০টি দৈনন্দিন শব্দ শেখে পরিবার, স্কুল ও বন্ধুদের কথোপকথনে।"]
       },
       {
         "tag": "ul",
@@ -588,7 +486,7 @@
                 "tag": "strong",
                 "children": ["01"]
               },
-              " শুনে বুঝতে শেখে | Learn by listening"
+              " শুনে বুঝতে শেখে"
             ]
           },
           {
@@ -598,7 +496,7 @@
                 "tag": "strong",
                 "children": ["02"]
               },
-              " বাক্যে ব্যবহার করে | Use words in sentences"
+              " বাক্যে ব্যবহার করে"
             ]
           },
           {
@@ -608,7 +506,7 @@
                 "tag": "strong",
                 "children": ["03"]
               },
-              " আত্মবিশ্বাসের সাথে বলে | Speak with confidence"
+              " আত্মবিশ্বাসের সাথে বলে"
             ]
           }
         ]
@@ -617,36 +515,20 @@
   },
   {
     "id": "PresentationSkillsSection",
-    "imageUrl": "/images/home/PresentationSkillsSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/presentation.webp",
+    "imageAlt": "A Bangladeshi schoolgirl confidently sharing her playground drawing with classmates in English",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Speak | বলুন"]
-      },
-      {
-        "tag": "span",
-        "children": ["with confidence | আত্মবিশ্বাসের সাথে"]
-      },
-      {
-        "tag": "span",
-        "children": ["Presentation practice"]
-      },
       {
         "tag": "h2",
         "children": ["Present Your Story"]
       },
       {
         "tag": "p",
-        "children": [
-          "শিশুরা নিজের পরিচয়, পরিবার, স্কুল এবং প্রিয় বিষয় নিয়ে কথা বলবে। Children will speak about themselves, their families, school, and favorite topics."
-        ]
+        "children": ["শিশুরা নিজের পরিচয়, পরিবার, স্কুল এবং প্রিয় বিষয় নিয়ে কথা বলবে।"]
       },
       {
         "tag": "p",
-        "children": [
-          "প্রতিদিনের জীবন ও শখ নিয়ে সুন্দরভাবে ভাবনা সাজিয়ে উপস্থাপন করার অভ্যাস তৈরি হবে। They will learn to organize their thoughts and present them clearly when talking about everyday life and hobbies."
-        ]
+        "children": ["প্রতিদিনের জীবন ও শখ নিয়ে সুন্দরভাবে ভাবনা সাজিয়ে উপস্থাপন করার অভ্যাস তৈরি হবে।"]
       },
       {
         "tag": "ul",
@@ -658,7 +540,7 @@
                 "tag": "strong",
                 "children": ["01"]
               },
-              " নিজেকে পরিচয় করানো | Introducing yourself"
+              " নিজেকে পরিচয় করানো"
             ]
           },
           {
@@ -668,7 +550,7 @@
                 "tag": "strong",
                 "children": ["02"]
               },
-              " পরিবার ও বাবা-মা | Family and parents"
+              " পরিবার ও বাবা-মা"
             ]
           },
           {
@@ -678,7 +560,7 @@
                 "tag": "strong",
                 "children": ["03"]
               },
-              " স্কুল ও সেরা বন্ধু | School and best friends"
+              " স্কুল ও সেরা বন্ধু"
             ]
           },
           {
@@ -688,7 +570,7 @@
                 "tag": "strong",
                 "children": ["04"]
               },
-              " দৈনন্দিন কাজ ও শখ | Daily activities and hobbies"
+              " দৈনন্দিন কাজ ও শখ"
             ]
           }
         ]
@@ -700,34 +582,28 @@
             "tag": "strong",
             "children": ["Learning outcome:"]
           },
-          " আত্মবিশ্বাসের সাথে শ্রোতার সামনে কথা বলা। Speak confidently in front of an audience."
+          " আত্মবিশ্বাসের সাথে শ্রোতার সামনে কথা বলা।"
         ]
       }
     ]
   },
   {
     "id": "ReadingFluencySection",
-    "imageUrl": "/images/home/ReadingFluencySection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/reading.webp",
+    "imageAlt": "Bangladeshi children reading an illustrated book aloud with their teacher in a bright school library",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Reading aloud"]
-      },
       {
         "tag": "h2",
         "children": ["Read With Natural Flow"]
       },
       {
         "tag": "p",
-        "children": [
-          "শিশুরা ছন্দ, উচ্চারণ এবং স্বাভাবিক গতিতে সাবলীলভাবে পড়বে। Children will read fluently with rhythm, clear pronunciation, and a natural pace."
-        ]
+        "children": ["শিশুরা ছন্দ, উচ্চারণ এবং স্বাভাবিক গতিতে সাবলীলভাবে পড়বে।"]
       },
       {
         "tag": "p",
         "children": [
-          "নিয়মিত reading practice-এর মাধ্যমে শব্দ পরিষ্কার বলা, বাক্যের rhythm বোঝা এবং আত্মবিশ্বাসের সাথে কথা বলা শিখবে। Regular reading practice will help them pronounce words clearly, understand sentence rhythm, and speak with confidence."
+          "নিয়মিত reading practice-এর মাধ্যমে শব্দ পরিষ্কার বলা, বাক্যের rhythm বোঝা এবং আত্মবিশ্বাসের সাথে কথা বলা শিখবে।"
         ]
       },
       {
@@ -757,40 +633,26 @@
       },
       {
         "tag": "p",
-        "children": [
-          "শুধু পড়া নয়—শিশুর কণ্ঠে তৈরি হবে স্বাভাবিক আত্মবিশ্বাস। More than reading, it helps children speak with natural confidence."
-        ]
+        "children": ["শুধু পড়া নয়—শিশুর কণ্ঠে তৈরি হবে স্বাভাবিক আত্মবিশ্বাস।"]
       }
     ]
   },
   {
     "id": "RealLifeTenseSection",
-    "imageUrl": "/images/home/RealLifeTenseSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/playground.webp",
+    "imageAlt": "Bangladeshi children practising English through a playful outdoor activity with their teacher in Dhaka",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Talk about life"]
-      },
-      {
-        "tag": "span",
-        "children": ["Real-life grammar"]
-      },
       {
         "tag": "h2",
         "children": ["Tenses For Real Life"]
       },
       {
         "tag": "p",
-        "children": [
-          "শিশুরা মুখস্থ না করে কথার মাধ্যমে Present, Past এবং Future Tense শিখবে। Children will learn the present, past, and future tenses through conversation instead of memorization."
-        ]
+        "children": ["শিশুরা মুখস্থ না করে কথার মাধ্যমে Present, Past এবং Future Tense শিখবে।"]
       },
       {
         "tag": "p",
-        "children": [
-          "নিজের অভিজ্ঞতা, আজকের কাজ এবং আগামী পরিকল্পনা নিয়ে কথা বলেই tense ব্যবহার শেখা হবে। They will learn to use tenses by talking about their experiences, what they do today, and their plans for tomorrow."
-        ]
+        "children": ["নিজের অভিজ্ঞতা, আজকের কাজ এবং আগামী পরিকল্পনা নিয়ে কথা বলেই tense ব্যবহার শেখা হবে।"]
       },
       {
         "tag": "ol",
@@ -802,7 +664,7 @@
                 "tag": "strong",
                 "children": ["Present"]
               },
-              " আজ কী করি | What I do today"
+              " আজ কী করি"
             ]
           },
           {
@@ -812,7 +674,7 @@
                 "tag": "strong",
                 "children": ["Past"]
               },
-              " গতকাল কী করেছি | What I did yesterday"
+              " গতকাল কী করেছি"
             ]
           },
           {
@@ -822,7 +684,7 @@
                 "tag": "strong",
                 "children": ["Future"]
               },
-              " আগামীকাল কী করব | What I will do tomorrow"
+              " আগামীকাল কী করব"
             ]
           }
         ]
@@ -831,28 +693,20 @@
   },
   {
     "id": "SituationalSpeakingSection",
-    "imageUrl": "/images/home/SituationalSpeakingSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/playground.webp",
+    "imageAlt": "Bangladeshi children practising English through a playful outdoor activity with their teacher in Dhaka",
     "content": [
-      {
-        "tag": "span",
-        "children": ["On-the-spot speaking"]
-      },
       {
         "tag": "h2",
         "children": ["Speak In The Moment"]
       },
       {
         "tag": "p",
-        "children": [
-          "পরিস্থিতি বুঝে শিশুরা দ্রুত, স্বাভাবিকভাবে ইংরেজিতে কথা বলবে। Children will learn to speak English quickly and naturally by responding to different situations."
-        ]
+        "children": ["পরিস্থিতি বুঝে শিশুরা দ্রুত, স্বাভাবিকভাবে ইংরেজিতে কথা বলবে।"]
       },
       {
         "tag": "p",
-        "children": [
-          "স্কুলের অনুষ্ঠান, ভালো ফলাফল, অর্জন এবং পরিচিত বিষয় নিয়ে তাৎক্ষণিক বলার অনুশীলন হবে। They will practice speaking on the spot about school events, good results, achievements, and familiar topics."
-        ]
+        "children": ["স্কুলের অনুষ্ঠান, ভালো ফলাফল, অর্জন এবং পরিচিত বিষয় নিয়ে তাৎক্ষণিক বলার অনুশীলন হবে।"]
       },
       {
         "tag": "ul",
@@ -900,44 +754,26 @@
       },
       {
         "tag": "p",
-        "children": [
-          "ফলাফল: প্রস্তুতি ছাড়াই আত্মবিশ্বাসের সাথে কথা বলা। Outcome: Speak confidently without preparation."
-        ]
-      },
-      {
-        "tag": "span",
-        "children": ["Think"]
-      },
-      {
-        "tag": "span",
-        "children": ["Speak"]
+        "children": ["ফলাফল: প্রস্তুতি ছাড়াই আত্মবিশ্বাসের সাথে কথা বলা।"]
       }
     ]
   },
   {
     "id": "SpokenPhrasesSection",
-    "imageUrl": "/images/home/SpokenPhrasesSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/classroom.webp",
+    "imageAlt": "Young Bangladeshi learners enjoying an English conversation and picture-card activity in a modern classroom",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Everyday phrases"]
-      },
       {
         "tag": "h2",
         "children": ["Speak With Confidence"]
       },
       {
         "tag": "p",
-        "children": [
-          "শিশুরা ১৫০টির বেশি phrase ও sentence structure শিখবে। Children will learn more than 150 phrases and sentence structures."
-        ]
+        "children": ["শিশুরা ১৫০টির বেশি phrase ও sentence structure শিখবে।"]
       },
       {
         "tag": "p",
-        "children": [
-          "প্রতিদিনের কথোপকথনে বাক্য সাজানো, প্রশ্ন করা এবং উত্তর দেওয়ার অনুশীলন হবে। Children will practice forming sentences, asking questions, and answering in everyday conversations."
-        ]
+        "children": ["প্রতিদিনের কথোপকথনে বাক্য সাজানো, প্রশ্ন করা এবং উত্তর দেওয়ার অনুশীলন হবে।"]
       },
       {
         "tag": "ul",
@@ -982,40 +818,26 @@
             ]
           }
         ]
-      },
-      {
-        "tag": "span",
-        "children": ["Hello!"]
-      },
-      {
-        "tag": "span",
-        "children": ["Let’s talk!"]
       }
     ]
   },
   {
     "id": "WhatsAppActivitiesSection",
-    "imageUrl": "/images/home/WhatsAppActivitiesSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/online.webp",
+    "imageAlt": "A Bangladeshi child practising English online at home with her mother and a friendly teacher",
     "content": [
       {
-        "tag": "span",
-        "children": ["Learning beyond class"]
-      },
-      {
         "tag": "h2",
-        "children": ["Keep Practicing At Home | বাড়িতে অনুশীলন চালিয়ে যাও"]
+        "children": ["বাড়িতে অনুশীলন চালিয়ে যাও"]
+      },
+      {
+        "tag": "p",
+        "children": ["এনরোল করা শিক্ষার্থীরা নিয়মিত home activity ও speaking practice পাবে।"]
       },
       {
         "tag": "p",
         "children": [
-          "এনরোল করা শিক্ষার্থীরা নিয়মিত home activity ও speaking practice পাবে। Enrolled students will get regular home activities and speaking practice."
-        ]
-      },
-      {
-        "tag": "p",
-        "children": [
-          "WhatsApp Group-এর মাধ্যমে homework, video activity, practice task এবং প্রয়োজনীয় learning material দেওয়া হবে। Homework, video activities, practice tasks, and learning materials will be shared through the WhatsApp group."
+          "WhatsApp Group-এর মাধ্যমে homework, video activity, practice task এবং প্রয়োজনীয় learning material দেওয়া হবে।"
         ]
       },
       {
@@ -1028,7 +850,7 @@
                 "tag": "strong",
                 "children": ["Group"]
               },
-              " WhatsApp learning group | WhatsApp শেখার গ্রুপ"
+              " WhatsApp শেখার গ্রুপ"
             ]
           },
           {
@@ -1038,7 +860,7 @@
                 "tag": "strong",
                 "children": ["Speak"]
               },
-              " Weekly speaking homework | সাপ্তাহিক speaking homework"
+              " সাপ্তাহিক speaking homework"
             ]
           },
           {
@@ -1048,7 +870,7 @@
                 "tag": "strong",
                 "children": ["Video"]
               },
-              " Short video activities | ছোট video activity"
+              " ছোট video activity"
             ]
           },
           {
@@ -1058,32 +880,26 @@
                 "tag": "strong",
                 "children": ["Learn"]
               },
-              " Practice tasks and materials | অনুশীলনের কাজ ও learning materials"
+              " অনুশীলনের কাজ ও learning materials"
             ]
           }
         ]
       },
       {
         "tag": "p",
-        "children": [
-          "অভিভাবকের সহায়তায় বাড়িতেও শেখার অভ্যাস তৈরি হবে। With support from a parent, children can build regular learning habits at home."
-        ]
+        "children": ["অভিভাবকের সহায়তায় বাড়িতেও শেখার অভ্যাস তৈরি হবে।"]
       },
       {
         "tag": "a",
-        "children": ["Join the course | কোর্সে ভর্তি হও"]
+        "children": ["কোর্সে ভর্তি হও"]
       }
     ]
   },
   {
     "id": "AnswerDevelopmentSection",
-    "imageUrl": "/images/home/AnswerDevelopmentSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/writing.webp",
+    "imageAlt": "Bangladeshi university students developing English writing and vocabulary skills with guidance from a tutor",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Build more"]
-      },
       {
         "tag": "h2",
         "children": ["Turn Ideas Into Answers"]
@@ -1157,13 +973,9 @@
   },
   {
     "id": "CompleteIeltsSpeakingSection",
-    "imageUrl": "/images/home/CompleteIeltsSpeakingSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/tutoring.webp",
+    "imageAlt": "A Bangladeshi student confidently practising English speaking with an encouraging tutor in Dhaka",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Speak with purpose"]
-      },
       {
         "tag": "h2",
         "children": ["Master Every Speaking Part"]
@@ -1232,13 +1044,9 @@
   },
   {
     "id": "CourseAudienceSection",
-    "imageUrl": "/images/home/CourseAudienceSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/campus.webp",
+    "imageAlt": "Bangladeshi university students enjoying an English conversation in a leafy modern campus courtyard",
     "content": [
-      {
-        "tag": "span",
-        "children": ["You belong here"]
-      },
       {
         "tag": "h2",
         "children": ["Who Is This Course For?"]
@@ -1358,13 +1166,9 @@
   },
   {
     "id": "CreativeTemplatesSection",
-    "imageUrl": "/images/home/CreativeTemplatesSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/writing.webp",
+    "imageAlt": "Bangladeshi university students developing English writing and vocabulary skills with guidance from a tutor",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Adapt with confidence"]
-      },
       {
         "tag": "h2",
         "children": ["One Idea, Many Topics"]
@@ -1455,8 +1259,8 @@
   },
   {
     "id": "DemoClassSection",
-    "imageUrl": "/images/home/DemoClassSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/tutoring.webp",
+    "imageAlt": "A Bangladeshi student confidently practising English speaking with an encouraging tutor in Dhaka",
     "content": [
       {
         "tag": "h2",
@@ -1490,17 +1294,13 @@
       {
         "tag": "p",
         "children": ["কোনো চাপ নয়—প্রথমে দেখে বুঝুন, তারপর enrollment-এর সিদ্ধান্ত নিন।"]
-      },
-      {
-        "tag": "span",
-        "children": ["See the difference"]
       }
     ]
   },
   {
     "id": "FluencyConfidenceSection",
-    "imageUrl": "/images/home/FluencyConfidenceSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/campus.webp",
+    "imageAlt": "Bangladeshi university students enjoying an English conversation in a leafy modern campus courtyard",
     "content": [
       {
         "tag": "h2",
@@ -1588,22 +1388,14 @@
       {
         "tag": "p",
         "children": ["Each practice session makes your ideas clearer and your delivery more effortless."]
-      },
-      {
-        "tag": "span",
-        "children": ["Keep moving forward"]
       }
     ]
   },
   {
     "id": "HighImpactPhrasesSection",
-    "imageUrl": "/images/home/HighImpactPhrasesSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/writing.webp",
+    "imageAlt": "Bangladeshi university students developing English writing and vocabulary skills with guidance from a tutor",
     "content": [
-      {
-        "tag": "span",
-        "children": ["50+ useful phrases"]
-      },
       {
         "tag": "h2",
         "children": ["More range. More natural answers."]
@@ -1713,13 +1505,9 @@
   },
   {
     "id": "ObjectTopicsSection",
-    "imageUrl": "/images/home/ObjectTopicsSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/writing.webp",
+    "imageAlt": "Bangladeshi university students developing English writing and vocabulary skills with guidance from a tutor",
     "content": [
-      {
-        "tag": "span",
-        "children": ["One core story"]
-      },
       {
         "tag": "h2",
         "children": ["One object, many confident answers."]
@@ -1811,8 +1599,8 @@
   },
   {
     "id": "PersonProfileSection",
-    "imageUrl": "/images/home/PersonProfileSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/campus.webp",
+    "imageAlt": "Bangladeshi university students enjoying an English conversation in a leafy modern campus courtyard",
     "content": [
       {
         "tag": "h2",
@@ -1909,17 +1697,13 @@
             ]
           }
         ]
-      },
-      {
-        "tag": "span",
-        "children": ["One adaptable story"]
       }
     ]
   },
   {
     "id": "PlaceTopicsSection",
-    "imageUrl": "/images/home/PlaceTopicsSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/campus.webp",
+    "imageAlt": "Bangladeshi university students enjoying an English conversation in a leafy modern campus courtyard",
     "content": [
       {
         "tag": "h2",
@@ -2037,17 +1821,13 @@
       {
         "tag": "p",
         "children": ["Keep the structure. Change only the relevant details, and your answer stays clear and natural."]
-      },
-      {
-        "tag": "span",
-        "children": ["One adaptable place"]
       }
     ]
   },
   {
     "id": "SecondaryIeltsHero",
-    "imageUrl": "/images/home/SecondaryIeltsHero.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/ielts.webp",
+    "imageAlt": "Bangladeshi university students developing English speaking skills together in a modern learning studio",
     "content": [
       {
         "tag": "h1",
@@ -2119,26 +1899,14 @@
       {
         "tag": "a",
         "children": ["Join a Demo Class"]
-      },
-      {
-        "tag": "span",
-        "children": ["Learn the method before enrolling."]
-      },
-      {
-        "tag": "span",
-        "children": ["Speak better, naturally"]
       }
     ]
   },
   {
     "id": "SmartAnswerTemplatesSection",
-    "imageUrl": "/images/home/SmartAnswerTemplatesSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/writing.webp",
+    "imageAlt": "Bangladeshi university students developing English writing and vocabulary skills with guidance from a tutor",
     "content": [
-      {
-        "tag": "span",
-        "children": ["Smart templates"]
-      },
       {
         "tag": "h2",
         "children": ["Build answers with a clear direction."]
@@ -2213,8 +1981,8 @@
   },
   {
     "id": "SpeakingFocusedPracticeSection",
-    "imageUrl": "/images/home/SpeakingFocusedPracticeSection.webp",
-    "imageAlt": "",
+    "imageUrl": "/images/home/bangladesh/tutoring.webp",
+    "imageAlt": "A Bangladeshi student confidently practising English speaking with an encouraging tutor in Dhaka",
     "content": [
       {
         "tag": "h2",
@@ -2342,10 +2110,6 @@
       {
         "tag": "a",
         "children": ["Book a Demo Class"]
-      },
-      {
-        "tag": "span",
-        "children": ["Personal feedback"]
       }
     ]
   }
