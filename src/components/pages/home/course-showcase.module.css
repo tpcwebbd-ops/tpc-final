@@ -304,7 +304,7 @@
   transform: translate(2px, -2px);
 }
 .contactPanel {
-  --focus: #f9d7a8;
+  --focus: var(--brand);
   position: relative;
   display: flex;
   align-items: center;
@@ -313,10 +313,10 @@
   padding: 23px 28px;
   margin-top: 24px;
   overflow: hidden;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: 16px;
-  background: var(--ink);
-  color: var(--surface);
+  background: var(--blush);
+  color: var(--ink);
 }
 .contactPanel::before {
   position: absolute;
@@ -324,11 +324,11 @@
   top: -118px;
   width: 270px;
   height: 270px;
-  border: 1px solid #f9d7a814;
+  border: 1px solid #cf302b14;
   border-radius: 50%;
   box-shadow:
-    0 0 0 24px #f9d7a805,
-    0 0 0 48px #f9d7a804;
+    0 0 0 24px #cf302b05,
+    0 0 0 48px #cf302b04;
   content: "";
   pointer-events: none;
 }
@@ -345,9 +345,10 @@
   width: 49px;
   height: 49px;
   flex-shrink: 0;
-  border: 1px solid #f9d7a833;
+  border: 1px solid #efc4b9;
   border-radius: 50%;
-  color: #f9d7a8;
+  color: var(--brand);
+  background: var(--surface);
 }
 .contactIcon > span {
   position: absolute;
@@ -355,9 +356,9 @@
   right: 0;
   width: 9px;
   height: 9px;
-  border: 2px solid #292524;
+  border: 2px solid var(--blush);
   border-radius: 50%;
-  background: #f9d7a8;
+  background: var(--brand);
 }
 .contactIntro h3 {
   margin: 0 0 5px;
@@ -368,7 +369,7 @@
 }
 .contactIntro p {
   margin: 0;
-  color: #ded0c6;
+  color: var(--muted);
   font-size: 11px;
   line-height: 1.7;
 }

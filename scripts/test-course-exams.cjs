@@ -236,6 +236,24 @@ const rejects = (run, status) =>
     for (const answers of [[0], [0, 9], ["0", 1], [-1, 0], [0.5, 1], { score: 999 }])
       assert.equal(rules.gradeExam([question, second], answers), null);
   });
+  await check("result sheets distinguish weighted marks from answer counts", async () => {
+    const result = {
+      questions: [question, second],
+      questionCount: 2,
+      correctCount: 1,
+      answers: [null, 1],
+      score: 2.5,
+      totalMarks: 3.5,
+    };
+    assert.deepEqual(rules.examResultSummary(result), { correct: 1, incorrect: 0, unanswered: 1, percentage: 71.4 });
+    assert.deepEqual(rules.examResultSummary({ ...result, answers: [1, 0], correctCount: 0, score: 0 }), {
+      correct: 0,
+      incorrect: 2,
+      unanswered: 0,
+      percentage: 0,
+    });
+    assert.equal(rules.examResultSummary({ ...result, totalMarks: 0 }).percentage, 0);
+  });
   await check("unapproved enrollment cannot expose documents or start exams; approval unlocks the course", async () => {
     const student = { id: "pending", name: "Pending", email: "pending@example.test" };
     await rejects(() => service.studentCourseWorkspace(student, "course-a"), 403);

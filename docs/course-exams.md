@@ -9,9 +9,9 @@
 
 ## Students
 
-1. Request enrollment in **My Courses**. An approved student can open the course's documents, videos, and exams.
-2. Starting an exam reserves one attempt. An unfinished attempt can be resumed without using another credit. Answers are retained in that browser's local storage when available; grading and final results are stored on the server.
-3. Submit final answers to see marks and correct answers. Open any saved result to review it again or download the PDF marksheet. The marksheet includes the student's answers, correct answers, per-question marks, total marks, and elapsed time. Bengali text is rendered through the browser's fonts.
+1. Request enrollment in **My Courses**. After approval, **Open course** opens a full-window learning space with **Tutorials**, **Exams**, and **Results** tabs. Tutorials contains the course's documents and videos.
+2. Starting an exam reserves one attempt. An unfinished attempt can be resumed without using another credit. Switching tabs keeps the current exam's answers and submission confirmation in place. Answers are also retained in that browser's local storage when available; grading and final results are stored on the server.
+3. Submitting final answers opens the saved result in **Results**. Open any saved result to review it again or download the PDF marksheet. The marksheet uses the site's logo on every page, prominently highlights earned and possible marks and the weighted percentage, and distinguishes correct, incorrect, and unanswered questions. It includes the student's answers, correct answers, per-question marks, explanations, and elapsed time. Bengali text is rendered through the browser's fonts.
 4. Each student starts with **20 exam attempts per course**, including retakes. After all available attempts are submitted, request 20 more from the course workspace. Refresh after staff approval to see the new allowance.
 
 ## Persistence and access

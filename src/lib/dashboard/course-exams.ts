@@ -99,3 +99,16 @@ export function examDuration(seconds: number) {
   const total = Math.max(0, Math.floor(seconds));
   return `${Math.floor(total / 60)}m ${total % 60}s`;
 }
+
+export function examResultSummary(result: ExamResult) {
+  const unanswered = result.questions.filter((_, index) => result.answers[index] == null).length;
+  const correct =
+    result.correctCount ??
+    result.questions.filter((question, index) => result.answers[index] === question.correctOptionIndex).length;
+  return {
+    correct,
+    unanswered,
+    incorrect: Math.max(0, result.questionCount - unanswered - correct),
+    percentage: result.totalMarks > 0 ? Math.round(((result.score ?? 0) / result.totalMarks) * 1000) / 10 : 0,
+  };
+}

@@ -143,7 +143,7 @@ function LearningSection({ section, index }: { section: HomeSection; index: numb
   const results = section.id === "CourseResultsSection";
   const hero = kidsHero || ieltsHero;
   const Heading = kidsHero ? "h1" : "h2";
-  const dark = ieltsHero || demo;
+  const featured = ieltsHero || demo;
   const reversed = index % 2 === 0 && !hero;
   // Follow the column positions, with a scale entrance every third section.
   const copyFrom = index % 3 === 2 ? "scale" : reversed ? "right" : "left";
@@ -153,7 +153,7 @@ function LearningSection({ section, index }: { section: HomeSection; index: numb
     styles.learningSection,
     hero ? styles.hero : "",
     kidsHero ? styles.kidsHero : "",
-    dark ? styles.darkSection : "",
+    featured ? styles.featureSection : "",
     results ? styles.resultsSection : "",
     demo ? styles.demoSection : "",
     reversed ? styles.reversed : "",

@@ -9,12 +9,13 @@
 import { useState } from "react";
 
 import { toast } from "@/components/ui/global-toast";
-import { examDuration, type ExamResult } from "@/lib/dashboard/course-exams";
+import { examDuration, examResultSummary, type ExamResult } from "@/lib/dashboard/course-exams";
 import { questionMarks } from "@/lib/dashboard/courses";
 import { downloadExamMarksheet } from "@/lib/dashboard/exam-marksheet";
 
 export default function ExamResultView({ result, onBack }: { result: ExamResult; onBack: () => void }) {
   const [downloading, setDownloading] = useState(false);
+  const summary = examResultSummary(result);
   async function download() {
     setDownloading(true);
     try {
@@ -26,44 +27,69 @@ export default function ExamResultView({ result, onBack }: { result: ExamResult;
     }
   }
   return (
-    <div className="space-y-4">
+    <div className="mx-auto max-w-5xl space-y-5">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h3 className="text-xl font-semibold">{result.examTitle}</h3>
+          <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-[#cf302b]">Examination result</p>
+          <h3 className="text-xl font-semibold text-stone-900">{result.examTitle}</h3>
           <p className="mt-1 text-sm text-stone-600">Saved result · {new Date(result.submittedAt!).toLocaleString()}</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <button className="secondary-button" onClick={onBack} type="button">
-            Back to course
+            All results
           </button>
           <button className="primary-button" disabled={downloading} onClick={() => void download()} type="button">
             {downloading ? "Creating PDF…" : "Download marksheet PDF"}
           </button>
         </div>
       </header>
-      <div className="grid gap-3 rounded-sm border border-emerald-200 bg-emerald-50 p-4 sm:grid-cols-3">
-        <p>
-          <span className="block text-xs text-stone-600">Marks</span>
-          <strong className="text-xl">
-            {result.score} / {result.totalMarks}
-          </strong>
-        </p>
-        <p>
-          <span className="block text-xs text-stone-600">Correct answers</span>
-          <strong>
-            {result.correctCount} / {result.questionCount}
-          </strong>
-        </p>
-        <p>
-          <span className="block text-xs text-stone-600">Time taken</span>
-          <strong>{examDuration(result.elapsedSeconds ?? 0)}</strong>
+      <section
+        aria-label="Marks summary"
+        className="overflow-hidden rounded-2xl border border-red-100 bg-white shadow-sm"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-5 bg-[#fff1ee] px-5 py-6 sm:px-7">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#a52b26]">Marks obtained</p>
+            <p className="mt-2">
+              <strong className="text-5xl font-bold tracking-tight text-[#cf302b]">{result.score ?? 0}</strong>
+              <span className="ml-2 text-xl text-stone-500">/ {result.totalMarks}</span>
+            </p>
+            <p className="mt-3 text-sm text-stone-600">
+              {result.studentName} · {result.courseName}
+            </p>
+          </div>
+          <div className="rounded-xl border border-red-100 bg-white px-6 py-4 text-center">
+            <strong className="text-3xl text-[#cf302b]">{summary.percentage}%</strong>
+            <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-stone-500">Percentage</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4 p-5 sm:grid-cols-4 sm:px-7">
+          {[
+            { label: "Correct", value: summary.correct, color: "text-emerald-800" },
+            { label: "Incorrect", value: summary.incorrect, color: "text-red-800" },
+            { label: "Unanswered", value: summary.unanswered, color: "text-amber-800" },
+            { label: "Time taken", value: examDuration(result.elapsedSeconds ?? 0), color: "text-stone-800" },
+          ].map(({ label, value, color }) => (
+            <p key={label}>
+              <span className="block text-xs text-stone-500">{label}</span>
+              <strong className={`mt-1 block text-xl ${color}`}>{value}</strong>
+            </p>
+          ))}
+        </div>
+      </section>
+      <div>
+        <h4 className="font-semibold text-stone-900">Answer breakdown</h4>
+        <p className="mt-1 text-sm text-stone-500">
+          Compare your answers with the correct choices and see the marks for each question.
         </p>
       </div>
       {result.questions.map((question, index) => (
-        <article className="rounded-sm border border-stone-200 bg-white p-4" key={question.id}>
+        <article className="rounded-xl border border-stone-200 bg-white p-4 sm:p-5" key={question.id}>
           <h4 className="font-semibold">
             {index + 1}. {question.title}
-            <span className="ml-2 text-sm text-stone-500">
+            <span
+              className={`ml-2 inline-block rounded-full px-3 py-1 text-sm ${result.answers[index] == null ? "bg-amber-50 text-amber-800" : result.answers[index] === question.correctOptionIndex ? "bg-emerald-50 text-emerald-800" : "bg-red-50 text-red-800"}`}
+            >
               {result.answers[index] === question.correctOptionIndex ? questionMarks(question) : 0} /{" "}
               {questionMarks(question)} marks
             </span>
