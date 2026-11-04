@@ -1,0 +1,805 @@
+.showcase {
+  position: relative;
+  overflow: clip;
+  padding: 58px 36px 26px;
+  background: #f7f8f0;
+  color: #203c34;
+  border-bottom: 1px solid #dfe5d5;
+}
+.showcaseInner {
+  position: relative;
+  z-index: 1;
+  max-width: 1168px;
+  margin: auto;
+}
+.ambientGlow {
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  right: -220px;
+  top: -360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #d7f17d4d, transparent 68%);
+  pointer-events: none;
+}
+.showcaseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  margin-bottom: 34px;
+  animation: riseIn 700ms both;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.eyebrow > span {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e6edcc;
+}
+.showcaseHeader h2 {
+  margin: 0;
+  font-size: clamp(35px, 3.8vw, 49px);
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -0.055em;
+}
+.showcaseHeader h2 > span {
+  position: relative;
+  display: inline-block;
+  color: #55783c;
+}
+.showcaseHeader h2 svg {
+  position: absolute;
+  width: 100%;
+  height: 12px;
+  bottom: -10px;
+  left: 0;
+  overflow: visible;
+  fill: none;
+  stroke: #a5c357;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 270;
+  stroke-dashoffset: 270;
+  animation: drawLine 1s 450ms ease forwards;
+}
+.headerAside {
+  padding-bottom: 2px;
+}
+.headerAside > p {
+  margin: 0 0 16px;
+  color: #657266;
+  font-size: 12px;
+  line-height: 1.9;
+}
+.headerAside > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 11px;
+  font-weight: 650;
+  padding-block: 6px;
+}
+.headerAside > a svg {
+  transition: transform 200ms;
+}
+.headerAside > a:hover svg {
+  transform: translateY(3px);
+}
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  scroll-margin-top: 28px;
+}
+.courseItem {
+  min-width: 0;
+  display: flex;
+  animation: riseIn 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(120ms + var(--card-index) * 130ms);
+}
+.courseCard {
+  --card-accent: #3d633b;
+  --card-tint: #eaf0da;
+  --art-color: #d6e2b5;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #dfe5d5;
+  border-radius: 20px;
+  background: #fffef9;
+  box-shadow:
+    0 3px 3px #203c3402,
+    0 12px 28px #203c3403;
+  transition:
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 350ms,
+    border-color 350ms;
+}
+.courseCard[data-theme="speaking"] {
+  --card-accent: #356e73;
+  --card-tint: #e1efed;
+  --art-color: #b7d9d5;
+}
+.courseCard[data-theme="writing"] {
+  --card-accent: #9a543c;
+  --card-tint: #f6e9dd;
+  --art-color: #ecd0b6;
+}
+.cardArt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  height: 110px;
+  flex-shrink: 0;
+  padding: 24px;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 19px 19px 0 0;
+  background: var(--card-tint);
+  color: var(--card-accent);
+}
+.artIcon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border: 1px solid #ffffffd9;
+  border-radius: 18px;
+  background: #fffef9b3;
+  box-shadow: 0 5px 13px #203c3407;
+  transform: rotate(-7deg);
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.artCaption {
+  position: relative;
+  max-width: 110px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.artNumber {
+  position: absolute;
+  right: 18px;
+  bottom: -18px;
+  color: var(--card-accent);
+  font-size: 100px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.1em;
+  opacity: 0.075;
+  z-index: -1;
+  user-select: none;
+}
+.artOrbit,
+.artOrbitInner {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: -75px;
+  right: -38px;
+  border: 1px solid var(--art-color);
+  border-radius: 50%;
+  z-index: -1;
+}
+.artOrbitInner {
+  width: 140px;
+  height: 140px;
+  top: -55px;
+  right: -18px;
+}
+.artSpark {
+  position: absolute;
+  top: 18px;
+  right: 32px;
+  animation: floatSpark 5s ease-in-out 3;
+  animation-delay: calc(var(--card-index) * -1.2s);
+}
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: 24px;
+}
+.courseTitle {
+  min-height: 58px;
+  margin: 0 0 16px;
+  font-size: clamp(21px, 1.9vw, 25px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.courseMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-bottom: 15px;
+  color: #68736a;
+  font-size: 10px;
+  line-height: 1.7;
+}
+.courseMeta > span,
+.courseHighlight,
+.courseSchedule {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+.courseMeta svg,
+.courseHighlight svg,
+.courseSchedule svg,
+.detailsContent svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--card-accent);
+}
+.courseHighlight,
+.courseSchedule {
+  margin: 0 0 9px;
+  color: #536457;
+  font-size: 11px;
+  line-height: 1.8;
+}
+.courseSchedule {
+  color: #6a746b;
+  font-size: 10px;
+}
+.courseDetails {
+  margin: 2px 0 18px;
+  font-size: 11px;
+  color: var(--card-accent);
+}
+.courseDetails summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 36px;
+  width: 100%;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+}
+.courseDetails summary::-webkit-details-marker {
+  display: none;
+}
+.courseDetails summary > svg {
+  transition: transform 250ms;
+}
+.courseDetails[open] summary > svg {
+  transform: rotate(180deg);
+}
+.detailsContent {
+  padding: 12px;
+  border: 1px solid var(--card-tint);
+  border-radius: 10px;
+  background: #f8f9f2;
+  color: #536457;
+  font-size: 11px;
+  line-height: 1.85;
+  animation: detailsIn 250ms ease both;
+}
+.detailsContent ul {
+  display: grid;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.detailsContent li,
+.detailsContent p {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+.detailsContent p {
+  margin: 10px 0 0;
+}
+.courseFooter {
+  margin-top: auto;
+}
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px 12px;
+  padding-top: 18px;
+  margin-bottom: 17px;
+  border-top: 1px solid #e8ebdf;
+}
+.coursePrice {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.055em;
+}
+.coursePrice > span {
+  font-size: 20px;
+  font-weight: 400;
+}
+.feeLabel {
+  color: #748072;
+  font-size: 10px;
+}
+.courseAction {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  overflow: hidden;
+  min-height: 58px;
+  padding: 12px 16px;
+  border: 1px solid #203c34;
+  border-radius: 10px;
+  background: #203c34;
+  color: #fffef9;
+  transition:
+    background 250ms,
+    border-color 250ms,
+    box-shadow 250ms;
+}
+.courseAction::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(110deg, transparent 25%, #ffffff18 48%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 600ms ease;
+  pointer-events: none;
+}
+.courseAction > span {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.courseAction small {
+  display: block;
+  margin-top: 3px;
+  color: #e0e9cf;
+  font-size: 10px;
+  font-weight: 400;
+}
+.courseAction > svg {
+  flex-shrink: 0;
+  color: #d7f17d;
+  transition: transform 250ms;
+}
+.courseAction:hover,
+.courseAction:focus-visible {
+  background: #315441;
+  border-color: #315441;
+  box-shadow: 0 5px 15px #203c341a;
+}
+.courseAction:hover::before {
+  transform: translateX(120%);
+}
+.courseAction:hover > svg {
+  transform: translate(2px, -2px);
+}
+.contactPanel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 23px 28px;
+  margin-top: 24px;
+  overflow: hidden;
+  border: 1px solid #203c34;
+  border-radius: 16px;
+  background: #203c34;
+  color: #fffef9;
+  animation: riseIn 800ms 500ms both;
+}
+.contactPanel::before {
+  position: absolute;
+  right: 24%;
+  top: -118px;
+  width: 270px;
+  height: 270px;
+  border: 1px solid #d7f17d14;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 24px #d7f17d05,
+    0 0 0 48px #d7f17d04;
+  content: "";
+  pointer-events: none;
+}
+.contactIntro {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+.contactIcon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 49px;
+  height: 49px;
+  flex-shrink: 0;
+  border: 1px solid #d7f17d33;
+  border-radius: 50%;
+  color: #d7f17d;
+}
+.contactIcon > span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 9px;
+  height: 9px;
+  border: 2px solid #203c34;
+  border-radius: 50%;
+  background: #d7f17d;
+}
+.contactIntro h3 {
+  margin: 0 0 5px;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+}
+.contactIntro p {
+  margin: 0;
+  color: #c0ccbb;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.whatsappAction {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-shrink: 0;
+  min-height: 54px;
+  padding: 11px 18px;
+  border: 1px solid #d7f17d;
+  border-radius: 10px;
+  background: #d7f17d;
+  color: #203c34;
+  transition:
+    background 200ms,
+    transform 200ms;
+}
+.whatsappAction > span {
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+.whatsappAction small {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.whatsappAction > svg:last-child {
+  margin-left: 10px;
+}
+.whatsappAction:hover {
+  transform: translateY(-2px);
+  background: #e3fa9e;
+}
+.communityRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin-top: 20px;
+}
+.communityRow > p {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: #697764;
+  font-size: 10px;
+}
+.communityRow > p > span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #87a568;
+}
+.communityLinks {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+}
+.communityLinks > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  color: #5b6e5c;
+  font-size: 10px;
+  transition: color 200ms;
+}
+.communityLinks > a > svg:last-child {
+  opacity: 0.5;
+  transition:
+    transform 200ms,
+    opacity 200ms;
+}
+.communityLinks > a:hover {
+  color: #203c34;
+}
+.communityLinks > a:hover > svg:last-child {
+  opacity: 1;
+  transform: translateX(3px);
+}
+.showcase a:focus-visible,
+.showcase summary:focus-visible {
+  outline: 3px solid #cb7939;
+  outline-offset: 5px;
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes floatSpark {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-7px) rotate(14deg);
+  }
+}
+@keyframes detailsIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .courseCard:hover {
+    transform: translateY(-7px);
+    border-color: var(--art-color);
+    box-shadow:
+      0 8px 12px #203c3405,
+      0 22px 40px #203c3410;
+  }
+  .courseCard:hover .artIcon {
+    transform: rotate(2deg) translateY(-3px);
+  }
+}
+@media (max-width: 1000px) {
+  .showcase {
+    padding: 44px 28px 22px;
+  }
+  .courseGrid {
+    gap: 14px;
+  }
+  .cardContent {
+    padding: 20px;
+  }
+  .cardArt {
+    padding: 20px;
+    gap: 10px;
+  }
+  .artIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+  }
+  .artCaption {
+    font-size: 10px;
+    max-width: 90px;
+  }
+  .courseMeta {
+    flex-direction: column;
+    gap: 7px;
+  }
+  .feeLabel {
+    font-size: 9px;
+  }
+  .coursePrice {
+    font-size: 27px;
+  }
+  .communityRow {
+    justify-content: center;
+  }
+}
+@media (max-width: 760px) {
+  .showcase {
+    padding: 38px 23px 24px;
+  }
+  .showcaseInner {
+    max-width: 520px;
+  }
+  .showcaseHeader {
+    display: block;
+    margin-bottom: 26px;
+  }
+  .showcaseHeader h2 {
+    font-size: clamp(35px, 7.5vw, 45px);
+  }
+  .headerAside {
+    margin-top: 24px;
+  }
+  .headerAside > p {
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+  .headerAside > a {
+    gap: 12px;
+  }
+  .courseGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .cardArt {
+    height: 100px;
+    padding-inline: 24px;
+    gap: 14px;
+  }
+  .artCaption {
+    max-width: none;
+    font-size: 11px;
+  }
+  .cardContent {
+    padding: 24px;
+  }
+  .courseTitle {
+    min-height: 0;
+    font-size: 26px;
+    margin-bottom: 14px;
+  }
+  .courseMeta {
+    flex-direction: row;
+    gap: 8px 14px;
+    font-size: 11px;
+  }
+  .courseHighlight {
+    font-size: 12px;
+  }
+  .courseSchedule {
+    font-size: 11px;
+  }
+  .courseDetails {
+    font-size: 12px;
+  }
+  .coursePrice {
+    font-size: 31px;
+  }
+  .feeLabel {
+    font-size: 11px;
+  }
+  .courseAction {
+    min-height: 61px;
+  }
+  .courseAction > span {
+    font-size: 13px;
+  }
+  .courseAction small {
+    font-size: 11px;
+  }
+  .contactPanel {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+  }
+  .contactIntro {
+    gap: 12px;
+  }
+  .contactIcon {
+    width: 42px;
+    height: 42px;
+  }
+  .contactIntro h3 {
+    font-size: 16px;
+  }
+  .contactIntro p {
+    font-size: 11px;
+  }
+  .whatsappAction {
+    justify-content: flex-start;
+  }
+  .whatsappAction > svg:last-child {
+    margin-left: auto;
+  }
+  .communityRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .communityLinks {
+    align-items: flex-start;
+    gap: 2px 18px;
+  }
+  .communityLinks > a {
+    font-size: 11px;
+    min-height: 38px;
+  }
+}
+@media (max-width: 360px) {
+  .showcase {
+    padding-inline: 17px;
+  }
+  .cardContent {
+    padding: 20px;
+  }
+  .contactPanel {
+    padding: 20px;
+  }
+  .eyebrow {
+    letter-spacing: 0.08em;
+    font-size: 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .showcase *,
+  .showcase *::before,
+  .showcase *::after {
+    animation: none;
+    transition: none;
+  }
+  .showcaseHeader h2 svg {
+    stroke-dashoffset: 0;
+  }
+  .whatsappAction:hover,
+  .courseAction:hover > svg,
+  .communityLinks > a:hover > svg:last-child,
+  .headerAside > a:hover svg {
+    transform: none;
+  }
+}

@@ -36,7 +36,7 @@ export function dashboardPaths(path: string) {
     "/dashboard/admin/topbanner": ["/dashboard/admin/top-banner"],
     "/dashboard/admin/footer": ["/dashboard/admin/footer-editor"],
   };
-  const parents = ["/dashboard/admin/menu", "/dashboard/admin/pages", "/dashboard/leads"].filter(
+  const parents = ["/dashboard/admin/menu", "/dashboard/admin/pages", "/dashboard/course", "/dashboard/leads"].filter(
     (parent) => path.startsWith(`${parent}/`),
   );
   return [path, ...(aliases[path] ?? []), ...parents];

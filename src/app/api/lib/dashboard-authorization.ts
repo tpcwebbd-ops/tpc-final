@@ -53,6 +53,7 @@ const standardUserPaths = new Set([
   "/dashboard/media",
   "/dashboard/install",
   "/dashboard/tutorial",
+  "/dashboard/my-course",
 ]);
 
 export type DashboardAccessState = {
@@ -261,6 +262,9 @@ function apiResourcePaths(pathname: string, method: string): string[] | null {
     tracking: ["/dashboard/admin/tracking"],
     categories: ["/dashboard/category"],
     coupons: ["/dashboard/coupon"],
+    courses: ["/dashboard/course"],
+    "my-course": ["/dashboard/my-course"],
+    students: ["/dashboard/students"],
     navigation: ["/dashboard/developer/navigation"],
     leads: [
       "/dashboard/leads",

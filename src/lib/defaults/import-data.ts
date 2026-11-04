@@ -85,6 +85,9 @@ export const sidebarDefaults: ImportSidebarDefault[] = [
   { name: "Profile", url: "/dashboard/profile", icon: "User" },
   { name: "Tutorial", url: "/dashboard/tutorial", icon: "Video" },
   { name: "Category", url: "/dashboard/category", icon: "FolderKanban" },
+  { name: "Course", url: "/dashboard/course", icon: "Bookmark" },
+  { name: "My Courses", url: "/dashboard/my-course", icon: "BookmarkPlus" },
+  { name: "Students", url: "/dashboard/students", icon: "Users" },
   { name: "Coupons", url: "/dashboard/coupon", icon: "Tag" },
   { name: "Install", url: "/dashboard/install", icon: "Download" },
 ];
@@ -125,8 +128,18 @@ export const pageDefaults: ImportPageDefault[] = [
     description: "Answers to frequently asked questions.",
     variant: "all-frequently-ask-questions",
   },
-  { title: "Privacy Policy", path: importPageRoutes.privacy.path, description: "Our privacy policy.", variant: "all-privacy" },
-  { title: "Refund Policy", path: importPageRoutes.refund.path, description: "Our refund policy.", variant: "all-refund" },
+  {
+    title: "Privacy Policy",
+    path: importPageRoutes.privacy.path,
+    description: "Our privacy policy.",
+    variant: "all-privacy",
+  },
+  {
+    title: "Refund Policy",
+    path: importPageRoutes.refund.path,
+    description: "Our refund policy.",
+    variant: "all-refund",
+  },
   {
     title: "Security",
     path: importPageRoutes.security.path,

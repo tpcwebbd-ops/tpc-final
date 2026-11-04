@@ -1,3 +1,9 @@
-Look at the page that create form '/tools/import-data' and please Update Menu, Footer, and Topbanner based on import-data page so there is no mismatch on route and page. you can also check our code base for hard coded rotue and page. 
-after that please remove those components. 
-- 'src/components/products' and make sure in this project there is no products features. 
+Look at the project and I want to implement a new features for our students and teacher or admin. 
+1. Course: I want to a sidebar name 'course' inside 'src/app/dashboard/course'. Inside the page I want to create new coursees. and I want to view, edit and delete each course. each course have name, description, studentsList, duration, total classes, time. Look at the pagebuilder features from 'src/app/dashboard/admin/pages/...' Now I want to build course page same like page builder. I want edit course like edit page. for selection tab please add new items MCQ questions, Content PDF, Video from Media. Inside the edit page I want to select those item and add or edit content.  
+
+2. Students: I want to see all summery of students inside 'src/app/dashboard/students'. in percent based on course. and also I want to see if not enrolled course. also display all students info by table. and ensure there is a search bar, pagination, and filter throw course, and paid or non paid. 
+--------------------------------------------------------------------------------
+Look at the project and I want to implement a new features for our students. 
+1. My-Course: I want to see all courses inside 'src/app/dashboard/my-course' from 'src/app/dashboard/course'. and Add enrollment button for each course. and after conformation please send a request for enrollment in 'src/app/dashboard/course' page. 
+
+2. Course: please add a new tab inside 'src/app/dashboard/course/edit' page for each course name 'request' so I can see request students and make them enrolled. and please add an option so I can block students from here for course. 

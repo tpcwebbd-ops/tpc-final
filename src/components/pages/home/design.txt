@@ -1,0 +1,392 @@
+<section id="AnnouncementBar">
+  <ul>
+    <li><a>Kids Spoken Level 1 | 2 months | 24 lectures | Age-friendly spoken English | 5,000 BDT | Join a free class • ফ্রি ক্লাসে যোগ দিন</a></li>
+    <li><a>IELTS Speaking Course | 2 months + 4-month club access | 24 classes · 24 lecture sheets | Part 1: 6 · Part 2: 8 · Part 3: 10 | Sun, Tue &amp; Thu · 9:30–10:30 PM | 4,000 BDT | Join a free class • ফ্রি ক্লাসে যোগ দিন</a></li>
+    <li><a>IELTS Writing Full Course – 2026 | 2 Months | 3–4 classes per week | Saturday, Monday, Wednesday · 9:30–10:30 PM | Foundation classes · Writing basics | Vocabulary lessons · Words &amp; phrases | Task 1 · Graphs, charts &amp; diagrams | Task 2 · Six major essay types | WhatsApp · +880 1786 558855 | 4,000 TK | Join a free class • ফ্রি ক্লাসে যোগ দিন</a></li>
+  </ul>
+  <nav>
+    <a>WhatsApp 01786558855</a>
+    <a>Kids English Facebook page</a>
+    <a>TestPrep Center Facebook page</a>
+    <a>TestPrep Center on YouTube</a>
+  </nav>
+</section>
+
+<section id="CameraSpeakingSection">
+  <span>Camera confidence</span>
+  <h2>Feel Comfortable On Camera</h2>
+  <p>প্রেজেন্টেশন ও video homework-এর মাধ্যমে শিশুরা camera confidence তৈরি করবে। Children will build confidence on camera through presentations and video homework.</p>
+  <p>সহজ, ছোট ছোট speaking task-এর মাধ্যমে নিজের কণ্ঠ, অভিব্যক্তি এবং উপস্থাপনায় স্বচ্ছন্দ হবে। Simple speaking tasks will help children feel comfortable with their voice, expressions, and presentations.</p>
+  <p><strong>Learning outcome:</strong> ক্যামেরার সামনে শান্তভাবে, স্পষ্টভাবে এবং আত্মবিশ্বাসের সাথে কথা বলা। Speak calmly, clearly, and confidently in front of the camera.</p>
+  <a>Build confidence</a>
+  <span>REC</span>
+  <span>You can do it!</span>
+  <span>Find your voice</span>
+</section>
+
+<section id="CollocationsSection">
+  <span>Word connections</span>
+  <h2>Choose Words Naturally</h2>
+  <p>শিশুরা শিখবে কোন শব্দগুলো একসাথে স্বাভাবিকভাবে ব্যবহার হয়। Children will learn which words naturally go together.</p>
+  <p>সঠিক পরিস্থিতিতে সঠিক শব্দ বেছে নিয়ে তারা আরও পরিষ্কার, স্বচ্ছন্দ এবং প্রাকৃতিক ইংরেজিতে কথা বলবে। Choosing the right words for each situation will help them speak English more clearly, comfortably, and naturally.</p>
+  <ul>
+    <li><span>make</span> <strong>a decision</strong></li>
+    <li><span>take</span> <strong>a break</strong></li>
+    <li><span>strong</span> <strong>coffee</strong></li>
+  </ul>
+  <p>শব্দের সঠিক জুটি বুঝে কথায় তৈরি হবে স্বাভাবিক flow। Understanding natural word pairs will help children speak with a natural flow.</p>
+  <span>Match!</span>
+  <span>Right words</span>
+</section>
+
+<section id="ContractionsSection">
+  <span>Everyday speaking</span>
+  <h2>Speak Naturally, Faster</h2>
+  <p>কথার গতি ও স্বাভাবিকতা বাড়াতে শিশুরা contractions শিখবে। Children will learn contractions to speak more smoothly and naturally.</p>
+  <p>দৈনন্দিন কথোপকথনে দীর্ঘ শব্দকে ছোট করে সহজে, দ্রুত এবং আত্মবিশ্বাসের সাথে বলা হবে। Using contractions will help children speak more easily, quickly, and confidently in everyday conversations.</p>
+  <ul>
+    <li><span>I am</span> <strong>I’m</strong></li>
+    <li><span>I will</span> <strong>I’ll</strong></li>
+    <li><span>do not</span> <strong>don’t</strong></li>
+    <li><span>cannot</span> <strong>can’t</strong></li>
+  </ul>
+  <p>বাস্তব কথোপকথন আরও সহজ ও স্বাভাবিক শোনাবে। Real conversations sound easier and more natural.</p>
+  <span>I’m ready!</span>
+  <span>I’ll try!</span>
+</section>
+
+<section id="ConversationPracticeSection">
+  <span>Let’s talk!</span>
+  <span>Learn by talking</span>
+  <h2>Practice Through Conversation</h2>
+  <p>কথোপকথনের মাধ্যমে শিশুরা প্রশ্ন, উত্তর এবং স্বাভাবিকভাবে কথা বলা শিখবে। Through conversation, children will learn to ask questions, answer, and speak naturally.</p>
+  <p>জোড়ায় কথা বলা, পরিস্থিতি অনুযায়ী speaking এবং interactive activity-এর মাধ্যমে শেখা হবে আনন্দময়। Pair conversations, situational speaking, and interactive activities make learning enjoyable.</p>
+  <ul>
+    <li><strong>Q&amp;A</strong> <span>Ask and answer</span></li>
+    <li><strong>Pair</strong> <span>Talk together</span></li>
+    <li><strong>Scene</strong> <span>Speak by situation</span></li>
+    <li><strong>Play</strong> <span>Learn interactively</span></li>
+  </ul>
+  <a>Start speaking</a>
+</section>
+
+<section id="CourseResultsSection">
+  <span>Learning milestones</span>
+  <h2>কোর্স শেষে অর্জন | Course Outcomes</h2>
+  <p>শিশুর শেখা দক্ষতাগুলো ধীরে ধীরে বাস্তব আত্মবিশ্বাসে পরিণত হবে। The skills children develop will gradually become real confidence.</p>
+  <ul>
+    <li>Speaking Fluency</li>
+    <li>Vocabulary</li>
+    <li>Grammar Accuracy</li>
+    <li>Presentation Skills</li>
+    <li>Reading Fluency</li>
+    <li>Natural Pronunciation</li>
+    <li>Conversation Skills</li>
+    <li>Camera Confidence</li>
+    <li>Situational Speaking</li>
+    <li>Overall Confidence</li>
+  </ul>
+  <p><strong>চূড়ান্ত লক্ষ্য | Final goal:</strong> প্রতিটি শিশু যেন ইংরেজিতে নিজের ভাবনা আত্মবিশ্বাসের সাথে প্রকাশ করতে পারে। Every child can express their ideas in English with confidence.</p>
+  <span>Ready</span>
+  <span>to speak!</span>
+</section>
+
+<section id="KidsHero">
+  <span>Kids spoken English</span>
+  <h1>Build English Confidence | ইংরেজিতে আত্মবিশ্বাস গড়ুন</h1>
+  <p>৩ মাসে শিশুরা শিখবে প্রয়োজনীয় ইংরেজি, আনন্দে ও আত্মবিশ্বাসে। In 3 months, children will learn practical English with joy and confidence.</p>
+  <ul>
+    <li><strong>৩ মাস | 3 months</strong> <span>কোর্সের সময়কাল | Course duration</span></li>
+    <li><strong>৬–১০ বছর | Ages 6–10</strong> <span>উপযুক্ত বয়স | Suitable age</span></li>
+  </ul>
+  <p>৬–১০ বছরের শিশুদের জন্য সহজ, আনন্দময় শেখার পরিবেশ। A fun, welcoming learning environment for children ages 6–10.</p>
+  <a>ভর্তি হতে যোগাযোগ করুন | Enroll now</a>
+  <a>কোর্সটি দেখুন | View course</a>
+  <span>Learn with joy!</span>
+</section>
+
+<section id="PracticalVocabularySection">
+  <span>600–800</span>
+  <span>everyday words | দৈনন্দিন শব্দ</span>
+  <span>Everyday English</span>
+  <h2>Learn Practical Vocabulary</h2>
+  <p>শিশুরা শব্দ শিখে বাস্তব জীবনে সঠিকভাবে ব্যবহার করবে। Children will learn new words and use them correctly in everyday life.</p>
+  <p>৬০০–৮০০টি দৈনন্দিন শব্দ শেখে পরিবার, স্কুল ও বন্ধুদের কথোপকথনে। They will learn 600–800 everyday words used with family, at school, and with friends.</p>
+  <ul>
+    <li><strong>01</strong> শুনে বুঝতে শেখে | Learn by listening</li>
+    <li><strong>02</strong> বাক্যে ব্যবহার করে | Use words in sentences</li>
+    <li><strong>03</strong> আত্মবিশ্বাসের সাথে বলে | Speak with confidence</li>
+  </ul>
+</section>
+
+<section id="PresentationSkillsSection">
+  <span>Speak | বলুন</span>
+  <span>with confidence | আত্মবিশ্বাসের সাথে</span>
+  <span>Presentation practice</span>
+  <h2>Present Your Story</h2>
+  <p>শিশুরা নিজের পরিচয়, পরিবার, স্কুল এবং প্রিয় বিষয় নিয়ে কথা বলবে। Children will speak about themselves, their families, school, and favorite topics.</p>
+  <p>প্রতিদিনের জীবন ও শখ নিয়ে সুন্দরভাবে ভাবনা সাজিয়ে উপস্থাপন করার অভ্যাস তৈরি হবে। They will learn to organize their thoughts and present them clearly when talking about everyday life and hobbies.</p>
+  <ul>
+    <li><strong>01</strong> নিজেকে পরিচয় করানো | Introducing yourself</li>
+    <li><strong>02</strong> পরিবার ও বাবা-মা | Family and parents</li>
+    <li><strong>03</strong> স্কুল ও সেরা বন্ধু | School and best friends</li>
+    <li><strong>04</strong> দৈনন্দিন কাজ ও শখ | Daily activities and hobbies</li>
+  </ul>
+  <p><strong>Learning outcome:</strong> আত্মবিশ্বাসের সাথে শ্রোতার সামনে কথা বলা। Speak confidently in front of an audience.</p>
+</section>
+
+<section id="ReadingFluencySection">
+  <span>Reading aloud</span>
+  <h2>Read With Natural Flow</h2>
+  <p>শিশুরা ছন্দ, উচ্চারণ এবং স্বাভাবিক গতিতে সাবলীলভাবে পড়বে। Children will read fluently with rhythm, clear pronunciation, and a natural pace.</p>
+  <p>নিয়মিত reading practice-এর মাধ্যমে শব্দ পরিষ্কার বলা, বাক্যের rhythm বোঝা এবং আত্মবিশ্বাসের সাথে কথা বলা শিখবে। Regular reading practice will help them pronounce words clearly, understand sentence rhythm, and speak with confidence.</p>
+  <ul>
+    <li>Rhythm</li>
+    <li>Pronunciation</li>
+    <li>Natural Flow</li>
+    <li>Fluent Reading</li>
+    <li>Confident Speaking</li>
+  </ul>
+  <p>শুধু পড়া নয়—শিশুর কণ্ঠে তৈরি হবে স্বাভাবিক আত্মবিশ্বাস। More than reading, it helps children speak with natural confidence.</p>
+</section>
+
+<section id="RealLifeTenseSection">
+  <span>Talk about life</span>
+  <span>Real-life grammar</span>
+  <h2>Tenses For Real Life</h2>
+  <p>শিশুরা মুখস্থ না করে কথার মাধ্যমে Present, Past এবং Future Tense শিখবে। Children will learn the present, past, and future tenses through conversation instead of memorization.</p>
+  <p>নিজের অভিজ্ঞতা, আজকের কাজ এবং আগামী পরিকল্পনা নিয়ে কথা বলেই tense ব্যবহার শেখা হবে। They will learn to use tenses by talking about their experiences, what they do today, and their plans for tomorrow.</p>
+  <ol>
+    <li><strong>Present</strong> আজ কী করি | What I do today</li>
+    <li><strong>Past</strong> গতকাল কী করেছি | What I did yesterday</li>
+    <li><strong>Future</strong> আগামীকাল কী করব | What I will do tomorrow</li>
+  </ol>
+</section>
+
+<section id="SituationalSpeakingSection">
+  <span>On-the-spot speaking</span>
+  <h2>Speak In The Moment</h2>
+  <p>পরিস্থিতি বুঝে শিশুরা দ্রুত, স্বাভাবিকভাবে ইংরেজিতে কথা বলবে। Children will learn to speak English quickly and naturally by responding to different situations.</p>
+  <p>স্কুলের অনুষ্ঠান, ভালো ফলাফল, অর্জন এবং পরিচিত বিষয় নিয়ে তাৎক্ষণিক বলার অনুশীলন হবে। They will practice speaking on the spot about school events, good results, achievements, and familiar topics.</p>
+  <ul>
+    <li><strong>School events</strong> <span>Speak on stage</span></li>
+    <li><strong>Achievements</strong> <span>Share good news</span></li>
+    <li><strong>Familiar topics</strong> <span>Think and respond</span></li>
+  </ul>
+  <p>ফলাফল: প্রস্তুতি ছাড়াই আত্মবিশ্বাসের সাথে কথা বলা। Outcome: Speak confidently without preparation.</p>
+  <span>Think</span>
+  <span>Speak</span>
+</section>
+
+<section id="SpokenPhrasesSection">
+  <span>Everyday phrases</span>
+  <h2>Speak With Confidence</h2>
+  <p>শিশুরা ১৫০টির বেশি phrase ও sentence structure শিখবে। Children will learn more than 150 phrases and sentence structures.</p>
+  <p>প্রতিদিনের কথোপকথনে বাক্য সাজানো, প্রশ্ন করা এবং উত্তর দেওয়ার অনুশীলন হবে। Children will practice forming sentences, asking questions, and answering in everyday conversations.</p>
+  <ul>
+    <li><strong>Ask</strong> <span>How are you?</span></li>
+    <li><strong>Answer</strong> <span>I am happy!</span></li>
+    <li><strong>Build a sentence</strong> <span>I like + activity</span></li>
+  </ul>
+  <span>Hello!</span>
+  <span>Let’s talk!</span>
+</section>
+
+<section id="WhatsAppActivitiesSection">
+  <span>Learning beyond class</span>
+  <h2>Keep Practicing At Home | বাড়িতে অনুশীলন চালিয়ে যাও</h2>
+  <p>এনরোল করা শিক্ষার্থীরা নিয়মিত home activity ও speaking practice পাবে। Enrolled students will get regular home activities and speaking practice.</p>
+  <p>WhatsApp Group-এর মাধ্যমে homework, video activity, practice task এবং প্রয়োজনীয় learning material দেওয়া হবে। Homework, video activities, practice tasks, and learning materials will be shared through the WhatsApp group.</p>
+  <ul>
+    <li><strong>Group</strong> WhatsApp learning group | WhatsApp শেখার গ্রুপ</li>
+    <li><strong>Speak</strong> Weekly speaking homework | সাপ্তাহিক speaking homework</li>
+    <li><strong>Video</strong> Short video activities | ছোট video activity</li>
+    <li><strong>Learn</strong> Practice tasks and materials | অনুশীলনের কাজ ও learning materials</li>
+  </ul>
+  <p>অভিভাবকের সহায়তায় বাড়িতেও শেখার অভ্যাস তৈরি হবে। With support from a parent, children can build regular learning habits at home.</p>
+  <a>Join the course | কোর্সে ভর্তি হও</a>
+</section>
+
+<section id="AnswerDevelopmentSection">
+  <span>Build more</span>
+  <h2>Turn Ideas Into Answers</h2>
+  <p>একটি short answer-কে চারটি simple step-এ complete, clear এবং relevant করে তুলুন।</p>
+  <ol>
+    <li><strong>Reason</strong> <span>State your main idea clearly.</span></li>
+    <li><strong>Example</strong> <span>Make the idea easy to understand.</span></li>
+    <li><strong>Explanation</strong> <span>Show how your example supports the point.</span></li>
+    <li><strong>Relevant Details</strong> <span>Add natural detail to make it convincing.</span></li>
+  </ol>
+  <p>প্রতিটি stage যোগ হলে উত্তর হয় longer, clearer এবং more convincing।</p>
+</section>
+
+<section id="CompleteIeltsSpeakingSection">
+  <span>Speak with purpose</span>
+  <h2>Master Every Speaking Part</h2>
+  <p>প্রতিটি Part-এর format, strategy এবং confident delivery-এর জন্য structured practice।</p>
+  <ul>
+    <li><strong>Part 1</strong> <span>Interview</span> <p>Answer familiar questions naturally.</p></li>
+    <li><strong>Part 2</strong> <span>Cue Card / Long Turn</span> <p>Organize ideas and speak continuously.</p></li>
+    <li><strong>Part 3</strong> <span>Discussion</span> <p>Explain opinions with clear examples.</p></li>
+  </ul>
+</section>
+
+<section id="CourseAudienceSection">
+  <span>You belong here</span>
+  <h2>Who Is This Course For?</h2>
+  <p>যদি Speaking নিয়ে struggle করেন, এই course আপনাকে step by step এগোতে সাহায্য করবে।</p>
+  <ul>
+    <li><strong>01</strong> <strong>Stuck in Speaking</strong> <span>আপনি জানেন, কিন্তু smoothly বলতে পারছেন না।</span></li>
+    <li><strong>02</strong> <strong>Need More Ideas</strong> <span>উত্তর দেওয়ার সময় idea খুঁজে পেতে সময় লাগে।</span></li>
+    <li><strong>03</strong> <strong>Fear Cue Cards</strong> <span>Cue Card দেখলেই confidence কমে যায়।</span></li>
+    <li><strong>04</strong> <strong>Low Fluency</strong> <span>কথার flow বারবার থেমে যায়।</span></li>
+    <li><strong>05</strong> <strong>Low Confidence</strong> <span>ভুল হওয়ার ভয় আপনাকে আটকে রাখে।</span></li>
+    <li><strong>06</strong> <strong>Improve Band Score</strong> <span>আরও ভালো Speaking score-এর জন্য প্রস্তুত।</span></li>
+  </ul>
+</section>
+
+<section id="CreativeTemplatesSection">
+  <span>Adapt with confidence</span>
+  <h2>One Idea, Many Topics</h2>
+  <p>একটি core template রেখে relevant information বদলে বিভিন্ন topic-এ smartly উত্তর দিন।</p>
+  <p><strong>Core template</strong></p>
+  <ol>
+    <li>Introduce</li>
+    <li>Describe</li>
+    <li>Explain</li>
+    <li>Reflect</li>
+  </ol>
+  <ul>
+    <li><strong>Person</strong> <span>a teacher who inspired me</span></li>
+    <li><strong>Place</strong> <span>a park I enjoy visiting</span></li>
+    <li><strong>Experience</strong> <span>a memorable journey</span></li>
+  </ul>
+  <p>Structure একই থাকে, idea বদলায়—তাই উত্তর হয় natural এবং organized।</p>
+</section>
+
+<section id="DemoClassSection">
+  <h2>Join A Demo Class</h2>
+  <p>Enrollment-এর আগে Demo Class-এ অংশ নিয়ে আমাদের teaching method এবং course structure বুঝে নিন।</p>
+  <p><strong>Course Fee</strong> <span>4,000 BDT — Fixed</span></p>
+  <p>এই fixed fee negotiable নয়।</p>
+  <a>Reserve Your Demo Class</a>
+  <p>কোনো চাপ নয়—প্রথমে দেখে বুঝুন, তারপর enrollment-এর সিদ্ধান্ত নিন।</p>
+  <span>See the difference</span>
+</section>
+
+<section id="FluencyConfidenceSection">
+  <h2>Speak better with every conversation.</h2>
+  <p>Regular speaking practice turns familiar English into fluent, confident, natural delivery—one clear step at a time.</p>
+  <ol>
+    <li><strong>Fluency</strong> <span>Speak without searching for every word</span> <span>01</span></li>
+    <li><strong>Confidence</strong> <span>Stay composed under every question</span> <span>02</span></li>
+    <li><strong>Ideas</strong> <span>Develop answers with a clear direction</span> <span>03</span></li>
+    <li><strong>Delivery</strong> <span>Sound natural, warm, and well paced</span> <span>04</span></li>
+  </ol>
+  <p>Each practice session makes your ideas clearer and your delivery more effortless.</p>
+  <span>Keep moving forward</span>
+</section>
+
+<section id="HighImpactPhrasesSection">
+  <span>50+ useful phrases</span>
+  <h2>More range. More natural answers.</h2>
+  <p>Build a ready-to-use bank of useful phrases and expressions, then use them naturally when it is your turn to speak.</p>
+  <ul>
+    <li><span>01</span> <strong>Start</strong> <span>From my perspective,</span> <p>Open your answer naturally</p></li>
+    <li><span>02</span> <strong>Expand</strong> <span>One reason is that…</span> <p>Develop a clear point</p></li>
+    <li><span>03</span> <strong>Connect</strong> <span>For instance,</span> <p>Make your ideas easy to follow</p></li>
+    <li><span>04</span> <strong>Conclude</strong> <span>Overall, I would say…</span> <p>Finish with confidence</p></li>
+  </ul>
+  <p>These are not lines to memorise. They are flexible building blocks for answers that sound like you.</p>
+</section>
+
+<section id="ObjectTopicsSection">
+  <span>One core story</span>
+  <h2>One object, many confident answers.</h2>
+  <p>Prepare one object with the right vocabulary, details, and personal story—then adapt the focus for several cue cards.</p>
+  <ul>
+    <li><span>01</span> <strong>A useful device</strong> <span>Focus: Usefulness</span></li>
+    <li><span>02</span> <strong>A special gift</strong> <span>Focus: Personal story</span></li>
+    <li><span>03</span> <strong>Something you bought</strong> <span>Focus: Choice and value</span></li>
+    <li><span>04</span> <strong>An object you use daily</strong> <span>Focus: Routine and habit</span></li>
+  </ul>
+  <p>Keep the core description the same. Shift the focus to match the question.</p>
+</section>
+
+<section id="PersonProfileSection">
+  <h2>One profile. Many thoughtful answers.</h2>
+  <p>Build one memorable person profile with details that matter, then shift the angle to suit different IELTS Speaking cue cards.</p>
+  <p><strong>Your core profile</strong></p>
+  <p>Relationship, one vivid memory, a defining quality, and the impact they had on you.</p>
+  <ul>
+    <li><span>01</span> <strong>Someone who helped you</strong> <span>Focus on: A meaningful moment</span></li>
+    <li><span>02</span> <strong>An inspiring person</strong> <span>Focus on: Their positive influence</span></li>
+    <li><span>03</span> <strong>A successful person</strong> <span>Focus on: Habits and achievements</span></li>
+    <li><span>04</span> <strong>A person you admire</strong> <span>Focus on: Character and values</span></li>
+  </ul>
+  <span>One adaptable story</span>
+</section>
+
+<section id="PlaceTopicsSection">
+  <h2>One place, many ways to speak.</h2>
+  <p>Prepare one place with strong vocabulary and a simple structure. Then adapt the details for the cue card in front of you.</p>
+  <p><strong>Core framework</strong></p>
+  <ol>
+    <li>Location</li>
+    <li>Details</li>
+    <li>Feeling</li>
+    <li>Reason</li>
+  </ol>
+  <ul>
+    <li><span>01</span> <strong>A place you visit</strong> <span>Focus on: Your routine</span></li>
+    <li><span>02</span> <strong>A beautiful location</strong> <span>Focus on: The atmosphere</span></li>
+    <li><span>03</span> <strong>A crowded place</strong> <span>Focus on: The energy</span></li>
+    <li><span>04</span> <strong>A place for relaxation</strong> <span>Focus on: How it makes you feel</span></li>
+  </ul>
+  <p>Keep the structure. Change only the relevant details, and your answer stays clear and natural.</p>
+  <span>One adaptable place</span>
+</section>
+
+<section id="SecondaryIeltsHero">
+  <h1>Build confidence. Speak naturally. Perform better.</h1>
+  <p>Real conversation, focused practice, and expert guidance—so you can feel prepared for IELTS Speaking and sound like yourself.</p>
+  <ul>
+    <li><strong>2 Months</strong> <span>Course duration</span></li>
+    <li><strong>3 Days</strong> <span>Every week</span></li>
+    <li><strong>9:30–10:30 PM</strong> <span>Class time</span></li>
+    <li><strong>4,000 BDT</strong> <span>Fixed fee</span></li>
+  </ul>
+  <a>Join a Demo Class</a>
+  <span>Learn the method before enrolling.</span>
+  <span>Speak better, naturally</span>
+</section>
+
+<section id="SmartAnswerTemplatesSection">
+  <span>Smart templates</span>
+  <h2>Build answers with a clear direction.</h2>
+  <p>Use simple answer structures to organise your ideas in every part of IELTS Speaking—without sounding rehearsed.</p>
+  <ul>
+    <li><strong>Part 1</strong> <span>Answer · Reason</span> <p>Keep short answers clear, then make them more complete with one natural reason.</p></li>
+    <li><strong>Part 2</strong> <span>Plan · Speak · Extend</span> <p>Start from one central idea, then add the details that bring your story to life.</p></li>
+    <li><strong>Part 3</strong> <span>Opinion · Explain · Example</span> <p>Make a thoughtful point, explain why it matters, and support it with an example.</p></li>
+  </ul>
+  <p>A template is not a script to memorise. It is a reliable route for expressing your own ideas.</p>
+</section>
+
+<section id="SpeakingFocusedPracticeSection">
+  <h2>Practice. Get feedback. Improve with purpose.</h2>
+  <p>Regular IELTS Speaking practice helps you identify personal weak points, build on what works, and make meaningful progress from session to session.</p>
+  <ol>
+    <li><span>01</span> <strong>Speak</strong> <span>Answer in a realistic mock interview</span></li>
+    <li><span>02</span> <strong>Review</strong> <span>See what is already working</span></li>
+    <li><span>03</span> <strong>Improve</strong> <span>Apply clear next-step feedback</span></li>
+  </ol>
+  <ul>
+    <li><strong>Fluency</strong> <span>A smoother flow of ideas</span></li>
+    <li><strong>Vocabulary</strong> <span>A more flexible word range</span></li>
+    <li><strong>Grammar</strong> <span>Clearer, more accurate structures</span></li>
+    <li><strong>Pronunciation</strong> <span>Easier-to-understand delivery</span></li>
+  </ul>
+  <a>Book a Demo Class</a>
+  <span>Personal feedback</span>
+</section>

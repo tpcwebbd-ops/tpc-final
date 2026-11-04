@@ -1,0 +1,2352 @@
+[
+  {
+    "id": "AnnouncementBar",
+    "imageUrl": "/images/home/AnnouncementBar.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "a",
+                "children": [
+                  "Kids Spoken Level 1 | 2 months | 24 lectures | Age-friendly spoken English | 5,000 BDT | Join a free class • ফ্রি ক্লাসে যোগ দিন"
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "a",
+                "children": [
+                  "IELTS Speaking Course | 2 months + 4-month club access | 24 classes · 24 lecture sheets | Part 1: 6 · Part 2: 8 · Part 3: 10 | Sun, Tue & Thu · 9:30–10:30 PM | 4,000 BDT | Join a free class • ফ্রি ক্লাসে যোগ দিন"
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "a",
+                "children": [
+                  "IELTS Writing Full Course – 2026 | 2 Months | 3–4 classes per week | Saturday, Monday, Wednesday · 9:30–10:30 PM | Foundation classes · Writing basics | Vocabulary lessons · Words & phrases | Task 1 · Graphs, charts & diagrams | Task 2 · Six major essay types | WhatsApp · +880 1786 558855 | 4,000 TK | Join a free class • ফ্রি ক্লাসে যোগ দিন"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "nav",
+        "children": [
+          {
+            "tag": "a",
+            "children": ["WhatsApp 01786558855"]
+          },
+          {
+            "tag": "a",
+            "children": ["Kids English Facebook page"]
+          },
+          {
+            "tag": "a",
+            "children": ["TestPrep Center Facebook page"]
+          },
+          {
+            "tag": "a",
+            "children": ["TestPrep Center on YouTube"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CameraSpeakingSection",
+    "imageUrl": "/images/home/CameraSpeakingSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Camera confidence"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Feel Comfortable On Camera"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "প্রেজেন্টেশন ও video homework-এর মাধ্যমে শিশুরা camera confidence তৈরি করবে। Children will build confidence on camera through presentations and video homework."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "সহজ, ছোট ছোট speaking task-এর মাধ্যমে নিজের কণ্ঠ, অভিব্যক্তি এবং উপস্থাপনায় স্বচ্ছন্দ হবে। Simple speaking tasks will help children feel comfortable with their voice, expressions, and presentations."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          {
+            "tag": "strong",
+            "children": ["Learning outcome:"]
+          },
+          " ক্যামেরার সামনে শান্তভাবে, স্পষ্টভাবে এবং আত্মবিশ্বাসের সাথে কথা বলা। Speak calmly, clearly, and confidently in front of the camera."
+        ]
+      },
+      {
+        "tag": "a",
+        "children": ["Build confidence"]
+      },
+      {
+        "tag": "span",
+        "children": ["REC"]
+      },
+      {
+        "tag": "span",
+        "children": ["You can do it!"]
+      },
+      {
+        "tag": "span",
+        "children": ["Find your voice"]
+      }
+    ]
+  },
+  {
+    "id": "CollocationsSection",
+    "imageUrl": "/images/home/CollocationsSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Word connections"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Choose Words Naturally"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "শিশুরা শিখবে কোন শব্দগুলো একসাথে স্বাভাবিকভাবে ব্যবহার হয়। Children will learn which words naturally go together."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "সঠিক পরিস্থিতিতে সঠিক শব্দ বেছে নিয়ে তারা আরও পরিষ্কার, স্বচ্ছন্দ এবং প্রাকৃতিক ইংরেজিতে কথা বলবে। Choosing the right words for each situation will help them speak English more clearly, comfortably, and naturally."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["make"]
+              },
+              {
+                "tag": "strong",
+                "children": ["a decision"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["take"]
+              },
+              {
+                "tag": "strong",
+                "children": ["a break"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["strong"]
+              },
+              {
+                "tag": "strong",
+                "children": ["coffee"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "শব্দের সঠিক জুটি বুঝে কথায় তৈরি হবে স্বাভাবিক flow। Understanding natural word pairs will help children speak with a natural flow."
+        ]
+      },
+      {
+        "tag": "span",
+        "children": ["Match!"]
+      },
+      {
+        "tag": "span",
+        "children": ["Right words"]
+      }
+    ]
+  },
+  {
+    "id": "ContractionsSection",
+    "imageUrl": "/images/home/ContractionsSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Everyday speaking"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Speak Naturally, Faster"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "কথার গতি ও স্বাভাবিকতা বাড়াতে শিশুরা contractions শিখবে। Children will learn contractions to speak more smoothly and naturally."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "দৈনন্দিন কথোপকথনে দীর্ঘ শব্দকে ছোট করে সহজে, দ্রুত এবং আত্মবিশ্বাসের সাথে বলা হবে। Using contractions will help children speak more easily, quickly, and confidently in everyday conversations."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["I am"]
+              },
+              {
+                "tag": "strong",
+                "children": ["I’m"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["I will"]
+              },
+              {
+                "tag": "strong",
+                "children": ["I’ll"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["do not"]
+              },
+              {
+                "tag": "strong",
+                "children": ["don’t"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["cannot"]
+              },
+              {
+                "tag": "strong",
+                "children": ["can’t"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": ["বাস্তব কথোপকথন আরও সহজ ও স্বাভাবিক শোনাবে। Real conversations sound easier and more natural."]
+      },
+      {
+        "tag": "span",
+        "children": ["I’m ready!"]
+      },
+      {
+        "tag": "span",
+        "children": ["I’ll try!"]
+      }
+    ]
+  },
+  {
+    "id": "ConversationPracticeSection",
+    "imageUrl": "/images/home/ConversationPracticeSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Let’s talk!"]
+      },
+      {
+        "tag": "span",
+        "children": ["Learn by talking"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Practice Through Conversation"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "কথোপকথনের মাধ্যমে শিশুরা প্রশ্ন, উত্তর এবং স্বাভাবিকভাবে কথা বলা শিখবে। Through conversation, children will learn to ask questions, answer, and speak naturally."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "জোড়ায় কথা বলা, পরিস্থিতি অনুযায়ী speaking এবং interactive activity-এর মাধ্যমে শেখা হবে আনন্দময়। Pair conversations, situational speaking, and interactive activities make learning enjoyable."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Q&A"]
+              },
+              {
+                "tag": "span",
+                "children": ["Ask and answer"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Pair"]
+              },
+              {
+                "tag": "span",
+                "children": ["Talk together"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Scene"]
+              },
+              {
+                "tag": "span",
+                "children": ["Speak by situation"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Play"]
+              },
+              {
+                "tag": "span",
+                "children": ["Learn interactively"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "a",
+        "children": ["Start speaking"]
+      }
+    ]
+  },
+  {
+    "id": "CourseResultsSection",
+    "imageUrl": "/images/home/CourseResultsSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Learning milestones"]
+      },
+      {
+        "tag": "h2",
+        "children": ["কোর্স শেষে অর্জন | Course Outcomes"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "শিশুর শেখা দক্ষতাগুলো ধীরে ধীরে বাস্তব আত্মবিশ্বাসে পরিণত হবে। The skills children develop will gradually become real confidence."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": ["Speaking Fluency"]
+          },
+          {
+            "tag": "li",
+            "children": ["Vocabulary"]
+          },
+          {
+            "tag": "li",
+            "children": ["Grammar Accuracy"]
+          },
+          {
+            "tag": "li",
+            "children": ["Presentation Skills"]
+          },
+          {
+            "tag": "li",
+            "children": ["Reading Fluency"]
+          },
+          {
+            "tag": "li",
+            "children": ["Natural Pronunciation"]
+          },
+          {
+            "tag": "li",
+            "children": ["Conversation Skills"]
+          },
+          {
+            "tag": "li",
+            "children": ["Camera Confidence"]
+          },
+          {
+            "tag": "li",
+            "children": ["Situational Speaking"]
+          },
+          {
+            "tag": "li",
+            "children": ["Overall Confidence"]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          {
+            "tag": "strong",
+            "children": ["চূড়ান্ত লক্ষ্য | Final goal:"]
+          },
+          " প্রতিটি শিশু যেন ইংরেজিতে নিজের ভাবনা আত্মবিশ্বাসের সাথে প্রকাশ করতে পারে। Every child can express their ideas in English with confidence."
+        ]
+      },
+      {
+        "tag": "span",
+        "children": ["Ready"]
+      },
+      {
+        "tag": "span",
+        "children": ["to speak!"]
+      }
+    ]
+  },
+  {
+    "id": "KidsHero",
+    "imageUrl": "/images/home/KidsHero.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Kids spoken English"]
+      },
+      {
+        "tag": "h1",
+        "children": ["Build English Confidence | ইংরেজিতে আত্মবিশ্বাস গড়ুন"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "৩ মাসে শিশুরা শিখবে প্রয়োজনীয় ইংরেজি, আনন্দে ও আত্মবিশ্বাসে। In 3 months, children will learn practical English with joy and confidence."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["৩ মাস | 3 months"]
+              },
+              {
+                "tag": "span",
+                "children": ["কোর্সের সময়কাল | Course duration"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["৬–১০ বছর | Ages 6–10"]
+              },
+              {
+                "tag": "span",
+                "children": ["উপযুক্ত বয়স | Suitable age"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "৬–১০ বছরের শিশুদের জন্য সহজ, আনন্দময় শেখার পরিবেশ। A fun, welcoming learning environment for children ages 6–10."
+        ]
+      },
+      {
+        "tag": "a",
+        "children": ["ভর্তি হতে যোগাযোগ করুন | Enroll now"]
+      },
+      {
+        "tag": "a",
+        "children": ["কোর্সটি দেখুন | View course"]
+      },
+      {
+        "tag": "span",
+        "children": ["Learn with joy!"]
+      }
+    ]
+  },
+  {
+    "id": "PracticalVocabularySection",
+    "imageUrl": "/images/home/PracticalVocabularySection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["600–800"]
+      },
+      {
+        "tag": "span",
+        "children": ["everyday words | দৈনন্দিন শব্দ"]
+      },
+      {
+        "tag": "span",
+        "children": ["Everyday English"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Learn Practical Vocabulary"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "শিশুরা শব্দ শিখে বাস্তব জীবনে সঠিকভাবে ব্যবহার করবে। Children will learn new words and use them correctly in everyday life."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "৬০০–৮০০টি দৈনন্দিন শব্দ শেখে পরিবার, স্কুল ও বন্ধুদের কথোপকথনে। They will learn 600–800 everyday words used with family, at school, and with friends."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["01"]
+              },
+              " শুনে বুঝতে শেখে | Learn by listening"
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["02"]
+              },
+              " বাক্যে ব্যবহার করে | Use words in sentences"
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["03"]
+              },
+              " আত্মবিশ্বাসের সাথে বলে | Speak with confidence"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PresentationSkillsSection",
+    "imageUrl": "/images/home/PresentationSkillsSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Speak | বলুন"]
+      },
+      {
+        "tag": "span",
+        "children": ["with confidence | আত্মবিশ্বাসের সাথে"]
+      },
+      {
+        "tag": "span",
+        "children": ["Presentation practice"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Present Your Story"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "শিশুরা নিজের পরিচয়, পরিবার, স্কুল এবং প্রিয় বিষয় নিয়ে কথা বলবে। Children will speak about themselves, their families, school, and favorite topics."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "প্রতিদিনের জীবন ও শখ নিয়ে সুন্দরভাবে ভাবনা সাজিয়ে উপস্থাপন করার অভ্যাস তৈরি হবে। They will learn to organize their thoughts and present them clearly when talking about everyday life and hobbies."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["01"]
+              },
+              " নিজেকে পরিচয় করানো | Introducing yourself"
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["02"]
+              },
+              " পরিবার ও বাবা-মা | Family and parents"
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["03"]
+              },
+              " স্কুল ও সেরা বন্ধু | School and best friends"
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["04"]
+              },
+              " দৈনন্দিন কাজ ও শখ | Daily activities and hobbies"
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          {
+            "tag": "strong",
+            "children": ["Learning outcome:"]
+          },
+          " আত্মবিশ্বাসের সাথে শ্রোতার সামনে কথা বলা। Speak confidently in front of an audience."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ReadingFluencySection",
+    "imageUrl": "/images/home/ReadingFluencySection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Reading aloud"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Read With Natural Flow"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "শিশুরা ছন্দ, উচ্চারণ এবং স্বাভাবিক গতিতে সাবলীলভাবে পড়বে। Children will read fluently with rhythm, clear pronunciation, and a natural pace."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "নিয়মিত reading practice-এর মাধ্যমে শব্দ পরিষ্কার বলা, বাক্যের rhythm বোঝা এবং আত্মবিশ্বাসের সাথে কথা বলা শিখবে। Regular reading practice will help them pronounce words clearly, understand sentence rhythm, and speak with confidence."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": ["Rhythm"]
+          },
+          {
+            "tag": "li",
+            "children": ["Pronunciation"]
+          },
+          {
+            "tag": "li",
+            "children": ["Natural Flow"]
+          },
+          {
+            "tag": "li",
+            "children": ["Fluent Reading"]
+          },
+          {
+            "tag": "li",
+            "children": ["Confident Speaking"]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "শুধু পড়া নয়—শিশুর কণ্ঠে তৈরি হবে স্বাভাবিক আত্মবিশ্বাস। More than reading, it helps children speak with natural confidence."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "RealLifeTenseSection",
+    "imageUrl": "/images/home/RealLifeTenseSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Talk about life"]
+      },
+      {
+        "tag": "span",
+        "children": ["Real-life grammar"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Tenses For Real Life"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "শিশুরা মুখস্থ না করে কথার মাধ্যমে Present, Past এবং Future Tense শিখবে। Children will learn the present, past, and future tenses through conversation instead of memorization."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "নিজের অভিজ্ঞতা, আজকের কাজ এবং আগামী পরিকল্পনা নিয়ে কথা বলেই tense ব্যবহার শেখা হবে। They will learn to use tenses by talking about their experiences, what they do today, and their plans for tomorrow."
+        ]
+      },
+      {
+        "tag": "ol",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Present"]
+              },
+              " আজ কী করি | What I do today"
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Past"]
+              },
+              " গতকাল কী করেছি | What I did yesterday"
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Future"]
+              },
+              " আগামীকাল কী করব | What I will do tomorrow"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SituationalSpeakingSection",
+    "imageUrl": "/images/home/SituationalSpeakingSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["On-the-spot speaking"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Speak In The Moment"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "পরিস্থিতি বুঝে শিশুরা দ্রুত, স্বাভাবিকভাবে ইংরেজিতে কথা বলবে। Children will learn to speak English quickly and naturally by responding to different situations."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "স্কুলের অনুষ্ঠান, ভালো ফলাফল, অর্জন এবং পরিচিত বিষয় নিয়ে তাৎক্ষণিক বলার অনুশীলন হবে। They will practice speaking on the spot about school events, good results, achievements, and familiar topics."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["School events"]
+              },
+              {
+                "tag": "span",
+                "children": ["Speak on stage"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Achievements"]
+              },
+              {
+                "tag": "span",
+                "children": ["Share good news"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Familiar topics"]
+              },
+              {
+                "tag": "span",
+                "children": ["Think and respond"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "ফলাফল: প্রস্তুতি ছাড়াই আত্মবিশ্বাসের সাথে কথা বলা। Outcome: Speak confidently without preparation."
+        ]
+      },
+      {
+        "tag": "span",
+        "children": ["Think"]
+      },
+      {
+        "tag": "span",
+        "children": ["Speak"]
+      }
+    ]
+  },
+  {
+    "id": "SpokenPhrasesSection",
+    "imageUrl": "/images/home/SpokenPhrasesSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Everyday phrases"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Speak With Confidence"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "শিশুরা ১৫০টির বেশি phrase ও sentence structure শিখবে। Children will learn more than 150 phrases and sentence structures."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "প্রতিদিনের কথোপকথনে বাক্য সাজানো, প্রশ্ন করা এবং উত্তর দেওয়ার অনুশীলন হবে। Children will practice forming sentences, asking questions, and answering in everyday conversations."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Ask"]
+              },
+              {
+                "tag": "span",
+                "children": ["How are you?"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Answer"]
+              },
+              {
+                "tag": "span",
+                "children": ["I am happy!"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Build a sentence"]
+              },
+              {
+                "tag": "span",
+                "children": ["I like + activity"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "span",
+        "children": ["Hello!"]
+      },
+      {
+        "tag": "span",
+        "children": ["Let’s talk!"]
+      }
+    ]
+  },
+  {
+    "id": "WhatsAppActivitiesSection",
+    "imageUrl": "/images/home/WhatsAppActivitiesSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Learning beyond class"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Keep Practicing At Home | বাড়িতে অনুশীলন চালিয়ে যাও"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "এনরোল করা শিক্ষার্থীরা নিয়মিত home activity ও speaking practice পাবে। Enrolled students will get regular home activities and speaking practice."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "WhatsApp Group-এর মাধ্যমে homework, video activity, practice task এবং প্রয়োজনীয় learning material দেওয়া হবে। Homework, video activities, practice tasks, and learning materials will be shared through the WhatsApp group."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Group"]
+              },
+              " WhatsApp learning group | WhatsApp শেখার গ্রুপ"
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Speak"]
+              },
+              " Weekly speaking homework | সাপ্তাহিক speaking homework"
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Video"]
+              },
+              " Short video activities | ছোট video activity"
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Learn"]
+              },
+              " Practice tasks and materials | অনুশীলনের কাজ ও learning materials"
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "অভিভাবকের সহায়তায় বাড়িতেও শেখার অভ্যাস তৈরি হবে। With support from a parent, children can build regular learning habits at home."
+        ]
+      },
+      {
+        "tag": "a",
+        "children": ["Join the course | কোর্সে ভর্তি হও"]
+      }
+    ]
+  },
+  {
+    "id": "AnswerDevelopmentSection",
+    "imageUrl": "/images/home/AnswerDevelopmentSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Build more"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Turn Ideas Into Answers"]
+      },
+      {
+        "tag": "p",
+        "children": ["একটি short answer-কে চারটি simple step-এ complete, clear এবং relevant করে তুলুন।"]
+      },
+      {
+        "tag": "ol",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Reason"]
+              },
+              {
+                "tag": "span",
+                "children": ["State your main idea clearly."]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Example"]
+              },
+              {
+                "tag": "span",
+                "children": ["Make the idea easy to understand."]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Explanation"]
+              },
+              {
+                "tag": "span",
+                "children": ["Show how your example supports the point."]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Relevant Details"]
+              },
+              {
+                "tag": "span",
+                "children": ["Add natural detail to make it convincing."]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": ["প্রতিটি stage যোগ হলে উত্তর হয় longer, clearer এবং more convincing।"]
+      }
+    ]
+  },
+  {
+    "id": "CompleteIeltsSpeakingSection",
+    "imageUrl": "/images/home/CompleteIeltsSpeakingSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Speak with purpose"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Master Every Speaking Part"]
+      },
+      {
+        "tag": "p",
+        "children": ["প্রতিটি Part-এর format, strategy এবং confident delivery-এর জন্য structured practice।"]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Part 1"]
+              },
+              {
+                "tag": "span",
+                "children": ["Interview"]
+              },
+              {
+                "tag": "p",
+                "children": ["Answer familiar questions naturally."]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Part 2"]
+              },
+              {
+                "tag": "span",
+                "children": ["Cue Card / Long Turn"]
+              },
+              {
+                "tag": "p",
+                "children": ["Organize ideas and speak continuously."]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Part 3"]
+              },
+              {
+                "tag": "span",
+                "children": ["Discussion"]
+              },
+              {
+                "tag": "p",
+                "children": ["Explain opinions with clear examples."]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CourseAudienceSection",
+    "imageUrl": "/images/home/CourseAudienceSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["You belong here"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Who Is This Course For?"]
+      },
+      {
+        "tag": "p",
+        "children": ["যদি Speaking নিয়ে struggle করেন, এই course আপনাকে step by step এগোতে সাহায্য করবে।"]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["01"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Stuck in Speaking"]
+              },
+              {
+                "tag": "span",
+                "children": ["আপনি জানেন, কিন্তু smoothly বলতে পারছেন না।"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["02"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Need More Ideas"]
+              },
+              {
+                "tag": "span",
+                "children": ["উত্তর দেওয়ার সময় idea খুঁজে পেতে সময় লাগে।"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["03"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Fear Cue Cards"]
+              },
+              {
+                "tag": "span",
+                "children": ["Cue Card দেখলেই confidence কমে যায়।"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["04"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Low Fluency"]
+              },
+              {
+                "tag": "span",
+                "children": ["কথার flow বারবার থেমে যায়।"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["05"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Low Confidence"]
+              },
+              {
+                "tag": "span",
+                "children": ["ভুল হওয়ার ভয় আপনাকে আটকে রাখে।"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["06"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Improve Band Score"]
+              },
+              {
+                "tag": "span",
+                "children": ["আরও ভালো Speaking score-এর জন্য প্রস্তুত।"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CreativeTemplatesSection",
+    "imageUrl": "/images/home/CreativeTemplatesSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Adapt with confidence"]
+      },
+      {
+        "tag": "h2",
+        "children": ["One Idea, Many Topics"]
+      },
+      {
+        "tag": "p",
+        "children": ["একটি core template রেখে relevant information বদলে বিভিন্ন topic-এ smartly উত্তর দিন।"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          {
+            "tag": "strong",
+            "children": ["Core template"]
+          }
+        ]
+      },
+      {
+        "tag": "ol",
+        "children": [
+          {
+            "tag": "li",
+            "children": ["Introduce"]
+          },
+          {
+            "tag": "li",
+            "children": ["Describe"]
+          },
+          {
+            "tag": "li",
+            "children": ["Explain"]
+          },
+          {
+            "tag": "li",
+            "children": ["Reflect"]
+          }
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Person"]
+              },
+              {
+                "tag": "span",
+                "children": ["a teacher who inspired me"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Place"]
+              },
+              {
+                "tag": "span",
+                "children": ["a park I enjoy visiting"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Experience"]
+              },
+              {
+                "tag": "span",
+                "children": ["a memorable journey"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": ["Structure একই থাকে, idea বদলায়—তাই উত্তর হয় natural এবং organized।"]
+      }
+    ]
+  },
+  {
+    "id": "DemoClassSection",
+    "imageUrl": "/images/home/DemoClassSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "h2",
+        "children": ["Join A Demo Class"]
+      },
+      {
+        "tag": "p",
+        "children": ["Enrollment-এর আগে Demo Class-এ অংশ নিয়ে আমাদের teaching method এবং course structure বুঝে নিন।"]
+      },
+      {
+        "tag": "p",
+        "children": [
+          {
+            "tag": "strong",
+            "children": ["Course Fee"]
+          },
+          {
+            "tag": "span",
+            "children": ["4,000 BDT — Fixed"]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": ["এই fixed fee negotiable নয়।"]
+      },
+      {
+        "tag": "a",
+        "children": ["Reserve Your Demo Class"]
+      },
+      {
+        "tag": "p",
+        "children": ["কোনো চাপ নয়—প্রথমে দেখে বুঝুন, তারপর enrollment-এর সিদ্ধান্ত নিন।"]
+      },
+      {
+        "tag": "span",
+        "children": ["See the difference"]
+      }
+    ]
+  },
+  {
+    "id": "FluencyConfidenceSection",
+    "imageUrl": "/images/home/FluencyConfidenceSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "h2",
+        "children": ["Speak better with every conversation."]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "Regular speaking practice turns familiar English into fluent, confident, natural delivery—one clear step at a time."
+        ]
+      },
+      {
+        "tag": "ol",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Fluency"]
+              },
+              {
+                "tag": "span",
+                "children": ["Speak without searching for every word"]
+              },
+              {
+                "tag": "span",
+                "children": ["01"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Confidence"]
+              },
+              {
+                "tag": "span",
+                "children": ["Stay composed under every question"]
+              },
+              {
+                "tag": "span",
+                "children": ["02"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Ideas"]
+              },
+              {
+                "tag": "span",
+                "children": ["Develop answers with a clear direction"]
+              },
+              {
+                "tag": "span",
+                "children": ["03"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Delivery"]
+              },
+              {
+                "tag": "span",
+                "children": ["Sound natural, warm, and well paced"]
+              },
+              {
+                "tag": "span",
+                "children": ["04"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": ["Each practice session makes your ideas clearer and your delivery more effortless."]
+      },
+      {
+        "tag": "span",
+        "children": ["Keep moving forward"]
+      }
+    ]
+  },
+  {
+    "id": "HighImpactPhrasesSection",
+    "imageUrl": "/images/home/HighImpactPhrasesSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["50+ useful phrases"]
+      },
+      {
+        "tag": "h2",
+        "children": ["More range. More natural answers."]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "Build a ready-to-use bank of useful phrases and expressions, then use them naturally when it is your turn to speak."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["01"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Start"]
+              },
+              {
+                "tag": "span",
+                "children": ["From my perspective,"]
+              },
+              {
+                "tag": "p",
+                "children": ["Open your answer naturally"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["02"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Expand"]
+              },
+              {
+                "tag": "span",
+                "children": ["One reason is that…"]
+              },
+              {
+                "tag": "p",
+                "children": ["Develop a clear point"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["03"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Connect"]
+              },
+              {
+                "tag": "span",
+                "children": ["For instance,"]
+              },
+              {
+                "tag": "p",
+                "children": ["Make your ideas easy to follow"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["04"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Conclude"]
+              },
+              {
+                "tag": "span",
+                "children": ["Overall, I would say…"]
+              },
+              {
+                "tag": "p",
+                "children": ["Finish with confidence"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "These are not lines to memorise. They are flexible building blocks for answers that sound like you."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ObjectTopicsSection",
+    "imageUrl": "/images/home/ObjectTopicsSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["One core story"]
+      },
+      {
+        "tag": "h2",
+        "children": ["One object, many confident answers."]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "Prepare one object with the right vocabulary, details, and personal story—then adapt the focus for several cue cards."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["01"]
+              },
+              {
+                "tag": "strong",
+                "children": ["A useful device"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus: Usefulness"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["02"]
+              },
+              {
+                "tag": "strong",
+                "children": ["A special gift"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus: Personal story"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["03"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Something you bought"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus: Choice and value"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["04"]
+              },
+              {
+                "tag": "strong",
+                "children": ["An object you use daily"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus: Routine and habit"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": ["Keep the core description the same. Shift the focus to match the question."]
+      }
+    ]
+  },
+  {
+    "id": "PersonProfileSection",
+    "imageUrl": "/images/home/PersonProfileSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "h2",
+        "children": ["One profile. Many thoughtful answers."]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "Build one memorable person profile with details that matter, then shift the angle to suit different IELTS Speaking cue cards."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          {
+            "tag": "strong",
+            "children": ["Your core profile"]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": ["Relationship, one vivid memory, a defining quality, and the impact they had on you."]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["01"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Someone who helped you"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus on: A meaningful moment"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["02"]
+              },
+              {
+                "tag": "strong",
+                "children": ["An inspiring person"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus on: Their positive influence"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["03"]
+              },
+              {
+                "tag": "strong",
+                "children": ["A successful person"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus on: Habits and achievements"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["04"]
+              },
+              {
+                "tag": "strong",
+                "children": ["A person you admire"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus on: Character and values"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "span",
+        "children": ["One adaptable story"]
+      }
+    ]
+  },
+  {
+    "id": "PlaceTopicsSection",
+    "imageUrl": "/images/home/PlaceTopicsSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "h2",
+        "children": ["One place, many ways to speak."]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "Prepare one place with strong vocabulary and a simple structure. Then adapt the details for the cue card in front of you."
+        ]
+      },
+      {
+        "tag": "p",
+        "children": [
+          {
+            "tag": "strong",
+            "children": ["Core framework"]
+          }
+        ]
+      },
+      {
+        "tag": "ol",
+        "children": [
+          {
+            "tag": "li",
+            "children": ["Location"]
+          },
+          {
+            "tag": "li",
+            "children": ["Details"]
+          },
+          {
+            "tag": "li",
+            "children": ["Feeling"]
+          },
+          {
+            "tag": "li",
+            "children": ["Reason"]
+          }
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["01"]
+              },
+              {
+                "tag": "strong",
+                "children": ["A place you visit"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus on: Your routine"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["02"]
+              },
+              {
+                "tag": "strong",
+                "children": ["A beautiful location"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus on: The atmosphere"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["03"]
+              },
+              {
+                "tag": "strong",
+                "children": ["A crowded place"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus on: The energy"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["04"]
+              },
+              {
+                "tag": "strong",
+                "children": ["A place for relaxation"]
+              },
+              {
+                "tag": "span",
+                "children": ["Focus on: How it makes you feel"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": ["Keep the structure. Change only the relevant details, and your answer stays clear and natural."]
+      },
+      {
+        "tag": "span",
+        "children": ["One adaptable place"]
+      }
+    ]
+  },
+  {
+    "id": "SecondaryIeltsHero",
+    "imageUrl": "/images/home/SecondaryIeltsHero.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "h1",
+        "children": ["Build confidence. Speak naturally. Perform better."]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "Real conversation, focused practice, and expert guidance—so you can feel prepared for IELTS Speaking and sound like yourself."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["2 Months"]
+              },
+              {
+                "tag": "span",
+                "children": ["Course duration"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["3 Days"]
+              },
+              {
+                "tag": "span",
+                "children": ["Every week"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["9:30–10:30 PM"]
+              },
+              {
+                "tag": "span",
+                "children": ["Class time"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["4,000 BDT"]
+              },
+              {
+                "tag": "span",
+                "children": ["Fixed fee"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "a",
+        "children": ["Join a Demo Class"]
+      },
+      {
+        "tag": "span",
+        "children": ["Learn the method before enrolling."]
+      },
+      {
+        "tag": "span",
+        "children": ["Speak better, naturally"]
+      }
+    ]
+  },
+  {
+    "id": "SmartAnswerTemplatesSection",
+    "imageUrl": "/images/home/SmartAnswerTemplatesSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "span",
+        "children": ["Smart templates"]
+      },
+      {
+        "tag": "h2",
+        "children": ["Build answers with a clear direction."]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "Use simple answer structures to organise your ideas in every part of IELTS Speaking—without sounding rehearsed."
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Part 1"]
+              },
+              {
+                "tag": "span",
+                "children": ["Answer · Reason"]
+              },
+              {
+                "tag": "p",
+                "children": ["Keep short answers clear, then make them more complete with one natural reason."]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Part 2"]
+              },
+              {
+                "tag": "span",
+                "children": ["Plan · Speak · Extend"]
+              },
+              {
+                "tag": "p",
+                "children": ["Start from one central idea, then add the details that bring your story to life."]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Part 3"]
+              },
+              {
+                "tag": "span",
+                "children": ["Opinion · Explain · Example"]
+              },
+              {
+                "tag": "p",
+                "children": ["Make a thoughtful point, explain why it matters, and support it with an example."]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "p",
+        "children": ["A template is not a script to memorise. It is a reliable route for expressing your own ideas."]
+      }
+    ]
+  },
+  {
+    "id": "SpeakingFocusedPracticeSection",
+    "imageUrl": "/images/home/SpeakingFocusedPracticeSection.webp",
+    "imageAlt": "",
+    "content": [
+      {
+        "tag": "h2",
+        "children": ["Practice. Get feedback. Improve with purpose."]
+      },
+      {
+        "tag": "p",
+        "children": [
+          "Regular IELTS Speaking practice helps you identify personal weak points, build on what works, and make meaningful progress from session to session."
+        ]
+      },
+      {
+        "tag": "ol",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["01"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Speak"]
+              },
+              {
+                "tag": "span",
+                "children": ["Answer in a realistic mock interview"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["02"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Review"]
+              },
+              {
+                "tag": "span",
+                "children": ["See what is already working"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "span",
+                "children": ["03"]
+              },
+              {
+                "tag": "strong",
+                "children": ["Improve"]
+              },
+              {
+                "tag": "span",
+                "children": ["Apply clear next-step feedback"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "ul",
+        "children": [
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Fluency"]
+              },
+              {
+                "tag": "span",
+                "children": ["A smoother flow of ideas"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Vocabulary"]
+              },
+              {
+                "tag": "span",
+                "children": ["A more flexible word range"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Grammar"]
+              },
+              {
+                "tag": "span",
+                "children": ["Clearer, more accurate structures"]
+              }
+            ]
+          },
+          {
+            "tag": "li",
+            "children": [
+              {
+                "tag": "strong",
+                "children": ["Pronunciation"]
+              },
+              {
+                "tag": "span",
+                "children": ["Easier-to-understand delivery"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "a",
+        "children": ["Book a Demo Class"]
+      },
+      {
+        "tag": "span",
+        "children": ["Personal feedback"]
+      }
+    ]
+  }
+]

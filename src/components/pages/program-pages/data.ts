@@ -6,7 +6,7 @@
 |-----------------------------------------
 */
 
-import type { HomeData } from "../home/data";
+import type { HomeData } from "./template-data";
 
 export const defaultIeltsPreparationData: HomeData = {
   forceUpdate: "false",

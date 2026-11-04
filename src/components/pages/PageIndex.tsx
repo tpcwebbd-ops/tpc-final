@@ -45,6 +45,8 @@ import {
   defaultIeltsPreparationData as ieltsPreparation,
   defaultKidsSpokenEnglishData as kidsSpokenEnglish,
 } from "./program-pages/data";
+import ProgramMutation from "./program-pages/Mutation";
+import ProgramQuery from "./program-pages/Query";
 import { defaultDataPage7 as refund } from "./refund-policy/data";
 import RefundMutation from "./refund-policy/Mutation";
 import RefundQuery from "./refund-policy/Query";
@@ -135,24 +137,24 @@ export const pageIndex: Record<AllPageKind, Definition> = {
     title: "IELTS Preparation",
     description: "An online IELTS preparation page for TestPrep Center learners",
     Mutation: ({ data, onChange }) => (
-      <HomeMutation
+      <ProgramMutation
         data={data as unknown as typeof ieltsPreparation}
         onChange={onChange as unknown as (data: typeof ieltsPreparation) => void}
       />
     ),
-    Query: ({ data }) => <HomeQuery data={data as unknown as typeof ieltsPreparation} />,
+    Query: ({ data }) => <ProgramQuery data={data as unknown as typeof ieltsPreparation} />,
   },
   "kids-spoken-english": {
     defaultData: kidsSpokenEnglish as unknown as AllPageData,
     title: "TPC Kids Spoken English",
     description: "An online spoken-English course page for young learners in Bangladesh",
     Mutation: ({ data, onChange }) => (
-      <HomeMutation
+      <ProgramMutation
         data={data as unknown as typeof kidsSpokenEnglish}
         onChange={onChange as unknown as (data: typeof kidsSpokenEnglish) => void}
       />
     ),
-    Query: ({ data }) => <HomeQuery data={data as unknown as typeof kidsSpokenEnglish} />,
+    Query: ({ data }) => <ProgramQuery data={data as unknown as typeof kidsSpokenEnglish} />,
   },
   "company-story": {
     defaultData: companyStory as unknown as AllPageData,

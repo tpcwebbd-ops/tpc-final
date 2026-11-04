@@ -51,6 +51,8 @@ export const apiSlice = createApi({
     "Session",
     "Verification",
     "Coupon",
+    "Course",
+    "Student",
   ],
   endpoints: () => ({}),
 });
