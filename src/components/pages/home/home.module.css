@@ -1,10 +1,16 @@
-/* Home styles stay scoped to the Home page and its editor preview. */
+/* Home palette follows the red/charcoal logo, coral menu branding, and warm footer neutrals. */
 .home {
-  --ink: #173e35;
-  --muted: #5d6e65;
-  --paper: #fffcf5;
-  --accent: #d5ed8c;
-  --line: #dce4d6;
+  --brand: #cf302b;
+  --brand-hover: #ad2523;
+  --ink: #292524;
+  --muted: #625b57;
+  --paper: #fffdf9;
+  --accent: #b45309;
+  --line: #e8ddd6;
+  --surface: #ffffff;
+  --cream: #fff8ed;
+  --blush: #fff2ef;
+  --focus: #b45309;
   background: var(--paper);
   color: var(--ink);
   isolation: isolate;
@@ -21,7 +27,7 @@
 }
 .home a:focus-visible,
 .home summary:focus-visible {
-  outline: 3px solid #cb7939;
+  outline: 3px solid var(--focus);
   outline-offset: 6px;
 }
 .learningSection {
@@ -30,10 +36,10 @@
   scroll-margin-top: 100px;
 }
 .learningSection:nth-child(4n + 3) {
-  background: #f0f4eb;
+  background: var(--cream);
 }
 .learningSection:nth-child(4n + 1) {
-  background: #fbf1e8;
+  background: var(--blush);
 }
 .sectionInner {
   max-width: 1168px;
@@ -116,13 +122,13 @@
   font-size: 11px;
 }
 .sectionBody li > strong:first-child:not(:last-child) {
-  color: #527046;
+  color: var(--brand);
 }
 .sectionBody li > strong + strong {
   color: var(--ink);
 }
 .sectionBody li > span:first-child:has(+ strong) {
-  color: #6e8054;
+  color: var(--accent);
   font-size: 11px;
   letter-spacing: 0.08em;
 }
@@ -131,7 +137,7 @@
 }
 .sectionBody > ol > li {
   position: relative;
-  border-left: 3px solid #a2b780;
+  border-left: 3px solid #eab4a4;
 }
 .actions {
   display: flex;
@@ -158,20 +164,20 @@
     transform 0.2s ease;
 }
 .primaryAction {
-  background: #174c3c;
-  color: #fffdf7;
+  background: var(--brand);
+  color: var(--surface);
 }
 .primaryAction:hover {
-  background: #236448;
+  background: var(--brand-hover);
   transform: translateY(-2px);
 }
 .secondaryAction {
-  border: 1px solid #bec5b3;
+  border: 1px solid #cdbeb4;
   color: var(--ink);
   background: transparent;
 }
 .secondaryAction:hover {
-  background: #e9eddb;
+  background: #fbe9e2;
 }
 .actions svg {
   flex-shrink: 0;
@@ -185,18 +191,18 @@
 .imageBackdrop {
   position: absolute;
   inset: 0 0 38px 30px;
-  border: 1px solid #bfd1b0;
+  border: 1px solid #efc4b9;
   border-radius: 38px;
   transform: rotate(4deg);
-  background: #e0ebd3;
+  background: #fce4df;
 }
 .photoFrame {
   position: relative;
   aspect-ratio: 1.25;
   border-radius: 28px;
   overflow: hidden;
-  background: #dce0d0;
-  box-shadow: 0 20px 55px #173e3510;
+  background: #eee5de;
+  box-shadow: 0 20px 55px #29252410;
 }
 .photo {
   object-fit: cover;
@@ -209,7 +215,7 @@
   position: absolute;
   top: -9px;
   right: -5px;
-  color: #809d4f;
+  color: #d66049;
   font-size: 65px;
   line-height: 1;
   transform: rotate(10deg);
@@ -217,27 +223,27 @@
 .reversed .star {
   right: auto;
   left: -7px;
-  color: #cc9971;
+  color: #b77936;
 }
 .hero {
   padding-top: 70px;
   padding-bottom: 96px;
 }
 .kidsHero {
-  background: radial-gradient(ellipse at 88% 35%, #e8f0d5 0, transparent 45%), #fffcf5 !important;
+  background: radial-gradient(ellipse at 88% 35%, #ffe4df 0, transparent 45%), var(--paper) !important;
 }
 .kidsHero::before {
   position: absolute;
   content: "";
   width: 300px;
   height: 300px;
-  border: 1px solid #d8e2cb;
+  border: 1px solid #ebd1c4;
   border-radius: 50%;
   left: -220px;
   bottom: -120px;
   box-shadow:
-    0 0 0 30px #d8e2cb33,
-    0 0 0 60px #d8e2cb22;
+    0 0 0 30px #ebd1c433,
+    0 0 0 60px #ebd1c422;
   pointer-events: none;
 }
 .hero .heading {
@@ -254,9 +260,9 @@
   gap: 64px;
 }
 .kidsHero .headingEnglish .word:last-child {
-  color: #608041;
+  color: var(--brand);
   text-decoration: underline;
-  text-decoration-color: #edbc83;
+  text-decoration-color: #e8bd7a;
   text-decoration-thickness: 4px;
   text-underline-offset: 10px;
 }
@@ -264,8 +270,8 @@
   font-size: 15px;
 }
 .heroBody > ul {
-  border-top: 1px solid #d8ddcb;
-  border-bottom: 1px solid #d8ddcb;
+  border-top: 1px solid #e8ddd6;
+  border-bottom: 1px solid #e8ddd6;
   gap: 0;
   padding: 18px 0;
 }
@@ -276,7 +282,7 @@
   background: none;
 }
 .heroBody > ul > li + li {
-  border-left: 1px solid #d8ddcb;
+  border-left: 1px solid #e8ddd6;
   padding-left: 20px;
 }
 .heroBody > ul > li > strong {
@@ -298,13 +304,13 @@
   inset: 7px -6px 77px 30px;
   border-radius: 45% 45% 28px 28px;
   transform: rotate(6deg);
-  background: #dce8bd;
+  background: #f5c9be;
 }
 .heroVisual .star {
   top: 0;
   right: -10px;
   font-size: 76px;
-  color: #d89455;
+  color: #b77936;
 }
 .insetPhoto {
   position: absolute;
@@ -312,11 +318,11 @@
   bottom: 15px;
   width: 42%;
   aspect-ratio: 1.25;
-  border: 7px solid #fffcf5;
+  border: 7px solid var(--paper);
   border-radius: 24px;
   overflow: hidden;
   transform: rotate(-7deg);
-  box-shadow: 0 15px 40px #173e351f;
+  box-shadow: 0 15px 40px #2925241f;
 }
 .insetPhoto img {
   object-fit: cover;
@@ -329,21 +335,21 @@
   width: 68px;
   height: 68px;
   border-radius: 22px;
-  box-shadow: 0 8px 20px #173e3510;
+  box-shadow: 0 8px 20px #29252410;
 }
 .playIcon {
   left: -16px;
   top: 36px;
-  background: #d7ed9e;
+  background: #fce4df;
   transform: rotate(-12deg);
-  color: #365635;
+  color: #a82d2a;
 }
 .talkIcon {
   right: -15px;
   bottom: 80px;
-  background: #f4bd99;
+  background: #f9dfb5;
   transform: rotate(12deg);
-  color: #73462e;
+  color: #845014;
 }
 .learningTrail {
   position: absolute;
@@ -355,7 +361,7 @@
   z-index: -1;
 }
 .learningTrail path {
-  stroke: #8caa68;
+  stroke: #c17f63;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-dasharray: 7 8;
@@ -451,31 +457,39 @@
   }
 }
 .darkSection {
-  --ink: #f6f7e9;
-  --muted: #c7d4c7;
+  --ink: #fffaf4;
+  --muted: #d8cfc9;
   --line: #ffffff24;
+  --accent: #f9d7a8;
+  --focus: #f9d7a8;
   color: var(--ink);
-  background: #203c34 !important;
+  background: #292524 !important;
 }
 .darkSection .heading {
-  color: #f5f6de;
+  color: #fffaf4;
 }
 .darkSection .sectionBody li {
   background: #ffffff08;
 }
 .darkSection .sectionBody li > strong:first-child:not(:last-child) {
-  color: #d7f17d;
+  color: #f9d7a8;
 }
 .darkSection .primaryAction {
-  color: #233b2f;
-  background: #d7f17d;
+  color: #292524;
+  background: #f9d7a8;
 }
 .darkSection .primaryAction:hover {
-  background: #e4f6aa;
+  background: #ffe8c7;
+}
+.darkSection .secondaryAction {
+  border-color: #ffffff66;
+}
+.darkSection .secondaryAction:hover {
+  background: #ffffff12;
 }
 .darkSection .imageBackdrop {
-  background: #6b8056;
-  border-color: #b7c493;
+  background: #63423e;
+  border-color: #bc8f83;
 }
 .darkSection .heroBody > ul {
   border-color: #ffffff24;
@@ -495,7 +509,7 @@
   padding-left: 0;
 }
 .resultsSection {
-  background: #eaf0d7 !important;
+  background: #fff2e0 !important;
 }
 .resultsSection .sectionBody > ul {
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -503,14 +517,14 @@
 .resultsSection .sectionBody li {
   border: 0;
   background: #ffffff80;
-  color: #3c5640;
+  color: #51433b;
   display: flex;
   align-items: center;
   gap: 9px;
 }
 .resultsSection .sectionBody li::before {
   content: "✓";
-  color: #708448;
+  color: #cf302b;
 }
 .resultsMark {
   position: absolute;
@@ -518,7 +532,7 @@
   bottom: 20px;
   width: 250px;
   height: 250px;
-  color: #bccd90;
+  color: #e7b986;
   opacity: 0.3;
   transform: rotate(-10deg);
 }
@@ -537,13 +551,13 @@
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #c1d294;
+  color: #ffd4c9;
 }
 .demoSection .sectionBody > p:has(strong) span {
   display: block;
   margin-top: 5px;
   font-size: 27px;
-  color: #f4f6df;
+  color: #fff6ed;
   font-weight: 600;
 }
 .recordingFrame {

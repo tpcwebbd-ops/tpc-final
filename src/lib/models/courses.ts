@@ -10,7 +10,12 @@ import "server-only";
 
 import { type ObjectId } from "mongodb";
 
-import { type CourseContent, type CourseEnrollmentRequest, type CourseStudent } from "@/lib/dashboard/courses";
+import {
+  type CourseContent,
+  type CourseEnrollmentRequest,
+  type CourseExam,
+  type CourseStudent,
+} from "@/lib/dashboard/courses";
 import { database } from "@/lib/db";
 
 export type CourseDocument = {
@@ -24,6 +29,7 @@ export type CourseDocument = {
   studentsList: CourseStudent[];
   enrollmentRequests?: CourseEnrollmentRequest[];
   content: CourseContent[];
+  exams?: CourseExam[];
   createdAt: Date;
   updatedAt: Date;
 };

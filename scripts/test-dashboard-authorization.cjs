@@ -20,12 +20,14 @@ function load(file, imports = {}) {
   );
   return module.exports;
 }
-const permissions = load("src/lib/dashboard/permissions.ts");
+const retiredRoutes = load("src/lib/dashboard/retired-routes.ts");
+const permissions = load("src/lib/dashboard/permissions.ts", { "@/lib/dashboard/retired-routes": retiredRoutes });
 const leads = load("src/lib/dashboard/leads.ts", { "./permissions": permissions });
 const rows = [
   { id: "admin", url: "/dashboard/admin", parentId: null },
   { id: "role", url: "/dashboard/admin/role", parentId: "admin" },
-  { id: "products", url: "/dashboard/products", parentId: null },
+  { id: "courses", url: "/dashboard/course", parentId: null },
+  { id: "mycourses", url: "/dashboard/my-course", parentId: null },
   { id: "leads", url: "/dashboard/leads", parentId: null },
   { id: "customers", url: "/dashboard/leads/customers", parentId: "leads" },
 ];
@@ -46,6 +48,7 @@ const collection = (records) => ({
   },
 });
 const auth = load("src/app/api/lib/dashboard-authorization.ts", {
+  "@/lib/dashboard/retired-routes": retiredRoutes,
   "@/app/api/lib/redis": { invalidateDashboardCache: async () => {}, redisKeys: {} },
   "@/lib/dashboard/leads": leads,
   "@/lib/dashboard/permissions": permissions,
@@ -74,7 +77,7 @@ function assign(flag, name, grants = {}) {
     assign("false", "Developer");
     assert.equal((await auth.getDashboardAccessState(session)).roleName, "Developer");
     for (const method of ["GET", "POST", "PATCH", "DELETE"]) {
-      assert.equal((await auth.authorizeDashboardRequest(session, "/api/dashboard/products/v1", method)).allowed, true);
+      assert.equal((await auth.authorizeDashboardRequest(session, "/api/dashboard/courses/v1", method)).allowed, true);
       assert.equal((await auth.authorizeDashboardRequest(session, "/dashboard/leads/customers", method)).allowed, true);
     }
   });
@@ -104,14 +107,36 @@ function assign(flag, name, grants = {}) {
   });
   await check("create-only pages and parent navigation do not grant read API access", async () => {
     assign("true", "Editor", {
-      products: { ...permissions.emptyDashboardPermission, create: true },
+      courses: { ...permissions.emptyDashboardPermission, create: true },
       role: { ...permissions.emptyDashboardPermission, read: true },
     });
-    assert.equal((await auth.authorizeDashboardRequest(session, "/dashboard/products", "GET")).allowed, true);
-    assert.equal((await auth.authorizeDashboardRequest(session, "/api/dashboard/products/v1", "GET")).allowed, false);
-    assert.equal((await auth.authorizeDashboardRequest(session, "/api/dashboard/products/v1", "POST")).allowed, true);
+    assert.equal((await auth.authorizeDashboardRequest(session, "/dashboard/course", "GET")).allowed, true);
+    assert.equal((await auth.authorizeDashboardRequest(session, "/api/dashboard/courses/v1", "GET")).allowed, false);
+    assert.equal((await auth.authorizeDashboardRequest(session, "/api/dashboard/courses/v1", "POST")).allowed, true);
     assert.equal((await auth.authorizeDashboardRequest(session, "/dashboard/admin", "GET")).allowed, true);
     assert.equal((await auth.authorizeDashboardRequest(session, "/api/dashboard/access/v1", "GET")).allowed, false);
+  });
+  await check("student exam access does not grant staff results or allowance approval", async () => {
+    assign("true", "Student", { mycourses: full });
+    for (const method of ["GET", "POST"]) {
+      assert.equal(
+        (await auth.authorizeDashboardRequest(session, "/api/dashboard/my-course/v1/exams", method)).allowed,
+        true,
+      );
+    }
+    for (const method of ["GET", "PATCH"]) {
+      assert.equal(
+        (await auth.authorizeDashboardRequest(session, "/api/dashboard/courses/v1/exams", method)).allowed,
+        false,
+      );
+    }
+    assign("true", "Admin", { courses: full });
+    for (const method of ["GET", "PATCH"]) {
+      assert.equal(
+        (await auth.authorizeDashboardRequest(session, "/api/dashboard/courses/v1/exams", method)).allowed,
+        true,
+      );
+    }
   });
   await check("Councilor cannot manage roles or access even with stale administrative grants", async () => {
     assign("true", "Councilor", { role: full, customers: full });

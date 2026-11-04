@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import { Icon } from "@/components/all-icons/all-icons";
 import { Button } from "@/components/ui/button";
 
+import FooterShare from "../FooterShare";
+
 import type { FooterThreeData, FooterThreeLink } from "./data";
 
 type BeforeInstallPromptEvent = Event & {
@@ -77,6 +79,7 @@ export default function Query({ data }: { data: FooterThreeData }) {
           )}
           <h2 className="mt-6 text-xl font-bold">{data.brand}</h2>
           <p className="mt-4 max-w-xs text-sm leading-6 opacity-80">{data.description}</p>
+          <FooterShare settings={data} />
         </div>
         <div>
           <h2 className="font-bold">Destinations</h2>
@@ -89,12 +92,20 @@ export default function Query({ data }: { data: FooterThreeData }) {
         <div>
           <h2 className="font-bold">Contact</h2>
           <div className="mt-4 grid gap-3 text-sm">
-            <a href={`https://wa.me/${data.whatsappNumber.replace(/\D/g, "").replace(/^0/, "880")}`} rel="noopener noreferrer" target="_blank">
+            <a
+              href={`https://wa.me/${data.whatsappNumber.replace(/\D/g, "").replace(/^0/, "880")}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               WhatsApp: {data.whatsappNumber}
             </a>
             <a href={`tel:${data.phone.replace(/[^+\d]/g, "")}`}>{data.phone}</a>
-            <a href={data.facebookUrl} rel="noopener noreferrer" target="_blank">Facebook Page</a>
-            <a href={data.facebookGroupUrl} rel="noopener noreferrer" target="_blank">TPC Kids Facebook Group</a>
+            <a href={data.facebookUrl} rel="noopener noreferrer" target="_blank">
+              Facebook Page
+            </a>
+            <a href={data.facebookGroupUrl} rel="noopener noreferrer" target="_blank">
+              TPC Kids Facebook Group
+            </a>
           </div>
         </div>
       </div>

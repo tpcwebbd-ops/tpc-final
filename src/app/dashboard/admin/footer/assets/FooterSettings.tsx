@@ -10,6 +10,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
+import { sharePlatforms, type FooterShareSettings } from "@/components/footer/share";
 import { Button } from "@/components/ui/button";
 
 import LogoMediaPicker from "./LogoMediaPicker";
@@ -27,7 +28,7 @@ export type FooterSettingsValue = {
   legalBackground: string;
   copyright: string;
   disabledPaths: string[];
-};
+} & FooterShareSettings;
 export default function FooterSettings({
   value,
   onChange,
@@ -150,6 +151,52 @@ export default function FooterSettings({
           Show legal bar
         </label>
       </div>
+      <fieldset className="grid min-w-0 gap-3 rounded-sm border border-stone-200 p-4">
+        <legend className="px-1 text-sm font-semibold">Website sharing</legend>
+        <label className="flex items-center gap-2 text-sm">
+          <input
+            checked={value.showShareButtons}
+            onChange={(event) => update("showShareButtons", event.target.checked)}
+            type="checkbox"
+          />
+          Show share icons
+        </label>
+        {value.showShareButtons && (
+          <>
+            <label className="grid min-w-0 gap-1 text-sm">
+              Share message
+              <textarea
+                className="min-h-20 min-w-0 rounded-sm border border-stone-200 p-3"
+                onChange={(event) => update("shareMessage", event.target.value)}
+                value={value.shareMessage}
+              />
+            </label>
+            <p className="text-xs text-stone-500">
+              This message and the website link are included when sharing through messaging apps.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              {sharePlatforms.map(({ id, label }) => (
+                <label className="flex items-center gap-2 text-sm" key={id}>
+                  <input
+                    checked={value.sharePlatforms.includes(id)}
+                    onChange={(event) =>
+                      onChange({
+                        ...value,
+                        sharePlatforms: event.target.checked
+                          ? [...value.sharePlatforms, id]
+                          : value.sharePlatforms.filter((platform) => platform !== id),
+                      })
+                    }
+                    type="checkbox"
+                  />
+                  {label}
+                </label>
+              ))}
+            </div>
+            <p className="text-xs text-stone-500">Visitors can also use their device share menu or copy the link.</p>
+          </>
+        )}
+      </fieldset>
       <div className="grid gap-3 sm:grid-cols-4">
         <label className="grid gap-1 text-xs">
           Main

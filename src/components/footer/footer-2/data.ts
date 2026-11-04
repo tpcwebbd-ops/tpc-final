@@ -8,6 +8,8 @@
 
 import { importPageRoutes } from "@/lib/defaults/import-data";
 
+import { defaultShareSettings, type FooterShareSettings } from "../share";
+
 export type FooterTwoData = {
   variant: "footer-2";
   isVisible: boolean;
@@ -32,9 +34,10 @@ export type FooterTwoData = {
   showLegalBar: boolean;
   legalBackground: string;
   legalLinks: { id: string; label: string; url: string; visible: boolean }[];
-};
+} & FooterShareSettings;
 
 export const defaultData: FooterTwoData = {
+  ...defaultShareSettings,
   variant: "footer-2",
   isVisible: true,
   forceUpdate: true,
@@ -58,7 +61,12 @@ export const defaultData: FooterTwoData = {
       title: "Programs",
       links: [
         { id: "ielts", label: "IELTS Preparation", url: importPageRoutes.ielts.path, visible: true },
-        { id: "kids-spoken", label: "Kids Spoken English", url: importPageRoutes.kidsSpokenEnglish.path, visible: true },
+        {
+          id: "kids-spoken",
+          label: "Kids Spoken English",
+          url: importPageRoutes.kidsSpokenEnglish.path,
+          visible: true,
+        },
       ],
     },
     {

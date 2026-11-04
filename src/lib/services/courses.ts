@@ -11,6 +11,8 @@ import "server-only";
 import { randomUUID } from "crypto";
 
 import {
+  courseExams,
+  questionMarks,
   type CourseEnrollmentRequest,
   type CourseEnrollmentRequestStatus,
   type CourseInput,
@@ -19,7 +21,11 @@ import {
 import { type UserDocument, usersCollection } from "@/lib/models/auth";
 import { coursesCollection, type CourseDocument } from "@/lib/models/courses";
 
-export type SerializedCourse = Omit<CourseDocument, "_id" | "createdAt" | "updatedAt" | "enrollmentRequests"> & {
+export type SerializedCourse = Omit<
+  CourseDocument,
+  "_id" | "createdAt" | "updatedAt" | "enrollmentRequests" | "exams"
+> & {
+  exams: CourseInput["exams"];
   createdAt: string;
   enrollmentRequests: CourseEnrollmentRequest[];
   updatedAt: string;
@@ -34,7 +40,8 @@ const serializeCourse = (course: CourseDocument): SerializedCourse => ({
   time: course.time,
   studentsList: course.studentsList ?? [],
   enrollmentRequests: course.enrollmentRequests ?? [],
-  content: course.content ?? [],
+  content: (course.content ?? []).map((item) => (item.type === "mcq" ? { ...item, marks: questionMarks(item) } : item)),
+  exams: courseExams(course),
   createdAt: course.createdAt.toISOString(),
   updatedAt: course.updatedAt.toISOString(),
 });

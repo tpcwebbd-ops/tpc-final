@@ -14,8 +14,9 @@ import { useRouter } from "next/navigation";
 import { type FormEvent, useState } from "react";
 
 import { useConfirmDelete } from "@/components/confirm-delete-provider";
+import CourseExamAdmin from "@/components/courses/CourseExamAdmin";
 import { toast } from "@/components/ui/global-toast";
-import { courseDefaults } from "@/lib/dashboard/courses";
+import { courseDefaults, questionMarks } from "@/lib/dashboard/courses";
 import {
   type CourseInput,
   type CourseItem,
@@ -324,7 +325,7 @@ function CourseView({ close, course }: { close: () => void; course: CourseItem }
     <div className="fixed inset-0 z-[100] grid place-items-center bg-stone-950/35 p-4 backdrop-blur-sm">
       <section
         aria-modal="true"
-        className="max-h-[calc(100vh-2rem)] w-full max-w-xl overflow-y-auto rounded-sm border border-[#eadfca] bg-[#fffaf0] p-5 shadow-2xl"
+        className="max-h-[calc(100vh-2rem)] w-full max-w-5xl overflow-y-auto rounded-sm border border-[#eadfca] bg-[#fffaf0] p-5 shadow-2xl"
         role="dialog"
       >
         <header className="flex items-start justify-between gap-4 border-b border-[#eadfca] pb-4">
@@ -367,15 +368,51 @@ function CourseView({ close, course }: { close: () => void; course: CourseItem }
         </section>
         <section className="mt-4 rounded-sm border border-[#eadfca] bg-white p-4">
           <h3 className="font-semibold text-stone-900">Learning content ({course.content.length})</h3>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-3 space-y-3">
             {course.content.map((content) => (
-              <span className="rounded-sm bg-amber-50 px-2 py-1 text-xs text-amber-900" key={content.id}>
-                {content.type.toUpperCase()} · {content.title}
-              </span>
+              <article className="rounded-sm border border-stone-200 p-3 text-sm" key={content.id}>
+                <h4 className="font-semibold">
+                  {content.type.toUpperCase()} · {content.title}
+                </h4>
+                {content.type === "mcq" ? (
+                  <>
+                    <p className="mt-2 whitespace-pre-wrap">{content.question}</p>
+                    <p className="mt-1 text-xs text-stone-500">{questionMarks(content)} mark(s)</p>
+                    <ol className="mt-2 space-y-1">
+                      {content.options.map((option, index) => (
+                        <li
+                          className={
+                            index === content.correctOptionIndex
+                              ? "rounded-sm bg-emerald-50 p-2 font-medium text-emerald-800"
+                              : "p-2"
+                          }
+                          key={index}
+                        >
+                          {String.fromCharCode(65 + index)}. {option}
+                          {index === content.correctOptionIndex ? " ✓ Correct answer" : ""}
+                        </li>
+                      ))}
+                    </ol>
+                    {content.explanation && (
+                      <p className="mt-2 whitespace-pre-wrap text-stone-600">Explanation: {content.explanation}</p>
+                    )}
+                  </>
+                ) : (
+                  <a
+                    className="mt-2 inline-block text-amber-800 underline"
+                    href={content.mediaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Open {content.type.toUpperCase()}
+                  </a>
+                )}
+              </article>
             ))}
             {!course.content.length && <p className="text-sm text-stone-500">No learning content added yet.</p>}
           </div>
         </section>
+        <CourseExamAdmin courseId={course.id} />
       </section>
     </div>
   );

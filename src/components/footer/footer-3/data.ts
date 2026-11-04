@@ -8,6 +8,8 @@
 
 import { importPageRoutes } from "@/lib/defaults/import-data";
 
+import { defaultShareSettings, type FooterShareSettings } from "../share";
+
 export type FooterThreeLink = { id: string; label: string; url: string; visible: boolean };
 export type FooterThreeData = {
   variant: "footer-3";
@@ -32,9 +34,10 @@ export type FooterThreeData = {
   legalLinks: FooterThreeLink[];
   showLegalBar: boolean;
   legalBackground: string;
-};
+} & FooterShareSettings;
 
 export const defaultData: FooterThreeData = {
+  ...defaultShareSettings,
   variant: "footer-3",
   isVisible: true,
   forceUpdate: true,

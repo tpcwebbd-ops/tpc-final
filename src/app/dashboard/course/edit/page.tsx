@@ -30,7 +30,10 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
+import CourseExamAdmin from "@/components/courses/CourseExamAdmin";
+import CourseExamsEditor from "@/components/courses/CourseExamsEditor";
 import { toast } from "@/components/ui/global-toast";
+import { questionMarks } from "@/lib/dashboard/courses";
 import {
   type CourseContent,
   type CourseEnrollmentRequest,
@@ -44,7 +47,7 @@ import {
 } from "@/redux/features/dashboard/courses/coursesSlice";
 import { useGetMediaQuery, type MediaItem } from "@/redux/features/dashboard/media/mediaSlice";
 
-type EditorTab = "details" | "students" | "requests" | "content";
+type EditorTab = "details" | "students" | "requests" | "content" | "exams" | "results";
 type ContentEditor = { type: CourseContent["type"]; content?: CourseContent };
 
 const errorMessage = (error: unknown, fallback: string) =>
@@ -96,6 +99,7 @@ function CourseEditor({ course }: { course: CourseItem }) {
     studentsList: course.studentsList,
     enrollmentRequests: course.enrollmentRequests,
     content: course.content,
+    exams: course.exams,
   }));
   const [tab, setTab] = useState<EditorTab>("details");
   const [studentSearch, setStudentSearch] = useState("");
@@ -234,7 +238,18 @@ function CourseEditor({ course }: { course: CourseItem }) {
             label={`Learning content (${draft.content.length})`}
             onClick={() => setTab("content")}
           />
+          <Tab active={tab === "exams"} label={`MCQ exams (${draft.exams.length})`} onClick={() => setTab("exams")} />
+          <Tab active={tab === "results"} label="Exam results & requests" onClick={() => setTab("results")} />
         </nav>
+
+        {tab === "exams" && (
+          <CourseExamsEditor
+            content={draft.content}
+            exams={draft.exams}
+            onChange={(exams) => setDraft({ ...draft, exams })}
+          />
+        )}
+        {tab === "results" && <CourseExamAdmin courseId={course.id} />}
 
         {tab === "details" && (
           <section className="mt-4 rounded-sm border border-[#eadfca] bg-white p-4 sm:p-6">
@@ -527,7 +542,13 @@ function CourseEditor({ course }: { course: CourseItem }) {
                   key={item.id}
                   move={moveContent}
                   onDelete={() =>
-                    setDraft({ ...draft, content: draft.content.filter((entry) => entry.id !== item.id) })
+                    setDraft({
+                      ...draft,
+                      content: draft.content.filter((entry) => entry.id !== item.id),
+                      exams: draft.exams
+                        .map((exam) => ({ ...exam, questionIds: exam.questionIds.filter((id) => id !== item.id) }))
+                        .filter((exam) => exam.questionIds.length),
+                    })
                   }
                   onEdit={() => setContentEditor({ type: item.type, content: item })}
                   total={draft.content.length}
@@ -680,6 +701,7 @@ function ContentDialog({
   const [options, setOptions] = useState<string[]>(mcq?.options ?? ["", ""]);
   const [correctOptionIndex, setCorrectOptionIndex] = useState(mcq?.correctOptionIndex ?? 0);
   const [explanation, setExplanation] = useState(mcq?.explanation ?? "");
+  const [marks, setMarks] = useState(mcq ? questionMarks(mcq) : 1);
   const [selectedMediaId, setSelectedMediaId] = useState(existingMedia?.mediaId ?? "");
   const selectedMedia = media.find((item) => item.id === selectedMediaId);
   const suitableMedia = media.filter((item) => item.type === (type === "pdf" ? "pdf" : "video"));
@@ -704,6 +726,7 @@ function ContentDialog({
         question: question.trim(),
         options: cleanOptions,
         correctOptionIndex,
+        marks,
         explanation: explanation.trim(),
       });
       return;
@@ -748,6 +771,18 @@ function ContentDialog({
           </Field>
           {type === "mcq" ? (
             <>
+              <Field label="Marks for this question (default 1)">
+                <input
+                  className="input"
+                  min="0.01"
+                  max="100"
+                  step="0.01"
+                  type="number"
+                  required
+                  value={marks}
+                  onChange={(event) => setMarks(Number(event.target.value))}
+                />
+              </Field>
               <Field label="Question">
                 <textarea
                   className="input min-h-28 resize-y"
@@ -799,7 +834,13 @@ function ContentDialog({
                           onClick={() => {
                             const next = options.filter((_, optionIndex) => optionIndex !== index);
                             setOptions(next);
-                            setCorrectOptionIndex(Math.max(0, Math.min(correctOptionIndex, next.length - 1)));
+                            setCorrectOptionIndex(
+                              correctOptionIndex === index
+                                ? 0
+                                : correctOptionIndex > index
+                                  ? correctOptionIndex - 1
+                                  : correctOptionIndex,
+                            );
                           }}
                           type="button"
                         >

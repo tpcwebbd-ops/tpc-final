@@ -79,7 +79,8 @@ export default function RootLayout({
         </div>
         <ReduxProvider>
           <ConfirmDeleteProvider>
-            <div className="print:hidden">
+            {/* Avoid a short containing block that prevents the menu from sticking during page scroll. */}
+            <div className="contents print:hidden">
               <TopBanner />
               <Menu />
             </div>

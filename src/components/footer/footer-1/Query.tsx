@@ -14,6 +14,8 @@ import { useEffect, useState } from "react";
 import { Icon } from "@/components/all-icons/all-icons";
 import { Button } from "@/components/ui/button";
 
+import FooterShare from "../FooterShare";
+
 import type { FooterOneData } from "./data";
 
 type BeforeInstallPromptEvent = Event & {
@@ -77,6 +79,7 @@ export default function Query({ data }: { data: FooterOneData }) {
             {data.brand}
           </p>
           <p className="mt-3 max-w-xs text-sm leading-6 opacity-75">{data.description}</p>
+          <FooterShare settings={data} />
         </div>
         {data.columns.map((column) => (
           <div key={column.title}>
@@ -117,10 +120,20 @@ export default function Query({ data }: { data: FooterOneData }) {
             >
               {data.phone}
             </a>
-            <a className="w-fit transition duration-700 hover:opacity-100" href={data.facebookUrl} rel="noopener noreferrer" target="_blank">
+            <a
+              className="w-fit transition duration-700 hover:opacity-100"
+              href={data.facebookUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               Facebook Page
             </a>
-            <a className="w-fit transition duration-700 hover:opacity-100" href={data.facebookGroupUrl} rel="noopener noreferrer" target="_blank">
+            <a
+              className="w-fit transition duration-700 hover:opacity-100"
+              href={data.facebookGroupUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               TPC Kids Facebook Group
             </a>
           </div>

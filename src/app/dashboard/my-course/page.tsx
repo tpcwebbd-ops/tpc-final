@@ -11,6 +11,7 @@
 import { BookOpen, CheckCircle2, Clock3, Loader2, LockKeyhole, RefreshCw, Send } from "lucide-react";
 import { useState } from "react";
 
+import StudentCourseWorkspace from "@/components/courses/StudentCourseWorkspace";
 import { toast } from "@/components/ui/global-toast";
 import {
   type StudentCourseItem,
@@ -30,6 +31,7 @@ export default function MyCoursePage() {
   const { data, error, isFetching, isLoading, refetch } = useGetMyCoursesQuery();
   const [requestEnrollment, requestState] = useRequestCourseEnrollmentMutation();
   const [confirming, setConfirming] = useState<StudentCourseItem | null>(null);
+  const [viewing, setViewing] = useState<string | null>(null);
   const courses = data?.items ?? [];
 
   async function sendEnrollmentRequest() {
@@ -81,11 +83,18 @@ export default function MyCoursePage() {
         ) : (
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {courses.map((course) => (
-              <CourseCard course={course} key={course.id} onRequest={() => setConfirming(course)} />
+              <CourseCard
+                course={course}
+                key={course.id}
+                onRequest={() => setConfirming(course)}
+                onOpen={() => setViewing(course.id)}
+              />
             ))}
           </div>
         )}
       </section>
+
+      {viewing && <StudentCourseWorkspace close={() => setViewing(null)} courseId={viewing} />}
 
       {confirming && (
         <div className="fixed inset-0 z-[100] grid place-items-center bg-stone-950/30 p-4 backdrop-blur-sm">
@@ -129,7 +138,15 @@ export default function MyCoursePage() {
   );
 }
 
-function CourseCard({ course, onRequest }: { course: StudentCourseItem; onRequest: () => void }) {
+function CourseCard({
+  course,
+  onRequest,
+  onOpen,
+}: {
+  course: StudentCourseItem;
+  onRequest: () => void;
+  onOpen: () => void;
+}) {
   const requestable = course.enrollmentStatus === "not-requested";
   return (
     <article className="flex min-w-0 flex-col rounded-sm border border-[#eadfca] bg-[#fffdfa] p-4">
@@ -171,9 +188,9 @@ function CourseCard({ course, onRequest }: { course: StudentCourseItem; onReques
             <Clock3 className="h-3.5 w-3.5" /> Request pending
           </span>
         ) : course.enrollmentStatus === "enrolled" ? (
-          <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700">
-            <CheckCircle2 className="h-3.5 w-3.5" /> Enrolled
-          </span>
+          <button className="primary-button py-1.5" onClick={onOpen} type="button">
+            <CheckCircle2 className="h-3.5 w-3.5" /> Open course
+          </button>
         ) : (
           <span className="inline-flex items-center gap-1 text-xs font-medium text-red-700">
             <LockKeyhole className="h-3.5 w-3.5" /> Enrollment unavailable

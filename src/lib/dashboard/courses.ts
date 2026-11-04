@@ -38,7 +38,19 @@ export type CourseMcqContent = {
   options: string[];
   correctOptionIndex: number;
   explanation: string;
+  marks: number;
 };
+
+export type CourseExam = { id: string; title: string; questionIds: string[] };
+
+/** Legacy questions carry one mark until explicitly edited. */
+export const questionMarks = (question: { marks?: number }) => question.marks ?? 1;
+
+export function courseExams(course: { exams?: CourseExam[]; content: CourseContent[] }): CourseExam[] {
+  if (Array.isArray(course.exams)) return course.exams;
+  const questionIds = course.content.filter((item) => item.type === "mcq").map((item) => item.id);
+  return questionIds.length ? [{ id: "course-mcq", title: "Course MCQ exam", questionIds }] : [];
+}
 
 export type CourseMediaContent = {
   id: string;
@@ -59,6 +71,7 @@ export type CourseInput = {
   studentsList: CourseStudent[];
   enrollmentRequests: CourseEnrollmentRequest[];
   content: CourseContent[];
+  exams: CourseExam[];
 };
 
 export const courseDefaults: CourseInput = {
@@ -70,6 +83,7 @@ export const courseDefaults: CourseInput = {
   studentsList: [],
   enrollmentRequests: [],
   content: [],
+  exams: [],
 };
 
 const text = (value: unknown, maxLength = 2_000) => (typeof value === "string" ? value.trim().slice(0, maxLength) : "");
@@ -117,10 +131,19 @@ function parseContent(value: unknown): CourseContent | null {
   if (!id || !title) return null;
 
   if (item.type === "mcq") {
-    const options = Array.isArray(item.options) ? item.options.map((option) => text(option, 500)).filter(Boolean) : [];
+    const options = Array.isArray(item.options) ? item.options.map((option) => text(option, 500)) : [];
     const correctOptionIndex = Number(item.correctOptionIndex);
     const question = text(item.question, 5_000);
-    if (!question || options.length < 2 || options.length > 6 || !Number.isInteger(correctOptionIndex)) return null;
+    const marks = item.marks === undefined ? 1 : Number(item.marks);
+    if (!Number.isFinite(marks) || marks <= 0 || marks > 100 || Math.round(marks * 100) / 100 !== marks) return null;
+    if (
+      !question ||
+      options.some((option) => !option) ||
+      options.length < 2 ||
+      options.length > 6 ||
+      !Number.isInteger(correctOptionIndex)
+    )
+      return null;
     if (correctOptionIndex < 0 || correctOptionIndex >= options.length) return null;
     return {
       id,
@@ -130,6 +153,7 @@ function parseContent(value: unknown): CourseContent | null {
       options,
       correctOptionIndex,
       explanation: text(item.explanation, 5_000),
+      marks,
     };
   }
 
@@ -175,6 +199,22 @@ export function parseCourseInput(value: unknown): CourseInput | null {
   )
     return null;
 
+  const mcqIds = new Set(content.filter((entry) => entry?.type === "mcq").map((entry) => entry!.id));
+  const rawExams = item.exams === undefined ? courseExams({ content: content as CourseContent[] }) : item.exams;
+  if (!Array.isArray(rawExams) || rawExams.length > 100) return null;
+  const exams: CourseExam[] = [];
+  for (const entry of rawExams) {
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) return null;
+    const exam = entry as Partial<CourseExam>;
+    const id = text(exam.id, 128);
+    const title = text(exam.title, 240);
+    if (!id || !title || !Array.isArray(exam.questionIds) || !exam.questionIds.length || exam.questionIds.length > 200)
+      return null;
+    if (exam.questionIds.some((questionId) => typeof questionId !== "string" || !mcqIds.has(questionId))) return null;
+    if (new Set(exam.questionIds).size !== exam.questionIds.length || exams.some((item) => item.id === id)) return null;
+    exams.push({ id, title, questionIds: exam.questionIds });
+  }
+
   return {
     name,
     description: text(item.description, 10_000),
@@ -184,5 +224,6 @@ export function parseCourseInput(value: unknown): CourseInput | null {
     studentsList: students as CourseStudent[],
     enrollmentRequests: enrollmentRequests as CourseEnrollmentRequest[],
     content: content as CourseContent[],
+    exams,
   };
 }

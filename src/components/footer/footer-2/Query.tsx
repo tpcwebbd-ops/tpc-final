@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import { Icon } from "@/components/all-icons/all-icons";
 import { Button } from "@/components/ui/button";
 
+import FooterShare from "../FooterShare";
+
 import type { FooterTwoData } from "./data";
 
 type BeforeInstallPromptEvent = Event & {
@@ -98,6 +100,7 @@ export default function Query({ data }: { data: FooterTwoData }) {
             </div>
             <h2 className="mt-4 text-xl font-bold tracking-tight text-stone-950 sm:text-2xl">{data.tagline}</h2>
             <p className="mt-2 text-base leading-7 text-stone-600">{data.description}</p>
+            <FooterShare settings={data} />
             <div className="mt-5 flex flex-wrap gap-x-7 gap-y-3 text-sm font-medium">
               <a
                 className="inline-flex items-center gap-2 transition-colors duration-200 hover:text-orange-800"
@@ -187,10 +190,20 @@ export default function Query({ data }: { data: FooterTwoData }) {
               >
                 {data.phone}
               </a>
-              <a className="w-fit truncate text-stone-600 transition duration-200 hover:text-orange-800" href={data.facebookUrl} rel="noopener noreferrer" target="_blank">
+              <a
+                className="w-fit truncate text-stone-600 transition duration-200 hover:text-orange-800"
+                href={data.facebookUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 Facebook Page
               </a>
-              <a className="w-fit truncate text-stone-600 transition duration-200 hover:text-orange-800" href={data.facebookGroupUrl} rel="noopener noreferrer" target="_blank">
+              <a
+                className="w-fit truncate text-stone-600 transition duration-200 hover:text-orange-800"
+                href={data.facebookGroupUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 TPC Kids Facebook Group
               </a>
             </div>
