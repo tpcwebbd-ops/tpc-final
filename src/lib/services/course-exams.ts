@@ -288,7 +288,7 @@ export async function adminCourseExams(courseId: string, page = 1): Promise<Exam
   const course = await coursesCollection().findOne({ id: courseId });
   if (!course) throw new CourseExamError(404, "Course not found.");
   await ensureExamIndexes();
-  const [attempts, total, accounts] = await Promise.all([
+  const [attempts, total, accounts, submitted] = await Promise.all([
     examAttemptsCollection()
       .find({ courseId }, { projection: { questions: 0, answers: 0 } })
       .sort({ startedAt: -1 })
@@ -297,6 +297,9 @@ export async function adminCourseExams(courseId: string, page = 1): Promise<Exam
       .toArray(),
     examAttemptsCollection().countDocuments({ courseId }),
     examAccountsCollection().find({ courseId }).toArray(),
+    examAttemptsCollection()
+      .find({ courseId, status: "submitted" }, { projection: { userId: 1, examId: 1 } })
+      .toArray(),
   ]);
   return {
     attempts: attempts.map(summary),
@@ -308,6 +311,11 @@ export async function adminCourseExams(courseId: string, page = 1): Promise<Exam
         userId: student.userId,
         studentName: student.name,
         studentEmail: student.email,
+        progress: courseProgress(
+          course,
+          account?.completedLectureIds ?? [],
+          submitted.filter((item) => item.userId === student.userId).map((item) => item.examId),
+        ).percentage,
         quota: account ? quota(account) : { limit: EXAM_ALLOWANCE, used: 0, remaining: EXAM_ALLOWANCE, request: null },
       };
     }),

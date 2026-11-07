@@ -11,8 +11,10 @@
 import { BookOpen, CheckCircle2, Clock3, Loader2, LockKeyhole, RefreshCw, Send } from "lucide-react";
 import { useState } from "react";
 
+import { StatusBadge } from "@/components/courses/CourseStatus";
 import StudentCourseWorkspace from "@/components/courses/StudentCourseWorkspace";
 import { toast } from "@/components/ui/global-toast";
+import { learningStatus } from "@/lib/dashboard/course-status";
 import {
   type StudentCourseItem,
   useGetMyCoursesQuery,
@@ -46,8 +48,8 @@ export default function MyCoursePage() {
   }
 
   return (
-    <main className="min-h-[calc(100vh-65px)] flex-1 bg-[#fffaf0] px-4 py-6 sm:px-6 lg:px-10">
-      <section className="mx-auto max-w-6xl rounded-sm border border-[#eadfca] bg-white p-4 shadow-[0_16px_40px_-30px_rgba(120,53,15,.35)] sm:p-6">
+    <main className="min-h-[calc(100vh-65px)] flex-1 bg-gradient-to-br from-slate-50 via-white to-sky-50 px-4 py-6 sm:px-6 lg:px-10">
+      <section className="mx-auto max-w-6xl rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-[0_16px_40px_-30px_rgba(120,53,15,.35)] sm:p-6">
         <header className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h1 className="flex items-center gap-2 text-xl font-semibold text-stone-900">
@@ -147,9 +149,15 @@ function CourseCard({
   onRequest: () => void;
   onOpen: () => void;
 }) {
+  const status = learningStatus(course.progress.percentage);
   const requestable = course.enrollmentStatus === "not-requested";
   return (
-    <article className="flex min-w-0 flex-col rounded-sm border border-[#eadfca] bg-[#fffdfa] p-4">
+    <article
+      className={
+        "flex min-w-0 flex-col rounded-2xl border p-5 shadow-sm transition-shadow hover:shadow-md " +
+        (course.enrollmentStatus === "enrolled" ? status.style : "border-slate-200 bg-white")
+      }
+    >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h2 className="truncate font-semibold text-stone-900" title={course.name}>
@@ -163,12 +171,15 @@ function CourseCard({
       </div>
       {course.enrollmentStatus === "enrolled" && (
         <div className="mt-4">
+          <StatusBadge {...status} />
           <p className="mb-1 text-xs text-stone-600">
             {course.progress.completed} / {course.progress.total} completed - {course.progress.percentage}%
           </p>
           <progress
             aria-label="Course progress"
-            className="h-2 w-full accent-amber-700"
+            className={
+              "mt-2 h-2 w-full " + (course.progress.percentage >= 100 ? "accent-emerald-600" : "accent-sky-600")
+            }
             max={100}
             value={course.progress.percentage}
           />

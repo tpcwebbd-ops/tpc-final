@@ -10,11 +10,15 @@ import { useState } from "react";
 
 import { toast } from "@/components/ui/global-toast";
 import { examDuration, examResultSummary, type ExamResult } from "@/lib/dashboard/course-exams";
+import { examStatus } from "@/lib/dashboard/course-status";
 import { questionMarks } from "@/lib/dashboard/courses";
 import { downloadExamMarksheet } from "@/lib/dashboard/exam-marksheet";
 
+import { StatusBadge } from "./CourseStatus";
+
 export default function ExamResultView({ result, onBack }: { result: ExamResult; onBack: () => void }) {
   const [downloading, setDownloading] = useState(false);
+  const status = examStatus(result);
   const summary = examResultSummary(result);
   async function download() {
     setDownloading(true);
@@ -43,23 +47,21 @@ export default function ExamResultView({ result, onBack }: { result: ExamResult;
           </button>
         </div>
       </header>
-      <section
-        aria-label="Marks summary"
-        className="overflow-hidden rounded-2xl border border-red-100 bg-white shadow-sm"
-      >
-        <div className="flex flex-wrap items-center justify-between gap-5 bg-[#fff1ee] px-5 py-6 sm:px-7">
+      <section aria-label="Marks summary" className={"overflow-hidden rounded-2xl border shadow-sm " + status.style}>
+        <div className="flex flex-wrap items-center justify-between gap-5 px-5 py-6 sm:px-7">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[#a52b26]">Marks obtained</p>
+            <StatusBadge {...status} />
+            <p className="mt-3 text-xs font-bold uppercase tracking-widest">Marks obtained</p>
             <p className="mt-2">
-              <strong className="text-5xl font-bold tracking-tight text-[#cf302b]">{result.score ?? 0}</strong>
+              <strong className="text-5xl font-bold tracking-tight text-current">{result.score ?? 0}</strong>
               <span className="ml-2 text-xl text-stone-500">/ {result.totalMarks}</span>
             </p>
             <p className="mt-3 text-sm text-stone-600">
               {result.studentName} · {result.courseName}
             </p>
           </div>
-          <div className="rounded-xl border border-red-100 bg-white px-6 py-4 text-center">
-            <strong className="text-3xl text-[#cf302b]">{summary.percentage}%</strong>
+          <div className="rounded-xl border border-white bg-white/80 px-6 py-4 text-center">
+            <strong className="text-3xl text-current">{summary.percentage}%</strong>
             <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-stone-500">Percentage</p>
           </div>
         </div>

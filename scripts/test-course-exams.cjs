@@ -17,6 +17,7 @@ function load(file, imports = {}) {
 }
 const courses = load("src/lib/dashboard/courses.ts");
 const rules = load("src/lib/dashboard/course-exams.ts", { "./courses": courses });
+const visualStatus = load("src/lib/dashboard/course-status.ts");
 const clone = (value) => structuredClone(value);
 const get = (object, key) =>
   key
@@ -206,6 +207,18 @@ const rejects = (run, status) =>
   assert.rejects(run, (error) => error instanceof service.CourseExamError && error.status === status);
 
 (async () => {
+  await check("status colors respect score boundaries, unfinished attempts, and course completion", async () => {
+    const attempt = { status: "submitted", totalMarks: 100, score: 0 };
+    for (const [score, label] of [[0, "Failed"], [49.9, "Failed"], [50, "Passed"], [80, "Passed"], [80.1, "Excellent"], [100, "Excellent"]]) {
+      assert.equal(visualStatus.examStatus({ ...attempt, score }).label, label);
+    }
+    assert.equal(visualStatus.examStatus({ ...attempt, status: "in-progress", score: null }).label, "Unfinished");
+    assert.equal(visualStatus.examStatus().label, "Not started");
+    assert.equal(visualStatus.learningStatus(0).label, "Not started");
+    assert.equal(visualStatus.learningStatus(50).label, "In progress");
+    assert.equal(visualStatus.learningStatus(100).label, "Completed");
+  });
+
   await check("tutorial completion persists, is private and idempotent, and exam retakes count once", async () => {
     await rejects(() => service.completeCourseLecture({ id: "outsider" }, "course-a", "pdf1"), 403);
     await rejects(() => service.completeCourseLecture(alpha, "course-a", "q1"), 404);

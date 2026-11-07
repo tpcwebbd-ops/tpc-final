@@ -15,6 +15,7 @@ import { getYouTubeEmbedUrl } from "@/components/sections/section-34/data";
 import { toast } from "@/components/ui/global-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { examDuration, type ActiveExam, type ExamResult } from "@/lib/dashboard/course-exams";
+import { examStatus, learningStatus, statusStyles } from "@/lib/dashboard/course-status";
 import type { CourseMediaContent } from "@/lib/dashboard/courses";
 import {
   useCompleteCourseLectureMutation,
@@ -25,6 +26,7 @@ import {
   useSubmitCourseExamMutation,
 } from "@/redux/features/dashboard/course-exams/courseExamsSlice";
 
+import { ExamStatusLegend, StatusBadge } from "./CourseStatus";
 import ExamResultView from "./ExamResultView";
 
 const message = (error: unknown) =>
@@ -82,7 +84,7 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
       }}
     >
       <Dialog.Portal>
-        <Dialog.Popup className="fixed inset-0 z-[100] flex h-dvh w-full flex-col bg-[#fffaf5] text-stone-800 outline-none">
+        <Dialog.Popup className="fixed inset-0 z-[100] flex h-dvh w-full flex-col bg-gradient-to-br from-slate-50 via-white to-sky-50 text-stone-800 outline-none">
           <header className="shrink-0 border-b border-stone-200 bg-white">
             <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8">
               <div className="flex min-w-0 items-center gap-4">
@@ -155,14 +157,15 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                 )}
                 {data && (
                   <>
-                    <div className="mb-6">
+                    <div className={"mb-6 rounded-2xl border p-4 " + learningStatus(data.progress.percentage).style}>
+                      <StatusBadge {...learningStatus(data.progress.percentage)} />
                       <p className="mb-1 text-sm">
                         Course progress: {data.progress.completed} / {data.progress.total} completed -{" "}
                         {data.progress.percentage}%
                       </p>
                       <progress
                         aria-label="Course progress"
-                        className="h-2 w-full accent-amber-700"
+                        className="h-2 w-full accent-emerald-600"
                         max={100}
                         value={data.progress.percentage}
                       />
@@ -199,8 +202,10 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                                     className={
                                       "flex w-full items-start gap-3 rounded-lg border p-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 " +
                                       (selected
-                                        ? "border-amber-300 bg-amber-50 text-amber-950"
-                                        : "border-transparent text-stone-700 hover:bg-stone-50")
+                                        ? "border-sky-400 bg-sky-100 text-sky-950 ring-1 ring-sky-200"
+                                        : done
+                                          ? "border-emerald-200 bg-emerald-50 text-emerald-900 hover:bg-emerald-100"
+                                          : "border-slate-200 bg-slate-50 text-stone-700 hover:bg-sky-50")
                                     }
                                   >
                                     <Icon aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
@@ -315,10 +320,11 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                             )}
                           </section>
                           <section>
-                            <h3 className="font-semibold">MCQ exams</h3>
+                            <h3 className="mb-3 font-semibold">MCQ exams</h3>
+                            <ExamStatusLegend />
                             {data.active && (
-                              <div className="mt-3 rounded-sm border border-amber-300 bg-amber-50 p-4">
-                                <p className="font-medium">In progress: {data.active.examTitle}</p>
+                              <div className="mt-3 rounded-xl border border-rose-200 bg-rose-50 p-4">
+                                <p className="font-medium">Unfinished: {data.active.examTitle}</p>
                                 <button
                                   className="primary-button mt-2"
                                   onClick={() => setRunning(data.active)}
@@ -331,12 +337,18 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                             <div className="mt-3 space-y-2">
                               {data.exams.map((exam) => (
                                 <article
-                                  className="flex flex-wrap items-center justify-between gap-3 rounded-sm border border-stone-200 bg-white p-3"
+                                  className={
+                                    "flex flex-wrap items-center justify-between gap-3 rounded-xl border p-4 shadow-sm " +
+                                    examStatus(data.attempts.find((attempt) => attempt.examId === exam.id)).style
+                                  }
                                   key={exam.id}
                                 >
                                   <div>
                                     <h4 className="font-medium">
                                       {exam.title}{" "}
+                                      <StatusBadge
+                                        {...examStatus(data.attempts.find((attempt) => attempt.examId === exam.id))}
+                                      />
                                       {data.progress.completedExamIds.includes(exam.id) && (
                                         <span className="text-emerald-700">(Completed)</span>
                                       )}
@@ -378,23 +390,27 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                               Review your marks, check the correct answers, and download a branded PDF marksheet.
                             </p>
                           </div>
-                          <div className="grid gap-4 lg:grid-cols-2">
+                          <ExamStatusLegend />
+                          <div className="mt-4 grid gap-4 lg:grid-cols-2">
                             {completed.map((attempt) => (
                               <article
-                                className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                                className={"rounded-2xl border p-5 shadow-sm " + examStatus(attempt).style}
                                 key={attempt.id}
                               >
                                 <div className="flex flex-wrap items-start justify-between gap-4">
                                   <div className="min-w-0">
                                     <h4 className="break-words font-semibold text-stone-900">{attempt.examTitle}</h4>
+                                    <div className="mt-2">
+                                      <StatusBadge {...examStatus(attempt)} />
+                                    </div>
                                     <p className="mt-1 text-xs text-stone-500">
                                       {new Date(attempt.submittedAt!).toLocaleString()}
                                     </p>
                                   </div>
-                                  <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-center">
-                                    <strong className="text-2xl text-[#cf302b]">{attempt.score}</strong>
+                                  <div className="rounded-xl border border-white/80 bg-white/80 px-4 py-3 text-center">
+                                    <strong className="text-2xl text-current">{attempt.score}</strong>
                                     <span className="ml-1 text-sm text-stone-500">/ {attempt.totalMarks}</span>
-                                    <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#a52b26]">
+                                    <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-stone-600">
                                       Marks obtained
                                     </p>
                                   </div>
@@ -458,7 +474,12 @@ function TutorialViewer({
     heading.current?.scrollIntoView({ block: "start" });
   }, [lecture.id]);
   return (
-    <article className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
+    <article
+      className={
+        "overflow-hidden rounded-2xl border shadow-sm " +
+        (completed ? statusStyles.complete : "border-sky-200 bg-white")
+      }
+    >
       <header className="space-y-3 border-b border-stone-200 p-4 sm:p-6">
         <h3
           ref={heading}
@@ -503,7 +524,12 @@ function TutorialViewer({
           </p>
         )}
       </div>
-      <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-stone-200 bg-stone-50 p-4 sm:p-6">
+      <footer
+        className={
+          "flex flex-wrap items-center justify-between gap-4 border-t p-4 sm:p-6 " +
+          (completed ? statusStyles.complete : statusStyles.learning)
+        }
+      >
         <p className="text-sm text-stone-600">
           {completed
             ? "You have completed this tutorial."

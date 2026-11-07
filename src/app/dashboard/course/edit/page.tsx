@@ -33,8 +33,11 @@ import { useMemo, useState } from "react";
 import { UploadButton } from "@/app/api/lib/uploadthing";
 import CourseExamAdmin from "@/components/courses/CourseExamAdmin";
 import CourseExamsEditor from "@/components/courses/CourseExamsEditor";
+import { StatusBadge } from "@/components/courses/CourseStatus";
 import { toast } from "@/components/ui/global-toast";
+import { learningStatus } from "@/lib/dashboard/course-status";
 import { questionMarks } from "@/lib/dashboard/courses";
+import { useGetAdminCourseExamsQuery } from "@/redux/features/dashboard/course-exams/courseExamsSlice";
 import {
   type CourseContent,
   type CourseEnrollmentRequest,
@@ -89,6 +92,9 @@ function EditorMessage({ text }: { text: string }) {
 }
 
 function CourseEditor({ course }: { course: CourseItem }) {
+  const { data: participation } = useGetAdminCourseExamsQuery({ courseId: course.id, page: 1 });
+  const studentProgress = (student: CourseStudent) =>
+    participation?.accounts.find((account) => account.userId === student.userId)?.progress ?? student.progress;
   const [update, updateState] = useUpdateCourseMutation();
   const [reviewRequest, reviewRequestState] = useReviewCourseEnrollmentRequestMutation();
   const [draft, setDraft] = useState<CourseInput>(() => ({
@@ -194,7 +200,7 @@ function CourseEditor({ course }: { course: CourseItem }) {
   }
 
   return (
-    <main className="min-h-[calc(100vh-65px)] flex-1 bg-[#fffaf0] p-4 sm:p-6 lg:p-8">
+    <main className="min-h-[calc(100vh-65px)] flex-1 bg-gradient-to-br from-slate-50 via-white to-sky-50 p-4 sm:p-6 lg:p-8">
       <div className="mx-auto max-w-6xl">
         <header className="flex flex-wrap items-start justify-between gap-3 rounded-sm border border-[#eadfca] bg-white p-4 shadow-sm">
           <div className="min-w-0">
@@ -369,10 +375,16 @@ function CourseEditor({ course }: { course: CourseItem }) {
                     </thead>
                     <tbody>
                       {draft.studentsList.map((student) => (
-                        <tr className="border-t border-stone-100" key={student.userId}>
+                        <tr
+                          className={"border-t border-white " + learningStatus(studentProgress(student)).style}
+                          key={student.userId}
+                        >
                           <td className="p-3">
                             <p className="font-medium text-stone-900">{student.name}</p>
                             <p className="text-xs text-stone-500">{student.email}</p>
+                            <div className="mt-2">
+                              <StatusBadge {...learningStatus(student.progress)} />
+                            </div>
                           </td>
                           <td className="p-3">
                             <label className="flex items-center gap-2">
@@ -605,7 +617,7 @@ function Tab({ active, label, onClick }: { active: boolean; label: string; onCli
   return (
     <button
       aria-pressed={active}
-      className={`rounded-sm px-3 py-2 text-sm font-medium ${active ? "bg-amber-700 text-white" : "text-stone-600 hover:bg-amber-50"}`}
+      className={`rounded-sm px-3 py-2 text-sm font-medium ${active ? "bg-sky-700 text-white shadow-sm" : "text-slate-600 hover:bg-sky-50"}`}
       onClick={onClick}
       type="button"
     >

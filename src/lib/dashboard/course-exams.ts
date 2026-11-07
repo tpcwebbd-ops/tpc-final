@@ -58,7 +58,7 @@ export type ExamAdminOverview = {
   attempts: ExamAttemptSummary[];
   page: number;
   total: number;
-  accounts: { userId: string; studentName: string; studentEmail: string; quota: ExamQuota }[];
+  accounts: { userId: string; studentName: string; studentEmail: string; progress: number; quota: ExamQuota }[];
 };
 
 export function publicExamQuestions(questions: CourseMcqContent[]): ExamQuestion[] {

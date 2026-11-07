@@ -10,10 +10,13 @@ import { useState } from "react";
 
 import { toast } from "@/components/ui/global-toast";
 import { examDuration } from "@/lib/dashboard/course-exams";
+import { examStatus, learningStatus } from "@/lib/dashboard/course-status";
 import {
   useGetAdminCourseExamsQuery,
   useReviewExamAllowanceMutation,
 } from "@/redux/features/dashboard/course-exams/courseExamsSlice";
+
+import { ExamStatusLegend, StatusBadge } from "./CourseStatus";
 
 export default function CourseExamAdmin({ courseId }: { courseId: string }) {
   const [page, setPage] = useState(1);
@@ -31,7 +34,7 @@ export default function CourseExamAdmin({ courseId }: { courseId: string }) {
     }
   }
   return (
-    <section className="mt-4 space-y-4 rounded-sm border border-[#eadfca] bg-white p-4">
+    <section className="mt-4 space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <header className="flex flex-wrap items-center justify-between gap-3">
         <h3 className="font-semibold">Exam results and allowances</h3>
         <button className="secondary-button" disabled={isFetching} onClick={() => void refetch()} type="button">
@@ -46,11 +49,24 @@ export default function CourseExamAdmin({ courseId }: { courseId: string }) {
           <div className="max-h-80 space-y-2 overflow-y-auto">
             {data.accounts.map((account) => (
               <div
-                className="flex flex-wrap items-center justify-between gap-3 rounded-sm border border-stone-200 p-3 text-sm"
+                className={
+                  "flex flex-wrap items-center justify-between gap-3 rounded-xl border p-4 text-sm " +
+                  learningStatus(account.progress).style
+                }
                 key={account.userId}
               >
                 <div>
                   <p className="font-medium">{account.studentName}</p>
+                  <div className="my-2">
+                    <StatusBadge {...learningStatus(account.progress)} />{" "}
+                    <span className="text-xs">{account.progress}% complete</span>
+                  </div>
+                  <progress
+                    aria-label={account.studentName + " course progress"}
+                    max={100}
+                    value={account.progress}
+                    className="h-1.5 w-44 accent-emerald-600"
+                  />
                   <p className="break-all text-xs text-stone-500">{account.studentEmail}</p>
                   <p className="mt-1">
                     {account.quota.used} / {account.quota.limit} attempts used
@@ -87,6 +103,7 @@ export default function CourseExamAdmin({ courseId }: { courseId: string }) {
             ))}
             {!data.accounts.length && <p className="text-sm text-stone-500">No enrolled students yet.</p>}
           </div>
+          <ExamStatusLegend />
           <h4 className="text-sm font-semibold">Exam participation ({data.total})</h4>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[740px] text-left text-sm">
@@ -101,14 +118,16 @@ export default function CourseExamAdmin({ courseId }: { courseId: string }) {
               </thead>
               <tbody>
                 {data.attempts.map((attempt) => (
-                  <tr className="border-t align-top" key={attempt.id}>
+                  <tr className={"border-t border-white align-top " + examStatus(attempt).style} key={attempt.id}>
                     <td className="p-2">
                       {attempt.studentName}
                       <span className="block text-xs text-stone-500">{attempt.studentEmail}</span>
                     </td>
                     <td className="p-2">
                       {attempt.examTitle}
-                      <span className="block text-xs text-stone-500">{attempt.status}</span>
+                      <div className="mt-2">
+                        <StatusBadge {...examStatus(attempt)} />
+                      </div>
                     </td>
                     <td className="p-2 text-xs">
                       {new Date(attempt.startedAt).toLocaleString()}
@@ -121,6 +140,9 @@ export default function CourseExamAdmin({ courseId }: { courseId: string }) {
                     </td>
                     <td className="p-2 font-semibold">
                       {attempt.score === null ? "Pending" : `${attempt.score} / ${attempt.totalMarks}`}
+                      {examStatus(attempt).percentage !== null && (
+                        <span className="mt-1 block text-xs">{examStatus(attempt).percentage}%</span>
+                      )}
                     </td>
                   </tr>
                 ))}
