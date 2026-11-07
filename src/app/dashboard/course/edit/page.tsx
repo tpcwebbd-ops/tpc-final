@@ -30,6 +30,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
+import { UploadButton } from "@/app/api/lib/uploadthing";
 import CourseExamAdmin from "@/components/courses/CourseExamAdmin";
 import CourseExamsEditor from "@/components/courses/CourseExamsEditor";
 import { toast } from "@/components/ui/global-toast";
@@ -45,7 +46,7 @@ import {
   useReviewCourseEnrollmentRequestMutation,
   useUpdateCourseMutation,
 } from "@/redux/features/dashboard/courses/coursesSlice";
-import { useGetMediaQuery, type MediaItem } from "@/redux/features/dashboard/media/mediaSlice";
+import { useCreateMediaMutation, useGetMediaQuery, type MediaItem } from "@/redux/features/dashboard/media/mediaSlice";
 
 type EditorTab = "details" | "students" | "requests" | "content" | "exams" | "results";
 type ContentEditor = { type: CourseContent["type"]; content?: CourseContent };
@@ -725,9 +726,85 @@ function ContentDialog({
   const [explanation, setExplanation] = useState(mcq?.explanation ?? "");
   const [marks, setMarks] = useState(mcq ? questionMarks(mcq) : 1);
   const [selectedMediaId, setSelectedMediaId] = useState(existingMedia?.mediaId ?? "");
-  const selectedMedia = media.find((item) => item.id === selectedMediaId);
-  const suitableMedia = media.filter((item) => item.type === (type === "pdf" ? "pdf" : "video"));
-  const dialogTitle = type === "mcq" ? "MCQ question" : type === "pdf" ? "Content PDF" : "Video from Media";
+  const [addedMedia, setAddedMedia] = useState<MediaItem[]>([]);
+  const [createMedia, createMediaState] = useCreateMediaMutation();
+  const [uploading, setUploading] = useState(false);
+  const [mediaError, setMediaError] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const busy = uploading || createMediaState.isLoading;
+  const availableMedia = [...addedMedia, ...media.filter((item) => !addedMedia.some((added) => added.id === item.id))];
+  const selectedMedia = availableMedia.find((item) => item.id === selectedMediaId);
+
+  function selectAddedMedia(item: MediaItem) {
+    setAddedMedia((current) => [...current, item]);
+    setSelectedMediaId(item.id);
+    setTitle((current) => (current.trim() ? current : item.name));
+    setMediaError("");
+  }
+
+  async function saveUpload(files: { name: string; ufsUrl: string; key: string }[]) {
+    const file = files[0];
+    if (!file || type === "mcq") {
+      setUploading(false);
+      return;
+    }
+    try {
+      const saved = await createMedia({
+        name: file.name,
+        url: file.ufsUrl,
+        fileKey: file.key,
+        type,
+        uploadPlane: "Uploadthings",
+      }).unwrap();
+      selectAddedMedia(saved.item);
+      toast.success("File uploaded and selected. Save this tutorial, then save the course to publish it.");
+    } catch (error) {
+      setMediaError(
+        errorMessage(error, "Upload completed, but the file could not be saved to Media. Please try again."),
+      );
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  async function addYoutube() {
+    setMediaError("");
+    let url: URL;
+    try {
+      url = new URL(youtubeUrl.trim());
+      const host = url.hostname.toLowerCase().replace(/^www\./, "");
+      const id =
+        host === "youtu.be"
+          ? url.pathname.slice(1).split("/")[0]
+          : ["youtube.com", "m.youtube.com"].includes(host)
+            ? url.pathname === "/watch"
+              ? url.searchParams.get("v")
+              : /^\/(embed|shorts)\//.test(url.pathname)
+                ? url.pathname.split("/")[2]
+                : null
+            : null;
+      if (!["https:", "http:"].includes(url.protocol) || !id || !/^[\w-]{11}$/.test(id)) throw new Error();
+      url = new URL("https://www.youtube.com/watch?v=" + id);
+    } catch {
+      setMediaError("Enter a valid YouTube video URL (watch, shorts, embed, or youtu.be).");
+      return;
+    }
+    try {
+      const saved = await createMedia({
+        name: title.trim() || "YouTube video",
+        url: url.href,
+        type: "video",
+        uploadPlane: "Youtube",
+      }).unwrap();
+      selectAddedMedia(saved.item);
+      setYoutubeUrl("");
+      toast.success("YouTube video selected. Save this tutorial, then save the course to publish it.");
+    } catch (error) {
+      setMediaError(errorMessage(error, "Could not save the YouTube video."));
+    }
+  }
+  const suitableMedia = availableMedia.filter((item) => item.type === (type === "pdf" ? "pdf" : "video"));
+  const dialogTitle = type === "mcq" ? "MCQ question" : type === "pdf" ? "Content PDF" : "Video";
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -753,7 +830,7 @@ function ContentDialog({
       });
       return;
     }
-    if (!selectedMedia || !title.trim()) return;
+    if (busy || !selectedMedia || !title.trim()) return;
     onSave({ id, type, title: title.trim(), mediaId: selectedMedia.id, mediaUrl: selectedMedia.url });
   }
 
@@ -773,10 +850,16 @@ function ContentDialog({
             <p className="mt-1 text-sm text-stone-600">
               {type === "mcq"
                 ? "Write the question, answers, and correct option."
-                : "Choose a file already available in the Media library."}
+                : "Upload a file or choose one from Media. Videos can also use a YouTube link."}
             </p>
           </div>
-          <button aria-label="Close content editor" className="icon-button" onClick={onClose} type="button">
+          <button
+            aria-label="Close content editor"
+            className="icon-button"
+            disabled={busy}
+            onClick={onClose}
+            type="button"
+          >
             <X className="h-4 w-4" />
           </button>
         </header>
@@ -884,6 +967,64 @@ function ContentDialog({
             </>
           ) : (
             <>
+              <section className="rounded-sm border border-[#eadfca] bg-white p-4">
+                <h3 className="text-sm font-semibold">{type === "pdf" ? "Upload PDF" : "Upload video"}</h3>
+                <UploadButton
+                  endpoint={type === "pdf" ? "pdfUploader" : "videoUploader"}
+                  disabled={busy}
+                  className="mt-3 items-start"
+                  appearance={{
+                    button: "rounded-sm bg-amber-700 px-4 text-sm text-white",
+                    allowedContent: "text-xs text-stone-500",
+                  }}
+                  content={{ button: uploading ? "Uploading..." : type === "pdf" ? "Upload PDF" : "Upload video" }}
+                  onBeforeUploadBegin={(files) => {
+                    setUploading(true);
+                    setMediaError("");
+                    return files;
+                  }}
+                  onClientUploadComplete={(files) => void saveUpload(files)}
+                  onUploadError={(error) => {
+                    setUploading(false);
+                    setMediaError(error.message);
+                  }}
+                />
+                <p className="mt-2 text-xs text-stone-500">
+                  The uploaded file is saved to Media and selected for this tutorial.
+                </p>
+              </section>
+              {type === "video" && (
+                <section className="rounded-sm border border-[#eadfca] bg-white p-4">
+                  <Field label="YouTube video URL">
+                    <input
+                      className="input mt-2"
+                      type="url"
+                      value={youtubeUrl}
+                      disabled={busy}
+                      onChange={(event) => setYoutubeUrl(event.target.value)}
+                      placeholder="https://www.youtube.com/watch?v=..."
+                    />
+                  </Field>
+                  <button
+                    className="secondary-button mt-3"
+                    type="button"
+                    disabled={busy || !youtubeUrl.trim()}
+                    onClick={() => void addYoutube()}
+                  >
+                    Add YouTube video
+                  </button>
+                </section>
+              )}
+              {mediaError && (
+                <p role="alert" className="rounded-sm bg-red-50 p-3 text-sm text-red-700">
+                  {mediaError}
+                </p>
+              )}
+              {busy && (
+                <p role="status" className="text-sm text-stone-500">
+                  {uploading ? "Uploading file..." : "Saving media..."}
+                </p>
+              )}
               <Field label={type === "pdf" ? "PDF from Media" : "Video from Media"}>
                 <div className="max-h-60 space-y-2 overflow-y-auto rounded-sm border border-[#eadfca] bg-white p-2">
                   {mediaLoading && <p className="p-2 text-sm text-stone-500">Loading Media library…</p>}
@@ -894,6 +1035,7 @@ function ContentDialog({
                         key={item.id}
                       >
                         <input
+                          disabled={busy}
                           checked={selectedMediaId === item.id}
                           name="course-media"
                           onChange={() => {
@@ -910,7 +1052,8 @@ function ContentDialog({
                     ))}
                   {!mediaLoading && !suitableMedia.length && (
                     <p className="p-3 text-sm text-stone-500">
-                      No {type.toUpperCase()} files are in Media yet. Upload one in the Media Library first.
+                      No {type.toUpperCase()} files are in Media yet. Upload one above
+                      {type === "video" ? " or add a YouTube link" : ""}.
                     </p>
                   )}
                 </div>
@@ -924,10 +1067,10 @@ function ContentDialog({
           )}
         </div>
         <footer className="mt-5 flex justify-end gap-2">
-          <button className="secondary-button" onClick={onClose} type="button">
+          <button className="secondary-button" disabled={busy} onClick={onClose} type="button">
             Cancel
           </button>
-          <button className="primary-button" disabled={type !== "mcq" && !selectedMediaId} type="submit">
+          <button className="primary-button" disabled={busy || (type !== "mcq" && !selectedMedia)} type="submit">
             Save {dialogTitle}
           </button>
         </footer>

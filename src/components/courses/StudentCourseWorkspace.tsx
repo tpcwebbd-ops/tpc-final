@@ -9,11 +9,13 @@
 import { Dialog } from "@base-ui/react/dialog";
 import { ArrowLeft, BookOpen, ClipboardList, FileCheck2, FileText, Play, RefreshCw, Timer } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
+import { getYouTubeEmbedUrl } from "@/components/sections/section-34/data";
 import { toast } from "@/components/ui/global-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { examDuration, type ActiveExam, type ExamResult } from "@/lib/dashboard/course-exams";
+import type { CourseMediaContent } from "@/lib/dashboard/courses";
 import {
   useCompleteCourseLectureMutation,
   useGetCourseWorkspaceQuery,
@@ -43,6 +45,8 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
   const [loadResult, resultState] = useLazyGetStudentExamResultQuery();
   const [running, setRunning] = useState<ActiveExam | null>(null);
   const [result, setResult] = useState<ExamResult | null>(null);
+  const [lectureId, setLectureId] = useState<string | null>(null);
+  const lecture = data?.course.content.find((item) => item.id === lectureId) ?? data?.course.content[0];
   const [tab, setTab] = useState("tutorials");
   const workspaceId = useId();
   const completed = data?.attempts.filter((attempt) => attempt.status === "submitted") ?? [];
@@ -170,67 +174,77 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                       role="tabpanel"
                       tabIndex={0}
                     >
-                      <div className="mb-6">
-                        <h3 className="text-xl font-semibold text-stone-900">Your tutorials</h3>
-                        <p className="mt-1 text-sm text-stone-500">
-                          Read the course documents and watch the lesson videos at your own pace.
-                        </p>
-                      </div>
-                      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                        {data.course.content.map((item, index) => (
-                          <article
-                            className="flex min-w-0 flex-col rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
-                            key={item.id}
-                          >
-                            <div className="mb-5 flex items-center justify-between">
-                              <span
-                                className={`grid size-12 place-items-center rounded-xl ${item.type === "pdf" ? "bg-red-50 text-[#cf302b]" : "bg-amber-50 text-amber-800"}`}
-                              >
-                                {item.type === "pdf" ? (
-                                  <FileText aria-hidden="true" className="size-6" />
-                                ) : (
-                                  <Play aria-hidden="true" className="size-6" />
-                                )}
-                              </span>
-                              <span className="text-xs font-medium uppercase tracking-wide text-stone-400">
-                                {item.type === "pdf" ? "Document" : "Video"} {index + 1}
-                              </span>
+                      {data.course.content.length ? (
+                        <div className="grid items-start gap-5 md:grid-cols-[16rem_minmax(0,1fr)] lg:grid-cols-[18rem_minmax(0,1fr)]">
+                          <aside className="min-w-0 rounded-xl border border-stone-200 bg-white shadow-sm md:sticky md:top-0">
+                            <div className="border-b border-stone-200 p-4">
+                              <h3 className="font-semibold text-stone-900">Tutorials</h3>
+                              <p className="mt-1 text-xs text-stone-500">Choose a lesson to read or watch.</p>
                             </div>
-                            <h4 className="break-words font-semibold text-stone-900">{item.title}</h4>
-                            <p className="mb-6 mt-2 text-sm text-stone-500">
-                              {item.type === "pdf" ? "Course reading material" : "Recorded course lesson"}
-                            </p>
-                            <a
-                              className="secondary-button mt-auto w-fit"
-                              href={item.mediaUrl}
-                              rel="noopener noreferrer"
-                              target="_blank"
+                            <nav
+                              aria-label="Tutorial lessons"
+                              className="max-h-64 space-y-2 overflow-y-auto p-3 md:max-h-[70dvh]"
                             >
-                              {item.type === "pdf" ? "Read document" : "Watch video"}
-                              <span className="sr-only"> (opens in a new tab)</span>
-                            </a>
-                            <button
-                              className="primary-button mt-3 w-fit"
-                              type="button"
-                              disabled={lectureState.isLoading || data.progress.completedLectureIds.includes(item.id)}
-                              onClick={async () => {
-                                try {
-                                  await completeLecture({ courseId, lectureId: item.id }).unwrap();
-                                  toast.success("Tutorial completed.");
-                                } catch (error) {
-                                  toast.error(message(error));
-                                }
-                              }}
-                            >
-                              {data.progress.completedLectureIds.includes(item.id) ? "Completed" : "Mark complete"}
-                            </button>
-                          </article>
-                        ))}
-                      </div>
-                      {!data.course.content.length && (
+                              {data.course.content.map((item, index) => {
+                                const selected = item.id === lecture?.id;
+                                const done = data.progress.completedLectureIds.includes(item.id);
+                                const Icon = item.type === "pdf" ? FileText : Play;
+                                return (
+                                  <button
+                                    key={item.id}
+                                    type="button"
+                                    aria-current={selected ? "true" : undefined}
+                                    aria-controls={workspaceId + "-tutorial-viewer"}
+                                    onClick={() => setLectureId(item.id)}
+                                    className={
+                                      "flex w-full items-start gap-3 rounded-lg border p-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 " +
+                                      (selected
+                                        ? "border-amber-300 bg-amber-50 text-amber-950"
+                                        : "border-transparent text-stone-700 hover:bg-stone-50")
+                                    }
+                                  >
+                                    <Icon aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
+                                    <span className="min-w-0">
+                                      <span className="block break-words text-sm font-semibold">
+                                        {index + 1}. {item.title}
+                                      </span>
+                                      <span className="mt-1 block text-xs text-stone-500">
+                                        {item.type === "pdf" ? "PDF" : "Video"}
+                                      </span>
+                                      {done && (
+                                        <span className="mt-1 block text-xs font-medium text-emerald-700">
+                                          Completed
+                                        </span>
+                                      )}
+                                    </span>
+                                  </button>
+                                );
+                              })}
+                            </nav>
+                          </aside>
+                          <div id={workspaceId + "-tutorial-viewer"} className="min-w-0">
+                            {lecture && tab === "tutorials" && (
+                              <TutorialViewer
+                                key={lecture.id}
+                                lecture={lecture}
+                                completed={data.progress.completedLectureIds.includes(lecture.id)}
+                                saving={lectureState.isLoading}
+                                onComplete={async () => {
+                                  try {
+                                    await completeLecture({ courseId, lectureId: lecture.id }).unwrap();
+                                    toast.success("Tutorial completed.");
+                                  } catch (error) {
+                                    toast.error(message(error));
+                                  }
+                                }}
+                              />
+                            )}
+                          </div>
+                        </div>
+                      ) : (
                         <div className="rounded-xl border border-dashed border-stone-300 bg-white p-12 text-center">
                           <BookOpen aria-hidden="true" className="mx-auto mb-3 size-8 text-stone-400" />
-                          <h4 className="font-semibold">Your tutorials will appear here</h4>
+                          <h3 className="font-semibold">Your tutorials will appear here</h3>
                           <p className="mt-1 text-sm text-stone-500">No documents or videos have been added yet.</p>
                         </div>
                       )}
@@ -422,6 +436,91 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>
+  );
+}
+
+function TutorialViewer({
+  lecture,
+  completed,
+  saving,
+  onComplete,
+}: {
+  lecture: CourseMediaContent;
+  completed: boolean;
+  saving: boolean;
+  onComplete: () => Promise<void>;
+}) {
+  const heading = useRef<HTMLHeadingElement>(null);
+  const [videoError, setVideoError] = useState(false);
+  const youtube = lecture.type === "video" ? getYouTubeEmbedUrl(lecture.mediaUrl) : null;
+  useEffect(() => {
+    heading.current?.focus({ preventScroll: true });
+    heading.current?.scrollIntoView({ block: "start" });
+  }, [lecture.id]);
+  return (
+    <article className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
+      <header className="space-y-3 border-b border-stone-200 p-4 sm:p-6">
+        <h3
+          ref={heading}
+          tabIndex={-1}
+          className="scroll-mt-4 break-words text-xl font-semibold text-stone-900 outline-none"
+        >
+          {lecture.title}
+        </h3>
+      </header>
+      <div className="p-3 sm:p-6">
+        {lecture.type === "pdf" ? (
+          <iframe
+            title={lecture.title + " PDF"}
+            src={lecture.mediaUrl}
+            className="h-[70dvh] min-h-96 w-full rounded-lg border border-stone-200"
+          />
+        ) : youtube ? (
+          <iframe
+            title={lecture.title + " video"}
+            src={youtube}
+            className="aspect-video w-full rounded-lg bg-black"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+        ) : (
+          <video
+            aria-label={lecture.title}
+            src={lecture.mediaUrl}
+            controls
+            playsInline
+            preload="metadata"
+            className="max-h-[75dvh] w-full rounded-lg bg-black"
+            onError={() => setVideoError(true)}
+          >
+            Your browser does not support video playback.
+          </video>
+        )}
+        {videoError && (
+          <p role="alert" className="mt-3 text-sm text-red-700">
+            This video could not be loaded. Please refresh or contact your course administrator.
+          </p>
+        )}
+      </div>
+      <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-stone-200 bg-stone-50 p-4 sm:p-6">
+        <p className="text-sm text-stone-600">
+          {completed
+            ? "You have completed this tutorial."
+            : lecture.type === "pdf"
+              ? "Finished reading? Complete this tutorial to save your progress."
+              : "Finished watching? Complete this tutorial to save your progress."}
+        </p>
+        <button
+          className="primary-button"
+          type="button"
+          disabled={saving || completed}
+          onClick={() => void onComplete()}
+        >
+          {completed ? "Completed" : saving ? "Saving..." : "Complete tutorial"}
+        </button>
+      </footer>
+    </article>
   );
 }
 
