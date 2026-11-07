@@ -113,15 +113,24 @@ export function DashboardNav() {
   const [collapsed, setCollapsed] = useState(false);
   const [hoverExpanded, setHoverExpanded] = useState(false);
   const { data: session, isPending: sessionPending } = authClient.useSession();
-  const { data, isLoading, isError, refetch } = useGetSidebarsQuery(undefined, {
-    skip: !session,
+  const {
+    currentData: data,
+    isLoading,
+    isFetching,
+    isError,
+    refetch,
+  } = useGetSidebarsQuery(session?.user.id, {
+    skip: sessionPending || !session,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
-  const items = useMemo(() => createTree(data?.items ?? []), [data?.items]);
+  const items = useMemo(
+    () => createTree(!sessionPending && session && !isError ? (data?.items ?? []) : []),
+    [data?.items, isError, session, sessionPending],
+  );
   const expanded = !collapsed || hoverExpanded;
-  const navigationLoading = sessionPending || isLoading;
+  const navigationLoading = sessionPending || isLoading || (isFetching && !data);
 
   useEffect(() => {
     const toggleMobileSidebar = () => setMobileOpen((open) => !open);

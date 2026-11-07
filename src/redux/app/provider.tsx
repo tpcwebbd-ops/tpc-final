@@ -14,10 +14,13 @@
 
 "use client";
 
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { useEffect } from "react";
 import { Provider } from "react-redux";
 
 import { store } from "@/redux/app/store";
 
 export function ReduxProvider({ children }: Readonly<{ children: React.ReactNode }>) {
+  useEffect(() => setupListeners(store.dispatch), []);
   return <Provider store={store}>{children}</Provider>;
 }

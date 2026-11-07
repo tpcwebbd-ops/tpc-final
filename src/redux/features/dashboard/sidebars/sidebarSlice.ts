@@ -15,12 +15,21 @@ type SidebarResponse = {
   items: SidebarItem[];
   roleName: string | null;
   access: DashboardPermissions;
+  navigationAccess: DashboardPermissions;
   leadsActor: LeadActor | null;
 };
 
 export const sidebarsApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    getSidebars: build.query<SidebarResponse, void>({ query: () => "sidebars/v1", providesTags: ["Sidebar"] }),
+    // Key private navigation by account so switching sessions cannot reuse another user's menu.
+    getSidebars: build.query<SidebarResponse, string | void>({
+      query: () => "sidebars/v1",
+      providesTags: ["Sidebar"],
+    }),
+    getSidebarInventory: build.query<SidebarResponse, void>({
+      query: () => ({ url: "sidebars/v1", params: { scope: "all" } }),
+      providesTags: ["Sidebar"],
+    }),
     createSidebar: build.mutation<
       { item: SidebarItem },
       Pick<SidebarItem, "name" | "url" | "icon"> & { parentId?: string | null }
@@ -32,7 +41,7 @@ export const sidebarsApi = apiSlice.injectEndpoints({
       query: ({ id, direction }) => ({ url: `sidebars/v1/${id}/move`, method: "POST", body: { direction } }),
       async onQueryStarted({ id, direction }, { dispatch, queryFulfilled }) {
         const patch = dispatch(
-          sidebarsApi.util.updateQueryData("getSidebars", undefined, (draft) => {
+          sidebarsApi.util.updateQueryData("getSidebarInventory", undefined, (draft) => {
             const current = draft.items.find((item) => item.id === id);
             if (!current) return;
             const siblings = draft.items
@@ -54,7 +63,7 @@ export const sidebarsApi = apiSlice.injectEndpoints({
       query: ({ id, ...body }) => ({ url: `sidebars/v1/${id}`, method: "PATCH", body }),
       async onQueryStarted(item, { dispatch, queryFulfilled }) {
         const patch = dispatch(
-          sidebarsApi.util.updateQueryData("getSidebars", undefined, (draft) => {
+          sidebarsApi.util.updateQueryData("getSidebarInventory", undefined, (draft) => {
             const index = draft.items.findIndex((current) => current.id === item.id);
             if (index >= 0) draft.items[index] = item;
           }),
@@ -71,7 +80,7 @@ export const sidebarsApi = apiSlice.injectEndpoints({
       query: (id) => ({ url: `sidebars/v1/${id}`, method: "DELETE" }),
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         const patch = dispatch(
-          sidebarsApi.util.updateQueryData("getSidebars", undefined, (draft) => {
+          sidebarsApi.util.updateQueryData("getSidebarInventory", undefined, (draft) => {
             const toRemove = new Set<string>([id]);
             let changed = true;
             while (changed) {
@@ -99,6 +108,7 @@ export const sidebarsApi = apiSlice.injectEndpoints({
 
 export const {
   useGetSidebarsQuery,
+  useGetSidebarInventoryQuery,
   useCreateSidebarMutation,
   useMoveSidebarMutation,
   useUpdateSidebarMutation,

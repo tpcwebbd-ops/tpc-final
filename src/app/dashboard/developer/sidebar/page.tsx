@@ -18,7 +18,7 @@ import { useConfirmDelete } from "@/components/confirm-delete-provider";
 import {
   useCreateSidebarMutation,
   useDeleteSidebarMutation,
-  useGetSidebarsQuery,
+  useGetSidebarInventoryQuery,
   useMoveSidebarMutation,
   useUpdateSidebarMutation,
 } from "@/redux/features/dashboard/sidebars/sidebarSlice";
@@ -32,7 +32,7 @@ const noItems: SidebarItem[] = [];
 export default function SidebarPage() {
   const confirmDelete = useConfirmDelete();
   const { data: session, isPending } = authClient.useSession();
-  const { data, error, isLoading, refetch } = useGetSidebarsQuery(undefined, { skip: !session });
+  const { data, error, isLoading, refetch } = useGetSidebarInventoryQuery(undefined, { skip: !session });
   const [createSidebar, createState] = useCreateSidebarMutation();
   const [updateSidebar, updateState] = useUpdateSidebarMutation();
   const [deleteSidebar] = useDeleteSidebarMutation();

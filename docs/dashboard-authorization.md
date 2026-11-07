@@ -3,6 +3,10 @@
 1. Keep `.env.local` at `AuthorizationEnable=false` while setting up the website.
    Sign-in and blocked-account checks remain active. The dashboard displays the
    assigned role when one exists; missing assignments display "Not assigned".
+   The setup flag bypasses page/API authorization, but the sidebar and dashboard
+   quick links always follow the assigned database role's saved permissions.
+   Missing or deleted roles show no protected navigation; saved role-name labels
+   never grant access. Open setup tools directly by URL while configuring access.
 2. Open `/tools/import-data` and sync the desired sidebar/page defaults. Sync
    preserves existing sidebar IDs and therefore role grants. Its status uses the
    stored inventory rather than the account's filtered navigation. When roles are
@@ -12,6 +16,8 @@
    reading data still requires Read. A parent container can open when a child is
    permitted, and its quick links remain filtered. Explicit Leads child entries
    control their own grants instead of inheriting an unrestricted parent grant.
+   Custom role names work through their saved role ID and grants. Looking up a
+   role never rewrites its permissions, including the default `user` role.
 4. Assign roles at `/dashboard/admin/access`. Use **Review missing assignments**
    to find broken role IDs, inspect the suggested role name, and explicitly choose
    a replacement. Existing assignments are never promoted based on their saved
@@ -38,6 +44,11 @@ My Leads remains personal in either authorization mode.
 Role, access, sidebar, and import mutations invalidate the relevant client
 permission/navigation/Leads caches. The APIs independently verify session-derived
 access; UI controls do not grant permission.
+Navigation caches are keyed by the signed-in account and refresh on mount,
+window focus, and reconnect. Sidebar management loads the complete inventory
+separately through `/api/dashboard/sidebars/v1?scope=all`; that scope requires
+sidebar-management permission (or the explicit setup bypass). Normal navigation
+responses contain only permitted entries and the parents needed to display them.
 
 Verification commands:
 

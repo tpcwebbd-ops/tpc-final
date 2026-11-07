@@ -13,6 +13,7 @@ import {
   getDashboardAccessState,
   getLeadsActor,
 } from "@/app/api/lib/dashboard-authorization";
+import { dashboardCanEnter } from "@/lib/dashboard/permissions";
 import type { SidebarItem } from "@/lib/models/auth";
 import { addSidebar, listSidebars } from "@/lib/services/sidebars";
 async function access(request: Request) {
@@ -27,12 +28,16 @@ export async function GET(request: Request) {
   if (!session) return Response.json({ error: "Sign in required." }, { status: 401 });
   const authorization = await getDashboardAccessState(session);
   if (authorization.blocked) return Response.json({ error: authorization.message ?? "Unauthorized." }, { status: 403 });
-  const sidebars = await listSidebars(authorization.allowedSidebarIds, authorization.bypassed);
+  const includeInventory = new URL(request.url).searchParams.get("scope") === "all";
+  if (includeInventory && !dashboardCanEnter(authorization, "/dashboard/developer/sidebar"))
+    return Response.json({ error: "You cannot manage sidebar items." }, { status: 403 });
+  const sidebars = await listSidebars(authorization.allowedSidebarIds, includeInventory);
   return Response.json(
     {
       ...sidebars,
       roleName: authorization.roleName,
       access: authorization,
+      navigationAccess: { ...authorization, bypassed: false },
       leadsActor: await getLeadsActor(session, authorization),
     },
     { headers: { "Cache-Control": "private, no-store" } },

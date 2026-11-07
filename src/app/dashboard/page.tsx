@@ -24,11 +24,20 @@ const sidebarCardColors = ["#8b5cf6", "#0ea5e9", "#10b981", "#f59e0b", "#f43f5e"
 
 export default function DashboardHomePage() {
   const { data: session, isPending } = authClient.useSession();
-  const { data, isLoading, isError } = useGetSidebarsQuery(undefined, { skip: !session });
+  const {
+    currentData: data,
+    isLoading,
+    isFetching,
+    isError,
+  } = useGetSidebarsQuery(session?.user.id, {
+    skip: isPending || !session,
+  });
   const items = useMemo(() => removeRetiredSidebarDescendants(data?.items ?? []), [data?.items]);
   const sidebarItemById = useMemo(() => new Map(items.map((item) => [item.id, item])), [items]);
-  const canReadMedia = dashboardCan(data?.access, "/dashboard/media", "read");
-  const canReadCategories = dashboardCan(data?.access, "/dashboard/category", "read");
+  const canReadMedia =
+    !isPending && Boolean(session) && !isError && dashboardCan(data?.navigationAccess, "/dashboard/media", "read");
+  const canReadCategories =
+    !isPending && Boolean(session) && !isError && dashboardCan(data?.navigationAccess, "/dashboard/category", "read");
   const { data: mediaData, isLoading: mediaLoading } = useGetMediaQuery(undefined, { skip: !canReadMedia });
   const { data: categoriesData, isLoading: categoriesLoading } = useGetCategoriesQuery(
     { page: 1, pageSize: 1 },
@@ -69,7 +78,7 @@ export default function DashboardHomePage() {
     { label: "Email", value: session?.user.email?.trim() || "—" },
     { label: "Role", value: data?.roleName?.trim() || "Not assigned" },
   ];
-  if (isPending || isLoading) return <LoadingState label="Loading dashboard" />;
+  if (isPending || isLoading || (isFetching && !data)) return <LoadingState label="Loading dashboard" />;
   if (isError) return <DashboardError />;
 
   return (

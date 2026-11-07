@@ -16,7 +16,6 @@ import {
   dashboardCan,
   dashboardCanEnter,
   emptyDashboardPermission,
-  fullDashboardPermission,
   type DashboardOperation,
   type DashboardPermission,
 } from "@/lib/dashboard/permissions";
@@ -47,14 +46,6 @@ type Sidebar = {
   updatedAt?: Date;
 };
 type SessionUser = { user: { id?: string | null; email?: string | null } };
-
-const standardUserPaths = new Set([
-  "/dashboard/profile",
-  "/dashboard/media",
-  "/dashboard/install",
-  "/dashboard/tutorial",
-  "/dashboard/my-course",
-]);
 
 export type DashboardAccessState = {
   bypassed: boolean;
@@ -114,25 +105,6 @@ async function ensureDefaultAccess(email: string) {
   return item;
 }
 
-async function enforceStandardUserPermissions(role: Role, sidebars: Sidebar[]) {
-  if (role.name.trim().toLowerCase() !== "user") return role;
-
-  const permissions = Object.fromEntries(
-    sidebars.map((sidebar) => [
-      sidebar.id,
-      standardUserPaths.has(sidebar.url)
-        ? { read: true, create: true, update: true, delete: true }
-        : { read: false, create: false, update: false, delete: false },
-    ]),
-  ) as Record<string, Permission>;
-  const unchanged = JSON.stringify(role.permissions ?? {}) === JSON.stringify(permissions);
-  if (!unchanged) {
-    await rolesCollection<Role>().updateOne({ id: role.id }, { $set: { permissions, updatedAt: new Date() } });
-    await invalidateDashboardCache(redisKeys.roles, redisKeys.access);
-  }
-  return { ...role, permissions };
-}
-
 export async function getDashboardAccessState(session: SessionUser): Promise<DashboardAccessState> {
   const bypassed = authorizationIsDisabled();
   const email = cleanEmail(session.user.email);
@@ -174,16 +146,15 @@ export async function getDashboardAccessState(session: SessionUser): Promise<Das
     };
 
   const sidebars = removeRetiredSidebarDescendants(savedSidebars);
-  const role = savedRole ? (bypassed ? savedRole : await enforceStandardUserPermissions(savedRole, sidebars)) : null;
+  const role = savedRole;
   const leadsRole = leadRole(role?.name);
   const sidebarPermissions = sidebars.map((sidebar) => ({
     id: sidebar.id,
     url: sidebar.url,
     parentId: sidebar.parentId,
-    permissions: bypassed
-      ? fullDashboardPermission
-      : (/^\/dashboard\/leads(?:\/|$)/.test(sidebar.url) && !leadsRole) ||
-          (leadsRole === "councilor" && councilorRestrictedPath(sidebar.url))
+    permissions:
+      (/^\/dashboard\/leads(?:\/|$)/.test(sidebar.url) && !leadsRole) ||
+      (leadsRole === "councilor" && councilorRestrictedPath(sidebar.url))
         ? emptyDashboardPermission
         : leadsRole === "councilor"
           ? councilorPermission(sidebar.url, role?.permissions?.[sidebar.id] ?? {})
@@ -191,9 +162,10 @@ export async function getDashboardAccessState(session: SessionUser): Promise<Das
   }));
   // A role can reach a dashboard area when it has at least one operation on
   // that sidebar entry. The sidebar API uses these IDs to render only the
-  // role's permitted navigation tree.
+  // role's permitted navigation tree, including while setup bypass is enabled.
+  // The bypass still controls request authorization, never navigation grants.
   const allowed = sidebarPermissions
-    .filter((sidebar) => dashboardCanEnter({ bypassed, blocked: false, sidebarPermissions }, sidebar.url))
+    .filter((sidebar) => dashboardCanEnter({ bypassed: false, blocked: false, sidebarPermissions }, sidebar.url))
     .map((x) => x.id);
   return {
     bypassed,
@@ -300,8 +272,8 @@ async function authorizeDashboardRequestWithState(state: DashboardAccessState, p
     return { allowed: false, state: { ...state, message: "This dashboard area is no longer available." } };
   if (state.bypassed) return { allowed: true, state };
 
-  // The dashboard home is not an editable sidebar row. A role that can read at
-  // least one sidebar area may enter it; a default "user" role still cannot.
+  // The dashboard home is not an editable sidebar row. Any database role with
+  // at least one permitted sidebar area may enter it.
   if (pathname === "/dashboard" && method === "GET") {
     const allowed = state.allowedSidebarIds.length > 0;
     return {

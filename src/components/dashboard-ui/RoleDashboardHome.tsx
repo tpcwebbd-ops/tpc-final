@@ -129,7 +129,8 @@ const content = {
 export async function RoleDashboardHome({ role }: { role: keyof typeof content }) {
   const data = content[role];
   const session = await auth.api.getSession({ headers: await headers() });
-  const access = session ? await getDashboardAccessState(session) : undefined;
+  const state = session ? await getDashboardAccessState(session) : undefined;
+  const access = state ? { ...state, bypassed: false } : undefined;
   return (
     <main className="min-h-[calc(100vh-65px)] flex-1 bg-[#fffaf0] px-4 py-6 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">

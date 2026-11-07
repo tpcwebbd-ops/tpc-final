@@ -39,7 +39,7 @@ function serializeSidebar(item: SidebarItem): SerializedSidebar {
   };
 }
 
-export async function listSidebars(allowedSidebarIds: string[], bypassed: boolean) {
+export async function listSidebars(allowedSidebarIds: string[], includeInventory = false) {
   const cached = await getCache<{ items: SerializedSidebar[] }>(redisKeys.sidebars);
   const items = cached?.items ?? (await findSidebars()).map(serializeSidebar);
   const availableItems = removeRetiredSidebarDescendants(items);
@@ -60,7 +60,7 @@ export async function listSidebars(allowedSidebarIds: string[], bypassed: boolea
     (item) =>
       !/^\/dashboard\/(?:admin\/)?business-growth(?:\/|$)/.test(item.url) &&
       item.url !== "/dashboard/admin/customer" &&
-      (bypassed || visibleIds.has(item.id)),
+      (includeInventory || visibleIds.has(item.id)),
   );
   return { items: visibleItems };
 }

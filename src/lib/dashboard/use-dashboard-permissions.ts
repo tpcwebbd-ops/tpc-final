@@ -14,11 +14,13 @@ import { useGetSidebarsQuery } from "@/redux/features/dashboard/sidebars/sidebar
 import { dashboardCan, dashboardCanEnter, type DashboardOperation } from "./permissions";
 
 export function useDashboardPermissions(path: string) {
-  const { data: session } = authClient.useSession();
-  const query = useGetSidebarsQuery(undefined, { skip: !session });
+  const { data: session, isPending } = authClient.useSession();
+  const query = useGetSidebarsQuery(session?.user.id, { skip: isPending || !session });
+  const data = !isPending && session && !query.isError ? query.currentData : undefined;
   return {
     ...query,
-    can: (operation: DashboardOperation) => dashboardCan(query.data?.access, path, operation),
-    canEnter: (target: string) => dashboardCanEnter(query.data?.access, target),
+    data,
+    can: (operation: DashboardOperation) => dashboardCan(data?.access, path, operation),
+    canEnter: (target: string) => dashboardCanEnter(data?.navigationAccess, target),
   };
 }

@@ -30,6 +30,8 @@ const rows = [
   { id: "mycourses", url: "/dashboard/my-course", parentId: null },
   { id: "leads", url: "/dashboard/leads", parentId: null },
   { id: "customers", url: "/dashboard/leads/customers", parentId: "leads" },
+  { id: "developer", url: "/dashboard/developer", parentId: null },
+  { id: "sidebar", url: "/dashboard/developer/sidebar", parentId: "developer" },
 ];
 let role, access;
 const collection = (records) => ({
@@ -59,6 +61,30 @@ const auth = load("src/app/api/lib/dashboard-authorization.ts", {
   },
 });
 const session = { user: { id: "synthetic", email: "qa@example.test" } };
+let signedIn = session;
+const sidebarCache = new Map();
+const sidebarService = load("src/lib/services/sidebars.ts", {
+  "server-only": {},
+  "@/app/api/lib/redis": {
+    getCache: async (key) => sidebarCache.get(key),
+    setCache: async (key, value) => sidebarCache.set(key, value),
+    redisKeys: { sidebars: "sidebars" },
+  },
+  "@/lib/dashboard/retired-routes": retiredRoutes,
+  "@/lib/models/auth": {
+    findSidebars: async () => rows.map((row, index) => ({ ...row, name: row.id, icon: "Home", position: index })),
+  },
+});
+const sidebarRoute = load("src/app/api/dashboard/sidebars/v1/route.ts", {
+  "@/app/api/lib/api-rate-limit": { rateLimitDistributed: async () => null },
+  "@/app/api/lib/auth": { auth: { api: { getSession: async () => signedIn } } },
+  "@/app/api/lib/dashboard-authorization": auth,
+  "@/lib/dashboard/permissions": permissions,
+  "@/lib/services/sidebars": sidebarService,
+});
+const navigation = (scope = "") =>
+  sidebarRoute.GET(new Request(`https://example.test/api/dashboard/sidebars/v1${scope}`));
+const sidebarIds = (body) => body.items.map((item) => item.id).sort();
 const full = permissions.fullDashboardPermission;
 let passed = 0;
 async function check(name, run) {
@@ -156,6 +182,76 @@ function assign(flag, name, grants = {}) {
     assert.equal((await auth.authorizeDashboardRequest(session, "/dashboard", "GET")).allowed, false);
     delete process.env.AuthorizationEnable;
     assert.equal((await auth.authorizeDashboardRequest(session, "/dashboard", "GET")).allowed, false);
+  });
+  await check(
+    "custom database roles filter navigation in both authorization modes without exposing siblings",
+    async () => {
+      for (const flag of ["false", "true"]) {
+        assign(flag, "Learning editor", {
+          courses: { ...permissions.emptyDashboardPermission, create: true },
+          role: { ...permissions.emptyDashboardPermission, read: true },
+        });
+        const response = await navigation();
+        assert.equal(response.status, 200);
+        assert.equal(response.headers.get("Cache-Control"), "private, no-store");
+        const body = await response.json();
+        assert.deepEqual(sidebarIds(body), ["admin", "courses", "role"]);
+        assert.equal(body.roleName, "Learning editor");
+        assert.equal(body.navigationAccess.bypassed, false);
+        assert.equal(permissions.dashboardCan(body.navigationAccess, "/dashboard/course", "read"), false);
+        assert.equal(permissions.dashboardCan(body.access, "/dashboard/course", "read"), flag === "false");
+      }
+    },
+  );
+  await check("saved user-role permissions are respected without request-time database writes", async () => {
+    for (const flag of ["false", "true"]) {
+      assign(flag, "user", { courses: full });
+      assert.deepEqual(sidebarIds(await (await navigation()).json()), ["courses"]);
+      assert.deepEqual(role.permissions, { courses: full });
+    }
+  });
+  await check("role edits and renames update navigation while the shared sidebar inventory stays cached", async () => {
+    assign("true", "Student", { mycourses: full });
+    assert.deepEqual(sidebarIds(await (await navigation()).json()), ["mycourses"]);
+    role.permissions = { courses: full };
+    role.name = "Course assistant";
+    const body = await (await navigation()).json();
+    assert.deepEqual(sidebarIds(body), ["courses"]);
+    assert.equal(body.roleName, "Course assistant");
+    assign("true", "Another custom role", { role: full });
+    assert.deepEqual(sidebarIds(await (await navigation()).json()), ["admin", "role"]);
+  });
+  await check("empty, stale, and missing role assignments never expose all sidebar items", async () => {
+    for (const flag of ["false", "true"]) {
+      assign(flag, "No grants", { "deleted-sidebar-id": full });
+      assert.deepEqual(sidebarIds(await (await navigation()).json()), []);
+      role = null;
+      assert.deepEqual(sidebarIds(await (await navigation()).json()), []);
+    }
+    assign("false", "Developer", { sidebar: full });
+    access = null;
+    assert.deepEqual(sidebarIds(await (await navigation()).json()), []);
+  });
+  await check("full sidebar inventory is isolated from navigation and requires management access", async () => {
+    assign("true", "Student", { mycourses: full });
+    assert.equal((await navigation("?scope=all")).status, 403);
+    assign("true", "Navigation editor", { sidebar: { ...permissions.emptyDashboardPermission, update: true } });
+    const inventory = await navigation("?scope=all");
+    assert.equal(inventory.status, 200);
+    assert.deepEqual(sidebarIds(await inventory.json()), rows.map((row) => row.id).sort());
+    assert.deepEqual(sidebarIds(await (await navigation()).json()), ["developer", "sidebar"]);
+    assign("false", "Student", { mycourses: full });
+    assert.equal((await navigation("?scope=all")).status, 200);
+    assert.deepEqual(sidebarIds(await (await navigation()).json()), ["mycourses"]);
+  });
+  await check("sidebar API rejects anonymous and blocked sessions, including inventory requests", async () => {
+    signedIn = null;
+    assert.equal((await navigation()).status, 401);
+    signedIn = session;
+    assign("false", "Developer", { sidebar: full });
+    access.blocked = true;
+    assert.equal((await navigation()).status, 403);
+    assert.equal((await navigation("?scope=all")).status, 403);
   });
   await check(
     "Councilor reads own plus unassigned and writes only own; My Leads stays personal in bypass mode",
