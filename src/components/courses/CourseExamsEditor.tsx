@@ -40,7 +40,7 @@ export default function CourseExamsEditor({
           Add exam
         </button>
       </header>
-      {!questions.length && <p className="text-sm text-stone-500">Add MCQ questions in Learning content first.</p>}
+      {!questions.length && <p className="text-sm text-stone-500">Add MCQ questions below, then create an exam.</p>}
       {exams.map((exam) => (
         <article
           className="flex flex-wrap items-center justify-between gap-3 rounded-sm border border-stone-200 p-3"

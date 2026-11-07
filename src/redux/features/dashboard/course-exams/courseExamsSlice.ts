@@ -19,6 +19,10 @@ export const courseExamsApi = apiSlice.injectEndpoints({
       query: (courseId) => ({ url: "my-course/v1/exams", params: { courseId } }),
       providesTags: ["Course"],
     }),
+    completeCourseLecture: build.mutation<CourseWorkspace, { courseId: string; lectureId: string }>({
+      query: (body) => ({ url: "my-course/v1/exams", method: "POST", body: { ...body, action: "complete-lecture" } }),
+      invalidatesTags: ["Course"],
+    }),
     startCourseExam: build.mutation<{ attempt: ActiveExam }, { courseId: string; examId: string }>({
       query: (body) => ({ url: "my-course/v1/exams", method: "POST", body: { ...body, action: "start" } }),
       invalidatesTags: ["Course"],
@@ -53,6 +57,7 @@ export const courseExamsApi = apiSlice.injectEndpoints({
 
 export const {
   useGetCourseWorkspaceQuery,
+  useCompleteCourseLectureMutation,
   useStartCourseExamMutation,
   useSubmitCourseExamMutation,
   useLazyGetStudentExamResultQuery,

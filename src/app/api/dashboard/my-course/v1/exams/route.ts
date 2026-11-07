@@ -6,6 +6,7 @@
 
 import { authorizeCourseExam, examError, examId } from "@/app/api/lib/course-exam-access";
 import {
+  completeCourseLecture,
   requestExamAllowance,
   startCourseExam,
   studentCourseWorkspace,
@@ -40,6 +41,11 @@ export async function POST(request: Request) {
   if (!courseId) return Response.json({ error: "Course id is required." }, { status: 400 });
   try {
     switch (body?.action) {
+      case "complete-lecture": {
+        const id = examId(body.lectureId);
+        if (!id) return Response.json({ error: "Tutorial id is required." }, { status: 400 });
+        return Response.json(await completeCourseLecture(access.session.user, courseId, id));
+      }
       case "start": {
         const id = examId(body.examId);
         if (!id) return Response.json({ error: "Exam id is required." }, { status: 400 });

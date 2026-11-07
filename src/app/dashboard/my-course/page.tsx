@@ -161,6 +161,19 @@ function CourseCard({
         </div>
         <EnrollmentBadge status={course.enrollmentStatus} />
       </div>
+      {course.enrollmentStatus === "enrolled" && (
+        <div className="mt-4">
+          <p className="mb-1 text-xs text-stone-600">
+            {course.progress.completed} / {course.progress.total} completed - {course.progress.percentage}%
+          </p>
+          <progress
+            aria-label="Course progress"
+            className="h-2 w-full accent-amber-700"
+            max={100}
+            value={course.progress.percentage}
+          />
+        </div>
+      )}
       <dl className="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
         <div className="rounded-sm bg-white p-2 text-stone-600">
           <dt className="text-stone-400">Duration</dt>
@@ -189,7 +202,7 @@ function CourseCard({
           </span>
         ) : course.enrollmentStatus === "enrolled" ? (
           <button className="primary-button py-1.5" onClick={onOpen} type="button">
-            <CheckCircle2 className="h-3.5 w-3.5" /> Open course
+            <CheckCircle2 className="h-3.5 w-3.5" /> Continue
           </button>
         ) : (
           <span className="inline-flex items-center gap-1 text-xs font-medium text-red-700">

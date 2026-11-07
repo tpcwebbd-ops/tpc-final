@@ -2,17 +2,19 @@
 
 ## Course staff
 
-1. Open **Courses → course editor → Learning content**. Add documents, videos, and MCQ questions. Questions default to 1 mark; positive weights up to 100 with two decimal places are supported.
-2. Open **MCQ exams**, add an exam title, and select its questions. An exam contains 1–200 questions. Click **Keep exam**, then **Save course** to publish the course changes.
+1. Open **Courses → course editor → Learning content**. Add documents and videos. Add MCQ questions in **Exams**. Questions default to 1 mark; positive weights up to 100 with two decimal places are supported.
+2. Open **Exams**, add an exam title, and select its questions. An exam contains 1–200 questions. Click **Keep exam**, then **Save course** to publish the course changes.
 3. Approve student enrollment from **Requests**, or enroll an existing student directly.
-4. Open **Exam results & requests** to see student identities, exam timestamps, elapsed time, marks, and per-course allowances. A pending allowance request can be declined or approved for exactly 20 additional attempts. Results also appear in the course View modal, which shows every MCQ, option, correct answer, explanation, and mark value.
+4. Open **Result** to see student identities, exam timestamps, elapsed time, marks, and per-course allowances. A pending allowance request can be declined or approved for exactly 20 additional attempts. Results also appear in the course View modal, which shows every MCQ, option, correct answer, explanation, and mark value.
 
 ## Students
 
-1. Request enrollment in **My Courses**. After approval, **Open course** opens a full-window learning space with **Tutorials**, **Exams**, and **Results** tabs. Tutorials contains the course's documents and videos.
+1. Request enrollment in **My Courses**. After approval, **Continue** opens a full-window learning space with **Tutorial**, **Exams**, and **Result** tabs. Tutorial contains the course's documents and videos.
 2. Starting an exam reserves one attempt. An unfinished attempt can be resumed without using another credit. Switching tabs keeps the current exam's answers and submission confirmation in place. Answers are also retained in that browser's local storage when available; grading and final results are stored on the server.
 3. Submitting final answers opens the saved result in **Results**. Open any saved result to review it again or download the PDF marksheet. The marksheet uses the site's logo on every page, prominently highlights earned and possible marks and the weighted percentage, and distinguishes correct, incorrect, and unanswered questions. It includes the student's answers, correct answers, per-question marks, explanations, and elapsed time. Bengali text is rendered through the browser's fonts.
 4. Each student starts with **20 exam attempts per course**, including retakes. After all available attempts are submitted, request 20 more from the course workspace. Refresh after staff approval to see the new allowance.
+
+Mark each tutorial complete to save lecture progress. Course cards and the workspace show progress across current tutorials and exams. Submitting an exam completes it; retakes count once.
 
 ## Persistence and access
 

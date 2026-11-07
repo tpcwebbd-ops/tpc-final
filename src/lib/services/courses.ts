@@ -11,6 +11,7 @@ import "server-only";
 import { randomUUID } from "crypto";
 
 import {
+  courseProgress,
   courseExams,
   questionMarks,
   type CourseEnrollmentRequest,
@@ -19,6 +20,7 @@ import {
   type CourseStudent,
 } from "@/lib/dashboard/courses";
 import { type UserDocument, usersCollection } from "@/lib/models/auth";
+import { examAccountsCollection, examAttemptsCollection } from "@/lib/models/course-exams";
 import { coursesCollection, type CourseDocument } from "@/lib/models/courses";
 
 export type SerializedCourse = Omit<
@@ -84,6 +86,7 @@ export type StudentCourseItem = {
   totalClasses: number;
   time: string;
   contentCount: number;
+  progress: ReturnType<typeof courseProgress>;
   enrollmentStatus: "not-requested" | "pending" | "enrolled" | "blocked";
   requestedAt: string | null;
   enrolledAt: string | null;
@@ -115,6 +118,12 @@ function enrollmentStatusFor(
 /** List the course catalogue with only the current student's enrollment state. */
 export async function listCoursesForStudentForApi(userId: string) {
   const courses = await coursesCollection().find({}).sort({ updatedAt: -1, name: 1 }).toArray();
+  const [accounts, attempts] = await Promise.all([
+    examAccountsCollection().find({ userId }).toArray(),
+    examAttemptsCollection()
+      .find({ userId, status: "submitted" }, { projection: { courseId: 1, examId: 1 } })
+      .toArray(),
+  ]);
   const items: StudentCourseItem[] = courses.map((course) => {
     const enrollment = enrollmentStatusFor(course, userId);
     return {
@@ -124,7 +133,12 @@ export async function listCoursesForStudentForApi(userId: string) {
       duration: course.duration,
       totalClasses: course.totalClasses,
       time: course.time,
-      contentCount: course.content?.length ?? 0,
+      contentCount: course.content.filter((item) => item.type !== "mcq").length,
+      progress: courseProgress(
+        course,
+        accounts.find((item) => item.courseId === course.id)?.completedLectureIds ?? [],
+        attempts.filter((item) => item.courseId === course.id).map((item) => item.examId),
+      ),
       enrollmentStatus: enrollment.status,
       requestedAt: enrollment.request?.requestedAt ?? null,
       enrolledAt: enrollment.enrollment?.enrolledAt ?? null,

@@ -181,7 +181,10 @@ function CourseEditor({ course }: { course: CourseItem }) {
   function moveContent(id: string, direction: "up" | "down") {
     setDraft((current) => {
       const index = current.content.findIndex((item) => item.id === id);
-      const nextIndex = index + (direction === "up" ? -1 : 1);
+      const visible = current.content.filter((item) => (tab === "exams" ? item.type === "mcq" : item.type !== "mcq"));
+      const position = visible.findIndex((item) => item.id === id);
+      const neighbor = visible[position + (direction === "up" ? -1 : 1)];
+      const nextIndex = neighbor ? current.content.findIndex((item) => item.id === neighbor.id) : -1;
       if (index < 0 || nextIndex < 0 || nextIndex >= current.content.length) return current;
       const content = [...current.content];
       [content[index], content[nextIndex]] = [content[nextIndex], content[index]];
@@ -233,13 +236,9 @@ function CourseEditor({ course }: { course: CourseItem }) {
             label={`Requests (${draft.enrollmentRequests.filter((request) => request.status === "pending").length})`}
             onClick={() => setTab("requests")}
           />
-          <Tab
-            active={tab === "content"}
-            label={`Learning content (${draft.content.length})`}
-            onClick={() => setTab("content")}
-          />
-          <Tab active={tab === "exams"} label={`MCQ exams (${draft.exams.length})`} onClick={() => setTab("exams")} />
-          <Tab active={tab === "results"} label="Exam results & requests" onClick={() => setTab("results")} />
+          <Tab active={tab === "content"} label="Tutorial" onClick={() => setTab("content")} />
+          <Tab active={tab === "exams"} label="Exams" onClick={() => setTab("exams")} />
+          <Tab active={tab === "results"} label="Result" onClick={() => setTab("results")} />
         </nav>
 
         {tab === "exams" && (
@@ -513,50 +512,73 @@ function CourseEditor({ course }: { course: CourseItem }) {
           </section>
         )}
 
-        {tab === "content" && (
+        {(tab === "content" || tab === "exams") && (
           <section className="mt-4 rounded-sm border border-[#eadfca] bg-white p-4 sm:p-6">
             <header className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <h2 className="text-lg font-semibold text-stone-900">Learning content</h2>
+                <h2 className="text-lg font-semibold text-stone-900">
+                  {tab === "content" ? "Tutorial" : "MCQ questions"}
+                </h2>
                 <p className="mt-1 text-sm text-stone-600">
                   Choose what to add, then edit the content in its own focused form.
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
-                <button className="secondary-button" onClick={() => setContentEditor({ type: "mcq" })} type="button">
-                  <FileQuestion className="h-4 w-4" /> MCQ question
-                </button>
-                <button className="secondary-button" onClick={() => setContentEditor({ type: "pdf" })} type="button">
-                  <FileText className="h-4 w-4" /> Content PDF
-                </button>
-                <button className="secondary-button" onClick={() => setContentEditor({ type: "video" })} type="button">
-                  <Film className="h-4 w-4" /> Video from Media
-                </button>
+                {tab === "exams" && (
+                  <button className="secondary-button" onClick={() => setContentEditor({ type: "mcq" })} type="button">
+                    <FileQuestion className="h-4 w-4" /> MCQ question
+                  </button>
+                )}
+                {tab === "content" && (
+                  <>
+                    <button
+                      className="secondary-button"
+                      onClick={() => setContentEditor({ type: "pdf" })}
+                      type="button"
+                    >
+                      <FileText className="h-4 w-4" /> Content PDF
+                    </button>
+                    <button
+                      className="secondary-button"
+                      onClick={() => setContentEditor({ type: "video" })}
+                      type="button"
+                    >
+                      <Film className="h-4 w-4" /> Video from Media
+                    </button>
+                  </>
+                )}
               </div>
             </header>
             <div className="mt-5 space-y-3">
-              {draft.content.map((item, index) => (
-                <ContentCard
-                  content={item}
-                  index={index}
-                  key={item.id}
-                  move={moveContent}
-                  onDelete={() =>
-                    setDraft({
-                      ...draft,
-                      content: draft.content.filter((entry) => entry.id !== item.id),
-                      exams: draft.exams
-                        .map((exam) => ({ ...exam, questionIds: exam.questionIds.filter((id) => id !== item.id) }))
-                        .filter((exam) => exam.questionIds.length),
-                    })
-                  }
-                  onEdit={() => setContentEditor({ type: item.type, content: item })}
-                  total={draft.content.length}
-                />
-              ))}
-              {!draft.content.length && (
+              {draft.content
+                .filter((item) => (tab === "exams" ? item.type === "mcq" : item.type !== "mcq"))
+                .map((item, index) => (
+                  <ContentCard
+                    content={item}
+                    index={index}
+                    key={item.id}
+                    move={moveContent}
+                    onDelete={() =>
+                      setDraft({
+                        ...draft,
+                        content: draft.content.filter((entry) => entry.id !== item.id),
+                        exams: draft.exams
+                          .map((exam) => ({ ...exam, questionIds: exam.questionIds.filter((id) => id !== item.id) }))
+                          .filter((exam) => exam.questionIds.length),
+                      })
+                    }
+                    onEdit={() => setContentEditor({ type: item.type, content: item })}
+                    total={
+                      draft.content.filter((item) => (tab === "exams" ? item.type === "mcq" : item.type !== "mcq"))
+                        .length
+                    }
+                  />
+                ))}
+              {!draft.content.some((item) => (tab === "exams" ? item.type === "mcq" : item.type !== "mcq")) && (
                 <div className="rounded-sm border border-dashed border-[#d9c9aa] bg-[#fffdfa] p-10 text-center text-sm text-stone-500">
-                  Choose MCQ question, Content PDF, or Video from Media to build the first learning item.
+                  {tab === "exams"
+                    ? "Add MCQ questions here, then select them when creating an exam above."
+                    : "Add a PDF or video to create your first tutorial."}
                 </div>
               )}
             </div>

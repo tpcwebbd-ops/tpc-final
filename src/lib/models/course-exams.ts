@@ -16,6 +16,7 @@ export type ExamAccountDocument = {
   userId: string;
   studentName: string;
   studentEmail: string;
+  completedLectureIds?: string[];
   limit: number;
   used: number;
   activeAttemptId: string | null;

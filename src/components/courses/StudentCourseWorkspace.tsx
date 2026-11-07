@@ -15,6 +15,7 @@ import { toast } from "@/components/ui/global-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { examDuration, type ActiveExam, type ExamResult } from "@/lib/dashboard/course-exams";
 import {
+  useCompleteCourseLectureMutation,
   useGetCourseWorkspaceQuery,
   useLazyGetStudentExamResultQuery,
   useRequestExamAllowanceMutation,
@@ -36,6 +37,7 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
   const { data, error, isFetching, refetch } = useGetCourseWorkspaceQuery(courseId, {
     refetchOnMountOrArgChange: true,
   });
+  const [completeLecture, lectureState] = useCompleteCourseLectureMutation();
   const [start, startState] = useStartCourseExamMutation();
   const [requestMore, requestState] = useRequestExamAllowanceMutation();
   const [loadResult, resultState] = useLazyGetStudentExamResultQuery();
@@ -117,9 +119,9 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                 className="mx-auto grid w-full max-w-7xl grid-cols-3 gap-1 px-3 sm:gap-3 sm:px-6 lg:px-8"
               >
                 {[
-                  { value: "tutorials", label: "Tutorials", count: data?.course.content.length ?? 0, Icon: BookOpen },
+                  { value: "tutorials", label: "Tutorial", count: data?.course.content.length ?? 0, Icon: BookOpen },
                   { value: "exams", label: "Exams", count: data?.exams.length ?? 0, Icon: ClipboardList },
-                  { value: "results", label: "Results", count: completed.length, Icon: FileCheck2 },
+                  { value: "results", label: "Result", count: completed.length, Icon: FileCheck2 },
                 ].map(({ value, label, count, Icon }) => (
                   <TabsTrigger
                     aria-controls={`${workspaceId}-${value}-panel`}
@@ -149,6 +151,18 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                 )}
                 {data && (
                   <>
+                    <div className="mb-6">
+                      <p className="mb-1 text-sm">
+                        Course progress: {data.progress.completed} / {data.progress.total} completed -{" "}
+                        {data.progress.percentage}%
+                      </p>
+                      <progress
+                        aria-label="Course progress"
+                        className="h-2 w-full accent-amber-700"
+                        max={100}
+                        value={data.progress.percentage}
+                      />
+                    </div>
                     <div
                       aria-labelledby={`${workspaceId}-tutorials-tab`}
                       hidden={tab !== "tutorials"}
@@ -195,6 +209,21 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                               {item.type === "pdf" ? "Read document" : "Watch video"}
                               <span className="sr-only"> (opens in a new tab)</span>
                             </a>
+                            <button
+                              className="primary-button mt-3 w-fit"
+                              type="button"
+                              disabled={lectureState.isLoading || data.progress.completedLectureIds.includes(item.id)}
+                              onClick={async () => {
+                                try {
+                                  await completeLecture({ courseId, lectureId: item.id }).unwrap();
+                                  toast.success("Tutorial completed.");
+                                } catch (error) {
+                                  toast.error(message(error));
+                                }
+                              }}
+                            >
+                              {data.progress.completedLectureIds.includes(item.id) ? "Completed" : "Mark complete"}
+                            </button>
                           </article>
                         ))}
                       </div>
@@ -292,7 +321,12 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                                   key={exam.id}
                                 >
                                   <div>
-                                    <h4 className="font-medium">{exam.title}</h4>
+                                    <h4 className="font-medium">
+                                      {exam.title}{" "}
+                                      {data.progress.completedExamIds.includes(exam.id) && (
+                                        <span className="text-emerald-700">(Completed)</span>
+                                      )}
+                                    </h4>
                                     <p className="text-sm text-stone-600">
                                       {exam.questionCount} questions · {exam.totalMarks} marks
                                     </p>

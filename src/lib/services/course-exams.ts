@@ -16,7 +16,7 @@ import {
   type ExamQuota,
   type ExamResult,
 } from "@/lib/dashboard/course-exams";
-import { courseExams, questionMarks, type CourseMcqContent } from "@/lib/dashboard/courses";
+import { courseProgress, courseExams, questionMarks, type CourseMcqContent } from "@/lib/dashboard/courses";
 import {
   ensureExamIndexes,
   examAccountsCollection,
@@ -152,6 +152,11 @@ export async function studentCourseWorkspace(student: Student, courseId: string)
           ) / 100,
       };
     }),
+    progress: courseProgress(
+      course,
+      account.completedLectureIds ?? [],
+      attempts.filter((item) => item.status === "submitted").map((item) => item.examId),
+    ),
     quota: quota(account),
     attempts: attempts.map(summary),
     active: active?.status === "in-progress" ? publicAttempt(active) : null,
@@ -335,4 +340,13 @@ export async function reviewExamAllowance(
   );
   if (!updated) throw new CourseExamError(409, "This allowance request is no longer pending.");
   return quota(updated);
+}
+
+export async function completeCourseLecture(student: Student, courseId: string, lectureId: string) {
+  const course = await enrolledCourse(courseId, student.id);
+  if (!course.content.some((item) => item.id === lectureId && item.type !== "mcq"))
+    throw new CourseExamError(404, "Tutorial not found.");
+  const account = await accountFor(courseId, student);
+  await examAccountsCollection().updateOne({ _id: account._id }, { $addToSet: { completedLectureIds: lectureId } });
+  return studentCourseWorkspace(student, courseId);
 }

@@ -227,3 +227,25 @@ export function parseCourseInput(value: unknown): CourseInput | null {
     exams,
   };
 }
+
+/** Count each current tutorial and exam once, regardless of retakes. */
+export function courseProgress(
+  course: { content: CourseContent[]; exams?: CourseExam[] },
+  lectureIds: string[],
+  examIds: string[],
+) {
+  const completedLectureIds = course.content
+    .filter((item) => item.type !== "mcq" && lectureIds.includes(item.id))
+    .map((item) => item.id);
+  const exams = courseExams(course);
+  const completedExamIds = exams.filter((item) => examIds.includes(item.id)).map((item) => item.id);
+  const total = course.content.filter((item) => item.type !== "mcq").length + exams.length;
+  const completed = completedLectureIds.length + completedExamIds.length;
+  return {
+    completedLectureIds,
+    completedExamIds,
+    total,
+    completed,
+    percentage: total ? Math.round((completed / total) * 100) : 0,
+  };
+}

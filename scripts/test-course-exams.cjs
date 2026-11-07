@@ -74,6 +74,10 @@ function collection() {
     if (!row) return null;
     for (const [key, value] of Object.entries(changes.$set ?? {})) set(row, key, value, filter);
     for (const [key, value] of Object.entries(changes.$inc ?? {})) set(row, key, (get(row, key) ?? 0) + value, filter);
+    for (const [key, value] of Object.entries(changes.$addToSet ?? {})) {
+      row[key] ??= [];
+      if (!row[key].includes(value)) row[key].push(clone(value));
+    }
     for (const [key, value] of Object.entries(changes.$push ?? {})) {
       row[key] ??= [];
       row[key].push(clone(value));
@@ -202,6 +206,25 @@ const rejects = (run, status) =>
   assert.rejects(run, (error) => error instanceof service.CourseExamError && error.status === status);
 
 (async () => {
+  await check("tutorial completion persists, is private and idempotent, and exam retakes count once", async () => {
+    await rejects(() => service.completeCourseLecture({ id: "outsider" }, "course-a", "pdf1"), 403);
+    await rejects(() => service.completeCourseLecture(alpha, "course-a", "q1"), 404);
+    await rejects(() => service.completeCourseLecture(alpha, "course-a", "missing"), 404);
+    await service.completeCourseLecture(alpha, "course-a", "pdf1");
+    const workspace = await service.completeCourseLecture(alpha, "course-a", "pdf1");
+    assert.equal(workspace.progress.percentage, 50);
+    assert.deepEqual(workspace.progress.completedLectureIds, ["pdf1"]);
+    assert.equal((await service.studentCourseWorkspace(beta, "course-a")).progress.percentage, 0);
+    for (let i = 0; i < 2; i++) {
+      const attempt = await service.startCourseExam(alpha, "course-a", "exam1");
+      await service.submitCourseExam(alpha, "course-a", attempt.id, [0, 1]);
+    }
+    assert.equal((await service.studentCourseWorkspace(alpha, "course-a")).progress.percentage, 100);
+    const catalogue = await enrollments.listCoursesForStudentForApi(alpha.id);
+    assert.equal(catalogue.items.find((item) => item.id === "course-a").progress.percentage, 100);
+    assert.equal(courses.courseProgress({ content: [], exams: [] }, ["pdf1"], ["exam1"]).percentage, 0);
+  });
+
   await check("legacy questions default to one mark; named exams validate references and decimal weights", async () => {
     const input = { ...fixture(), exams: undefined };
     const parsed = courses.parseCourseInput(input);

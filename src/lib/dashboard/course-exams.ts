@@ -41,6 +41,13 @@ export type ExamResult = ExamAttemptSummary & {
 };
 export type ActiveExam = ExamAttemptSummary & { questions: ExamQuestion[] };
 export type CourseWorkspace = {
+  progress: {
+    completedLectureIds: string[];
+    completedExamIds: string[];
+    total: number;
+    completed: number;
+    percentage: number;
+  };
   course: { id: string; name: string; content: CourseMediaContent[] };
   exams: { id: string; title: string; questionCount: number; totalMarks: number }[];
   quota: ExamQuota;

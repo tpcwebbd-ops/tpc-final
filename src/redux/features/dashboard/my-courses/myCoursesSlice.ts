@@ -16,6 +16,7 @@ export type StudentCourseItem = {
   totalClasses: number;
   time: string;
   contentCount: number;
+  progress: { percentage: number; completed: number; total: number };
   enrollmentStatus: "not-requested" | "pending" | "enrolled" | "blocked";
   requestedAt: string | null;
   enrolledAt: string | null;
