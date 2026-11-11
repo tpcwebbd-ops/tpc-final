@@ -7,7 +7,7 @@
 "use client";
 
 import { Dialog } from "@base-ui/react/dialog";
-import { ArrowLeft, BookOpen, ClipboardList, FileCheck2, FileText, Play, RefreshCw, Timer } from "lucide-react";
+import { ArrowLeft, BookOpen, ClipboardList, FileCheck2, FileText, Play, RefreshCw } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
 
@@ -20,7 +20,7 @@ import type { CourseMediaContent } from "@/lib/dashboard/courses";
 import {
   useCompleteCourseLectureMutation,
   useGetCourseWorkspaceQuery,
-  useLazyGetStudentExamResultQuery,
+  useGetStudentExamResultQuery,
   useRequestExamAllowanceMutation,
   useStartCourseExamMutation,
   useSubmitCourseExamMutation,
@@ -44,29 +44,50 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
   const [completeLecture, lectureState] = useCompleteCourseLectureMutation();
   const [start, startState] = useStartCourseExamMutation();
   const [requestMore, requestState] = useRequestExamAllowanceMutation();
-  const [loadResult, resultState] = useLazyGetStudentExamResultQuery();
   const [running, setRunning] = useState<ActiveExam | null>(null);
   const [result, setResult] = useState<ExamResult | null>(null);
   const [lectureId, setLectureId] = useState<string | null>(null);
+  const [examId, setExamId] = useState<string | null>(null);
+  const [resultId, setResultId] = useState<string | null>(null);
   const lecture = data?.course.content.find((item) => item.id === lectureId) ?? data?.course.content[0];
   const [tab, setTab] = useState("tutorials");
   const workspaceId = useId();
+  const active = running ?? data?.active;
+  const exams =
+    active && !data?.exams.some((exam) => exam.id === active.examId)
+      ? [
+          {
+            id: active.examId,
+            title: active.examTitle,
+            questionCount: active.questionCount,
+            totalMarks: active.totalMarks,
+          },
+          ...(data?.exams ?? []),
+        ]
+      : (data?.exams ?? []);
+  const exam = exams.find((item) => item.id === examId) ?? exams.find((item) => item.id === active?.examId) ?? exams[0];
+  const latestAttempt =
+    active?.examId === exam?.id ? active : data?.attempts.find((attempt) => attempt.examId === exam?.id);
   const completed = data?.attempts.filter((attempt) => attempt.status === "submitted") ?? [];
+  if (result && !completed.some((attempt) => attempt.id === result.id)) completed.unshift(result);
+  const selectedResult = completed.find((attempt) => attempt.id === resultId) ?? completed[0];
+  const resultState = useGetStudentExamResultQuery(
+    { courseId, attemptId: selectedResult?.id ?? "" },
+    { skip: tab !== "results" || !selectedResult },
+  );
+  const displayedResult = resultState.currentData?.result ?? (result?.id === selectedResult?.id ? result : null);
   async function startExam(examId: string) {
     try {
       setRunning((await start({ courseId, examId }).unwrap()).attempt);
+      setExamId(examId);
       setTab("exams");
     } catch (error) {
       toast.error(message(error));
     }
   }
-  async function viewResult(attemptId: string) {
-    try {
-      setResult((await loadResult({ courseId, attemptId }).unwrap()).result);
-      setTab("results");
-    } catch (error) {
-      toast.error(message(error));
-    }
+  function viewResult(attemptId: string) {
+    setResultId(attemptId);
+    setTab("results");
   }
   async function more() {
     try {
@@ -262,20 +283,61 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                       role="tabpanel"
                       tabIndex={0}
                     >
-                      {running ? (
-                        <ExamRunner
-                          attempt={running}
-                          key={running.id}
-                          onBack={() => setRunning(null)}
-                          onResult={(result) => {
-                            setRunning(null);
-                            setResult(result);
-                            setTab("results");
-                          }}
-                        />
-                      ) : (
-                        <div className="space-y-6">
-                          <section className="rounded-xl border border-stone-200 bg-white p-5">
+                      <div className="grid items-start gap-5 md:grid-cols-[16rem_minmax(0,1fr)] lg:grid-cols-[18rem_minmax(0,1fr)]">
+                        <aside className="min-w-0 rounded-xl border border-stone-200 bg-white shadow-sm md:sticky md:top-0">
+                          <div className="border-b border-stone-200 p-4">
+                            <h3 className="font-semibold text-stone-900">Exams</h3>
+                            <p className="mt-1 text-xs text-stone-500">Choose an exam to view or take.</p>
+                          </div>
+                          <nav
+                            aria-label="Course exams"
+                            className="max-h-64 space-y-2 overflow-y-auto p-3 md:max-h-[70dvh]"
+                          >
+                            {exams.map((item, index) => {
+                              const selected = item.id === exam?.id;
+                              const attempt =
+                                active?.examId === item.id
+                                  ? active
+                                  : data.attempts.find((attempt) => attempt.examId === item.id);
+                              return (
+                                <button
+                                  key={item.id}
+                                  type="button"
+                                  aria-current={selected ? "true" : undefined}
+                                  aria-controls={workspaceId + "-exam-viewer"}
+                                  onClick={() => setExamId(item.id)}
+                                  className={
+                                    "flex w-full items-start gap-3 rounded-lg border p-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 " +
+                                    (selected
+                                      ? "border-sky-400 bg-sky-100 text-sky-950 ring-1 ring-sky-200"
+                                      : attempt
+                                        ? examStatus(attempt).style + " hover:brightness-95"
+                                        : "border-slate-200 bg-slate-50 text-stone-700 hover:bg-sky-50")
+                                  }
+                                >
+                                  <ClipboardList aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
+                                  <span className="min-w-0">
+                                    <span className="block break-words text-sm font-semibold">
+                                      {index + 1}. {item.title}
+                                    </span>
+                                    <span className="mt-1 block text-xs text-stone-500">
+                                      {item.questionCount} questions · {item.totalMarks} marks
+                                    </span>
+                                    <span className="mt-2 block">
+                                      <StatusBadge {...examStatus(attempt)} />
+                                    </span>
+                                    {data.progress.completedExamIds.includes(item.id) && (
+                                      <span className="mt-1 block text-xs font-medium text-emerald-700">Completed</span>
+                                    )}
+                                  </span>
+                                </button>
+                              );
+                            })}
+                            {!exams.length && <p className="p-3 text-sm text-stone-500">No exams published yet.</p>}
+                          </nav>
+                        </aside>
+                        <div id={workspaceId + "-exam-viewer"} className="min-w-0 space-y-5">
+                          <section className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-6">
                             <div className="flex flex-wrap items-start justify-between gap-3">
                               <div>
                                 <h3 className="font-semibold">Exam allowance</h3>
@@ -308,7 +370,7 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                                 again.
                               </p>
                             )}
-                            {data.quota.remaining === 0 && !data.active && data.quota.request?.status !== "pending" && (
+                            {data.quota.remaining === 0 && !active && data.quota.request?.status !== "pending" && (
                               <button
                                 className="primary-button mt-3"
                                 disabled={requestState.isLoading}
@@ -318,60 +380,109 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                                 Request 20 more exams
                               </button>
                             )}
-                          </section>
-                          <section>
-                            <h3 className="mb-3 font-semibold">MCQ exams</h3>
-                            <ExamStatusLegend />
-                            {data.active && (
-                              <div className="mt-3 rounded-xl border border-rose-200 bg-rose-50 p-4">
-                                <p className="font-medium">Unfinished: {data.active.examTitle}</p>
+                            {active && active.examId !== exam?.id && (
+                              <div className="mt-4 rounded-xl border border-rose-200 bg-rose-50 p-4">
+                                <p className="break-words font-medium">Unfinished: {active.examTitle}</p>
                                 <button
                                   className="primary-button mt-2"
-                                  onClick={() => setRunning(data.active)}
+                                  onClick={() => {
+                                    setExamId(active.examId);
+                                    setRunning(active);
+                                  }}
                                   type="button"
                                 >
                                   Resume exam
                                 </button>
                               </div>
                             )}
-                            <div className="mt-3 space-y-2">
-                              {data.exams.map((exam) => (
-                                <article
-                                  className={
-                                    "flex flex-wrap items-center justify-between gap-3 rounded-xl border p-4 shadow-sm " +
-                                    examStatus(data.attempts.find((attempt) => attempt.examId === exam.id)).style
-                                  }
-                                  key={exam.id}
-                                >
-                                  <div>
-                                    <h4 className="font-medium">
-                                      {exam.title}{" "}
-                                      <StatusBadge
-                                        {...examStatus(data.attempts.find((attempt) => attempt.examId === exam.id))}
-                                      />
-                                      {data.progress.completedExamIds.includes(exam.id) && (
-                                        <span className="text-emerald-700">(Completed)</span>
-                                      )}
-                                    </h4>
-                                    <p className="text-sm text-stone-600">
-                                      {exam.questionCount} questions · {exam.totalMarks} marks
-                                    </p>
-                                  </div>
-                                  <button
-                                    className="primary-button"
-                                    disabled={startState.isLoading || Boolean(data.active) || data.quota.remaining <= 0}
-                                    onClick={() => void startExam(exam.id)}
-                                    type="button"
-                                  >
-                                    Start exam
-                                  </button>
-                                </article>
-                              ))}
-                              {!data.exams.length && <p className="text-sm text-stone-500">No exams published yet.</p>}
-                            </div>
                           </section>
+                          <ExamStatusLegend />
+                          {running && (
+                            <div
+                              hidden={running.examId !== exam?.id}
+                              className="rounded-2xl border border-sky-200 bg-white p-4 shadow-sm sm:p-6"
+                            >
+                              <ExamRunner
+                                attempt={running}
+                                key={running.id}
+                                onBack={() => setRunning(null)}
+                                onResult={(result) => {
+                                  setRunning(null);
+                                  setResult(result);
+                                  setResultId(result.id);
+                                  setTab("results");
+                                }}
+                              />
+                            </div>
+                          )}
+                          {exam && running?.examId !== exam.id && (
+                            <article className="overflow-hidden rounded-2xl border border-sky-200 bg-white shadow-sm">
+                              <header className="space-y-3 border-b border-stone-200 p-4 sm:p-6">
+                                <h3 className="break-words text-xl font-semibold text-stone-900">{exam.title}</h3>
+                                <StatusBadge {...examStatus(latestAttempt)} />
+                              </header>
+                              <div className="space-y-5 p-4 sm:p-6">
+                                <dl className="grid grid-cols-2 gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
+                                  <div>
+                                    <dt className="text-xs text-stone-500">Questions</dt>
+                                    <dd className="mt-1 text-2xl font-semibold text-stone-900">{exam.questionCount}</dd>
+                                  </div>
+                                  <div>
+                                    <dt className="text-xs text-stone-500">Total marks</dt>
+                                    <dd className="mt-1 text-2xl font-semibold text-stone-900">{exam.totalMarks}</dd>
+                                  </div>
+                                </dl>
+                                <p className="text-sm leading-6 text-stone-600">
+                                  Answer the multiple-choice questions and submit your answers to save your result. You
+                                  can review your answers and download a marksheet after submission.
+                                </p>
+                                {active && active.examId !== exam.id ? (
+                                  <p className="text-sm text-amber-800">
+                                    Finish your unfinished exam before starting another.
+                                  </p>
+                                ) : !active && data.quota.remaining <= 0 ? (
+                                  <p className="text-sm text-amber-800">
+                                    Your exam allowance is used up. Request more attempts above to continue.
+                                  </p>
+                                ) : null}
+                              </div>
+                              <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-sky-200 bg-sky-50 p-4 sm:p-6">
+                                <p className="text-sm text-stone-600">
+                                  {active?.examId === exam.id
+                                    ? "Continue your saved attempt without using another attempt."
+                                    : "Starting this exam uses one attempt."}
+                                </p>
+                                <button
+                                  className="primary-button"
+                                  disabled={
+                                    startState.isLoading ||
+                                    (Boolean(active) && active?.examId !== exam.id) ||
+                                    (!active && data.quota.remaining <= 0)
+                                  }
+                                  onClick={() => {
+                                    if (active?.examId === exam.id) setRunning(active);
+                                    else void startExam(exam.id);
+                                  }}
+                                  type="button"
+                                >
+                                  {active?.examId === exam.id
+                                    ? "Resume exam"
+                                    : startState.isLoading
+                                      ? "Starting..."
+                                      : "Start exam"}
+                                </button>
+                              </footer>
+                            </article>
+                          )}
+                          {!exam && (
+                            <div className="rounded-xl border border-dashed border-stone-300 bg-white p-12 text-center">
+                              <ClipboardList aria-hidden="true" className="mx-auto mb-3 size-8 text-stone-400" />
+                              <h3 className="font-semibold">Your exams will appear here</h3>
+                              <p className="mt-1 text-sm text-stone-500">No exams have been published yet.</p>
+                            </div>
+                          )}
                         </div>
-                      )}
+                      </div>
                     </div>
                     <div
                       aria-labelledby={`${workspaceId}-results-tab`}
@@ -380,59 +491,85 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                       role="tabpanel"
                       tabIndex={0}
                     >
-                      {result ? (
-                        <ExamResultView onBack={() => setResult(null)} result={result} />
-                      ) : (
-                        <section>
-                          <div className="mb-6">
-                            <h3 className="text-xl font-semibold text-stone-900">Your results</h3>
-                            <p className="mt-1 text-sm text-stone-500">
-                              Review your marks, check the correct answers, and download a branded PDF marksheet.
-                            </p>
+                      <div className="grid items-start gap-5 md:grid-cols-[16rem_minmax(0,1fr)] lg:grid-cols-[18rem_minmax(0,1fr)]">
+                        <aside className="min-w-0 rounded-xl border border-stone-200 bg-white shadow-sm md:sticky md:top-0">
+                          <div className="border-b border-stone-200 p-4">
+                            <h3 className="font-semibold text-stone-900">Results</h3>
+                            <p className="mt-1 text-xs text-stone-500">Choose an attempt to review your marks.</p>
                           </div>
-                          <ExamStatusLegend />
-                          <div className="mt-4 grid gap-4 lg:grid-cols-2">
-                            {completed.map((attempt) => (
-                              <article
-                                className={"rounded-2xl border p-5 shadow-sm " + examStatus(attempt).style}
-                                key={attempt.id}
-                              >
-                                <div className="flex flex-wrap items-start justify-between gap-4">
-                                  <div className="min-w-0">
-                                    <h4 className="break-words font-semibold text-stone-900">{attempt.examTitle}</h4>
-                                    <div className="mt-2">
-                                      <StatusBadge {...examStatus(attempt)} />
-                                    </div>
-                                    <p className="mt-1 text-xs text-stone-500">
+                          <nav
+                            aria-label="Saved exam results"
+                            className="max-h-64 space-y-2 overflow-y-auto p-3 md:max-h-[70dvh]"
+                          >
+                            {completed.map((attempt) => {
+                              const selected = attempt.id === selectedResult?.id;
+                              return (
+                                <button
+                                  key={attempt.id}
+                                  type="button"
+                                  aria-current={selected ? "true" : undefined}
+                                  aria-controls={workspaceId + "-result-viewer"}
+                                  onClick={() => viewResult(attempt.id)}
+                                  className={
+                                    "flex w-full items-start gap-3 rounded-lg border p-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 " +
+                                    (selected
+                                      ? "border-sky-400 bg-sky-100 text-sky-950 ring-1 ring-sky-200"
+                                      : examStatus(attempt).style + " hover:brightness-95")
+                                  }
+                                >
+                                  <FileCheck2 aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
+                                  <span className="min-w-0">
+                                    <span className="block break-words text-sm font-semibold">{attempt.examTitle}</span>
+                                    <span className="mt-1 block text-xs text-stone-500">
                                       {new Date(attempt.submittedAt!).toLocaleString()}
-                                    </p>
-                                  </div>
-                                  <div className="rounded-xl border border-white/80 bg-white/80 px-4 py-3 text-center">
-                                    <strong className="text-2xl text-current">{attempt.score}</strong>
-                                    <span className="ml-1 text-sm text-stone-500">/ {attempt.totalMarks}</span>
-                                    <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-stone-600">
-                                      Marks obtained
-                                    </p>
-                                  </div>
-                                </div>
-                                <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-stone-100 pt-4">
-                                  <span className="inline-flex items-center gap-1.5 text-xs text-stone-500">
-                                    <Timer aria-hidden="true" className="size-4" />
-                                    {examDuration(attempt.elapsedSeconds ?? 0)}
+                                    </span>
+                                    <span className="mt-2 block text-sm font-semibold">
+                                      {attempt.score} / {attempt.totalMarks} marks
+                                    </span>
+                                    <span className="mt-2 block">
+                                      <StatusBadge {...examStatus(attempt)} />
+                                    </span>
                                   </span>
-                                  <button
-                                    className="secondary-button"
-                                    disabled={resultState.isFetching}
-                                    onClick={() => void viewResult(attempt.id)}
-                                    type="button"
-                                  >
-                                    View result / marksheet
-                                  </button>
-                                </div>
-                              </article>
-                            ))}
-                          </div>
-                          {!completed.length && (
+                                </button>
+                              );
+                            })}
+                            {!completed.length && (
+                              <p className="p-3 text-sm text-stone-500">No completed attempts yet.</p>
+                            )}
+                          </nav>
+                        </aside>
+                        <div
+                          id={workspaceId + "-result-viewer"}
+                          className="min-w-0 space-y-5"
+                          aria-busy={resultState.isFetching}
+                        >
+                          {selectedResult ? (
+                            <>
+                              <ExamStatusLegend />
+                              <section className="rounded-2xl border border-sky-200 bg-white p-4 shadow-sm sm:p-6">
+                                {resultState.error && (
+                                  <div className="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-700" role="alert">
+                                    <p>{message(resultState.error)}</p>
+                                    <button
+                                      className="secondary-button mt-3"
+                                      disabled={resultState.isFetching}
+                                      onClick={() => void resultState.refetch()}
+                                      type="button"
+                                    >
+                                      Try again
+                                    </button>
+                                  </div>
+                                )}
+                                {displayedResult ? (
+                                  <ExamResultView key={displayedResult.id} result={displayedResult} />
+                                ) : resultState.isFetching ? (
+                                  <p className="py-8 text-center text-sm text-stone-500" role="status">
+                                    Loading result…
+                                  </p>
+                                ) : null}
+                              </section>
+                            </>
+                          ) : (
                             <div className="rounded-xl border border-dashed border-stone-300 bg-white p-12 text-center">
                               <FileCheck2 aria-hidden="true" className="mx-auto mb-3 size-8 text-stone-400" />
                               <h4 className="font-semibold">No results yet</h4>
@@ -441,8 +578,8 @@ export default function StudentCourseWorkspace({ courseId, close }: { courseId: 
                               </p>
                             </div>
                           )}
-                        </section>
-                      )}
+                        </div>
+                      </div>
                     </div>
                   </>
                 )}

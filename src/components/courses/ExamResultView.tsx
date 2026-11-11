@@ -16,7 +16,7 @@ import { downloadExamMarksheet } from "@/lib/dashboard/exam-marksheet";
 
 import { StatusBadge } from "./CourseStatus";
 
-export default function ExamResultView({ result, onBack }: { result: ExamResult; onBack: () => void }) {
+export default function ExamResultView({ result, onBack }: { result: ExamResult; onBack?: () => void }) {
   const [downloading, setDownloading] = useState(false);
   const status = examStatus(result);
   const summary = examResultSummary(result);
@@ -39,9 +39,11 @@ export default function ExamResultView({ result, onBack }: { result: ExamResult;
           <p className="mt-1 text-sm text-stone-600">Saved result · {new Date(result.submittedAt!).toLocaleString()}</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <button className="secondary-button" onClick={onBack} type="button">
-            All results
-          </button>
+          {onBack && (
+            <button className="secondary-button" onClick={onBack} type="button">
+              All results
+            </button>
+          )}
           <button className="primary-button" disabled={downloading} onClick={() => void download()} type="button">
             {downloading ? "Creating PDF…" : "Download marksheet PDF"}
           </button>

@@ -60,6 +60,7 @@ export const {
   useCompleteCourseLectureMutation,
   useStartCourseExamMutation,
   useSubmitCourseExamMutation,
+  useGetStudentExamResultQuery,
   useLazyGetStudentExamResultQuery,
   useRequestExamAllowanceMutation,
   useGetAdminCourseExamsQuery,
