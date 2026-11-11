@@ -181,6 +181,121 @@ async function finish(exam, token, registration = register()) {
   return state.result;
 }
 (async () => {
+  await check("question marks default to two, accept editable decimal values, and reject invalid weights", async () => {
+    assert.equal(rules.validateMcqExam(input()).questions[0].marks, 2);
+    for (const marks of [0.01, 0.1, 1, 2, 2.5, 100]) {
+      const value = input();
+      value.questions[0].marks = marks;
+      assert.equal(rules.validateMcqExam(value).questions[0].marks, marks);
+    }
+    for (const marks of [0, -1, 100.01, 1.001, NaN, Infinity, null, "2", true]) {
+      const value = input();
+      value.questions[0].marks = marks;
+      assert.throws(() => rules.validateMcqExam(value), { status: 400 });
+    }
+  });
+  await check(
+    "weighted marks are saved, exposed without answer keys, and graded from the immutable attempt",
+    async () => {
+      const value = input();
+      value.questions[0].marks = 2.5;
+      value.questions[1].marks = 3;
+      const exam = await service.saveMcqExam(value);
+      assert.deepEqual(
+        (await service.getMcqExam(exam.id)).questions.map((question) => question.marks),
+        [2.5, 3],
+      );
+      assert.equal((await service.publicMcqExam(exam.slug, "weights")).totalMarks, 5.5);
+      const active = await service.startMcqExam(exam.slug, "weights", register());
+      assert.equal(active.attempt.question.marks, 2.5);
+      assert.equal(active.attempt.totalMarks, 5.5);
+      assert.ok(!JSON.stringify(active).includes("correctOptionIndex"));
+      const changed = input();
+      changed.questions[0].marks = 9;
+      changed.questions[1].marks = 10;
+      await service.saveMcqExam(changed, exam.id);
+      const next = await service.answerMcqQuestion(exam.slug, "weights", {
+        attemptId: active.attempt.id,
+        questionIndex: 0,
+        answer: 0,
+        marks: 99,
+        score: 999,
+      });
+      assert.equal(next.attempt.question.marks, 3);
+      const completed = await service.answerMcqQuestion(exam.slug, "weights", {
+        attemptId: active.attempt.id,
+        questionIndex: 1,
+        answer: 0,
+      });
+      assert.equal(completed.result.score, 2.5);
+      assert.equal(completed.result.totalMarks, 5.5);
+      assert.deepEqual(
+        completed.result.questions.map((question) => question.marks),
+        [2.5, 3],
+      );
+      assert.equal((await service.mcqExamResults(exam.id, 1)).items[0].score, 2.5);
+      assert.equal((await service.listMcqExams(1)).items.find((item) => item.id === exam.id).totalMarks, 19);
+    },
+  );
+  await check("decimal mark totals and scores avoid floating point accumulation", async () => {
+    const value = input();
+    value.questions[0].marks = 0.1;
+    value.questions[1].marks = 0.2;
+    const exam = await service.saveMcqExam(value);
+    const completed = await finish(exam, "decimal-marks");
+    assert.equal(completed.score, 0.3);
+    assert.equal(completed.totalMarks, 0.3);
+  });
+  await check(
+    "older exams adopt the new default while old attempts retain their original one-mark scores",
+    async () => {
+      const exam = await service.saveMcqExam(input());
+      const saved = exams.rows.find((row) => row.id === exam.id);
+      saved.questions.forEach((question) => delete question.marks);
+      assert.deepEqual(
+        (await service.getMcqExam(exam.id)).questions.map((question) => question.marks),
+        [2, 2],
+      );
+      assert.equal((await service.publicMcqExam(exam.slug, "legacy")).totalMarks, 4);
+      const active = await service.startMcqExam(exam.slug, "legacy", register());
+      const attempt = attempts.rows.find((row) => row._id === active.attempt.id);
+      attempt.questions.forEach((question) => delete question.marks);
+      await service.answerMcqQuestion(exam.slug, "legacy", {
+        attemptId: active.attempt.id,
+        questionIndex: 0,
+        answer: 0,
+      });
+      const completed = await service.answerMcqQuestion(exam.slug, "legacy", {
+        attemptId: active.attempt.id,
+        questionIndex: 1,
+        answer: 1,
+      });
+      assert.equal(completed.result.score, 2);
+      assert.equal(completed.result.totalMarks, 2);
+      assert.equal((await service.mcqExamResult(exam.id, active.attempt.id)).totalMarks, 2);
+      assert.equal((await finish(exam, "new-default")).score, 4);
+    },
+  );
+  await check("the question editor shows editable marks and the correct examination total", async () => {
+    const React = require("react");
+    const { renderToStaticMarkup } = require("react-dom/server");
+    const editor = load("src/components/mcq/McqExamEditor.tsx", {
+      "@/components/ui/global-toast": { toast: {} },
+      "@/lib/dashboard/mcq-exams": rules,
+      "@/redux/features/dashboard/mcq-exams/mcqExamsSlice": {
+        useSaveMcqExamMutation: () => [() => {}, { isLoading: false }],
+      },
+      "./mcq-ui": load("src/components/mcq/mcq-ui.tsx"),
+    }).default;
+    const createHtml = renderToStaticMarkup(React.createElement(editor, { onClose: () => {} }));
+    assert.match(createHtml, /aria-label="Marks for question 1"[^>]*value="2"/);
+    const value = input();
+    value.questions[0].marks = 2.5;
+    value.questions[1].marks = 4;
+    const editHtml = renderToStaticMarkup(React.createElement(editor, { exam: value, onClose: () => {} }));
+    assert.match(editHtml, /aria-label="Marks for question 1"[^>]*value="2.5"/);
+    assert.ok(editHtml.includes("6.5"));
+  });
   await check(
     "exam validation accepts 25, 30, and 50 questions, 3/4 options, and defaults to three attempts",
     async () => {
@@ -270,7 +385,8 @@ async function finish(exam, token, registration = register()) {
         elapsedSeconds: 0,
       });
       assert.equal(completed.status, "submitted");
-      assert.equal(completed.result.score, 1);
+      assert.equal(completed.result.score, 2);
+      assert.equal(completed.result.totalMarks, 4);
       assert.equal(completed.result.totalTimeMs, 4000);
       const detail = await service.mcqExamResult(exam.id, base.attemptId);
       assert.deepEqual(detail.questionTimesMs, [1250, 2750]);
@@ -311,8 +427,8 @@ async function finish(exam, token, registration = register()) {
         questionIndex: 1,
         answer: 1,
       });
-      assert.equal(result.result.score, 2);
-      assert.equal(result.result.totalMarks, 2);
+      assert.equal(result.result.score, 4);
+      assert.equal(result.result.totalMarks, 4);
       assert.equal(result.result.examTitle, "MCQ practice");
       const detail = await service.mcqExamResult(exam.id, state.attempt.id);
       assert.equal(detail.questions[0].correctOptionIndex, 0);
@@ -347,7 +463,7 @@ async function finish(exam, token, registration = register()) {
       service.answerMcqQuestion(exam.slug, active.tokenHash, value),
       service.answerMcqQuestion(exam.slug, active.tokenHash, value),
     ]);
-    assert.equal(results[0].result.score, 1);
+    assert.equal(results[0].result.score, 2);
     assert.deepEqual(results[0], results[1]);
     assert.equal(accounts.rows.find((row) => row.examId === exam.id).used, 1);
   });
@@ -462,7 +578,7 @@ async function finish(exam, token, registration = register()) {
       const { renderToStaticMarkup } = require("react-dom/server");
       const exam = await service.saveMcqExam(input());
       const result = await finish(exam, "same-window");
-      const summary = { ...exam, participants: 1, completedAttempts: 1, questionCount: 2 };
+      const summary = { ...exam, participants: 1, completedAttempts: 1, questionCount: 2, totalMarks: 4 };
       let allowDelete = true;
       const page = load("src/app/dashboard/course/mcq/page.tsx", {
         "next/link": { default: ({ children, href }) => React.createElement("a", { href }, children) },

@@ -5,7 +5,7 @@
 */
 
 import { marksheetLogo } from "./exam-marksheet";
-import { mcqDate, mcqDuration, type McqResult } from "./mcq-exams";
+import { mcqDate, mcqDuration, mcqQuestionMarks, type McqResult } from "./mcq-exams";
 
 /** Both student and admin downloads use the attempt's original questions and answers. */
 export async function downloadMcqMarksheet(result: McqResult) {
@@ -210,7 +210,7 @@ export async function downloadMcqMarksheet(result: McqResult) {
     ctx.save();
     ctx.textAlign = "right";
     text(
-      `${correct ? "Correct" : "Incorrect"} | ${correct ? 1 : 0} / 1 mark | ${(result.questionTimesMs[index] / 1000).toFixed(2)}s`,
+      `${correct ? "Correct" : "Incorrect"} | ${correct ? mcqQuestionMarks(question) : 0} / ${mcqQuestionMarks(question)} marks | ${(result.questionTimesMs[index] / 1000).toFixed(2)}s`,
       canvas.width - margin - 10,
       y + 5,
       14,
@@ -243,5 +243,11 @@ export async function downloadMcqMarksheet(result: McqResult) {
     subject: "MCQ examination result and complete answer review",
     author: "TestPrep Center",
   });
-  pdf.save(`mcq-result-${result.id}.pdf`);
+  const filenameTitle =
+    result.examTitle
+      .replace(/[<>:"/\\|?*]/g, "-")
+      .replace(/\p{Cc}/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim() || "Exam";
+  pdf.save(`TPC-${filenameTitle}-${result.attemptNumber}.pdf`);
 }

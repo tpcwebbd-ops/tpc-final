@@ -10,7 +10,7 @@ import { Download } from "lucide-react";
 import { useState } from "react";
 
 import { toast } from "@/components/ui/global-toast";
-import { mcqDate, mcqDuration, type McqResult } from "@/lib/dashboard/mcq-exams";
+import { mcqDate, mcqDuration, mcqQuestionMarks, type McqResult } from "@/lib/dashboard/mcq-exams";
 import { downloadMcqMarksheet } from "@/lib/dashboard/mcq-marksheet";
 
 export default function McqResultView({ result, detail }: { result: McqResult; detail?: McqResult }) {
@@ -75,7 +75,9 @@ export default function McqResultView({ result, detail }: { result: McqResult; d
                 className={`mt-3 whitespace-pre-wrap break-words text-sm ${detail.answers[index] === question.correctOptionIndex ? "text-emerald-800" : "text-red-700"}`}
               >
                 Selected: {question.options[detail.answers[index]]} ·{" "}
-                {detail.answers[index] === question.correctOptionIndex ? "Correct · 1 mark" : "Incorrect · 0 marks"}
+                {detail.answers[index] === question.correctOptionIndex ? "Correct" : "Incorrect"} ·{" "}
+                {detail.answers[index] === question.correctOptionIndex ? mcqQuestionMarks(question) : 0} /{" "}
+                {mcqQuestionMarks(question)} marks
               </p>
               <p className="mt-1 whitespace-pre-wrap break-words text-sm text-stone-600">
                 Correct answer: {question.options[question.correctOptionIndex]}

@@ -11,6 +11,7 @@ import { type FormEvent, useEffect, useRef, useState } from "react";
 
 import {
   mcqDuration,
+  mcqQuestionMarks,
   type McqActiveAttempt,
   type McqPublicExam,
   type McqStudentState,
@@ -84,7 +85,8 @@ export default function McqStudentExam({ slug }: { slug: string }) {
                   <p className="text-xs font-semibold uppercase tracking-widest text-[#cf302b]">MCQ examination</p>
                   <h1 className="mt-2 break-words text-2xl font-semibold">{exam.title}</h1>
                   <p className="mt-2 text-sm text-stone-600">
-                    {exam.questionCount} questions · 1 mark per question · Up to {exam.maxAttempts} attempts per student
+                    {exam.questionCount} questions · {exam.totalMarks} total marks · Up to {exam.maxAttempts} attempts
+                    per student
                   </p>
                 </header>
                 <McqRegistration
@@ -260,7 +262,8 @@ function McqQuestionStep({
     <form className="space-y-5" onSubmit={(event) => void submit(event)}>
       <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
         <span className="text-stone-600">
-          Question {attempt.questionIndex + 1} of {attempt.questionCount} · {attempt.studentName}
+          Question {attempt.questionIndex + 1} of {attempt.questionCount} · {mcqQuestionMarks(attempt.question)} marks ·{" "}
+          {attempt.studentName}
         </span>
         <span className="text-xs text-stone-500">Attempt {attempt.attemptNumber}</span>
       </div>

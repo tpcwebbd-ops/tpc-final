@@ -1,3 +1,1 @@
-Look at the page '/dashboard/course/mcq' and add a delete features, so it will delete MCQ Exam, and exam data form students. I want to see the list of students and  summery in the same window. first there is summery and after that please display the table of students. 
-
-And Please Update both students and admin result pdf, Make sure Text will small, and display all questions with corrcet answer, also Update the pdf so It is Looking Good. 
+Please rename the download pdf as TPC-[Exam title]-[number]

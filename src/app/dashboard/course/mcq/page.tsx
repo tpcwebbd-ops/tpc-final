@@ -151,7 +151,8 @@ export default function McqExaminationsPage() {
                     <div className="min-w-0 flex-1">
                       <h3 className="break-words font-semibold">{item.title}</h3>
                       <p className="mt-1 text-sm text-stone-600">
-                        {item.questionCount} questions · {item.maxAttempts} attempts per student
+                        {item.questionCount} questions · {item.totalMarks} marks · {item.maxAttempts} attempts per
+                        student
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-2">

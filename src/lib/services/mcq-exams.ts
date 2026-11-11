@@ -10,6 +10,9 @@ import { randomUUID } from "node:crypto";
 
 import {
   McqExamError,
+  mcqExamQuestions,
+  mcqQuestionMarks,
+  mcqTotalMarks,
   normalizeMcqMobile,
   validateMcqExam,
   type McqAttemptSummary,
@@ -32,7 +35,7 @@ const accountId = (examId: string, mobile: string) => JSON.stringify([examId, mo
 const examView = ({ _id, deleting, ...exam }: McqExamDocument): McqExam => {
   void _id;
   void deleting;
-  return exam;
+  return { ...exam, questions: mcqExamQuestions(exam.questions) };
 };
 function attemptSummary(attempt: McqAttemptDocument): McqAttemptSummary {
   if (attempt.status !== "submitted" || !attempt.submittedAt)
@@ -47,7 +50,7 @@ function attemptSummary(attempt: McqAttemptDocument): McqAttemptSummary {
     startedAt: attempt.startedAt,
     submittedAt: attempt.submittedAt,
     score: attempt.score,
-    totalMarks: attempt.questions.length,
+    totalMarks: mcqTotalMarks(attempt.questions),
     totalTimeMs: attempt.totalTimeMs,
   };
 }
@@ -61,7 +64,8 @@ function attemptResult(attempt: McqAttemptDocument): McqResult {
 }
 function studentState(attempt: McqAttemptDocument): McqStudentState {
   if (attempt.status === "submitted") return { status: "submitted", result: attemptResult(attempt) };
-  const { id, question, options } = attempt.questions[attempt.answeredCount];
+  const currentQuestion = attempt.questions[attempt.answeredCount];
+  const { id, question, options } = currentQuestion;
   return {
     status: "in-progress",
     attempt: {
@@ -70,8 +74,9 @@ function studentState(attempt: McqAttemptDocument): McqStudentState {
       mobile: attempt.mobile,
       attemptNumber: attempt.attemptNumber,
       questionCount: attempt.questions.length,
+      totalMarks: mcqTotalMarks(attempt.questions),
       questionIndex: attempt.answeredCount,
-      question: { id, question, options },
+      question: { id, question, options, marks: mcqQuestionMarks(currentQuestion) },
       startedAt: attempt.startedAt,
       questionStartedAt: attempt.questionStartedAt,
       serverNow: new Date().toISOString(),
@@ -81,7 +86,7 @@ function studentState(attempt: McqAttemptDocument): McqStudentState {
 async function examBySlug(slug: string) {
   const exam = await mcqExamsCollection().findOne({ slug, deleting: { $ne: true } });
   if (!exam) throw new McqExamError(404, "This examination link was not found.");
-  return exam;
+  return { ...exam, questions: mcqExamQuestions(exam.questions) };
 }
 
 export async function saveMcqExam(value: unknown, id?: string) {
@@ -167,6 +172,7 @@ export async function listMcqExams(page: number) {
     return {
       ...item,
       questionCount: questions.length,
+      totalMarks: mcqTotalMarks(questions),
       participants: count?.participants ?? 0,
       completedAttempts: count?.completedAttempts ?? 0,
     };
@@ -184,6 +190,7 @@ export async function publicMcqExam(slug: string, tokenHash: string): Promise<Mc
   return {
     title: exam.title,
     questionCount: exam.questions.length,
+    totalMarks: mcqTotalMarks(exam.questions),
     maxAttempts: exam.maxAttempts,
     state: latest[0] ? studentState(latest[0]) : null,
   };
@@ -335,7 +342,14 @@ export async function answerMcqQuestion(slug: string, tokenHash: string, value: 
         answeredCount: answers.length,
         questionStartedAt: now.toISOString(),
         totalTimeMs: questionTimesMs.reduce((sum, time) => sum + time, 0),
-        score: attempt.score + (answer === attempt.questions[index].correctOptionIndex ? 1 : 0),
+        score:
+          Math.round(
+            (attempt.score +
+              (answer === attempt.questions[index].correctOptionIndex
+                ? mcqQuestionMarks(attempt.questions[index])
+                : 0)) *
+              100,
+          ) / 100,
         ...(finished ? { status: "submitted" as const, submittedAt: now.toISOString() } : {}),
       },
     },

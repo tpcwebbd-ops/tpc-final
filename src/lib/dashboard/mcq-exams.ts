@@ -5,12 +5,20 @@
 */
 
 export const DEFAULT_MCQ_ATTEMPTS = 3;
+export const DEFAULT_MCQ_MARKS = 2;
 export const MAX_MCQ_QUESTIONS = 200;
-export type McqQuestion = { id: string; question: string; options: string[]; correctOptionIndex: number };
+export type McqQuestion = {
+  id: string;
+  question: string;
+  options: string[];
+  correctOptionIndex: number;
+  marks?: number;
+};
 export type McqExamInput = { title: string; maxAttempts: number; questions: McqQuestion[] };
 export type McqExam = McqExamInput & { id: string; slug: string; createdAt: string; updatedAt: string };
 export type McqExamSummary = Omit<McqExam, "questions"> & {
   questionCount: number;
+  totalMarks: number;
   participants: number;
   completedAttempts: number;
 };
@@ -38,6 +46,7 @@ export type McqActiveAttempt = {
   mobile: string;
   attemptNumber: number;
   questionCount: number;
+  totalMarks: number;
   questionIndex: number;
   question: Omit<McqQuestion, "correctOptionIndex">;
   startedAt: string;
@@ -49,10 +58,19 @@ export type McqStudentState =
 export type McqPublicExam = {
   title: string;
   questionCount: number;
+  totalMarks: number;
   maxAttempts: number;
   state: McqStudentState | null;
 };
 export type McqResultsPage = { items: McqAttemptSummary[]; total: number; participants: number; page: number };
+
+// Attempts saved before configurable marks used one mark per question.
+export const mcqQuestionMarks = (question: { marks?: number }) => question.marks ?? 1;
+export const mcqTotalMarks = (questions: { marks?: number }[]) =>
+  questions.reduce((total, question) => total + Math.round(mcqQuestionMarks(question) * 100), 0) / 100;
+// Exam definitions without marks adopt the new default for future attempts.
+export const mcqExamQuestions = (questions: McqQuestion[]): McqQuestion[] =>
+  questions.map((question) => ({ ...question, marks: question.marks ?? DEFAULT_MCQ_MARKS }));
 
 export class McqExamError extends Error {
   constructor(
@@ -106,7 +124,19 @@ export function validateMcqExam(value: unknown): McqExamInput {
       correctOptionIndex >= options.length
     )
       throw new McqExamError(400, `Select the correct answer for question ${index + 1}.`);
-    return { id, question, options, correctOptionIndex };
+    const marks = row.marks === undefined ? DEFAULT_MCQ_MARKS : row.marks;
+    if (
+      typeof marks !== "number" ||
+      !Number.isFinite(marks) ||
+      marks < 0.01 ||
+      marks > 100 ||
+      Math.round(marks * 100) / 100 !== marks
+    )
+      throw new McqExamError(
+        400,
+        `Question ${index + 1} marks must be between 0.01 and 100, with up to two decimal places.`,
+      );
+    return { id, question, options, correctOptionIndex, marks };
   });
   return { title, maxAttempts, questions };
 }

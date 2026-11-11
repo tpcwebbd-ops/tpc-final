@@ -12,7 +12,10 @@ import { type FormEvent, useState } from "react";
 import { toast } from "@/components/ui/global-toast";
 import {
   DEFAULT_MCQ_ATTEMPTS,
+  DEFAULT_MCQ_MARKS,
   MAX_MCQ_QUESTIONS,
+  mcqExamQuestions,
+  mcqTotalMarks,
   validateMcqExam,
   type McqExam,
   type McqQuestion,
@@ -26,12 +29,13 @@ const blankQuestion = (): McqQuestion => ({
   question: "",
   options: ["", "", "", ""],
   correctOptionIndex: 0,
+  marks: DEFAULT_MCQ_MARKS,
 });
 export default function McqExamEditor({ exam, onClose }: { exam?: McqExam; onClose: () => void }) {
   const [title, setTitle] = useState(exam?.title ?? "");
   const [maxAttempts, setMaxAttempts] = useState(exam?.maxAttempts ?? DEFAULT_MCQ_ATTEMPTS);
   const [questions, setQuestions] = useState<McqQuestion[]>(() =>
-    exam ? structuredClone(exam.questions) : [blankQuestion()],
+    exam ? mcqExamQuestions(structuredClone(exam.questions)) : [blankQuestion()],
   );
   const [save, { isLoading }] = useSaveMcqExamMutation();
   function update(index: number, patch: Partial<McqQuestion>) {
@@ -86,13 +90,15 @@ export default function McqExamEditor({ exam, onClose }: { exam?: McqExam; onClo
           </label>
         </div>
         <p className="text-sm text-stone-600">
-          Each question carries 1 mark. Students are identified by mobile number.{" "}
+          New questions default to 2 marks. Edit the marks on each question. Students are identified by mobile number.{" "}
           {exam
             ? "Changes apply to new attempts; saved results keep their original questions."
             : "The default allowance is 3 attempts per student for this exam."}
         </p>
         <div className="flex flex-wrap items-center gap-2">
-          <h3 className="mr-auto font-semibold">Questions ({questions.length})</h3>
+          <h3 className="mr-auto font-semibold">
+            Questions ({questions.length}) · {mcqTotalMarks(questions)} total marks
+          </h3>
           {[25, 30, 50].map((count) => (
             <button
               className="secondary-button"
@@ -109,6 +115,20 @@ export default function McqExamEditor({ exam, onClose }: { exam?: McqExam; onClo
           <article className="space-y-3 rounded-sm border border-[#eadfca] bg-[#fffdfa] p-4" key={question.id}>
             <header className="flex flex-wrap items-center gap-3">
               <h4 className="mr-auto text-sm font-semibold">Question {index + 1}</h4>
+              <label className="flex items-center gap-2 text-sm">
+                Marks
+                <input
+                  aria-label={`Marks for question ${index + 1}`}
+                  className="input w-24 py-1"
+                  min={0.01}
+                  max={100}
+                  step={0.01}
+                  onChange={(event) => update(index, { marks: Number(event.target.value) })}
+                  required
+                  type="number"
+                  value={question.marks}
+                />
+              </label>
               <label className="flex items-center gap-2 text-sm">
                 Options
                 <select
