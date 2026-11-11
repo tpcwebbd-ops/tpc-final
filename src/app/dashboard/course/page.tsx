@@ -88,6 +88,9 @@ export default function CoursePage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
+            <Link className="secondary-button" href="/dashboard/course/mcq">
+              MCQ examinations
+            </Link>
             <button className="secondary-button" disabled={isFetching} onClick={() => void refetch()} type="button">
               <RefreshCw className={`h-4 w-4 ${isFetching ? "animate-spin" : ""}`} /> Refresh
             </button>

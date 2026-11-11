@@ -235,6 +235,7 @@ function apiResourcePaths(pathname: string, method: string): string[] | null {
     categories: ["/dashboard/category"],
     coupons: ["/dashboard/coupon"],
     courses: ["/dashboard/course"],
+    mcq: ["/dashboard/course/mcq"],
     "my-course": ["/dashboard/my-course"],
     students: ["/dashboard/students"],
     navigation: ["/dashboard/developer/navigation"],

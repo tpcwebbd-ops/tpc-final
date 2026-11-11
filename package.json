@@ -10,6 +10,7 @@
     "test:leads": "node scripts/test-leads.cjs",
     "test:dashboard-authorization": "node scripts/test-dashboard-authorization.cjs",
     "test:course-exams": "node scripts/test-course-exams.cjs",
+    "test:mcq-exams": "node scripts/test-mcq-exams.cjs",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

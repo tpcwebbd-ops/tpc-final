@@ -23,7 +23,7 @@ const palette = {
 const fontFamily = 'Arial, "Nirmala UI", sans-serif';
 
 /** Trim only the logo's white margins in memory; the original brand asset stays unchanged. */
-async function marksheetLogo() {
+export async function marksheetLogo() {
   const logo = await new Promise<HTMLImageElement>((resolve, reject) => {
     const image = new Image();
     image.onload = () => resolve(image);
