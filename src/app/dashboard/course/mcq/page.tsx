@@ -15,10 +15,11 @@ import { McqError, McqPagination, mcqApiError } from "@/components/mcq/mcq-ui";
 import McqExamEditor from "@/components/mcq/McqExamEditor";
 import McqResultView from "@/components/mcq/McqResultView";
 import { toast } from "@/components/ui/global-toast";
-import { mcqDate, mcqDuration, type McqExamSummary } from "@/lib/dashboard/mcq-exams";
+import { mcqDate, mcqDuration, type McqAttemptSummary, type McqExamSummary } from "@/lib/dashboard/mcq-exams";
 import { useDashboardPermissions } from "@/lib/dashboard/use-dashboard-permissions";
 import {
   useDeleteMcqExamMutation,
+  useDeleteMcqResultMutation,
   useGetMcqExamQuery,
   useGetMcqExamsQuery,
   useGetMcqResultQuery,
@@ -223,7 +224,7 @@ export default function McqExaminationsPage() {
             />
             {selected && (
               <section className="mt-6 border-t border-[#eadfca] pt-5" id="mcq-student-results">
-                <McqExamResults exam={selected} key={selected.id} />
+                <McqExamResults canDelete={permissions.can("delete")} exam={selected} key={selected.id} />
               </section>
             )}
           </>
@@ -233,14 +234,32 @@ export default function McqExaminationsPage() {
   );
 }
 
-function McqExamResults({ exam }: { exam: McqExamSummary }) {
+function McqExamResults({ exam, canDelete }: { exam: McqExamSummary; canDelete: boolean }) {
+  const confirmDelete = useConfirmDelete();
   const [page, setPage] = useState(1);
   const [attemptId, setAttemptId] = useState<string | null>(null);
+  const [remove, removeState] = useDeleteMcqResultMutation();
   const results = useGetMcqResultsQuery(
     { id: exam.id, page },
     { pollingInterval: 30_000, skipPollingIfUnfocused: true },
   );
   const detail = useGetMcqResultQuery({ id: exam.id, attemptId: attemptId ?? "" }, { skip: !attemptId });
+  async function destroy(item: McqAttemptSummary) {
+    if (
+      !(await confirmDelete(
+        `Delete the result for "${item.studentName}", attempt ${item.attemptNumber} in "${exam.title}"? This permanently removes this result, its saved answers, and timings. This cannot be undone.`,
+      ))
+    )
+      return;
+    try {
+      await remove({ id: exam.id, attemptId: item.id }).unwrap();
+      if (attemptId === item.id) setAttemptId(null);
+      if (results.currentData?.items.length === 1 && page > 1) setPage(page - 1);
+      toast.success("Student result deleted.");
+    } catch (error) {
+      toast.error(mcqApiError(error));
+    }
+  }
   return (
     <div className="space-y-4">
       <header className="flex flex-wrap items-start justify-between gap-3">
@@ -272,7 +291,7 @@ function McqExamResults({ exam }: { exam: McqExamSummary }) {
             <caption className="sr-only">Student examination results for {exam.title}</caption>
             <thead className="bg-[#fffaf0] text-stone-600">
               <tr>
-                {["Student", "Mobile", "Attempt", "Marks", "Total time", "Completed (BD)", "Result"].map((heading) => (
+                {["Student", "Mobile", "Attempt", "Marks", "Total time", "Completed (BD)", "Actions"].map((heading) => (
                   <th className="whitespace-nowrap px-3 py-3 font-medium" key={heading} scope="col">
                     {heading}
                   </th>
@@ -291,14 +310,30 @@ function McqExamResults({ exam }: { exam: McqExamSummary }) {
                   <td className="whitespace-nowrap px-3 py-3">{mcqDuration(item.totalTimeMs)}</td>
                   <td className="whitespace-nowrap px-3 py-3">{mcqDate(item.submittedAt)}</td>
                   <td className="px-3 py-3">
-                    <button
-                      aria-label={`View result for ${item.studentName}, attempt ${item.attemptNumber}`}
-                      className="secondary-button"
-                      onClick={() => setAttemptId(item.id)}
-                      type="button"
-                    >
-                      View
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        aria-label={`View result for ${item.studentName}, attempt ${item.attemptNumber}`}
+                        className="secondary-button"
+                        onClick={() => setAttemptId(item.id)}
+                        type="button"
+                      >
+                        View
+                      </button>
+                      {canDelete && (
+                        <button
+                          aria-label={`Delete result for ${item.studentName}, attempt ${item.attemptNumber}`}
+                          className="secondary-button border-red-200 text-red-700 hover:bg-red-50"
+                          disabled={removeState.isLoading}
+                          onClick={() => void destroy(item)}
+                          type="button"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                          {removeState.isLoading && removeState.originalArgs?.attemptId === item.id
+                            ? "Deleting..."
+                            : "Delete"}
+                        </button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}

@@ -387,3 +387,20 @@ export async function mcqExamResult(examId: string, attemptId: string): Promise<
   if (!attempt) throw new McqExamError(404, "Examination result not found.");
   return attemptResult(attempt);
 }
+
+export async function deleteMcqExamResult(examId: string, attemptId: string) {
+  await getMcqExam(examId);
+  const filter = { _id: attemptId, examId, status: "submitted" as const };
+  const attempt = await mcqAttemptsCollection().findOne(filter);
+  if (!attempt) throw new McqExamError(404, "Examination result not found.");
+  // Clear the completed attempt's active slot before removing its record, so
+  // interrupted-start recovery cannot mistake it for a failed registration.
+  // The student's used allowance stays unchanged when a result is deleted.
+  await mcqAccountsCollection().updateOne(
+    { _id: accountId(examId, attempt.mobile), activeAttemptId: attemptId },
+    { $set: { activeAttemptId: null, reservationAt: null } },
+  );
+  const deleted = await mcqAttemptsCollection().deleteOne(filter);
+  if (!deleted.deletedCount) throw new McqExamError(404, "Examination result not found.");
+  return { ok: true };
+}

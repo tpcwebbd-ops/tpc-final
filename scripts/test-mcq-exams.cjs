@@ -593,6 +593,7 @@ async function finish(exam, token, registration = register()) {
         },
         "@/redux/features/dashboard/mcq-exams/mcqExamsSlice": {
           useDeleteMcqExamMutation: () => [() => {}, { isLoading: false }],
+          useDeleteMcqResultMutation: () => [() => {}, { isLoading: false }],
           useGetMcqExamQuery: () => ({}),
           useGetMcqExamsQuery: () => ({ currentData: { items: [summary], total: 1 } }),
           useGetMcqResultsQuery: () => ({ currentData: { items: [result], total: 1, participants: 1 } }),
@@ -606,8 +607,11 @@ async function finish(exam, token, registration = register()) {
       assert.ok(html.indexOf("Summary dashboard") < html.indexOf("<table"));
       assert.ok(html.includes("Test Student"));
       assert.ok(html.includes(`Delete examination: ${exam.title}`));
+      assert.ok(html.includes(`Delete result for ${result.studentName}, attempt ${result.attemptNumber}`));
       allowDelete = false;
-      assert.ok(!renderToStaticMarkup(React.createElement(page)).includes("Delete examination:"));
+      const restrictedHtml = renderToStaticMarkup(React.createElement(page));
+      assert.ok(!restrictedHtml.includes("Delete examination:"));
+      assert.ok(!restrictedHtml.includes("Delete result for"));
     },
   );
   await check("the delete endpoint validates its exam ID and returns cascade cleanup results", async () => {
@@ -631,6 +635,101 @@ async function finish(exam, token, registration = register()) {
     const response = await routes.DELETE(new Request("http://local?id=exam-to-delete", { method: "DELETE" }));
     assert.equal(removedId, "exam-to-delete");
     assert.deepEqual(await response.json(), { ok: true, deletedAttempts: 2, deletedStudents: 1 });
+  });
+  await check(
+    "deleting one student result preserves the exam and other results and updates summary counts",
+    async () => {
+      const exam = await service.saveMcqExam(input(1));
+      const otherExam = await service.saveMcqExam(input(1));
+      const removed = await finish(exam, "result-delete");
+      const kept = await finish(exam, "result-keep", register("01812345678"));
+      const other = await finish(otherExam, "other-result");
+      assert.deepEqual(await service.deleteMcqExamResult(exam.id, removed.id), { ok: true });
+      assert.ok(!attempts.rows.some((row) => row._id === removed.id));
+      assert.equal((await service.getMcqExam(exam.id)).id, exam.id);
+      assert.equal((await service.mcqExamResult(exam.id, kept.id)).id, kept.id);
+      assert.equal((await service.mcqExamResult(otherExam.id, other.id)).id, other.id);
+      assert.equal((await service.publicMcqExam(exam.slug, "result-delete")).state, null);
+      await assert.rejects(() => service.mcqExamResult(exam.id, removed.id), { status: 404 });
+      const results = await service.mcqExamResults(exam.id, 1);
+      assert.equal(results.total, 1);
+      assert.equal(results.participants, 1);
+      const summary = (await service.listMcqExams(1)).items.find((item) => item.id === exam.id);
+      assert.equal(summary.completedAttempts, 1);
+      assert.equal(summary.participants, 1);
+    },
+  );
+  await check(
+    "deleting results preserves attempt limits and clears only the deleted completed attempt's slot",
+    async () => {
+      const exam = await service.saveMcqExam(input(1, 2));
+      const first = await finish(exam, "deleted-first");
+      const account = accounts.rows.find((row) => row.examId === exam.id);
+      assert.equal(account.activeAttemptId, first.id);
+      await service.deleteMcqExamResult(exam.id, first.id);
+      assert.equal(account.used, 1);
+      assert.equal(account.activeAttemptId, null);
+      assert.equal(account.reservationAt, null);
+      now += 120001;
+      const second = await finish(exam, "deleted-second");
+      assert.equal(second.attemptNumber, 2);
+      await service.deleteMcqExamResult(exam.id, second.id);
+      assert.equal(account.used, 2);
+      await assert.rejects(() => service.startMcqExam(exam.slug, "no-refund", register()), { status: 403 });
+    },
+  );
+  await check(
+    "result deletion rejects wrong exams and active attempts and preserves a newer active session",
+    async () => {
+      const exam = await service.saveMcqExam(input(1));
+      const other = await service.saveMcqExam(input(1));
+      const completed = await finish(exam, "old-completed");
+      const active = await service.startMcqExam(exam.slug, "new-active", register());
+      await assert.rejects(() => service.deleteMcqExamResult(other.id, completed.id), { status: 404 });
+      await assert.rejects(() => service.deleteMcqExamResult(exam.id, active.attempt.id), { status: 404 });
+      await service.deleteMcqExamResult(exam.id, completed.id);
+      const account = accounts.rows.find((row) => row.examId === exam.id);
+      assert.equal(account.activeAttemptId, active.attempt.id);
+      assert.equal(account.used, 2);
+      assert.equal((await service.publicMcqExam(exam.slug, "new-active")).state.attempt.id, active.attempt.id);
+      await assert.rejects(() => service.deleteMcqExamResult(exam.id, completed.id), { status: 404 });
+    },
+  );
+  await check("result delete API rejects invalid IDs without falling back to deleting the exam", async () => {
+    let examDeleted = false;
+    const deletedResults = [];
+    const routes = load("src/app/api/dashboard/mcq/v1/route.ts", {
+      "@/app/api/lib/mcq-exam-access": {
+        authorizeMcqAdmin: async () => null,
+        mcqJson: (value, status = 200) => Response.json(value, { status }),
+        mcqError: (error) => Response.json({ error: error.message }, { status: error.status ?? 500 }),
+      },
+      "@/lib/dashboard/mcq-exams": rules,
+      "@/lib/services/mcq-exams": {
+        deleteMcqExam: async () => {
+          examDeleted = true;
+          return { ok: true };
+        },
+        deleteMcqExamResult: async (...ids) => {
+          deletedResults.push(ids);
+          return { ok: true };
+        },
+      },
+    });
+    for (const query of [
+      "id=exam&attemptId=",
+      "id=exam&attemptId=%20",
+      `id=exam&attemptId=${"a".repeat(129)}`,
+      "attemptId=attempt",
+    ]) {
+      assert.equal((await routes.DELETE(new Request(`http://local?${query}`, { method: "DELETE" }))).status, 400);
+    }
+    assert.equal(examDeleted, false);
+    assert.equal(deletedResults.length, 0);
+    const response = await routes.DELETE(new Request("http://local?id=exam&attemptId=attempt", { method: "DELETE" }));
+    assert.deepEqual(await response.json(), { ok: true });
+    assert.deepEqual(deletedResults, [["exam", "attempt"]]);
+    assert.equal(examDeleted, false);
   });
   console.log(`Public MCQ exams: ${passed} scenarios passed, without live database writes.`);
 })()

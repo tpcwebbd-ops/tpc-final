@@ -8,6 +8,7 @@ import { authorizeMcqAdmin, mcqError, mcqJson, mcqPage } from "@/app/api/lib/mcq
 import { McqExamError } from "@/lib/dashboard/mcq-exams";
 import {
   deleteMcqExam,
+  deleteMcqExamResult,
   getMcqExam,
   listMcqExams,
   mcqExamResult,
@@ -49,8 +50,14 @@ export async function DELETE(request: Request) {
   try {
     const denied = await authorizeMcqAdmin(request);
     if (denied) return denied;
-    const id = new URL(request.url).searchParams.get("id")?.trim();
+    const params = new URL(request.url).searchParams;
+    const id = params.get("id")?.trim();
     if (!id || id.length > 128) throw new McqExamError(400, "Provide an examination ID.");
+    if (params.has("attemptId")) {
+      const attemptId = params.get("attemptId")?.trim();
+      if (!attemptId || attemptId.length > 128) throw new McqExamError(400, "Provide an examination result ID.");
+      return mcqJson(await deleteMcqExamResult(id, attemptId));
+    }
     return mcqJson(await deleteMcqExam(id));
   } catch (error) {
     return mcqError(error);

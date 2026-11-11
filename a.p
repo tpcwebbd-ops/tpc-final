@@ -1,1 +1,0 @@
-Please rename the download pdf as TPC-[Exam title]-[number]

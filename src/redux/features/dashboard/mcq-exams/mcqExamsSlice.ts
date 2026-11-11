@@ -25,6 +25,10 @@ const mcqApi = apiSlice.enhanceEndpoints({ addTagTypes: ["McqExam"] }).injectEnd
       query: (id) => ({ url: "mcq/v1", method: "DELETE", params: { id } }),
       invalidatesTags: ["McqExam"],
     }),
+    deleteMcqResult: build.mutation<{ ok: boolean }, { id: string; attemptId: string }>({
+      query: (params) => ({ url: "mcq/v1", method: "DELETE", params }),
+      invalidatesTags: ["McqExam"],
+    }),
     getMcqResults: build.query<McqResultsPage, { id: string; page: number }>({
       query: (params) => ({ url: "mcq/v1", params: { ...params, results: "true" } }),
       providesTags: ["McqExam"],
@@ -40,6 +44,7 @@ export const {
   useGetMcqExamQuery,
   useSaveMcqExamMutation,
   useDeleteMcqExamMutation,
+  useDeleteMcqResultMutation,
   useGetMcqResultsQuery,
   useGetMcqResultQuery,
 } = mcqApi;
